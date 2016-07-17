@@ -9,7 +9,7 @@ namespace SRR_Devolopment.Model
     {
         public DataItem(string title)
         {
-            Title = title;
+            Title = title;//testing commit
         }
 
         public string Title
