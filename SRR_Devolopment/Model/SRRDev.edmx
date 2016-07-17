@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="srr_devModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'srr_dev.dbo.SRR_M_User_Login_H' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="SRR_M_User_Login_H">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="User_Name" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Password" />
+            <PropertyRef Name="Status" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="User_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="srr_devModelStoreContainer">
+          <EntitySet Name="SRR_M_User_Login_H" EntityType="Self.SRR_M_User_Login_H" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[SRR_M_User_Login_H].[Id] AS [Id], 
+[SRR_M_User_Login_H].[User_Name] AS [User_Name], 
+[SRR_M_User_Login_H].[Name] AS [Name], 
+[SRR_M_User_Login_H].[Password] AS [Password], 
+[SRR_M_User_Login_H].[Status] AS [Status]
+FROM [dbo].[SRR_M_User_Login_H] AS [SRR_M_User_Login_H]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="srr_devModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="SRR_M_User_Login_H">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="User_Name" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Password" />
+            <PropertyRef Name="Status" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="User_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="srr_devEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="SRR_M_User_Login_H" EntityType="Self.SRR_M_User_Login_H" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="srr_devModelStoreContainer" CdmEntityContainer="srr_devEntities">
+          <EntitySetMapping Name="SRR_M_User_Login_H">
+            <EntityTypeMapping TypeName="srr_devModel.SRR_M_User_Login_H">
+              <MappingFragment StoreEntitySet="SRR_M_User_Login_H">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="User_Name" ColumnName="User_Name" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
