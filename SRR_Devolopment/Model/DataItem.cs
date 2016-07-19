@@ -15,7 +15,7 @@ namespace SRR_Devolopment.Model
         public string Title
         {
             get;
-            private set;
+            private set;//testing commit
         }
     }
 }
