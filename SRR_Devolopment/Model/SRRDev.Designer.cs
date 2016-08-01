@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'D:\Work\SRR\MockUp\SRR_Devolopment\SRR_Devolopment\Model\SRRDev.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\r467816\Desktop\TestGit\Repo_2\SRR_Devolopment\Model\SRRDev.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
