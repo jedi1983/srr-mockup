@@ -13,6 +13,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 using SRR_Devolopment.Model;
+using SRR_Devolopment.Services;
 
 namespace SRR_Devolopment.ViewModel
 {
@@ -36,10 +37,12 @@ namespace SRR_Devolopment.ViewModel
             else
             {
                 SimpleIoc.Default.Register<IDataService, DataService>();
+                SimpleIoc.Default.Register<IDataServices, DataAccessServices>();
             }
 
             SimpleIoc.Default.Register<MainViewModel>();
-            
+
+            SimpleIoc.Default.Register<LoginViewModel>();
         }
 
         /// <summary>
@@ -53,6 +56,14 @@ namespace SRR_Devolopment.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
+            }
+        }
+
+        public LoginViewModel Login
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<LoginViewModel>();
             }
         }
 

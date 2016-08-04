@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using SRR_Devolopment.ViewModel;
+//using SRR_Devolopment.Views;
 
 namespace SRR_Devolopment
 {
@@ -15,6 +16,8 @@ namespace SRR_Devolopment
         {
             InitializeComponent();
             Closing += (s, e) => ViewModelLocator.Cleanup();
+
+           // TestContent.Content = new Views.ucLoginPage();
         }
     }
 }

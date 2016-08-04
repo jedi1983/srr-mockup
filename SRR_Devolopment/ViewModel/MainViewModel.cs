@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using SRR_Devolopment.Model;
 
+
 namespace SRR_Devolopment.ViewModel
 {
     /// <summary>
@@ -61,5 +62,6 @@ namespace SRR_Devolopment.ViewModel
 
         ////    base.Cleanup();
         ////}
+       
     }
 }

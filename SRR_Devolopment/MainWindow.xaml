@@ -8,9 +8,9 @@
         mc:Ignorable="d ignore"
         Height="600"
         Width="800"
-        Title="MVVM Light Application"
+        Title="Koperasi" Icon="Images\Icons\1470068314_office-03.ico"
         DataContext="{Binding Main, Source={StaticResource Locator}}">
-    
+
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -21,10 +21,20 @@
 
     <Grid x:Name="LayoutRoot">
         <Grid.RowDefinitions >
-            
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions >
+            <ColumnDefinition Width="30*"/>
+            <ColumnDefinition Width="70*"/>
+        </Grid.ColumnDefinitions>
+        <GroupBox Grid.Column="0" HorizontalAlignment="Left" Background="#FFF0EAEA">
+            <Views:ucLoginPage  />
+        </GroupBox>
+        <ContentControl Name="TestContent" Grid.Column="1" HorizontalAlignment="Left" Margin="137,38,0,0" VerticalAlignment="Top" Width="235" Height="191" Content="{Binding testBind}" />
+            
         
-        <Views:ucLoginPage  Grid.Column="0"/>
+
+        <!-- <Views:ucLoginPage  Grid.Column="0" HorizontalAlignment="Left"/> -->
         <!--<TextBlock FontSize="36"
                    FontWeight="Bold"
                    Foreground="Purple"
@@ -32,7 +42,7 @@
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"
                    TextWrapping="Wrap" />-->
-        
+
 
     </Grid>
 </Window>

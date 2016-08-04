@@ -57,6 +57,15 @@
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Images\Icons\1470068314_office-03.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <StartupObject>SRR_Devolopment.App</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup />
   <ItemGroup>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
@@ -121,7 +130,7 @@
     <Compile Include="Model\SRR_M_User_Login_H.cs">
       <DependentUpon>SRRDev.tt</DependentUpon>
     </Compile>
-    <Compile Include="Services\IServices.cs" />
+    <Compile Include="Services\IDataServices.cs" />
     <Compile Include="Services\Services.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -131,6 +140,9 @@
     </Compile>
     <Compile Include="Views\ucPageOne.xaml.cs">
       <DependentUpon>ucPageOne.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ucTreeListMenu.xaml.cs">
+      <DependentUpon>ucTreeListMenu.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -153,6 +165,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ucPageOne.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ucTreeListMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -212,6 +228,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\Icons\1470068314_office-03.ico" />
     <Content Include="Model\SRRDev.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SRRDev.edmx</DependentUpon>
