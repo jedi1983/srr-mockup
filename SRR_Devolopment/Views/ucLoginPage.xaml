@@ -54,5 +54,6 @@
             </PasswordBox>
             <Button Grid.Column="3" Name="btnLogin" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Content="Login" Width="100" Command="{Binding Login}"/>
         </Grid>
+      
     </Grid>
 </UserControl>

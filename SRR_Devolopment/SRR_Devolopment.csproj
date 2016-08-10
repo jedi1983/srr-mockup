@@ -108,6 +108,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BaseLib\Class\CloseableTab.cs" />
+    <Compile Include="BaseLib\UserControl\ucTabCloseButton.xaml.cs">
+      <DependentUpon>ucTabCloseButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Design\DesignDataService.cs" />
     <Compile Include="Model\DataItem.cs" />
     <Compile Include="Model\DataService.cs" />
@@ -127,6 +131,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SRRDev.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Model\SRR_KK_M_Screen_Master_H.cs">
+      <DependentUpon>SRRDev.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\SRR_M_User_Login_H.cs">
       <DependentUpon>SRRDev.tt</DependentUpon>
     </Compile>
@@ -144,6 +151,10 @@
     <Compile Include="Views\ucTreeListMenu.xaml.cs">
       <DependentUpon>ucTreeListMenu.xaml</DependentUpon>
     </Compile>
+    <Page Include="BaseLib\UserControl\ucTabCloseButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -156,7 +167,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Skins\MainSkin.xaml">
+    <Page Include="Services\MainSkin.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -242,6 +253,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Skins\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

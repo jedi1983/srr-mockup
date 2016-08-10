@@ -1,6 +1,18 @@
-﻿using GalaSoft.MvvmLight;
+﻿using System;
+using System.Windows;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using GalaSoft.MvvmLight;
 using SRR_Devolopment.Model;
-
+using SRR_Devolopment.Services;
+using GalaSoft.MvvmLight.Command;
+using System.Collections.ObjectModel;
+using System.Windows.Controls;
+using SRR_Devolopment.Views;
+using SRR_Devolopment.BaseLib.UserControl;
+using SRR_Devolopment.BaseLib.Class;
 
 namespace SRR_Devolopment.ViewModel
 {
@@ -12,6 +24,8 @@ namespace SRR_Devolopment.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
+
+        
         private readonly IDataService _dataService;
 
         /// <summary>

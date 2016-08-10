@@ -27,12 +27,18 @@
             <ColumnDefinition Width="30*"/>
             <ColumnDefinition Width="70*"/>
         </Grid.ColumnDefinitions>
-        <GroupBox Grid.Column="0" HorizontalAlignment="Left" Background="#FFF0EAEA">
-            <Views:ucLoginPage  />
+        <GroupBox Grid.Column="0" HorizontalAlignment="Left" Background="#FFF0EAEA" Name="groupBoxMenu">
+           <!-- <Views:ucLoginPage  /> -->
         </GroupBox>
-        <ContentControl Name="TestContent" Grid.Column="1" HorizontalAlignment="Left" Margin="137,38,0,0" VerticalAlignment="Top" Width="235" Height="191" Content="{Binding testBind}" />
-            
+        <DockPanel x:Name="dockPanel1" Grid.Column="1" HorizontalAlignment="Stretch" LastChildFill="False" VerticalAlignment="Stretch" >
+            <Button x:Name="btn1" DockPanel.Dock="Top" Click="OnPlusTabClick" Width="500" Height="20">+Tab</Button>
+            <TabControl Name="uxTabs" Height="Auto" Width="Auto"/>
+        </DockPanel>
+        <!--<ContentControl Name="TestContent" Grid.Column="1" HorizontalAlignment="Left" Margin="137,38,0,0" VerticalAlignment="Top" Width="235" Height="240"  />-->
         
+
+
+
 
         <!-- <Views:ucLoginPage  Grid.Column="0" HorizontalAlignment="Left"/> -->
         <!--<TextBlock FontSize="36"
