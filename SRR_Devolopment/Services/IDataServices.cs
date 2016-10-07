@@ -19,7 +19,8 @@ namespace SRR_Devolopment.Services
         /// <param name="UserName">UserName </param>
         /// <param name="Password">Password</param>
         /// <returns>Observable Collections of user</returns>
-        ObservableCollection<SRR_M_User_Login_H> GetLoginID(String UserName, String Password);
+        //ObservableCollection<SRR_M_User_Login_H> GetLoginID(String UserName, String Password);
+        ObservableCollection<USP_CG_KP_M_UserProfile_H_Find_Result> GetLoginID(String UserName, String Password);
         bool saveLogin(string UserName, String Name, String Password);
         ObservableCollection<SRR_KK_M_Screen_Master_H> GetScreenMenu();
         

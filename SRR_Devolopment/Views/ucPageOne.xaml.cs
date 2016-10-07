@@ -49,6 +49,7 @@ namespace SRR_Devolopment.Views
             thisIsPanel3.Children.Add(newTest2);
             xTest.Content = thisIsPanel3;
             
+            
         }
     }
 }

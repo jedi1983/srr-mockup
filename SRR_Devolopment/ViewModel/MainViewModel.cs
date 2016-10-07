@@ -47,8 +47,8 @@ namespace SRR_Devolopment.ViewModel
         void Initalize()
         {
             _successStatusV = false;
-            _menuLoad = "/SRR_Devolopment;component/Views/ucLoginPage.xaml";
-            _moduleLoad = ModuleLoadObject.GetModule(_menuLoad);
+            //_menuLoad = "/SRR_Devolopment;component/Views/ucLoginPage.xaml";
+            //_moduleLoad = ModuleLoadObject.GetModule(_menuLoad);
             ReceiveStatusInfo();
         }
 
@@ -122,9 +122,9 @@ namespace SRR_Devolopment.ViewModel
 
         private string _username;
 
-        private ObservableCollection<SRR_M_User_Login_H> _dataBack;
+        private ObservableCollection<USP_CG_KP_M_UserProfile_H_Find_Result> _dataBack;
 
-        public ObservableCollection<SRR_M_User_Login_H> DataBack
+        public ObservableCollection<USP_CG_KP_M_UserProfile_H_Find_Result> DataBack
         {
             get { return _dataBack; }
             set
@@ -172,7 +172,7 @@ namespace SRR_Devolopment.ViewModel
             PasswordChanged = new RelayCommand<PasswordBox>(getPassword);
             _username = string.Empty; //setting first value of username
             _password = string.Empty; //setting first value of password
-            
+           
         }
 
         #endregion 

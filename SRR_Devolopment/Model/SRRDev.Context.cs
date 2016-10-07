@@ -12,6 +12,9 @@ namespace SRR_Devolopment.Model
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Objects;
+    using System.Data.Objects.DataClasses;
+    using System.Linq;
     
     public partial class srr_devEntities : DbContext
     {
@@ -27,5 +30,58 @@ namespace SRR_Devolopment.Model
     
         public DbSet<SRR_M_User_Login_H> SRR_M_User_Login_H { get; set; }
         public DbSet<SRR_KK_M_Screen_Master_H> SRR_KK_M_Screen_Master_H { get; set; }
+        public DbSet<CGL_KP_M_AccessRights_H> CGL_KP_M_AccessRights_H { get; set; }
+        public DbSet<CGL_KP_M_Assignment_H> CGL_KP_M_Assignment_H { get; set; }
+        public DbSet<CGL_KP_M_Form_Type_H> CGL_KP_M_Form_Type_H { get; set; }
+        public DbSet<CGL_KP_M_Group_H> CGL_KP_M_Group_H { get; set; }
+        public DbSet<CGL_KP_M_Legal_Entity_H> CGL_KP_M_Legal_Entity_H { get; set; }
+        public DbSet<CGL_KP_M_Member_H> CGL_KP_M_Member_H { get; set; }
+        public DbSet<CGL_KP_M_Period_H> CGL_KP_M_Period_H { get; set; }
+        public DbSet<CGL_KP_M_Period_Status_H> CGL_KP_M_Period_Status_H { get; set; }
+        public DbSet<CGL_KP_M_Status_H> CGL_KP_M_Status_H { get; set; }
+        public DbSet<CGL_KP_M_UserProfile_D> CGL_KP_M_UserProfile_D { get; set; }
+        public DbSet<CGL_KP_M_UserProfile_H> CGL_KP_M_UserProfile_H { get; set; }
+        public DbSet<CGL_KP_M_Form_Master_H> CGL_KP_M_Form_Master_H { get; set; }
+        public DbSet<CGL_KP_M_Gender_H> CGL_KP_M_Gender_H { get; set; }
+    
+        public virtual ObjectResult<USP_CG_KP_M_AccessRights_H_Find_Result> USP_CG_KP_M_AccessRights_H_Find(Nullable<int> groupID)
+        {
+            var groupIDParameter = groupID.HasValue ?
+                new ObjectParameter("GroupID", groupID) :
+                new ObjectParameter("GroupID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<USP_CG_KP_M_AccessRights_H_Find_Result>("USP_CG_KP_M_AccessRights_H_Find", groupIDParameter);
+        }
+    
+        public virtual ObjectResult<USP_CG_KP_M_Form_Type_H_Find_Result> USP_CG_KP_M_Form_Type_H_Find(Nullable<int> groupID)
+        {
+            var groupIDParameter = groupID.HasValue ?
+                new ObjectParameter("GroupID", groupID) :
+                new ObjectParameter("GroupID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<USP_CG_KP_M_Form_Type_H_Find_Result>("USP_CG_KP_M_Form_Type_H_Find", groupIDParameter);
+        }
+    
+        public virtual ObjectResult<USP_CG_KP_M_FormMaster_H_Find_R_Result> USP_CG_KP_M_FormMaster_H_Find_R(Nullable<int> groupID)
+        {
+            var groupIDParameter = groupID.HasValue ?
+                new ObjectParameter("GroupID", groupID) :
+                new ObjectParameter("GroupID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<USP_CG_KP_M_FormMaster_H_Find_R_Result>("USP_CG_KP_M_FormMaster_H_Find_R", groupIDParameter);
+        }
+    
+        public virtual ObjectResult<USP_CG_KP_M_UserProfile_H_Find_Result> USP_CG_KP_M_UserProfile_H_Find(string userID, string password)
+        {
+            var userIDParameter = userID != null ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("Password", password) :
+                new ObjectParameter("Password", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<USP_CG_KP_M_UserProfile_H_Find_Result>("USP_CG_KP_M_UserProfile_H_Find", userIDParameter, passwordParameter);
+        }
     }
 }

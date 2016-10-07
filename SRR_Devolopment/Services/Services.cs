@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SRR_Devolopment.Model;
 using System.Collections.ObjectModel;
+using SRR_Devolopment.BaseLib;
 
 namespace SRR_Devolopment.Services
 {
@@ -14,27 +15,24 @@ namespace SRR_Devolopment.Services
 
         //ctor
         
-        public ObservableCollection<SRR_M_User_Login_H> GetLoginID(String UserName, String Password)
+        public ObservableCollection<USP_CG_KP_M_UserProfile_H_Find_Result> GetLoginID(String UserName,String Password)
         {
-
+            String dataHashed = BaseLib.Class.HashingClass.getHash(Password);
             try
             {
-                using (srr_devEntities sr = new srr_devEntities())
+                using (srr_devEntities context = new srr_devEntities())
                 {
-                    var linqQuery = from tbl in sr.SRR_M_User_Login_H
-                                    where tbl.User_Name == UserName && tbl.Password.Contains(Password)
-                                    select tbl;
-
-                    return new ObservableCollection<SRR_M_User_Login_H>(linqQuery);
-
+                    IList<USP_CG_KP_M_UserProfile_H_Find_Result> data = context.USP_CG_KP_M_UserProfile_H_Find(UserName, dataHashed).ToList();
+                    return new ObservableCollection<USP_CG_KP_M_UserProfile_H_Find_Result>(data);
                 }
             }
-
             catch
             {
                 throw new Exception("Database Error");
             }
+           
         }
+        
         public bool saveLogin(string UserName, String Name, String Password)
         {   
         //

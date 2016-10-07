@@ -41,6 +41,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -109,11 +110,51 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BaseLib\Class\CloseableTab.cs" />
+    <Compile Include="BaseLib\Class\HashingClass.cs" />
     <Compile Include="BaseLib\Class\ModuleLoadObject.cs" />
     <Compile Include="BaseLib\UserControl\ucTabCloseButton.xaml.cs">
       <DependentUpon>ucTabCloseButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="MessageInfrastructure\Messaging.cs" />
+    <Compile Include="Model\CGL_KP_M_AccessRights_H.cs">
+      <DependentUpon>SRRDev.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CGL_KP_M_Assignment_H.cs">
+      <DependentUpon>SRRDev.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CGL_KP_M_Form_Master_H.cs">
+      <DependentUpon>SRRDev.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CGL_KP_M_Form_Type_H.cs">
+      <DependentUpon>SRRDev.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CGL_KP_M_Gender_H.cs">
+      <DependentUpon>SRRDev.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CGL_KP_M_Group_H.cs">
+      <DependentUpon>SRRDev.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CGL_KP_M_Legal_Entity_H.cs">
+      <DependentUpon>SRRDev.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CGL_KP_M_Member_H.cs">
+      <DependentUpon>SRRDev.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CGL_KP_M_Period_H.cs">
+      <DependentUpon>SRRDev.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CGL_KP_M_Period_Status_H.cs">
+      <DependentUpon>SRRDev.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CGL_KP_M_Status_H.cs">
+      <DependentUpon>SRRDev.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CGL_KP_M_UserProfile_D.cs">
+      <DependentUpon>SRRDev.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CGL_KP_M_UserProfile_H.cs">
+      <DependentUpon>SRRDev.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\SRRDev.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -133,6 +174,18 @@
       <DependentUpon>SRRDev.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\SRR_M_User_Login_H.cs">
+      <DependentUpon>SRRDev.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\USP_CG_KP_M_AccessRights_H_Find_Result.cs">
+      <DependentUpon>SRRDev.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\USP_CG_KP_M_FormMaster_H_Find_R_Result.cs">
+      <DependentUpon>SRRDev.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\USP_CG_KP_M_Form_Type_H_Find_Result.cs">
+      <DependentUpon>SRRDev.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\USP_CG_KP_M_UserProfile_H_Find_Result.cs">
       <DependentUpon>SRRDev.tt</DependentUpon>
     </Compile>
     <Compile Include="Services\IDataServices.cs" />

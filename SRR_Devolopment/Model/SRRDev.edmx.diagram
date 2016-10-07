@@ -7,6 +7,24 @@
       <Diagram DiagramId="885c61e7bc3f440bb69426f41494492a" Name="Diagram1">
         <EntityTypeShape EntityType="srr_devModel.SRR_M_User_Login_H" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="srr_devModel.SRR_KK_M_Screen_Master_H" Width="1.5" PointX="0.625" PointY="0.75" />
+        <EntityTypeShape EntityType="srr_devModel.CGL_KP_M_AccessRights_H" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="srr_devModel.CGL_KP_M_Assignment_H" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="srr_devModel.CGL_KP_M_Form_Type_H" Width="1.5" PointX="9.75" PointY="0.75" />
+        <EntityTypeShape EntityType="srr_devModel.CGL_KP_M_Group_H" Width="1.5" PointX="8.75" PointY="9.75" />
+        <EntityTypeShape EntityType="srr_devModel.CGL_KP_M_Legal_Entity_H" Width="1.5" PointX="0.75" PointY="7.5" />
+        <EntityTypeShape EntityType="srr_devModel.CGL_KP_M_Member_H" Width="1.5" PointX="6" PointY="6.875" />
+        <EntityTypeShape EntityType="srr_devModel.CGL_KP_M_Period_H" Width="1.5" PointX="3" PointY="7" />
+        <EntityTypeShape EntityType="srr_devModel.CGL_KP_M_Period_Status_H" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="srr_devModel.CGL_KP_M_Status_H" Width="1.5" PointX="3.75" PointY="12.75" />
+        <EntityTypeShape EntityType="srr_devModel.CGL_KP_M_UserProfile_D" Width="1.5" PointX="10.75" PointY="8.75" />
+        <EntityTypeShape EntityType="srr_devModel.CGL_KP_M_UserProfile_H" Width="1.5" PointX="12.75" PointY="0.75" />
+        <AssociationConnector Association="srr_devModel.FK_CGL_KP_M_Member_H_CGL_KP_M_Legal_Entity_H" />
+        <AssociationConnector Association="srr_devModel.FK_CGL_KP_M_Period_H_CGL_KP_M_Legal_Entity_H" />
+        <AssociationConnector Association="srr_devModel.FK_CGL_KP_M_Member_H_CGL_KP_M_Status_H" />
+        <AssociationConnector Association="srr_devModel.FK_CGL_KP_M_Period_H_CGL_KP_M_Period_Status_H" />
+        <EntityTypeShape EntityType="srr_devModel.CGL_KP_M_Form_Master_H" Width="1.5" PointX="0.75" PointY="12.75" />
+        <EntityTypeShape EntityType="srr_devModel.CGL_KP_M_Gender_H" Width="1.5" PointX="11.375" PointY="13" />
+        <AssociationConnector Association="srr_devModel.FK_CGL_KP_M_Member_H_CGL_KP_M_Gender_H" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
