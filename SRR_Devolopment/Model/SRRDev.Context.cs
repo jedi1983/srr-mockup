@@ -25,7 +25,7 @@ namespace SRR_Devolopment.Model
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<SRR_KK_M_Screen_Master_H> SRR_KK_M_Screen_Master_H { get; set; }
         public DbSet<SRR_M_User_Login_H> SRR_M_User_Login_H { get; set; }
+        public DbSet<SRR_KK_M_Screen_Master_H> SRR_KK_M_Screen_Master_H { get; set; }
     }
 }

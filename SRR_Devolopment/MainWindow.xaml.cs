@@ -20,9 +20,9 @@ namespace SRR_Devolopment
         public MainWindow()
         {
             InitializeComponent();
-            Closing += (s, e) => ViewModelLocator.Cleanup();
-           // var p = System.Windows.Application.LoadComponent(new Uri("/SRR_Devolopment;component/Views/ucLoginPage.xaml", UriKind.RelativeOrAbsolute));
-            //TestContent.Content = p;
+            //Closing += (s, e) => ViewModelLocator.Cleanup();
+            //var p = System.Windows.Application.LoadComponent(new Uri("/SRR_Devolopment;component/Views/ucLoginPage.xaml", UriKind.RelativeOrAbsolute));
+            ////TestContent.Content = p;
             //groupBoxMenu.Content = p;
         }
 
@@ -34,18 +34,18 @@ namespace SRR_Devolopment
             var header = new TextBlock { Text = "Tab!  " };
 
             // Create the content
-            var content = new TextBlock
-            {
-                Text = string.Format("Tab numero {0}-o",
-                    uxTabs.Items.Count + 1)
-            };
+            //var content = new TextBlock
+            //{
+            //    Text = string.Format("Tab numero {0}-o",
+            //        uxTabs.Items.Count + 1)
+            //};
 
-            // Create the tab
-            var tab = new CloseableTab();
-            tab.SetHeader(header);
-            tab.Content = p;
-            // Add to TabControl
-            uxTabs.Items.Add(tab);
+            //// Create the tab
+            //var tab = new CloseableTab();
+            //tab.SetHeader(header);
+            //tab.Content = p;
+            //// Add to TabControl
+            //uxTabs.Items.Add(tab);
 
         }
     }

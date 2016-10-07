@@ -22,7 +22,33 @@ namespace SRR_Devolopment.Views
     {
         public ucPageOne()
         {
+            
             InitializeComponent();
+            StackPanel thisIsPanel = new StackPanel();
+            StackPanel thisIsPanel2 = new StackPanel();
+            StackPanel thisIsPanel3 = new StackPanel();
+            Button test1 = new Button();
+            Button test2 = new Button();
+            Button test3 = new Button();
+            Button test4 = new Button();
+            test1.Content = "satu";
+            test2.Content = "Dua";
+            test3.Content = "satu";
+            test4.Content = "Dua";
+            thisIsPanel.Children.Add(test1);
+            thisIsPanel.Children.Add(test2);
+            thisIsPanel2.Children.Add(test3);
+            thisIsPanel2.Children.Add(test4);
+            Expander newTest = new Expander();
+            Expander newTest2 = new Expander();
+            newTest.Header = "Menu Test";
+            newTest.Content = thisIsPanel;
+            newTest2.Header = "Menu Dua";
+            newTest2.Content = thisIsPanel2;
+            thisIsPanel3.Children.Add(newTest);
+            thisIsPanel3.Children.Add(newTest2);
+            xTest.Content = thisIsPanel3;
+            
         }
     }
 }

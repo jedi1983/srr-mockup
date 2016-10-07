@@ -10,6 +10,7 @@
             <PropertyRef Name="Screen_Id" />
           </Key>
           <Property Name="Screen_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Screen_Type" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Screen_Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Screen_URI" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Screen_Image" Type="varchar" MaxLength="100" />
@@ -33,18 +34,9 @@
     <edmx:ConceptualModels>
       <Schema Namespace="srr_devModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="srr_devEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="SRR_KK_M_Screen_Master_H" EntityType="srr_devModel.SRR_KK_M_Screen_Master_H" />
           <EntitySet Name="SRR_M_User_Login_H" EntityType="srr_devModel.SRR_M_User_Login_H" />
+          <EntitySet Name="SRR_KK_M_Screen_Master_H" EntityType="srr_devModel.SRR_KK_M_Screen_Master_H" />
         </EntityContainer>
-        <EntityType Name="SRR_KK_M_Screen_Master_H">
-          <Key>
-            <PropertyRef Name="Screen_Id" />
-          </Key>
-          <Property Name="Screen_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Screen_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Screen_URI" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Screen_Image" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="SRR_M_User_Login_H">
           <Key>
             <PropertyRef Name="Id" />
@@ -55,22 +47,22 @@
           <Property Name="Password" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Status" Type="Boolean" Nullable="false" />
         </EntityType>
+        <EntityType Name="SRR_KK_M_Screen_Master_H">
+          <Key>
+            <PropertyRef Name="Screen_Id" />
+          </Key>
+          <Property Name="Screen_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Screen_Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Screen_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Screen_URI" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Screen_Image" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="srr_devModelStoreContainer" CdmEntityContainer="srr_devEntities">
-          <EntitySetMapping Name="SRR_KK_M_Screen_Master_H">
-            <EntityTypeMapping TypeName="srr_devModel.SRR_KK_M_Screen_Master_H">
-              <MappingFragment StoreEntitySet="SRR_KK_M_Screen_Master_H">
-                <ScalarProperty Name="Screen_Image" ColumnName="Screen_Image" />
-                <ScalarProperty Name="Screen_URI" ColumnName="Screen_URI" />
-                <ScalarProperty Name="Screen_Name" ColumnName="Screen_Name" />
-                <ScalarProperty Name="Screen_Id" ColumnName="Screen_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="SRR_M_User_Login_H">
             <EntityTypeMapping TypeName="srr_devModel.SRR_M_User_Login_H">
               <MappingFragment StoreEntitySet="SRR_M_User_Login_H">
@@ -79,6 +71,17 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="User_Name" ColumnName="User_Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SRR_KK_M_Screen_Master_H">
+            <EntityTypeMapping TypeName="srr_devModel.SRR_KK_M_Screen_Master_H">
+              <MappingFragment StoreEntitySet="SRR_KK_M_Screen_Master_H">
+                <ScalarProperty Name="Screen_Image" ColumnName="Screen_Image" />
+                <ScalarProperty Name="Screen_URI" ColumnName="Screen_URI" />
+                <ScalarProperty Name="Screen_Name" ColumnName="Screen_Name" />
+                <ScalarProperty Name="Screen_Type" ColumnName="Screen_Type" />
+                <ScalarProperty Name="Screen_Id" ColumnName="Screen_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -3,13 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
         xmlns:Views="clr-namespace:SRR_Devolopment.Views"
         xmlns:ignore="http://www.galasoft.ch/ignore"
         mc:Ignorable="d ignore"
         Height="600"
         Width="800"
         Title="Koperasi" Icon="Images\Icons\1470068314_office-03.ico"
-        DataContext="{Binding Main, Source={StaticResource Locator}}">
+        DataContext="{Binding Main, Source={StaticResource Locator}}" WindowState="Maximized">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -27,15 +29,73 @@
             <ColumnDefinition Width="30*"/>
             <ColumnDefinition Width="70*"/>
         </Grid.ColumnDefinitions>
-        <GroupBox Grid.Column="0" HorizontalAlignment="Left" Background="#FFF0EAEA" Name="groupBoxMenu">
-           <!-- <Views:ucLoginPage  /> -->
-        </GroupBox>
-        <DockPanel x:Name="dockPanel1" Grid.Column="1" HorizontalAlignment="Stretch" LastChildFill="False" VerticalAlignment="Stretch" >
+        <TabControl Grid.Column="0" HorizontalAlignment="Stretch"   VerticalAlignment="Stretch"  TabStripPlacement="Bottom">
+            <TabItem Header="Login">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5"/>
+                        <ColumnDefinition Width="5"/>
+                        <ColumnDefinition Width="280"/>
+                        <ColumnDefinition Width="5"/>
+                        <ColumnDefinition Width="5"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="220"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="10"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Column="2" Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5" />
+                            <ColumnDefinition Width="65" />
+                            <ColumnDefinition Width="5" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="5" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="70" />
+                            <RowDefinition Height="40" />
+                            <RowDefinition Height="40" />
+                            <RowDefinition Height="70" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Column="1" Name="tName" Text="User Name " HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" />
+                        <TextBlock Grid.Column="2"  Text=":" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1" />
+                        <TextBox Grid.Column="3" Name="tbUserName" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Grid.Row="1" MaxLines="20" CharacterCasing="Upper" Text="{Binding Username,Mode=TwoWay}"/>
+
+                        <TextBlock Grid.Column="1" Name="tPassword" Text="Password " HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="2" />
+                        <TextBlock Grid.Column="2"  Text=":" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" />
+                        <!-- <TextBox Grid.Column="3" Name="tbPasword" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Grid.Row="2" MaxLines="10" /> -->
+                        <PasswordBox Grid.Column="3" Name="tbPasword" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Grid.Row="2" PasswordChar="*" MaxLength="8" >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="PasswordChanged">
+                                    <mvvm:EventToCommand 
+                    Command="{Binding  PasswordChanged, Mode=OneWay}" CommandParameter="{Binding ElementName=tbPasword}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </PasswordBox>
+                        <Button Grid.Column="3" Name="btnLogin" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Content="Login" Width="100" Command="{Binding Login}"/>
+                    </Grid>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Menu ">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+        </TabControl>
+        <!--<GroupBox Grid.Column="0" HorizontalAlignment="Left" Background="#FFF0EAEA" Name="groupBoxMenu" Content="{Binding ModuleLoad,Mode=TwoWay}">
+            --><!--<Views:ucLoginPage  />--><!--
+        </GroupBox>-->
+       
+       
+        <!--<DockPanel x:Name="dockPanel1" Grid.Column="1" HorizontalAlignment="Stretch" LastChildFill="False" VerticalAlignment="Stretch" >
             <Button x:Name="btn1" DockPanel.Dock="Top" Click="OnPlusTabClick" Width="500" Height="20">+Tab</Button>
             <TabControl Name="uxTabs" Height="Auto" Width="Auto"/>
-        </DockPanel>
+        </DockPanel>-->
         <!--<ContentControl Name="TestContent" Grid.Column="1" HorizontalAlignment="Left" Margin="137,38,0,0" VerticalAlignment="Top" Width="235" Height="240"  />-->
-        
+
 
 
 

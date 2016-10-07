@@ -15,6 +15,7 @@ namespace SRR_Devolopment.Model
     public partial class SRR_KK_M_Screen_Master_H
     {
         public int Screen_Id { get; set; }
+        public string Screen_Type { get; set; }
         public string Screen_Name { get; set; }
         public string Screen_URI { get; set; }
         public string Screen_Image { get; set; }

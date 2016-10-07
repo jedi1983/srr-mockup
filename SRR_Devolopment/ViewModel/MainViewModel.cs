@@ -13,6 +13,8 @@ using System.Windows.Controls;
 using SRR_Devolopment.Views;
 using SRR_Devolopment.BaseLib.UserControl;
 using SRR_Devolopment.BaseLib.Class;
+using GalaSoft.MvvmLight.Messaging;
+using SRR_Devolopment.MessageInfrastructure;
 
 namespace SRR_Devolopment.ViewModel
 {
@@ -25,57 +27,154 @@ namespace SRR_Devolopment.ViewModel
     public class MainViewModel : ViewModelBase
     {
 
-        
-        private readonly IDataService _dataService;
+        #region "Helper"
+        private readonly IDataServices _dataServices;
+        #endregion
+
+        #region "Methods"
 
         /// <summary>
-        /// The <see cref="WelcomeTitle" /> property's name.
+        /// This is Method for accepting Message from other ModelView
         /// </summary>
-        public const string WelcomeTitlePropertyName = "WelcomeTitle";
-
-        private string _welcomeTitle = string.Empty;
-
-        /// <summary>
-        /// Gets the WelcomeTitle property.
-        /// Changes to that property's value raise the PropertyChanged event. 
-        /// </summary>
-        public string WelcomeTitle
+        void ReceiveStatusInfo()
         {
-            get
-            {
-                return _welcomeTitle;
-            }
-            set
-            {
-                Set(ref _welcomeTitle, value);
-            }
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the MainViewModel class.
-        /// </summary>
-        public MainViewModel(IDataService dataService)
-        {
-            _dataService = dataService;
-            _dataService.GetData(
-                (item, error) =>
+            Messenger.Default.Register<Messaging>(this, (SuccessStatus) =>
                 {
-                    if (error != null)
-                    {
-                        // Report error here
-                        return;
-                    }
-
-                    WelcomeTitle = item.Title;
+                    this.SuccessStatusV = SuccessStatus.SuccessStatus;
                 });
         }
+ 
+        void Initalize()
+        {
+            _successStatusV = false;
+            _menuLoad = "/SRR_Devolopment;component/Views/ucLoginPage.xaml";
+            _moduleLoad = ModuleLoadObject.GetModule(_menuLoad);
+            ReceiveStatusInfo();
+        }
 
-        ////public override void Cleanup()
-        ////{
-        ////    // Clean up if needed
+        void SendStatusInfo(bool stat)
+        {
+            //sending status of success login
+            Messenger.Default.Send<Messaging>(new Messaging() { SuccessStatus = stat });
 
-        ////    base.Cleanup();
-        ////}
-       
+        }
+
+        void getLogin()
+        {
+            DataBack = _dataServices.GetLoginID(Username, Password);
+            if (DataBack.Count != 0)
+            {
+                MessageBox.Show("Login Correct", "Koperasi", MessageBoxButton.OK, MessageBoxImage.Hand);
+                SendStatusInfo(true);
+            }
+            else
+                MessageBox.Show("Please Use The Correct User Name And Password", "Koperasi", MessageBoxButton.OK, MessageBoxImage.Stop);
+        }
+
+        void getPassword(PasswordBox passWord)
+        {
+            Password = passWord.Password;
+        }
+
+        #endregion
+
+        #region "Properties"
+
+        private bool _successStatusV;
+
+        public  bool SuccessStatusV
+        {
+            get{return this._successStatusV;}
+            set {
+                 this._successStatusV = value;
+                 if (this._successStatusV == true)//Correct Login will call Methods under this If Statement
+                 { 
+                     //load the default screen name for Tree List
+                     ModuleLoad = ModuleLoadObject.GetModule("/SRR_Devolopment;component/Views/ucTreeListMenu.xaml");
+                 }
+                RaisePropertyChanged("SuccessStatusV");
+                }
+        }
+
+        private Object _moduleLoad;
+        public Object ModuleLoad
+        {
+            get { return _moduleLoad; }
+            set { 
+                    _moduleLoad = value;
+                    RaisePropertyChanged("ModuleLoad");
+                }
+        }
+
+        private string _menuLoad;
+        public string MenuLoad
+        {
+            get { return  _menuLoad; }
+            set {  
+                    _menuLoad = value;
+                    RaisePropertyChanged("MenuLoad");
+                }
+        }
+
+        public RelayCommand Login { get; set; }
+
+        public RelayCommand<PasswordBox> PasswordChanged { get; set; }
+
+        private string _username;
+
+        private ObservableCollection<SRR_M_User_Login_H> _dataBack;
+
+        public ObservableCollection<SRR_M_User_Login_H> DataBack
+        {
+            get { return _dataBack; }
+            set
+            {
+                _dataBack = value;
+                RaisePropertyChanged("DataBack");
+            }
+        }
+
+
+        public string Username
+        {
+            get { return this._username; }
+            set
+            {
+                this._username = value;
+                RaisePropertyChanged("Username");
+            }
+        }
+
+        private string _password;
+
+        public string Password
+        {
+            get { return _password; }
+            set
+            {
+                _password = value;
+                RaisePropertyChanged("Password");
+            }
+        }
+
+
+        #endregion
+
+        #region"Ctor"
+
+
+        public MainViewModel(IDataServices dataServices)
+        {
+            //initializer
+            Initalize();
+            _dataServices = dataServices;
+            Login = new RelayCommand(getLogin);
+            PasswordChanged = new RelayCommand<PasswordBox>(getPassword);
+            _username = string.Empty; //setting first value of username
+            _password = string.Empty; //setting first value of password
+            
+        }
+
+        #endregion 
     }
 }

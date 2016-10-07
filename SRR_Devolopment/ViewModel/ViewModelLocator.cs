@@ -29,20 +29,12 @@ namespace SRR_Devolopment.ViewModel
         static ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-
-            if (ViewModelBase.IsInDesignModeStatic)
-            {
-                SimpleIoc.Default.Register<IDataService, Design.DesignDataService>();
-            }
-            else
-            {
-                SimpleIoc.Default.Register<IDataService, DataService>();
-                SimpleIoc.Default.Register<IDataServices, DataAccessServices>();
-            }
-
+    
+            SimpleIoc.Default.Register<IDataServices, DataAccessServices>();
+           
             SimpleIoc.Default.Register<MainViewModel>();
 
-            SimpleIoc.Default.Register<LoginViewModel>();
+            //SimpleIoc.Default.Register<LoginViewModel>();
         }
 
         /// <summary>
@@ -51,6 +43,7 @@ namespace SRR_Devolopment.ViewModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
+
         public MainViewModel Main
         {
             get
@@ -59,13 +52,13 @@ namespace SRR_Devolopment.ViewModel
             }
         }
 
-        public LoginViewModel Login
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<LoginViewModel>();
-            }
-        }
+        //public LoginViewModel Login
+        //{
+        //    get
+        //    {
+        //        return ServiceLocator.Current.GetInstance<LoginViewModel>();
+        //    }
+        //}
 
         /// <summary>
         /// Cleans up all the resources.
