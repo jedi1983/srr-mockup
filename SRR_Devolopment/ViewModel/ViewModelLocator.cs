@@ -33,8 +33,10 @@ namespace SRR_Devolopment.ViewModel
             SimpleIoc.Default.Register<IDataServices, DataAccessServices>();
            
             SimpleIoc.Default.Register<MainViewModel>();
+            
+            SimpleIoc.Default.Register<IMemberDataService, MemberDataService>();
 
-            //SimpleIoc.Default.Register<LoginViewModel>();
+            SimpleIoc.Default.Register<MemberViewModel>();
         }
 
         /// <summary>
@@ -44,6 +46,7 @@ namespace SRR_Devolopment.ViewModel
             "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
 
+        
         public MainViewModel Main
         {
             get
@@ -52,19 +55,36 @@ namespace SRR_Devolopment.ViewModel
             }
         }
 
-        //public LoginViewModel Login
-        //{
-        //    get
-        //    {
-        //        return ServiceLocator.Current.GetInstance<LoginViewModel>();
-        //    }
-        //}
+        public MemberViewModel Member
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<MemberViewModel>();
+            }
+        }
 
+      
         /// <summary>
         /// Cleans up all the resources.
         /// </summary>
         public static void Cleanup()
         {
+            
+            //if(SimpleIoc.Default.GetInstance<MemberViewModel>()!=null)
+            //{
+            //    SimpleIoc.Default.Unregister<MemberViewModel>();
+            //    SimpleIoc.Default.Register<MemberViewModel>();
+            //}
+
+        }
+
+        /// <summary>
+        /// Static Method Overload of Cleanup @Roland 2016
+        /// </summary>
+        /// <param name="ViewModelName">String PArameter ViewModelName</param>
+        public static void Cleanup(string ViewModelName)
+        {
+            
         }
     }
 }

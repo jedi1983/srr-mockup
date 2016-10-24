@@ -16,8 +16,8 @@ namespace SRR_Devolopment.Model
     {
         public CGL_KP_M_Legal_Entity_H()
         {
-            this.CGL_KP_M_Member_H = new HashSet<CGL_KP_M_Member_H>();
             this.CGL_KP_M_Period_H = new HashSet<CGL_KP_M_Period_H>();
+            this.CGL_KP_M_Member_H = new HashSet<CGL_KP_M_Member_H>();
         }
     
         public int Legal_Entity_Id { get; set; }
@@ -31,7 +31,7 @@ namespace SRR_Devolopment.Model
         public string Deleted_By { get; set; }
         public Nullable<System.DateTime> Deleted_Date { get; set; }
     
-        public virtual ICollection<CGL_KP_M_Member_H> CGL_KP_M_Member_H { get; set; }
         public virtual ICollection<CGL_KP_M_Period_H> CGL_KP_M_Period_H { get; set; }
+        public virtual ICollection<CGL_KP_M_Member_H> CGL_KP_M_Member_H { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace SRR_Devolopment.Model
         public int Form_ID { get; set; }
         public string Form_Name { get; set; }
         public string Uri { get; set; }
-        public int Type_Id { get; set; }
         public string Img_Uri { get; set; }
+        public int Form_Type_Id { get; set; }
     }
 }

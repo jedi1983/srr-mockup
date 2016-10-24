@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
-        xmlns:Views="clr-namespace:SRR_Devolopment.Views"
         xmlns:ignore="http://www.galasoft.ch/ignore"
         mc:Ignorable="d ignore"
         Height="600"
@@ -26,12 +25,19 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions >
-            <ColumnDefinition Width="30*"/>
+            <ColumnDefinition Width="20*"/>
             <ColumnDefinition Width="70*"/>
         </Grid.ColumnDefinitions>
-        <TabControl Grid.Column="0" HorizontalAlignment="Stretch"   VerticalAlignment="Stretch"  TabStripPlacement="Bottom">
-            <TabItem Header="Login">
-                <Grid Background="#FFE5E5E5">
+        <TabControl Grid.Column="0"   
+                    HorizontalAlignment="Stretch"   VerticalAlignment="Stretch"  TabStripPlacement="Bottom" >
+            <TabItem Header="Login" IsEnabled="{Binding EnableLogin,Mode=TwoWay}" IsSelected="{Binding IsLoginSelected,Mode=TwoWay}" >
+                <Grid>
+                    <Grid.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FFECE8E8" Offset="0.542"/>
+                            <GradientStop Color="#FFFFF4F4" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Grid.Background>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="5"/>
                         <ColumnDefinition Width="5"/>
@@ -67,48 +73,44 @@
 
                         <TextBlock Grid.Column="1" Name="tPassword" Text="Password " HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="2" />
                         <TextBlock Grid.Column="2"  Text=":" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" />
-                        <!-- <TextBox Grid.Column="3" Name="tbPasword" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Grid.Row="2" MaxLines="10" /> -->
-                        <PasswordBox Grid.Column="3" Name="tbPasword" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Grid.Row="2" PasswordChar="*" MaxLength="8" >
+                        <PasswordBox Grid.Column="3" Name="tbPasword" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Grid.Row="2" PasswordChar="*" MaxLength="8"  >
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="PasswordChanged">
                                     <mvvm:EventToCommand 
-                    Command="{Binding  PasswordChanged, Mode=OneWay}" CommandParameter="{Binding ElementName=tbPasword}"/>
+                                            Command="{Binding  PasswordChanged, Mode=OneWay}" CommandParameter="{Binding ElementName=tbPasword}"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </PasswordBox>
-                        <Button Grid.Column="3" Name="btnLogin" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Content="Login" Width="100" Command="{Binding Login}"/>
+                        <Button Grid.Column="3" Name="btnLogin" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Content="Login" Width="100" Command="{Binding LoginBtn}"/>
                     </Grid>
 
                 </Grid>
             </TabItem>
-            <TabItem Header="Menu ">
-                <Grid Background="#FFE5E5E5"/>
+            <TabItem Header="Menu "  IsEnabled="{Binding EnableMenu,Mode=TwoWay}" IsSelected="{Binding IsMenuSelected,Mode=TwoWay}">
+                <Grid >
+                    <Grid.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FFECE8E8" Offset="0.542"/>
+                            <GradientStop Color="#FFFFF4F4" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Grid.Background>
+                    <ContentControl x:Name="menuContent" Content="{Binding MenuObject}" />
+                </Grid>
+                
             </TabItem>
         </TabControl>
-        <!--<GroupBox Grid.Column="0" HorizontalAlignment="Left" Background="#FFF0EAEA" Name="groupBoxMenu" Content="{Binding ModuleLoad,Mode=TwoWay}">
-            --><!--<Views:ucLoginPage  />--><!--
-        </GroupBox>-->
-       
-       
-        <!--<DockPanel x:Name="dockPanel1" Grid.Column="1" HorizontalAlignment="Stretch" LastChildFill="False" VerticalAlignment="Stretch" >
-            <Button x:Name="btn1" DockPanel.Dock="Top" Click="OnPlusTabClick" Width="500" Height="20">+Tab</Button>
-            <TabControl Name="uxTabs" Height="Auto" Width="Auto"/>
-        </DockPanel>-->
-        <!--<ContentControl Name="TestContent" Grid.Column="1" HorizontalAlignment="Left" Margin="137,38,0,0" VerticalAlignment="Top" Width="235" Height="240"  />-->
-
-
-
-
-
-        <!-- <Views:ucLoginPage  Grid.Column="0" HorizontalAlignment="Left"/> -->
-        <!--<TextBlock FontSize="36"
-                   FontWeight="Bold"
-                   Foreground="Purple"
-                   Text="{Binding WelcomeTitle}"
-                   VerticalAlignment="Center"
-                   HorizontalAlignment="Center"
-                   TextWrapping="Wrap" />-->
-
-
+        <TabControl Grid.Column="1" ItemsSource="{Binding TabCollection}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="{Binding VisibilitySet}" SelectedItem="{Binding SelectedItemTab}">
+            <!--<TabControl.ItemTemplate >
+                <DataTemplate>
+                    <TabItem  Header="{Binding TestTab.Header}"/>
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+            <TabControl.ContentTemplate>
+                <DataTemplate>
+                    --><!--<ContentControl Content="{Binding TestTab.Content}"/>--><!--
+                    <ContentControl Content="{Binding Content}" />
+                </DataTemplate>
+            </TabControl.ContentTemplate>-->
+        </TabControl> 
     </Grid>
 </Window>

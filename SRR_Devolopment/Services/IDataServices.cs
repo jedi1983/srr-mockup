@@ -22,7 +22,15 @@ namespace SRR_Devolopment.Services
         //ObservableCollection<SRR_M_User_Login_H> GetLoginID(String UserName, String Password);
         ObservableCollection<USP_CG_KP_M_UserProfile_H_Find_Result> GetLoginID(String UserName, String Password);
         bool saveLogin(string UserName, String Name, String Password);
-        ObservableCollection<SRR_KK_M_Screen_Master_H> GetScreenMenu();
+       
+        ObservableCollection<USP_CG_KP_M_AccessRights_H_Find_Result> GetAccessRights(int GroupID);
+
+        ObservableCollection<USP_CG_KP_M_FormMaster_H_Find_R_Result> GetFormMasterData(int GroupID);
+
+        ObservableCollection<USP_CG_KP_M_Form_Type_H_Find_Result> GetFormType(int GroupID);
+
+        int GetFormTypeId(String FormType);
+
         
     }
 

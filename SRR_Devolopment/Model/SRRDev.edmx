@@ -44,7 +44,7 @@
           <Property Name="Form_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Form_Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Uri" Type="varchar" MaxLength="300" Nullable="false" />
-          <Property Name="Type_Id" Type="int" Nullable="false" />
+          <Property Name="Form_Type_Id" Type="int" Nullable="false" />
           <Property Name="Img_Uri" Type="varchar" MaxLength="200" />
           <Property Name="Is_Deleted" Type="bit" Nullable="false" />
           <Property Name="Created_By" Type="varchar" MaxLength="50" Nullable="false" />
@@ -69,21 +69,6 @@
           <Property Name="Deleted_By" Type="varchar" MaxLength="50" />
           <Property Name="Deleted_Date" Type="datetime" />
         </EntityType>
-        <EntityType Name="CGL_KP_M_Gender_H">
-          <Key>
-            <PropertyRef Name="Gender_Id" />
-          </Key>
-          <Property Name="Gender_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Gender_Code" Type="varchar" MaxLength="1" Nullable="false" />
-          <Property Name="Gender_Name" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="Is_Deleted" Type="bit" Nullable="false" />
-          <Property Name="Created_By" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Created_Date" Type="datetime" Nullable="false" />
-          <Property Name="Modified_By" Type="varchar" MaxLength="50" />
-          <Property Name="Modified_Date" Type="datetime" />
-          <Property Name="Deleted_By" Type="varchar" MaxLength="50" />
-          <Property Name="Deleted_Date" Type="datetime" />
-        </EntityType>
         <EntityType Name="CGL_KP_M_Group_H">
           <Key>
             <PropertyRef Name="Group_Id" />
@@ -91,7 +76,7 @@
           <Property Name="Group_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Group_Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Group_Code" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Access_Rights" Type="int" Nullable="false" />
+          <Property Name="Access_Rights_Id" Type="int" Nullable="false" />
           <Property Name="Is_Deleted" Type="bit" Nullable="false" />
           <Property Name="Created_By" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Created_Date" Type="datetime" Nullable="false" />
@@ -124,7 +109,7 @@
           <Property Name="Employee_No" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Address" Type="varchar" MaxLength="200" />
-          <Property Name="Gender_Id" Type="int" Nullable="false" />
+          <Property Name="Gender" Type="varchar" MaxLength="6" />
           <Property Name="Birth_Date" Type="datetime" />
           <Property Name="Join_Date" Type="datetime" Nullable="false" />
           <Property Name="Status_Id" Type="int" Nullable="false" />
@@ -184,28 +169,11 @@
           <Property Name="Deleted_By" Type="varchar" MaxLength="50" />
           <Property Name="Deleted_Date" Type="datetime" />
         </EntityType>
-        <EntityType Name="CGL_KP_M_UserProfile_D">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="User_Id" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="Legal_Entity_Id" Type="int" />
-          <Property Name="Group_Id" Type="int" Nullable="false" />
-          <Property Name="Is_Deleted" Type="bit" Nullable="false" />
-          <Property Name="Created_By" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Created_Date" Type="datetime" Nullable="false" />
-          <Property Name="Modified_By" Type="varchar" MaxLength="50" />
-          <Property Name="Modified_Date" Type="datetime" />
-          <Property Name="Deleted_By" Type="varchar" MaxLength="50" />
-          <Property Name="Deleted_Date" Type="datetime" />
-        </EntityType>
         <EntityType Name="CGL_KP_M_UserProfile_H">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="User_Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="User_Id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="User_Id" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="User_Name" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Password" Type="varchar" MaxLength="150" Nullable="false" />
@@ -218,35 +186,51 @@
           <Property Name="Deleted_By" Type="varchar" MaxLength="50" />
           <Property Name="Deleted_Date" Type="datetime" />
         </EntityType>
-        <EntityType Name="SRR_KK_M_Screen_Master_H">
-          <Key>
-            <PropertyRef Name="Screen_Id" />
-          </Key>
-          <Property Name="Screen_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Screen_Type" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Screen_Name" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Screen_URI" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="Screen_Image" Type="varchar" MaxLength="100" />
-        </EntityType>
-        <EntityType Name="SRR_M_User_Login_H">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="User_Name" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="Password" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="Status" Type="bit" Nullable="false" />
-        </EntityType>
-        <Association Name="FK_CGL_KP_M_Member_H_CGL_KP_M_Gender_H">
-          <End Role="CGL_KP_M_Gender_H" Type="Self.CGL_KP_M_Gender_H" Multiplicity="1" />
-          <End Role="CGL_KP_M_Member_H" Type="Self.CGL_KP_M_Member_H" Multiplicity="*" />
+        <Association Name="FK_CGL_KP_M_Assignment_H_CGL_KP_M_Form_Master_H">
+          <End Role="CGL_KP_M_Form_Master_H" Type="Self.CGL_KP_M_Form_Master_H" Multiplicity="1" />
+          <End Role="CGL_KP_M_Assignment_H" Type="Self.CGL_KP_M_Assignment_H" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="CGL_KP_M_Gender_H">
-              <PropertyRef Name="Gender_Id" />
+            <Principal Role="CGL_KP_M_Form_Master_H">
+              <PropertyRef Name="Form_ID" />
             </Principal>
-            <Dependent Role="CGL_KP_M_Member_H">
-              <PropertyRef Name="Gender_Id" />
+            <Dependent Role="CGL_KP_M_Assignment_H">
+              <PropertyRef Name="Form_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CGL_KP_M_Assignment_H_CGL_KP_M_Group_H">
+          <End Role="CGL_KP_M_Group_H" Type="Self.CGL_KP_M_Group_H" Multiplicity="1" />
+          <End Role="CGL_KP_M_Assignment_H" Type="Self.CGL_KP_M_Assignment_H" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CGL_KP_M_Group_H">
+              <PropertyRef Name="Group_Id" />
+            </Principal>
+            <Dependent Role="CGL_KP_M_Assignment_H">
+              <PropertyRef Name="Group_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CGL_KP_M_Form_Master_H_CGL_KP_M_Form_Type_H">
+          <End Role="CGL_KP_M_Form_Type_H" Type="Self.CGL_KP_M_Form_Type_H" Multiplicity="1" />
+          <End Role="CGL_KP_M_Form_Master_H" Type="Self.CGL_KP_M_Form_Master_H" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CGL_KP_M_Form_Type_H">
+              <PropertyRef Name="Form_Type_Id" />
+            </Principal>
+            <Dependent Role="CGL_KP_M_Form_Master_H">
+              <PropertyRef Name="Form_Type_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CGL_KP_M_Group_H_CGL_KP_M_AccessRights_H">
+          <End Role="CGL_KP_M_AccessRights_H" Type="Self.CGL_KP_M_AccessRights_H" Multiplicity="1" />
+          <End Role="CGL_KP_M_Group_H" Type="Self.CGL_KP_M_Group_H" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CGL_KP_M_AccessRights_H">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CGL_KP_M_Group_H">
+              <PropertyRef Name="Access_Rights_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -311,25 +295,37 @@
           <Parameter Name="UserID" Type="varchar(max)" Mode="In" />
           <Parameter Name="Password" Type="varchar(max)" Mode="In" />
         </Function>
+        <Function Name="USP_CGL_KP_M_Member_H_Find" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="varchar(max)" Mode="In" />
+          <Parameter Name="LegalEntityID" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="srr_devModelStoreContainer">
           <EntitySet Name="CGL_KP_M_AccessRights_H" EntityType="Self.CGL_KP_M_AccessRights_H" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CGL_KP_M_Assignment_H" EntityType="Self.CGL_KP_M_Assignment_H" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CGL_KP_M_Form_Master_H" EntityType="Self.CGL_KP_M_Form_Master_H" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CGL_KP_M_Form_Type_H" EntityType="Self.CGL_KP_M_Form_Type_H" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CGL_KP_M_Gender_H" EntityType="Self.CGL_KP_M_Gender_H" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CGL_KP_M_Group_H" EntityType="Self.CGL_KP_M_Group_H" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CGL_KP_M_Legal_Entity_H" EntityType="Self.CGL_KP_M_Legal_Entity_H" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CGL_KP_M_Member_H" EntityType="Self.CGL_KP_M_Member_H" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CGL_KP_M_Period_H" EntityType="Self.CGL_KP_M_Period_H" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CGL_KP_M_Period_Status_H" EntityType="Self.CGL_KP_M_Period_Status_H" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CGL_KP_M_Status_H" EntityType="Self.CGL_KP_M_Status_H" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CGL_KP_M_UserProfile_D" EntityType="Self.CGL_KP_M_UserProfile_D" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CGL_KP_M_UserProfile_H" EntityType="Self.CGL_KP_M_UserProfile_H" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="SRR_KK_M_Screen_Master_H" EntityType="Self.SRR_KK_M_Screen_Master_H" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="SRR_M_User_Login_H" EntityType="Self.SRR_M_User_Login_H" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_CGL_KP_M_Member_H_CGL_KP_M_Gender_H" Association="Self.FK_CGL_KP_M_Member_H_CGL_KP_M_Gender_H">
-            <End Role="CGL_KP_M_Gender_H" EntitySet="CGL_KP_M_Gender_H" />
-            <End Role="CGL_KP_M_Member_H" EntitySet="CGL_KP_M_Member_H" />
+          <AssociationSet Name="FK_CGL_KP_M_Assignment_H_CGL_KP_M_Form_Master_H" Association="Self.FK_CGL_KP_M_Assignment_H_CGL_KP_M_Form_Master_H">
+            <End Role="CGL_KP_M_Form_Master_H" EntitySet="CGL_KP_M_Form_Master_H" />
+            <End Role="CGL_KP_M_Assignment_H" EntitySet="CGL_KP_M_Assignment_H" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CGL_KP_M_Assignment_H_CGL_KP_M_Group_H" Association="Self.FK_CGL_KP_M_Assignment_H_CGL_KP_M_Group_H">
+            <End Role="CGL_KP_M_Group_H" EntitySet="CGL_KP_M_Group_H" />
+            <End Role="CGL_KP_M_Assignment_H" EntitySet="CGL_KP_M_Assignment_H" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CGL_KP_M_Form_Master_H_CGL_KP_M_Form_Type_H" Association="Self.FK_CGL_KP_M_Form_Master_H_CGL_KP_M_Form_Type_H">
+            <End Role="CGL_KP_M_Form_Type_H" EntitySet="CGL_KP_M_Form_Type_H" />
+            <End Role="CGL_KP_M_Form_Master_H" EntitySet="CGL_KP_M_Form_Master_H" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CGL_KP_M_Group_H_CGL_KP_M_AccessRights_H" Association="Self.FK_CGL_KP_M_Group_H_CGL_KP_M_AccessRights_H">
+            <End Role="CGL_KP_M_AccessRights_H" EntitySet="CGL_KP_M_AccessRights_H" />
+            <End Role="CGL_KP_M_Group_H" EntitySet="CGL_KP_M_Group_H" />
           </AssociationSet>
           <AssociationSet Name="FK_CGL_KP_M_Member_H_CGL_KP_M_Legal_Entity_H" Association="Self.FK_CGL_KP_M_Member_H_CGL_KP_M_Legal_Entity_H">
             <End Role="CGL_KP_M_Legal_Entity_H" EntitySet="CGL_KP_M_Legal_Entity_H" />
@@ -353,36 +349,18 @@
     <edmx:ConceptualModels>
       <Schema Namespace="srr_devModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="srr_devEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="SRR_M_User_Login_H" EntityType="srr_devModel.SRR_M_User_Login_H" />
-          <EntitySet Name="SRR_KK_M_Screen_Master_H" EntityType="srr_devModel.SRR_KK_M_Screen_Master_H" />
-          <EntitySet Name="CGL_KP_M_AccessRights_H" EntityType="srr_devModel.CGL_KP_M_AccessRights_H" />
-          <EntitySet Name="CGL_KP_M_Assignment_H" EntityType="srr_devModel.CGL_KP_M_Assignment_H" />
-          <EntitySet Name="CGL_KP_M_Form_Type_H" EntityType="srr_devModel.CGL_KP_M_Form_Type_H" />
-          <EntitySet Name="CGL_KP_M_Group_H" EntityType="srr_devModel.CGL_KP_M_Group_H" />
           <EntitySet Name="CGL_KP_M_Legal_Entity_H" EntityType="srr_devModel.CGL_KP_M_Legal_Entity_H" />
-          <EntitySet Name="CGL_KP_M_Member_H" EntityType="srr_devModel.CGL_KP_M_Member_H" />
           <EntitySet Name="CGL_KP_M_Period_H" EntityType="srr_devModel.CGL_KP_M_Period_H" />
           <EntitySet Name="CGL_KP_M_Period_Status_H" EntityType="srr_devModel.CGL_KP_M_Period_Status_H" />
           <EntitySet Name="CGL_KP_M_Status_H" EntityType="srr_devModel.CGL_KP_M_Status_H" />
-          <EntitySet Name="CGL_KP_M_UserProfile_D" EntityType="srr_devModel.CGL_KP_M_UserProfile_D" />
-          <EntitySet Name="CGL_KP_M_UserProfile_H" EntityType="srr_devModel.CGL_KP_M_UserProfile_H" />
-          <AssociationSet Name="FK_CGL_KP_M_Member_H_CGL_KP_M_Legal_Entity_H" Association="srr_devModel.FK_CGL_KP_M_Member_H_CGL_KP_M_Legal_Entity_H">
-            <End Role="CGL_KP_M_Legal_Entity_H" EntitySet="CGL_KP_M_Legal_Entity_H" />
-            <End Role="CGL_KP_M_Member_H" EntitySet="CGL_KP_M_Member_H" />
-          </AssociationSet>
           <AssociationSet Name="FK_CGL_KP_M_Period_H_CGL_KP_M_Legal_Entity_H" Association="srr_devModel.FK_CGL_KP_M_Period_H_CGL_KP_M_Legal_Entity_H">
             <End Role="CGL_KP_M_Legal_Entity_H" EntitySet="CGL_KP_M_Legal_Entity_H" />
             <End Role="CGL_KP_M_Period_H" EntitySet="CGL_KP_M_Period_H" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CGL_KP_M_Member_H_CGL_KP_M_Status_H" Association="srr_devModel.FK_CGL_KP_M_Member_H_CGL_KP_M_Status_H">
-            <End Role="CGL_KP_M_Status_H" EntitySet="CGL_KP_M_Status_H" />
-            <End Role="CGL_KP_M_Member_H" EntitySet="CGL_KP_M_Member_H" />
           </AssociationSet>
           <AssociationSet Name="FK_CGL_KP_M_Period_H_CGL_KP_M_Period_Status_H" Association="srr_devModel.FK_CGL_KP_M_Period_H_CGL_KP_M_Period_Status_H">
             <End Role="CGL_KP_M_Period_Status_H" EntitySet="CGL_KP_M_Period_Status_H" />
             <End Role="CGL_KP_M_Period_H" EntitySet="CGL_KP_M_Period_H" />
           </AssociationSet>
-          <EntitySet Name="CGL_KP_M_Form_Master_H" EntityType="srr_devModel.CGL_KP_M_Form_Master_H" />
           <FunctionImport Name="USP_CG_KP_M_AccessRights_H_Find" ReturnType="Collection(srr_devModel.USP_CG_KP_M_AccessRights_H_Find_Result)">
           <Parameter Name="GroupID" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -396,95 +374,42 @@
             <Parameter Name="UserID" Mode="In" Type="String" />
             <Parameter Name="Password" Mode="In" Type="String" />
           </FunctionImport>
-          <EntitySet Name="CGL_KP_M_Gender_H" EntityType="srr_devModel.CGL_KP_M_Gender_H" />
-          <AssociationSet Name="FK_CGL_KP_M_Member_H_CGL_KP_M_Gender_H" Association="srr_devModel.FK_CGL_KP_M_Member_H_CGL_KP_M_Gender_H">
-            <End Role="CGL_KP_M_Gender_H" EntitySet="CGL_KP_M_Gender_H" />
+          <EntitySet Name="CGL_KP_M_Member_H" EntityType="srr_devModel.CGL_KP_M_Member_H" />
+          <AssociationSet Name="FK_CGL_KP_M_Member_H_CGL_KP_M_Legal_Entity_H" Association="srr_devModel.FK_CGL_KP_M_Member_H_CGL_KP_M_Legal_Entity_H">
+            <End Role="CGL_KP_M_Legal_Entity_H" EntitySet="CGL_KP_M_Legal_Entity_H" />
             <End Role="CGL_KP_M_Member_H" EntitySet="CGL_KP_M_Member_H" />
           </AssociationSet>
+          <AssociationSet Name="FK_CGL_KP_M_Member_H_CGL_KP_M_Status_H" Association="srr_devModel.FK_CGL_KP_M_Member_H_CGL_KP_M_Status_H">
+            <End Role="CGL_KP_M_Status_H" EntitySet="CGL_KP_M_Status_H" />
+            <End Role="CGL_KP_M_Member_H" EntitySet="CGL_KP_M_Member_H" />
+          </AssociationSet>
+          <EntitySet Name="CGL_KP_M_AccessRights_H" EntityType="srr_devModel.CGL_KP_M_AccessRights_H" />
+          <EntitySet Name="CGL_KP_M_Assignment_H" EntityType="srr_devModel.CGL_KP_M_Assignment_H" />
+          <EntitySet Name="CGL_KP_M_Form_Master_H" EntityType="srr_devModel.CGL_KP_M_Form_Master_H" />
+          <EntitySet Name="CGL_KP_M_Form_Type_H" EntityType="srr_devModel.CGL_KP_M_Form_Type_H" />
+          <EntitySet Name="CGL_KP_M_Group_H" EntityType="srr_devModel.CGL_KP_M_Group_H" />
+          <EntitySet Name="CGL_KP_M_UserProfile_H" EntityType="srr_devModel.CGL_KP_M_UserProfile_H" />
+          <AssociationSet Name="FK_CGL_KP_M_Group_H_CGL_KP_M_AccessRights_H" Association="srr_devModel.FK_CGL_KP_M_Group_H_CGL_KP_M_AccessRights_H">
+            <End Role="CGL_KP_M_AccessRights_H" EntitySet="CGL_KP_M_AccessRights_H" />
+            <End Role="CGL_KP_M_Group_H" EntitySet="CGL_KP_M_Group_H" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CGL_KP_M_Assignment_H_CGL_KP_M_Form_Master_H" Association="srr_devModel.FK_CGL_KP_M_Assignment_H_CGL_KP_M_Form_Master_H">
+            <End Role="CGL_KP_M_Form_Master_H" EntitySet="CGL_KP_M_Form_Master_H" />
+            <End Role="CGL_KP_M_Assignment_H" EntitySet="CGL_KP_M_Assignment_H" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CGL_KP_M_Assignment_H_CGL_KP_M_Group_H" Association="srr_devModel.FK_CGL_KP_M_Assignment_H_CGL_KP_M_Group_H">
+            <End Role="CGL_KP_M_Group_H" EntitySet="CGL_KP_M_Group_H" />
+            <End Role="CGL_KP_M_Assignment_H" EntitySet="CGL_KP_M_Assignment_H" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CGL_KP_M_Form_Master_H_CGL_KP_M_Form_Type_H" Association="srr_devModel.FK_CGL_KP_M_Form_Master_H_CGL_KP_M_Form_Type_H">
+            <End Role="CGL_KP_M_Form_Type_H" EntitySet="CGL_KP_M_Form_Type_H" />
+            <End Role="CGL_KP_M_Form_Master_H" EntitySet="CGL_KP_M_Form_Master_H" />
+          </AssociationSet>
+          <FunctionImport Name="USP_CGL_KP_M_Member_H_Find" ReturnType="Collection(srr_devModel.USP_CGL_KP_M_Member_H_Find_Result)">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="LegalEntityID" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
-        <EntityType Name="SRR_M_User_Login_H">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="User_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Status" Type="Boolean" Nullable="false" />
-        </EntityType>
-        <EntityType Name="SRR_KK_M_Screen_Master_H">
-          <Key>
-            <PropertyRef Name="Screen_Id" />
-          </Key>
-          <Property Name="Screen_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Screen_Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Screen_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Screen_URI" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Screen_Image" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="CGL_KP_M_AccessRights_H">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Access_Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="IsRead" Type="Boolean" />
-          <Property Name="IsWrite" Type="Boolean" />
-          <Property Name="IsMod" Type="Boolean" />
-          <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
-          <Property Name="Created_By" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Modified_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Modified_Date" Type="DateTime" Precision="3" />
-          <Property Name="Deleted_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Deleted_Date" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="CGL_KP_M_Assignment_H">
-          <Key>
-            <PropertyRef Name="Assignment_Id" />
-          </Key>
-          <Property Name="Assignment_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Group_Id" Type="Int32" Nullable="false" />
-          <Property Name="Form_Id" Type="Int32" Nullable="false" />
-          <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
-          <Property Name="Created_By" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Modified_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Modified_Date" Type="DateTime" Precision="3" />
-          <Property Name="Deleted_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Deleted_Date" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="CGL_KP_M_Form_Type_H">
-          <Key>
-            <PropertyRef Name="Form_Type_Id" />
-          </Key>
-          <Property Name="Form_Type_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Form_Type_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Form_Type_Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
-          <Property Name="Created_By" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Modified_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Modified_Date" Type="DateTime" Precision="3" />
-          <Property Name="Deleted_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Deleted_Date" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="CGL_KP_M_Group_H">
-          <Key>
-            <PropertyRef Name="Group_Id" />
-          </Key>
-          <Property Name="Group_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Group_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Group_Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Access_Rights" Type="Int32" Nullable="false" />
-          <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
-          <Property Name="Created_By" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Modified_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Modified_Date" Type="DateTime" Precision="3" />
-          <Property Name="Deleted_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Deleted_Date" Type="DateTime" Precision="3" />
-        </EntityType>
         <EntityType Name="CGL_KP_M_Legal_Entity_H">
           <Key>
             <PropertyRef Name="Legal_Entity_Id" />
@@ -499,32 +424,8 @@
           <Property Name="Modified_Date" Type="DateTime" Precision="3" />
           <Property Name="Deleted_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Deleted_Date" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="CGL_KP_M_Member_H" Relationship="srr_devModel.FK_CGL_KP_M_Member_H_CGL_KP_M_Legal_Entity_H" FromRole="CGL_KP_M_Legal_Entity_H" ToRole="CGL_KP_M_Member_H" />
           <NavigationProperty Name="CGL_KP_M_Period_H" Relationship="srr_devModel.FK_CGL_KP_M_Period_H_CGL_KP_M_Legal_Entity_H" FromRole="CGL_KP_M_Legal_Entity_H" ToRole="CGL_KP_M_Period_H" />
-        </EntityType>
-        <EntityType Name="CGL_KP_M_Member_H">
-          <Key>
-            <PropertyRef Name="Member_Id" />
-          </Key>
-          <Property Name="Member_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Legal_Entity_Id" Type="Int32" Nullable="false" />
-          <Property Name="Employee_No" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Gender_Id" Type="Int32" Nullable="false" />
-          <Property Name="Birth_Date" Type="DateTime" Precision="3" />
-          <Property Name="Join_Date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Status_Id" Type="Int32" Nullable="false" />
-          <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
-          <Property Name="Created_By" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Modified_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Modified_Date" Type="DateTime" Precision="3" />
-          <Property Name="Deleted_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Deleted_Date" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="CGL_KP_M_Legal_Entity_H" Relationship="srr_devModel.FK_CGL_KP_M_Member_H_CGL_KP_M_Legal_Entity_H" FromRole="CGL_KP_M_Member_H" ToRole="CGL_KP_M_Legal_Entity_H" />
-          <NavigationProperty Name="CGL_KP_M_Status_H" Relationship="srr_devModel.FK_CGL_KP_M_Member_H_CGL_KP_M_Status_H" FromRole="CGL_KP_M_Member_H" ToRole="CGL_KP_M_Status_H" />
-          <NavigationProperty Name="CGL_KP_M_Gender_H" Relationship="srr_devModel.FK_CGL_KP_M_Member_H_CGL_KP_M_Gender_H" FromRole="CGL_KP_M_Member_H" ToRole="CGL_KP_M_Gender_H" />
+          <NavigationProperty Name="CGL_KP_M_Member_H" Relationship="srr_devModel.FK_CGL_KP_M_Member_H_CGL_KP_M_Legal_Entity_H" FromRole="CGL_KP_M_Legal_Entity_H" ToRole="CGL_KP_M_Member_H" />
         </EntityType>
         <EntityType Name="CGL_KP_M_Period_H">
           <Key>
@@ -578,52 +479,6 @@
           <Property Name="Deleted_Date" Type="DateTime" Precision="3" />
           <NavigationProperty Name="CGL_KP_M_Member_H" Relationship="srr_devModel.FK_CGL_KP_M_Member_H_CGL_KP_M_Status_H" FromRole="CGL_KP_M_Status_H" ToRole="CGL_KP_M_Member_H" />
         </EntityType>
-        <EntityType Name="CGL_KP_M_UserProfile_D">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="User_Id" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Legal_Entity_Id" Type="Int32" />
-          <Property Name="Group_Id" Type="Int32" Nullable="false" />
-          <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
-          <Property Name="Created_By" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Modified_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Modified_Date" Type="DateTime" Precision="3" />
-          <Property Name="Deleted_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Deleted_Date" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="CGL_KP_M_UserProfile_H">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="User_Id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="User_Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Legal_Entity_Id" Type="Int32" Nullable="false" />
-          <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
-          <Property Name="Created_By" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Modified_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Modified_Date" Type="DateTime" Precision="3" />
-          <Property Name="Deleted_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Deleted_Date" Type="DateTime" Precision="3" />
-        </EntityType>
-        <Association Name="FK_CGL_KP_M_Member_H_CGL_KP_M_Legal_Entity_H">
-          <End Type="srr_devModel.CGL_KP_M_Legal_Entity_H" Role="CGL_KP_M_Legal_Entity_H" Multiplicity="1" />
-          <End Type="srr_devModel.CGL_KP_M_Member_H" Role="CGL_KP_M_Member_H" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CGL_KP_M_Legal_Entity_H">
-              <PropertyRef Name="Legal_Entity_Id" />
-            </Principal>
-            <Dependent Role="CGL_KP_M_Member_H">
-              <PropertyRef Name="Legal_Entity_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_CGL_KP_M_Period_H_CGL_KP_M_Legal_Entity_H">
           <End Type="srr_devModel.CGL_KP_M_Legal_Entity_H" Role="CGL_KP_M_Legal_Entity_H" Multiplicity="1" />
           <End Type="srr_devModel.CGL_KP_M_Period_H" Role="CGL_KP_M_Period_H" Multiplicity="*" />
@@ -633,18 +488,6 @@
             </Principal>
             <Dependent Role="CGL_KP_M_Period_H">
               <PropertyRef Name="Legal_Entity_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CGL_KP_M_Member_H_CGL_KP_M_Status_H">
-          <End Type="srr_devModel.CGL_KP_M_Status_H" Role="CGL_KP_M_Status_H" Multiplicity="1" />
-          <End Type="srr_devModel.CGL_KP_M_Member_H" Role="CGL_KP_M_Member_H" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CGL_KP_M_Status_H">
-              <PropertyRef Name="Status_Id" />
-            </Principal>
-            <Dependent Role="CGL_KP_M_Member_H">
-              <PropertyRef Name="Status_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -660,23 +503,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="CGL_KP_M_Form_Master_H">
-          <Key>
-            <PropertyRef Name="Form_ID" />
-          </Key>
-          <Property Name="Form_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Form_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Uri" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
-          <Property Name="Type_Id" Type="Int32" Nullable="false" />
-          <Property Name="Img_Uri" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
-          <Property Name="Created_By" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Modified_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Modified_Date" Type="DateTime" Precision="3" />
-          <Property Name="Deleted_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Deleted_Date" Type="DateTime" Precision="3" />
-        </EntityType>
         <ComplexType Name="USP_CG_KP_M_AccessRights_H_Find_Result">
           <Property Type="String" Name="Access_Name" Nullable="false" MaxLength="100" />
           <Property Type="Boolean" Name="IsRead" Nullable="true" />
@@ -693,8 +519,8 @@
           <Property Type="Int32" Name="Form_ID" Nullable="false" />
           <Property Type="String" Name="Form_Name" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="Uri" Nullable="false" MaxLength="300" />
-          <Property Type="Int32" Name="Type_Id" Nullable="false" />
           <Property Type="String" Name="Img_Uri" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="Form_Type_Id" Nullable="false" />
         </ComplexType>
         <ComplexType Name="USP_CG_KP_M_UserProfile_H_Find_Result">
           <Property Type="String" Name="User_Id" Nullable="false" MaxLength="50" />
@@ -702,13 +528,19 @@
           <Property Type="Int32" Name="Legal_Entity_Id" Nullable="false" />
           <Property Type="Int32" Name="Group_Id" Nullable="false" />
         </ComplexType>
-        <EntityType Name="CGL_KP_M_Gender_H">
+        <EntityType Name="CGL_KP_M_Member_H">
           <Key>
-            <PropertyRef Name="Gender_Id" />
+            <PropertyRef Name="Member_Id" />
           </Key>
-          <Property Name="Gender_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Gender_Code" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="Gender_Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Member_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Legal_Entity_Id" Type="Int32" Nullable="false" />
+          <Property Name="Employee_No" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="Birth_Date" Type="DateTime" Precision="3" />
+          <Property Name="Join_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Status_Id" Type="Int32" Nullable="false" />
           <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
           <Property Name="Created_By" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
@@ -716,115 +548,206 @@
           <Property Name="Modified_Date" Type="DateTime" Precision="3" />
           <Property Name="Deleted_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Deleted_Date" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="CGL_KP_M_Member_H" Relationship="srr_devModel.FK_CGL_KP_M_Member_H_CGL_KP_M_Gender_H" FromRole="CGL_KP_M_Gender_H" ToRole="CGL_KP_M_Member_H" />
+          <NavigationProperty Name="CGL_KP_M_Legal_Entity_H" Relationship="srr_devModel.FK_CGL_KP_M_Member_H_CGL_KP_M_Legal_Entity_H" FromRole="CGL_KP_M_Member_H" ToRole="CGL_KP_M_Legal_Entity_H" />
+          <NavigationProperty Name="CGL_KP_M_Status_H" Relationship="srr_devModel.FK_CGL_KP_M_Member_H_CGL_KP_M_Status_H" FromRole="CGL_KP_M_Member_H" ToRole="CGL_KP_M_Status_H" />
         </EntityType>
-        <Association Name="FK_CGL_KP_M_Member_H_CGL_KP_M_Gender_H">
-          <End Type="srr_devModel.CGL_KP_M_Gender_H" Role="CGL_KP_M_Gender_H" Multiplicity="1" />
+        <Association Name="FK_CGL_KP_M_Member_H_CGL_KP_M_Legal_Entity_H">
+          <End Type="srr_devModel.CGL_KP_M_Legal_Entity_H" Role="CGL_KP_M_Legal_Entity_H" Multiplicity="1" />
           <End Type="srr_devModel.CGL_KP_M_Member_H" Role="CGL_KP_M_Member_H" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="CGL_KP_M_Gender_H">
-              <PropertyRef Name="Gender_Id" />
+            <Principal Role="CGL_KP_M_Legal_Entity_H">
+              <PropertyRef Name="Legal_Entity_Id" />
             </Principal>
             <Dependent Role="CGL_KP_M_Member_H">
-              <PropertyRef Name="Gender_Id" />
+              <PropertyRef Name="Legal_Entity_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CGL_KP_M_Member_H_CGL_KP_M_Status_H">
+          <End Type="srr_devModel.CGL_KP_M_Status_H" Role="CGL_KP_M_Status_H" Multiplicity="1" />
+          <End Type="srr_devModel.CGL_KP_M_Member_H" Role="CGL_KP_M_Member_H" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CGL_KP_M_Status_H">
+              <PropertyRef Name="Status_Id" />
+            </Principal>
+            <Dependent Role="CGL_KP_M_Member_H">
+              <PropertyRef Name="Status_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CGL_KP_M_AccessRights_H">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Access_Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IsRead" Type="Boolean" />
+          <Property Name="IsWrite" Type="Boolean" />
+          <Property Name="IsMod" Type="Boolean" />
+          <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="Created_By" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Modified_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Modified_Date" Type="DateTime" Precision="3" />
+          <Property Name="Deleted_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Deleted_Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CGL_KP_M_Group_H" Relationship="srr_devModel.FK_CGL_KP_M_Group_H_CGL_KP_M_AccessRights_H" FromRole="CGL_KP_M_AccessRights_H" ToRole="CGL_KP_M_Group_H" />
+        </EntityType>
+        <EntityType Name="CGL_KP_M_Assignment_H">
+          <Key>
+            <PropertyRef Name="Assignment_Id" />
+          </Key>
+          <Property Name="Assignment_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Group_Id" Type="Int32" Nullable="false" />
+          <Property Name="Form_Id" Type="Int32" Nullable="false" />
+          <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="Created_By" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Modified_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Modified_Date" Type="DateTime" Precision="3" />
+          <Property Name="Deleted_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Deleted_Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CGL_KP_M_Form_Master_H" Relationship="srr_devModel.FK_CGL_KP_M_Assignment_H_CGL_KP_M_Form_Master_H" FromRole="CGL_KP_M_Assignment_H" ToRole="CGL_KP_M_Form_Master_H" />
+          <NavigationProperty Name="CGL_KP_M_Group_H" Relationship="srr_devModel.FK_CGL_KP_M_Assignment_H_CGL_KP_M_Group_H" FromRole="CGL_KP_M_Assignment_H" ToRole="CGL_KP_M_Group_H" />
+        </EntityType>
+        <EntityType Name="CGL_KP_M_Form_Master_H">
+          <Key>
+            <PropertyRef Name="Form_ID" />
+          </Key>
+          <Property Name="Form_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Form_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Uri" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Form_Type_Id" Type="Int32" Nullable="false" />
+          <Property Name="Img_Uri" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="Created_By" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Modified_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Modified_Date" Type="DateTime" Precision="3" />
+          <Property Name="Deleted_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Deleted_Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CGL_KP_M_Assignment_H" Relationship="srr_devModel.FK_CGL_KP_M_Assignment_H_CGL_KP_M_Form_Master_H" FromRole="CGL_KP_M_Form_Master_H" ToRole="CGL_KP_M_Assignment_H" />
+          <NavigationProperty Name="CGL_KP_M_Form_Type_H" Relationship="srr_devModel.FK_CGL_KP_M_Form_Master_H_CGL_KP_M_Form_Type_H" FromRole="CGL_KP_M_Form_Master_H" ToRole="CGL_KP_M_Form_Type_H" />
+        </EntityType>
+        <EntityType Name="CGL_KP_M_Form_Type_H">
+          <Key>
+            <PropertyRef Name="Form_Type_Id" />
+          </Key>
+          <Property Name="Form_Type_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Form_Type_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Form_Type_Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="Created_By" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Modified_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Modified_Date" Type="DateTime" Precision="3" />
+          <Property Name="Deleted_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Deleted_Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CGL_KP_M_Form_Master_H" Relationship="srr_devModel.FK_CGL_KP_M_Form_Master_H_CGL_KP_M_Form_Type_H" FromRole="CGL_KP_M_Form_Type_H" ToRole="CGL_KP_M_Form_Master_H" />
+        </EntityType>
+        <EntityType Name="CGL_KP_M_Group_H">
+          <Key>
+            <PropertyRef Name="Group_Id" />
+          </Key>
+          <Property Name="Group_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Group_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Group_Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Access_Rights_Id" Type="Int32" Nullable="false" />
+          <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="Created_By" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Modified_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Modified_Date" Type="DateTime" Precision="3" />
+          <Property Name="Deleted_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Deleted_Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CGL_KP_M_AccessRights_H" Relationship="srr_devModel.FK_CGL_KP_M_Group_H_CGL_KP_M_AccessRights_H" FromRole="CGL_KP_M_Group_H" ToRole="CGL_KP_M_AccessRights_H" />
+          <NavigationProperty Name="CGL_KP_M_Assignment_H" Relationship="srr_devModel.FK_CGL_KP_M_Assignment_H_CGL_KP_M_Group_H" FromRole="CGL_KP_M_Group_H" ToRole="CGL_KP_M_Assignment_H" />
+        </EntityType>
+        <EntityType Name="CGL_KP_M_UserProfile_H">
+          <Key>
+            <PropertyRef Name="User_Id" />
+          </Key>
+          <Property Name="User_Id" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="User_Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Legal_Entity_Id" Type="Int32" Nullable="false" />
+          <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="Created_By" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Modified_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Modified_Date" Type="DateTime" Precision="3" />
+          <Property Name="Deleted_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Deleted_Date" Type="DateTime" Precision="3" />
+        </EntityType>
+        <Association Name="FK_CGL_KP_M_Group_H_CGL_KP_M_AccessRights_H">
+          <End Type="srr_devModel.CGL_KP_M_AccessRights_H" Role="CGL_KP_M_AccessRights_H" Multiplicity="1" />
+          <End Type="srr_devModel.CGL_KP_M_Group_H" Role="CGL_KP_M_Group_H" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CGL_KP_M_AccessRights_H">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CGL_KP_M_Group_H">
+              <PropertyRef Name="Access_Rights_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CGL_KP_M_Assignment_H_CGL_KP_M_Form_Master_H">
+          <End Type="srr_devModel.CGL_KP_M_Form_Master_H" Role="CGL_KP_M_Form_Master_H" Multiplicity="1" />
+          <End Type="srr_devModel.CGL_KP_M_Assignment_H" Role="CGL_KP_M_Assignment_H" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CGL_KP_M_Form_Master_H">
+              <PropertyRef Name="Form_ID" />
+            </Principal>
+            <Dependent Role="CGL_KP_M_Assignment_H">
+              <PropertyRef Name="Form_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CGL_KP_M_Assignment_H_CGL_KP_M_Group_H">
+          <End Type="srr_devModel.CGL_KP_M_Group_H" Role="CGL_KP_M_Group_H" Multiplicity="1" />
+          <End Type="srr_devModel.CGL_KP_M_Assignment_H" Role="CGL_KP_M_Assignment_H" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CGL_KP_M_Group_H">
+              <PropertyRef Name="Group_Id" />
+            </Principal>
+            <Dependent Role="CGL_KP_M_Assignment_H">
+              <PropertyRef Name="Group_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CGL_KP_M_Form_Master_H_CGL_KP_M_Form_Type_H">
+          <End Type="srr_devModel.CGL_KP_M_Form_Type_H" Role="CGL_KP_M_Form_Type_H" Multiplicity="1" />
+          <End Type="srr_devModel.CGL_KP_M_Form_Master_H" Role="CGL_KP_M_Form_Master_H" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CGL_KP_M_Form_Type_H">
+              <PropertyRef Name="Form_Type_Id" />
+            </Principal>
+            <Dependent Role="CGL_KP_M_Form_Master_H">
+              <PropertyRef Name="Form_Type_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="USP_CGL_KP_M_Member_H_Find_Result">
+          <Property Type="Int32" Name="Member_Id" Nullable="false" />
+          <Property Type="Int32" Name="Legal_Entity_Id" Nullable="false" />
+          <Property Type="String" Name="Employee_No" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Gender" Nullable="true" MaxLength="6" />
+          <Property Type="DateTime" Name="Birth_Date" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="Join_Date" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Status_Id" Nullable="false" />
+          <Property Type="String" Name="Legal_Entity_Code" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="Legal_Entity_Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Status_Desc" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="200" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="srr_devModelStoreContainer" CdmEntityContainer="srr_devEntities">
-          <EntitySetMapping Name="SRR_M_User_Login_H">
-            <EntityTypeMapping TypeName="srr_devModel.SRR_M_User_Login_H">
-              <MappingFragment StoreEntitySet="SRR_M_User_Login_H">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="User_Name" ColumnName="User_Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SRR_KK_M_Screen_Master_H">
-            <EntityTypeMapping TypeName="srr_devModel.SRR_KK_M_Screen_Master_H">
-              <MappingFragment StoreEntitySet="SRR_KK_M_Screen_Master_H">
-                <ScalarProperty Name="Screen_Image" ColumnName="Screen_Image" />
-                <ScalarProperty Name="Screen_URI" ColumnName="Screen_URI" />
-                <ScalarProperty Name="Screen_Name" ColumnName="Screen_Name" />
-                <ScalarProperty Name="Screen_Type" ColumnName="Screen_Type" />
-                <ScalarProperty Name="Screen_Id" ColumnName="Screen_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CGL_KP_M_AccessRights_H">
-            <EntityTypeMapping TypeName="srr_devModel.CGL_KP_M_AccessRights_H">
-              <MappingFragment StoreEntitySet="CGL_KP_M_AccessRights_H">
-                <ScalarProperty Name="Deleted_Date" ColumnName="Deleted_Date" />
-                <ScalarProperty Name="Deleted_By" ColumnName="Deleted_By" />
-                <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
-                <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
-                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
-                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
-                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
-                <ScalarProperty Name="IsMod" ColumnName="IsMod" />
-                <ScalarProperty Name="IsWrite" ColumnName="IsWrite" />
-                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
-                <ScalarProperty Name="Access_Name" ColumnName="Access_Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CGL_KP_M_Assignment_H">
-            <EntityTypeMapping TypeName="srr_devModel.CGL_KP_M_Assignment_H">
-              <MappingFragment StoreEntitySet="CGL_KP_M_Assignment_H">
-                <ScalarProperty Name="Deleted_Date" ColumnName="Deleted_Date" />
-                <ScalarProperty Name="Deleted_By" ColumnName="Deleted_By" />
-                <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
-                <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
-                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
-                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
-                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
-                <ScalarProperty Name="Form_Id" ColumnName="Form_Id" />
-                <ScalarProperty Name="Group_Id" ColumnName="Group_Id" />
-                <ScalarProperty Name="Assignment_Id" ColumnName="Assignment_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CGL_KP_M_Form_Type_H">
-            <EntityTypeMapping TypeName="srr_devModel.CGL_KP_M_Form_Type_H">
-              <MappingFragment StoreEntitySet="CGL_KP_M_Form_Type_H">
-                <ScalarProperty Name="Deleted_Date" ColumnName="Deleted_Date" />
-                <ScalarProperty Name="Deleted_By" ColumnName="Deleted_By" />
-                <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
-                <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
-                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
-                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
-                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
-                <ScalarProperty Name="Form_Type_Code" ColumnName="Form_Type_Code" />
-                <ScalarProperty Name="Form_Type_Name" ColumnName="Form_Type_Name" />
-                <ScalarProperty Name="Form_Type_Id" ColumnName="Form_Type_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CGL_KP_M_Group_H">
-            <EntityTypeMapping TypeName="srr_devModel.CGL_KP_M_Group_H">
-              <MappingFragment StoreEntitySet="CGL_KP_M_Group_H">
-                <ScalarProperty Name="Deleted_Date" ColumnName="Deleted_Date" />
-                <ScalarProperty Name="Deleted_By" ColumnName="Deleted_By" />
-                <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
-                <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
-                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
-                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
-                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
-                <ScalarProperty Name="Access_Rights" ColumnName="Access_Rights" />
-                <ScalarProperty Name="Group_Code" ColumnName="Group_Code" />
-                <ScalarProperty Name="Group_Name" ColumnName="Group_Name" />
-                <ScalarProperty Name="Group_Id" ColumnName="Group_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="CGL_KP_M_Legal_Entity_H">
             <EntityTypeMapping TypeName="srr_devModel.CGL_KP_M_Legal_Entity_H">
               <MappingFragment StoreEntitySet="CGL_KP_M_Legal_Entity_H">
@@ -838,28 +761,6 @@
                 <ScalarProperty Name="Legal_Entity_Name" ColumnName="Legal_Entity_Name" />
                 <ScalarProperty Name="Legal_Entity_Code" ColumnName="Legal_Entity_Code" />
                 <ScalarProperty Name="Legal_Entity_Id" ColumnName="Legal_Entity_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CGL_KP_M_Member_H">
-            <EntityTypeMapping TypeName="srr_devModel.CGL_KP_M_Member_H">
-              <MappingFragment StoreEntitySet="CGL_KP_M_Member_H">
-                <ScalarProperty Name="Deleted_Date" ColumnName="Deleted_Date" />
-                <ScalarProperty Name="Deleted_By" ColumnName="Deleted_By" />
-                <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
-                <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
-                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
-                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
-                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
-                <ScalarProperty Name="Status_Id" ColumnName="Status_Id" />
-                <ScalarProperty Name="Join_Date" ColumnName="Join_Date" />
-                <ScalarProperty Name="Birth_Date" ColumnName="Birth_Date" />
-                <ScalarProperty Name="Gender_Id" ColumnName="Gender_Id" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Employee_No" ColumnName="Employee_No" />
-                <ScalarProperty Name="Legal_Entity_Id" ColumnName="Legal_Entity_Id" />
-                <ScalarProperty Name="Member_Id" ColumnName="Member_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -914,60 +815,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CGL_KP_M_UserProfile_D">
-            <EntityTypeMapping TypeName="srr_devModel.CGL_KP_M_UserProfile_D">
-              <MappingFragment StoreEntitySet="CGL_KP_M_UserProfile_D">
-                <ScalarProperty Name="Deleted_Date" ColumnName="Deleted_Date" />
-                <ScalarProperty Name="Deleted_By" ColumnName="Deleted_By" />
-                <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
-                <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
-                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
-                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
-                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
-                <ScalarProperty Name="Group_Id" ColumnName="Group_Id" />
-                <ScalarProperty Name="Legal_Entity_Id" ColumnName="Legal_Entity_Id" />
-                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CGL_KP_M_UserProfile_H">
-            <EntityTypeMapping TypeName="srr_devModel.CGL_KP_M_UserProfile_H">
-              <MappingFragment StoreEntitySet="CGL_KP_M_UserProfile_H">
-                <ScalarProperty Name="Deleted_Date" ColumnName="Deleted_Date" />
-                <ScalarProperty Name="Deleted_By" ColumnName="Deleted_By" />
-                <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
-                <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
-                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
-                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
-                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
-                <ScalarProperty Name="Legal_Entity_Id" ColumnName="Legal_Entity_Id" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="User_Name" ColumnName="User_Name" />
-                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CGL_KP_M_Form_Master_H">
-            <EntityTypeMapping TypeName="srr_devModel.CGL_KP_M_Form_Master_H">
-              <MappingFragment StoreEntitySet="CGL_KP_M_Form_Master_H">
-                <ScalarProperty Name="Deleted_Date" ColumnName="Deleted_Date" />
-                <ScalarProperty Name="Deleted_By" ColumnName="Deleted_By" />
-                <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
-                <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
-                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
-                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
-                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
-                <ScalarProperty Name="Img_Uri" ColumnName="Img_Uri" />
-                <ScalarProperty Name="Type_Id" ColumnName="Type_Id" />
-                <ScalarProperty Name="Uri" ColumnName="Uri" />
-                <ScalarProperty Name="Form_Name" ColumnName="Form_Name" />
-                <ScalarProperty Name="Form_ID" ColumnName="Form_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="USP_CG_KP_M_AccessRights_H_Find" FunctionName="srr_devModel.Store.USP_CG_KP_M_AccessRights_H_Find">
             <ResultMapping>
               <ComplexTypeMapping TypeName="srr_devModel.USP_CG_KP_M_AccessRights_H_Find_Result">
@@ -994,8 +841,8 @@
                 <ScalarProperty Name="Form_ID" ColumnName="Form_ID" />
                 <ScalarProperty Name="Form_Name" ColumnName="Form_Name" />
                 <ScalarProperty Name="Uri" ColumnName="Uri" />
-                <ScalarProperty Name="Type_Id" ColumnName="Type_Id" />
                 <ScalarProperty Name="Img_Uri" ColumnName="Img_Uri" />
+                <ScalarProperty Name="Form_Type_Id" ColumnName="Form_Type_Id" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -1009,9 +856,9 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="CGL_KP_M_Gender_H">
-            <EntityTypeMapping TypeName="srr_devModel.CGL_KP_M_Gender_H">
-              <MappingFragment StoreEntitySet="CGL_KP_M_Gender_H">
+          <EntitySetMapping Name="CGL_KP_M_Member_H">
+            <EntityTypeMapping TypeName="srr_devModel.CGL_KP_M_Member_H">
+              <MappingFragment StoreEntitySet="CGL_KP_M_Member_H">
                 <ScalarProperty Name="Deleted_Date" ColumnName="Deleted_Date" />
                 <ScalarProperty Name="Deleted_By" ColumnName="Deleted_By" />
                 <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
@@ -1019,12 +866,139 @@
                 <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
                 <ScalarProperty Name="Created_By" ColumnName="Created_By" />
                 <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
-                <ScalarProperty Name="Gender_Name" ColumnName="Gender_Name" />
-                <ScalarProperty Name="Gender_Code" ColumnName="Gender_Code" />
-                <ScalarProperty Name="Gender_Id" ColumnName="Gender_Id" />
+                <ScalarProperty Name="Status_Id" ColumnName="Status_Id" />
+                <ScalarProperty Name="Join_Date" ColumnName="Join_Date" />
+                <ScalarProperty Name="Birth_Date" ColumnName="Birth_Date" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Employee_No" ColumnName="Employee_No" />
+                <ScalarProperty Name="Legal_Entity_Id" ColumnName="Legal_Entity_Id" />
+                <ScalarProperty Name="Member_Id" ColumnName="Member_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="CGL_KP_M_AccessRights_H">
+            <EntityTypeMapping TypeName="srr_devModel.CGL_KP_M_AccessRights_H">
+              <MappingFragment StoreEntitySet="CGL_KP_M_AccessRights_H">
+                <ScalarProperty Name="Deleted_Date" ColumnName="Deleted_Date" />
+                <ScalarProperty Name="Deleted_By" ColumnName="Deleted_By" />
+                <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+                <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+                <ScalarProperty Name="IsMod" ColumnName="IsMod" />
+                <ScalarProperty Name="IsWrite" ColumnName="IsWrite" />
+                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+                <ScalarProperty Name="Access_Name" ColumnName="Access_Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CGL_KP_M_Assignment_H">
+            <EntityTypeMapping TypeName="srr_devModel.CGL_KP_M_Assignment_H">
+              <MappingFragment StoreEntitySet="CGL_KP_M_Assignment_H">
+                <ScalarProperty Name="Deleted_Date" ColumnName="Deleted_Date" />
+                <ScalarProperty Name="Deleted_By" ColumnName="Deleted_By" />
+                <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+                <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+                <ScalarProperty Name="Form_Id" ColumnName="Form_Id" />
+                <ScalarProperty Name="Group_Id" ColumnName="Group_Id" />
+                <ScalarProperty Name="Assignment_Id" ColumnName="Assignment_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CGL_KP_M_Form_Master_H">
+            <EntityTypeMapping TypeName="srr_devModel.CGL_KP_M_Form_Master_H">
+              <MappingFragment StoreEntitySet="CGL_KP_M_Form_Master_H">
+                <ScalarProperty Name="Deleted_Date" ColumnName="Deleted_Date" />
+                <ScalarProperty Name="Deleted_By" ColumnName="Deleted_By" />
+                <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+                <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+                <ScalarProperty Name="Img_Uri" ColumnName="Img_Uri" />
+                <ScalarProperty Name="Form_Type_Id" ColumnName="Form_Type_Id" />
+                <ScalarProperty Name="Uri" ColumnName="Uri" />
+                <ScalarProperty Name="Form_Name" ColumnName="Form_Name" />
+                <ScalarProperty Name="Form_ID" ColumnName="Form_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CGL_KP_M_Form_Type_H">
+            <EntityTypeMapping TypeName="srr_devModel.CGL_KP_M_Form_Type_H">
+              <MappingFragment StoreEntitySet="CGL_KP_M_Form_Type_H">
+                <ScalarProperty Name="Deleted_Date" ColumnName="Deleted_Date" />
+                <ScalarProperty Name="Deleted_By" ColumnName="Deleted_By" />
+                <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+                <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+                <ScalarProperty Name="Form_Type_Code" ColumnName="Form_Type_Code" />
+                <ScalarProperty Name="Form_Type_Name" ColumnName="Form_Type_Name" />
+                <ScalarProperty Name="Form_Type_Id" ColumnName="Form_Type_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CGL_KP_M_Group_H">
+            <EntityTypeMapping TypeName="srr_devModel.CGL_KP_M_Group_H">
+              <MappingFragment StoreEntitySet="CGL_KP_M_Group_H">
+                <ScalarProperty Name="Deleted_Date" ColumnName="Deleted_Date" />
+                <ScalarProperty Name="Deleted_By" ColumnName="Deleted_By" />
+                <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+                <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+                <ScalarProperty Name="Access_Rights_Id" ColumnName="Access_Rights_Id" />
+                <ScalarProperty Name="Group_Code" ColumnName="Group_Code" />
+                <ScalarProperty Name="Group_Name" ColumnName="Group_Name" />
+                <ScalarProperty Name="Group_Id" ColumnName="Group_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CGL_KP_M_UserProfile_H">
+            <EntityTypeMapping TypeName="srr_devModel.CGL_KP_M_UserProfile_H">
+              <MappingFragment StoreEntitySet="CGL_KP_M_UserProfile_H">
+                <ScalarProperty Name="Deleted_Date" ColumnName="Deleted_Date" />
+                <ScalarProperty Name="Deleted_By" ColumnName="Deleted_By" />
+                <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+                <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+                <ScalarProperty Name="Legal_Entity_Id" ColumnName="Legal_Entity_Id" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="User_Name" ColumnName="User_Name" />
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="USP_CGL_KP_M_Member_H_Find" FunctionName="srr_devModel.Store.USP_CGL_KP_M_Member_H_Find">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="srr_devModel.USP_CGL_KP_M_Member_H_Find_Result">
+                <ScalarProperty Name="Member_Id" ColumnName="Member_Id" />
+                <ScalarProperty Name="Legal_Entity_Id" ColumnName="Legal_Entity_Id" />
+                <ScalarProperty Name="Employee_No" ColumnName="Employee_No" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Birth_Date" ColumnName="Birth_Date" />
+                <ScalarProperty Name="Join_Date" ColumnName="Join_Date" />
+                <ScalarProperty Name="Status_Id" ColumnName="Status_Id" />
+                <ScalarProperty Name="Legal_Entity_Code" ColumnName="Legal_Entity_Code" />
+                <ScalarProperty Name="Legal_Entity_Name" ColumnName="Legal_Entity_Name" />
+                <ScalarProperty Name="Status_Desc" ColumnName="Status_Desc" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

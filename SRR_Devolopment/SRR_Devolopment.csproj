@@ -30,6 +30,7 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <TargetFrameworkProfile />
+    <ExpressionBlendVersion>12.0.41002.1</ExpressionBlendVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -41,7 +42,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <RunCodeAnalysis>true</RunCodeAnalysis>
-    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -87,6 +88,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -110,11 +112,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BaseLib\Class\CloseableTab.cs" />
+    <Compile Include="BaseLib\Class\DateTimePicker.cs" />
     <Compile Include="BaseLib\Class\HashingClass.cs" />
     <Compile Include="BaseLib\Class\ModuleLoadObject.cs" />
-    <Compile Include="BaseLib\UserControl\ucTabCloseButton.xaml.cs">
-      <DependentUpon>ucTabCloseButton.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="BaseLib\Class\ObjectClass.cs" />
+    <Compile Include="BaseLib\Class\ViewModelBased.cs" />
     <Compile Include="MessageInfrastructure\Messaging.cs" />
     <Compile Include="Model\CGL_KP_M_AccessRights_H.cs">
       <DependentUpon>SRRDev.tt</DependentUpon>
@@ -126,9 +128,6 @@
       <DependentUpon>SRRDev.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\CGL_KP_M_Form_Type_H.cs">
-      <DependentUpon>SRRDev.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\CGL_KP_M_Gender_H.cs">
       <DependentUpon>SRRDev.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\CGL_KP_M_Group_H.cs">
@@ -149,9 +148,6 @@
     <Compile Include="Model\CGL_KP_M_Status_H.cs">
       <DependentUpon>SRRDev.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\CGL_KP_M_UserProfile_D.cs">
-      <DependentUpon>SRRDev.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\CGL_KP_M_UserProfile_H.cs">
       <DependentUpon>SRRDev.tt</DependentUpon>
     </Compile>
@@ -170,10 +166,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SRRDev.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Model\SRR_KK_M_Screen_Master_H.cs">
-      <DependentUpon>SRRDev.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\SRR_M_User_Login_H.cs">
+    <Compile Include="Model\USP_CGL_KP_M_Member_H_Find_Result.cs">
       <DependentUpon>SRRDev.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\USP_CG_KP_M_AccessRights_H_Find_Result.cs">
@@ -189,20 +182,21 @@
       <DependentUpon>SRRDev.tt</DependentUpon>
     </Compile>
     <Compile Include="Services\IDataServices.cs" />
+    <Compile Include="Services\IMemberDataService.cs" />
+    <Compile Include="Services\MemberDataService.cs" />
     <Compile Include="Services\Services.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\TreeListViewModel.cs" />
+    <Compile Include="ViewModel\MemberViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="Views\ucMember.xaml.cs">
+      <DependentUpon>ucMember.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ucPageOne.xaml.cs">
       <DependentUpon>ucPageOne.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ucTreeListMenu.xaml.cs">
-      <DependentUpon>ucTreeListMenu.xaml</DependentUpon>
+    <Compile Include="Views\ucTransactionOne.xaml.cs">
+      <DependentUpon>ucTransactionOne.xaml</DependentUpon>
     </Compile>
-    <Page Include="BaseLib\UserControl\ucTabCloseButton.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -219,11 +213,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\ucMember.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ucPageOne.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ucTreeListMenu.xaml">
+    <Page Include="Views\ucTransactionOne.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -284,6 +282,43 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Icons\1470068314_office-03.ico" />
+    <Resource Include="Images\ButtonIco\Menu16x16\Add.png" />
+    <Resource Include="Images\ButtonIco\Menu16x16\Approved.png" />
+    <Resource Include="Images\ButtonIco\Menu16x16\Calculation.png" />
+    <Resource Include="Images\ButtonIco\Menu16x16\Cancel.png" />
+    <Resource Include="Images\ButtonIco\Menu16x16\Completion.png" />
+    <Resource Include="Images\ButtonIco\Menu16x16\Delete.png" />
+    <Resource Include="Images\ButtonIco\Menu16x16\Modify.png" />
+    <Resource Include="Images\ButtonIco\Menu16x16\New.png" />
+    <Resource Include="Images\ButtonIco\Menu16x16\Print.png" />
+    <Resource Include="Images\ButtonIco\Menu16x16\PrintPreview.png" />
+    <Resource Include="Images\ButtonIco\Menu16x16\Refresh.png" />
+    <Resource Include="Images\ButtonIco\Menu16x16\Rejected.png" />
+    <Resource Include="Images\ButtonIco\Menu16x16\Remove.png" />
+    <Resource Include="Images\ButtonIco\Menu16x16\Save.png" />
+    <Resource Include="Images\ButtonIco\Menu16x16\ShiftLeft.png" />
+    <Resource Include="Images\ButtonIco\Menu16x16\ShiftRight.png" />
+    <Resource Include="Images\ButtonIco\Menu16x16\Shipment.png" />
+    <Resource Include="Images\ButtonIco\Menu32x32\Add.png" />
+    <Resource Include="Images\ButtonIco\Menu32x32\Approved.png" />
+    <Resource Include="Images\ButtonIco\Menu32x32\Calculation.png" />
+    <Resource Include="Images\ButtonIco\Menu32x32\Calculator.png" />
+    <Resource Include="Images\ButtonIco\Menu32x32\Cancel.png" />
+    <Resource Include="Images\ButtonIco\Menu32x32\Completion.png" />
+    <Resource Include="Images\ButtonIco\Menu32x32\Delete.png" />
+    <Resource Include="Images\ButtonIco\Menu32x32\Finish.png" />
+    <Resource Include="Images\ButtonIco\Menu32x32\Generate.png" />
+    <Resource Include="Images\ButtonIco\Menu32x32\Modify.png" />
+    <Resource Include="Images\ButtonIco\Menu32x32\New.png" />
+    <Resource Include="Images\ButtonIco\Menu32x32\Print.png" />
+    <Resource Include="Images\ButtonIco\Menu32x32\PrintPreview.png" />
+    <Resource Include="Images\ButtonIco\Menu32x32\Refresh.png" />
+    <Resource Include="Images\ButtonIco\Menu32x32\Rejected.png" />
+    <Resource Include="Images\ButtonIco\Menu32x32\Remove.png" />
+    <Resource Include="Images\ButtonIco\Menu32x32\Save.png" />
+    <Resource Include="Images\ButtonIco\Menu32x32\ShiftLeft.png" />
+    <Resource Include="Images\ButtonIco\Menu32x32\ShiftRight.png" />
+    <Resource Include="Images\ButtonIco\Menu32x32\Shipment.png" />
     <Content Include="Model\SRRDev.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SRRDev.edmx</DependentUpon>
@@ -298,7 +333,9 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="BaseLib\UserControl\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

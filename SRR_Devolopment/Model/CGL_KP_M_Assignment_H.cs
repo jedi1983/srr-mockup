@@ -24,5 +24,8 @@ namespace SRR_Devolopment.Model
         public Nullable<System.DateTime> Modified_Date { get; set; }
         public string Deleted_By { get; set; }
         public Nullable<System.DateTime> Deleted_Date { get; set; }
+    
+        public virtual CGL_KP_M_Form_Master_H CGL_KP_M_Form_Master_H { get; set; }
+        public virtual CGL_KP_M_Group_H CGL_KP_M_Group_H { get; set; }
     }
 }

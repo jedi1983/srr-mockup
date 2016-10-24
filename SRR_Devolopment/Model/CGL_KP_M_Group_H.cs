@@ -14,10 +14,15 @@ namespace SRR_Devolopment.Model
     
     public partial class CGL_KP_M_Group_H
     {
+        public CGL_KP_M_Group_H()
+        {
+            this.CGL_KP_M_Assignment_H = new HashSet<CGL_KP_M_Assignment_H>();
+        }
+    
         public int Group_Id { get; set; }
         public string Group_Name { get; set; }
         public string Group_Code { get; set; }
-        public int Access_Rights { get; set; }
+        public int Access_Rights_Id { get; set; }
         public bool Is_Deleted { get; set; }
         public string Created_By { get; set; }
         public System.DateTime Created_Date { get; set; }
@@ -25,5 +30,8 @@ namespace SRR_Devolopment.Model
         public Nullable<System.DateTime> Modified_Date { get; set; }
         public string Deleted_By { get; set; }
         public Nullable<System.DateTime> Deleted_Date { get; set; }
+    
+        public virtual CGL_KP_M_AccessRights_H CGL_KP_M_AccessRights_H { get; set; }
+        public virtual ICollection<CGL_KP_M_Assignment_H> CGL_KP_M_Assignment_H { get; set; }
     }
 }

@@ -14,7 +14,6 @@ namespace SRR_Devolopment.Model
     
     public partial class CGL_KP_M_UserProfile_H
     {
-        public int Id { get; set; }
         public string User_Id { get; set; }
         public string User_Name { get; set; }
         public string Email { get; set; }

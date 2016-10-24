@@ -1,8 +1,4 @@
-﻿
-namespace SRR_Devolopment.BaseLib.UserControl
-{
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,26 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-
+namespace SRR_Devolopment.Views
+{
     /// <summary>
-    /// Interaction logic for ucTabCloseButton.xaml
+    /// Interaction logic for ucTransactionOne.xaml
     /// </summary>
-    public partial class ucTabCloseButton : UserControl
+    public partial class ucTransactionOne : UserControl
     {
-         public event EventHandler Click;
-
-        public ucTabCloseButton()
+        public ucTransactionOne()
         {
             InitializeComponent();
         }
- 
-        private void OnClick(object sender, RoutedEventArgs e)
-        {
-            if (Click != null)
-            {
-                Click(sender, e);
-            }
-        }
-
     }
 }

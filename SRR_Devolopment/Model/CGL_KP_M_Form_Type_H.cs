@@ -14,6 +14,11 @@ namespace SRR_Devolopment.Model
     
     public partial class CGL_KP_M_Form_Type_H
     {
+        public CGL_KP_M_Form_Type_H()
+        {
+            this.CGL_KP_M_Form_Master_H = new HashSet<CGL_KP_M_Form_Master_H>();
+        }
+    
         public int Form_Type_Id { get; set; }
         public string Form_Type_Name { get; set; }
         public string Form_Type_Code { get; set; }
@@ -24,5 +29,7 @@ namespace SRR_Devolopment.Model
         public Nullable<System.DateTime> Modified_Date { get; set; }
         public string Deleted_By { get; set; }
         public Nullable<System.DateTime> Deleted_Date { get; set; }
+    
+        public virtual ICollection<CGL_KP_M_Form_Master_H> CGL_KP_M_Form_Master_H { get; set; }
     }
 }

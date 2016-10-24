@@ -13,7 +13,19 @@ namespace SRR_Devolopment.Services
 
     {
 
-        //ctor
+        
+        public int GetFormTypeId(String FormType)
+        {
+            int ret = 0;
+            using (srr_devEntities x = new srr_devEntities())
+            {
+                var linq = from tbl in x.CGL_KP_M_Form_Type_H
+                           where tbl.Is_Deleted == false && tbl.Form_Type_Name.Contains(FormType)
+                           select tbl;
+                ret = linq.FirstOrDefault().Form_Type_Id;
+            }
+            return ret;
+        }
         
         public ObservableCollection<USP_CG_KP_M_UserProfile_H_Find_Result> GetLoginID(String UserName,String Password)
         {
@@ -32,6 +44,54 @@ namespace SRR_Devolopment.Services
             }
            
         }
+
+        public ObservableCollection<USP_CG_KP_M_FormMaster_H_Find_R_Result> GetFormMasterData(int GroupID)
+        {
+            try
+            {
+                using (srr_devEntities context = new srr_devEntities())
+                {
+                    IList<USP_CG_KP_M_FormMaster_H_Find_R_Result> data = context.USP_CG_KP_M_FormMaster_H_Find_R(GroupID).ToList();
+                    return new ObservableCollection<USP_CG_KP_M_FormMaster_H_Find_R_Result>(data);
+                }
+            }
+            catch
+            {
+                throw new Exception("Database Error");
+            }
+        }
+
+        public ObservableCollection<USP_CG_KP_M_Form_Type_H_Find_Result> GetFormType(int GroupID)
+        {
+            try
+            {
+                using (srr_devEntities context = new srr_devEntities())
+                {
+                    IList<USP_CG_KP_M_Form_Type_H_Find_Result> data = context.USP_CG_KP_M_Form_Type_H_Find(GroupID).ToList();
+                    return new ObservableCollection<USP_CG_KP_M_Form_Type_H_Find_Result>(data);
+                }
+            }
+            catch
+            {
+                throw new Exception("Database Error");
+            }
+        }
+
+        public ObservableCollection<USP_CG_KP_M_AccessRights_H_Find_Result> GetAccessRights(int GroupID)
+        {
+            try
+            {
+                using (srr_devEntities context = new srr_devEntities())
+                {
+                    IList<USP_CG_KP_M_AccessRights_H_Find_Result> data = context.USP_CG_KP_M_AccessRights_H_Find(GroupID).ToList();
+                    return new ObservableCollection<USP_CG_KP_M_AccessRights_H_Find_Result>(data);
+                }
+            }
+            catch
+            {
+                throw new Exception("Database Error");
+            }
+        }
         
         public bool saveLogin(string UserName, String Name, String Password)
         {   
@@ -49,21 +109,6 @@ namespace SRR_Devolopment.Services
         return true;
         }
 
-        public ObservableCollection<SRR_KK_M_Screen_Master_H> GetScreenMenu()
-        {
-            try{
-                    using (srr_devEntities sr = new srr_devEntities())
-                            {
-                                var linqQuery = from tbl in sr.SRR_KK_M_Screen_Master_H
-                                                select tbl;
-
-                                return new ObservableCollection<SRR_KK_M_Screen_Master_H>(linqQuery);
-                            }
-               }
-            catch
-               {
-                      throw new Exception("Database Error");
-               }
-        }
+      
     }
 }
