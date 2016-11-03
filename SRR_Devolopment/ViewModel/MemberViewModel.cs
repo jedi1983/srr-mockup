@@ -83,19 +83,19 @@ namespace SRR_Devolopment.ViewModel
         /// <summary>
         /// Birth Date
         /// </summary>
-        private DateTime _setBirthDate;
-        public DateTime SetBirthDate
-        {
-            get
-            {
-                return _setBirthDate;
-            }
-            set 
-            {
-                _setBirthDate = value;
-                RaisePropertyChanged("SetBirthDate");
-            }
-        }
+        //private DateTime _setBirthDate;
+        //public DateTime SetBirthDate
+        //{
+        //    get
+        //    {
+        //        return _setBirthDate;
+        //    }
+        //    set 
+        //    {
+        //        _setBirthDate = value;
+        //        RaisePropertyChanged("SetBirthDate");
+        //    }
+        //}
 
         /// <summary>
         /// Get Status 
@@ -136,53 +136,53 @@ namespace SRR_Devolopment.ViewModel
         /// <summary>
         /// Get Gender
         /// </summary>
-        private ObservableCollection<BaseLib.Class.CGL_KP_M_Gender_H> _getGender;
-        public ObservableCollection<BaseLib.Class.CGL_KP_M_Gender_H> GetGender
-        {
-            get
-            {
-                _getGender = _dataServices.getGenderType();
-                return _getGender;
-            }
-            set
-            {
-                _getGender = value;
-                RaisePropertyChanged("GetGender");
-            }
-        }
-        /// <summary>
-        /// Set Gender
-        /// </summary>
-        private BaseLib.Class.CGL_KP_M_Gender_H _setGender;
-        public BaseLib.Class.CGL_KP_M_Gender_H SetGender
-        {
-            get
-            {
-                return _setGender;
-            }
-            set
-            {
-                _setGender = value;
-                RaisePropertyChanged("SetGender");
-            }
+        //private ObservableCollection<BaseLib.Class.CGL_KP_M_Gender_H> _getGender;
+        //public ObservableCollection<BaseLib.Class.CGL_KP_M_Gender_H> GetGender
+        //{
+        //    get
+        //    {
+        //        _getGender = _dataServices.getGenderType();
+        //        return _getGender;
+        //    }
+        //    set
+        //    {
+        //        _getGender = value;
+        //        RaisePropertyChanged("GetGender");
+        //    }
+        //}
+        ///// <summary>
+        ///// Set Gender
+        ///// </summary>
+        //private BaseLib.Class.CGL_KP_M_Gender_H _setGender;
+        //public BaseLib.Class.CGL_KP_M_Gender_H SetGender
+        //{
+        //    get
+        //    {
+        //        return _setGender;
+        //    }
+        //    set
+        //    {
+        //        _setGender = value;
+        //        RaisePropertyChanged("SetGender");
+        //    }
 
-        }
+        //}
         /// <summary>
         /// address
         /// </summary>
-        private string _address;
-        public string Address
-        {
-            get
-            {
-                return _address;
-            }
-            set
-            {
-                _address = value;
-                RaisePropertyChanged("Address");
-            }
-        }
+        //private string _address;
+        //public string Address
+        //{
+        //    get
+        //    {
+        //        return _address;
+        //    }
+        //    set
+        //    {
+        //        _address = value;
+        //        RaisePropertyChanged("Address");
+        //    }
+        //}
 
         /// <summary>
         /// Employee Name
@@ -394,9 +394,9 @@ namespace SRR_Devolopment.ViewModel
                 SetLegalEntity = GetLegalEntity.FirstOrDefault(x => x.Legal_Entity_Id == SelectedGridData.Legal_Entity_Id);
                 EmployeeName = SelectedGridData.Name;
                 EmployeeNo = SelectedGridData.Employee_No;
-                SetGender = GetGender.FirstOrDefault(x => x.GenderCode.Contains(SelectedGridData.Gender));
-                Address = SelectedGridData.Address;
-                SetBirthDate = (DateTime)SelectedGridData.Birth_Date;
+                //SetGender = GetGender.FirstOrDefault(x => x.GenderCode.Contains(SelectedGridData.Gender));
+                //Address = SelectedGridData.Address;
+                //SetBirthDate = (DateTime)SelectedGridData.Birth_Date;
                 SetJoinDate = (DateTime)SelectedGridData.Join_Date;
                 SetStatus = GetStatus.FirstOrDefault(x => x.Status_Id == SelectedGridData.Status_Id);
                 MemberID = SelectedGridData.Member_Id;
@@ -420,14 +420,14 @@ namespace SRR_Devolopment.ViewModel
             {
                 ret = "Please Fill Up Employee No";
             }
-            if (Address == string.Empty)
-            {
-                ret = "Please Fill Up Address";
-            }
-            if(SetGender == null)
-            {
-                ret = "Please Fill Up Gender";
-            }
+            //if (Address == string.Empty)
+            //{
+            //    ret = "Please Fill Up Address";
+            //}
+            //if(SetGender == null)
+            //{
+            //    ret = "Please Fill Up Gender";
+            //}
             if(SetStatus == null)
             {
                 ret = "Please Fill Up Status";
@@ -473,12 +473,12 @@ namespace SRR_Devolopment.ViewModel
                         dataInsert.Member_Id = MemberID;
                         dataInsert.Employee_No = EmployeeNo;
                         dataInsert.Name = EmployeeName;
-                        dataInsert.Address = Address;
-                        dataInsert.Birth_Date = SetBirthDate;
+                        //dataInsert.Address = Address;
+                        //dataInsert.Birth_Date = SetBirthDate;
                         dataInsert.Join_Date = SetJoinDate;
                         dataInsert.Status_Id = SetStatus.Status_Id;
                         dataInsert.Legal_Entity_Id = SetLegalEntity.Legal_Entity_Id;
-                        dataInsert.Gender = SetGender.GenderCode;
+                        //dataInsert.Gender = SetGender.GenderCode;
                         if (_dataServices.memberEditedData(dataInsert, (string)BaseLib.Class.Singleton.Instance.TmpUserName) == true)
                         {
                             MessageBox.Show("Data Saved Successfully", "Member Screen", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -506,12 +506,12 @@ namespace SRR_Devolopment.ViewModel
                        CGL_KP_M_Member_H dataInsert = new CGL_KP_M_Member_H();
                        dataInsert.Employee_No = EmployeeNo;
                        dataInsert.Name = EmployeeName;
-                       dataInsert.Birth_Date = SetBirthDate;
+                       //dataInsert.Birth_Date = SetBirthDate;
                        dataInsert.Join_Date = SetJoinDate;
                        dataInsert.Status_Id = SetStatus.Status_Id;
                        dataInsert.Legal_Entity_Id = SetLegalEntity.Legal_Entity_Id;
-                       dataInsert.Gender = SetGender.GenderCode;
-                       dataInsert.Address = Address;
+                       //dataInsert.Gender = SetGender.GenderCode;
+                       //dataInsert.Address = Address;
                        if(_dataServices.memberSaveData(dataInsert,(string)BaseLib.Class.Singleton.Instance.TmpUserName)==true)
                        {
                            MessageBox.Show("Data Saved Successfully", "Member Screen", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -571,14 +571,14 @@ namespace SRR_Devolopment.ViewModel
             _findName = string.Empty;
             _employeeName = string.Empty;
             _employeeNo = string.Empty;
-            _address = string.Empty;
-            _setGender = null;
+            //_address = string.Empty;
+            //_setGender = null;
             _setLegalEntity = null;
             _setStatus = null;
             ObjEnabled = false;
             ObjFilterEnabled = true;
             _dataMod = false;
-            _setBirthDate = DateTime.Now;
+            //_setBirthDate = DateTime.Now;
             _setJoinDate = DateTime.Now;
             _memberID = 0;
             //end here
@@ -592,10 +592,10 @@ namespace SRR_Devolopment.ViewModel
             SetLegalEntity = null;
             EmployeeName = string.Empty;
             EmployeeNo = string.Empty;
-            Address = string.Empty;
+            //Address = string.Empty;
             SetStatus = null;
-            SetGender = null;
-            SetBirthDate = DateTime.Now;
+            //SetGender = null;
+            //SetBirthDate = DateTime.Now;
             SetJoinDate = DateTime.Now;
             FindName = string.Empty;
             SetLegalEntityFind = null;

@@ -62,7 +62,7 @@
                             <DataGridTextColumn Header="Legal Entity" Binding="{Binding Legal_Entity_Name}" Width="auto" IsReadOnly="True"/>
                             <DataGridTextColumn Header="Employee No" Binding="{Binding Employee_No}" Width="auto" IsReadOnly="True"/>
                             <DataGridTextColumn Header="Employee Name" Binding="{Binding Name}" Width="auto" IsReadOnly="True"/>
-                            <DataGridTextColumn Header="Address" Binding="{Binding Address}" Width="auto" IsReadOnly="True"/>
+                            <!--<DataGridTextColumn Header="Address" Binding="{Binding Address}" Width="auto" IsReadOnly="True"/>
                             <DataGridTextColumn Header="Gender" Binding="{Binding Gender}" Width="auto" IsReadOnly="True"/>
 
                             <DataGridTemplateColumn Header="Birth Date" Width="auto" IsReadOnly="True">
@@ -71,7 +71,7 @@
                                         <DatePicker SelectedDate="{Binding Birth_Date}" BorderThickness="0" IsEnabled="False" my:DateTimePicker.DateFormat="dd/MMM/yyyy"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
+                                </DataGridTemplateColumn>-->
 
                             <DataGridTemplateColumn Header="Join Date" Width="auto" IsReadOnly="True">
                                 <DataGridTemplateColumn.CellTemplate>
@@ -166,7 +166,7 @@
                     <TextBox BorderBrush="Black" Grid.Column="3" Grid.Row="3" Height="25" Width="200" HorizontalAlignment="Center" 
                              VerticalAlignment="Center" Text="{Binding EmployeeName,Mode=TwoWay}" IsEnabled="{Binding ObjEnabled}"/>
 
-                    <TextBlock Grid.Column="1" Grid.Row="4" Text="Address"  HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <!--<TextBlock Grid.Column="1" Grid.Row="4" Text="Address"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <TextBlock Grid.Column="2" Grid.Row="4" Text=":"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <TextBox BorderBrush="Black" Grid.Column="3" Grid.Row="4" Height="25" Width="200" HorizontalAlignment="Center" 
                              VerticalAlignment="Center" Text="{Binding Address,Mode=TwoWay}" IsEnabled="{Binding ObjEnabled}"/>
@@ -175,21 +175,21 @@
                     <TextBlock Grid.Column="2" Grid.Row="5" Text=":"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <ComboBox BorderBrush="Black" Grid.Row="5" Grid.Column="3" Name="insertGender" Height="25" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" ItemsSource="{Binding GetGender}" 
                               DisplayMemberPath="GenderName"  SelectedItem="{Binding SetGender,Mode=TwoWay}"
-                              SelectedValue="{Binding SetGender.Id,Mode=TwoWay}"  SelectedValuePath="Id" IsEnabled="{Binding ObjEnabled}"/>
+                              SelectedValue="{Binding SetGender.Id,Mode=TwoWay}"  SelectedValuePath="Id" IsEnabled="{Binding ObjEnabled}"/>-->
 
-                    <TextBlock Grid.Column="1" Grid.Row="6" Text="Birth Date"  HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    <TextBlock Grid.Column="2" Grid.Row="6" Text=":"  HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    <DatePicker Grid.Column="3" Grid.Row="6" Width="200" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                                SelectedDate="{Binding SetBirthDate}" my:DateTimePicker.DateFormat="dd/MMM/yyyy" IsEnabled="{Binding ObjEnabled}"/>
+                    <!--<TextBlock Grid.Column="1" Grid.Row="3" Text="Birth Date"  HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <TextBlock Grid.Column="2" Grid.Row="3" Text=":"  HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <DatePicker Grid.Column="3" Grid.Row="3" Width="200" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                SelectedDate="{Binding SetBirthDate}" my:DateTimePicker.DateFormat="dd/MMM/yyyy" IsEnabled="{Binding ObjEnabled}"/>-->
 
-                    <TextBlock Grid.Column="1" Grid.Row="7" Text="Join Date"  HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    <TextBlock Grid.Column="2" Grid.Row="7" Text=":"  HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    <DatePicker Grid.Column="3" Grid.Row="7" Width="200" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                    <TextBlock Grid.Column="1" Grid.Row="4" Text="Join Date"  HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <TextBlock Grid.Column="2" Grid.Row="4" Text=":"  HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <DatePicker Grid.Column="3" Grid.Row="4" Width="200" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" 
                                 SelectedDate="{Binding SetJoinDate}" my:DateTimePicker.DateFormat="dd/MMM/yyyy" IsEnabled="{Binding ObjEnabled}"/>
 
-                    <TextBlock Grid.Column="1" Grid.Row="8" Text="Status"  HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    <TextBlock Grid.Column="2" Grid.Row="8" Text=":"  HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    <ComboBox BorderBrush="Black" Grid.Row="8" Grid.Column="3" Name="insertStatus" Height="25" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" ItemsSource="{Binding GetStatus}" 
+                    <TextBlock Grid.Column="1" Grid.Row="5" Text="Status"  HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <TextBlock Grid.Column="2" Grid.Row="5" Text=":"  HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <ComboBox BorderBrush="Black" Grid.Row="5" Grid.Column="3" Name="insertStatus" Height="25" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" ItemsSource="{Binding GetStatus}" 
                               DisplayMemberPath="Status_Desc"  SelectedItem="{Binding SetStatus,Mode=TwoWay}"
                               SelectedValue="{Binding SetStatus.Status_Id,Mode=TwoWay}"  SelectedValuePath="Status_Id" IsEnabled="{Binding ObjEnabled}"/>
 

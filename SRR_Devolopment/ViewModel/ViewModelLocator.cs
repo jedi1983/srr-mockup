@@ -14,6 +14,13 @@ using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 using SRR_Devolopment.Model;
 using SRR_Devolopment.Services;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using SRR_Devolopment.BaseLib.Class;
+using System.Reflection;
+using System;
+
 
 namespace SRR_Devolopment.ViewModel
 {
@@ -26,6 +33,7 @@ namespace SRR_Devolopment.ViewModel
     /// </summary>
     public class ViewModelLocator
     {
+
         static ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
@@ -37,6 +45,7 @@ namespace SRR_Devolopment.ViewModel
             SimpleIoc.Default.Register<IMemberDataService, MemberDataService>();
 
             SimpleIoc.Default.Register<MemberViewModel>();
+
         }
 
         /// <summary>
@@ -54,12 +63,28 @@ namespace SRR_Devolopment.ViewModel
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
             }
         }
-
+        /// <summary>
+        /// Member View Model Class
+        /// </summary>
         public MemberViewModel Member
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<MemberViewModel>();
+                //checking whether already Contains/Object Created for this class?, if yes then unreg it first to clean cache up
+                //and register back to the SimpleIoc dan let the service locator find the Object GodSpeed
+                if (SimpleIoc.Default.ContainsCreated<MemberViewModel>() == true)
+                {
+                   
+                    SimpleIoc.Default.Unregister<MemberViewModel>();
+                    SimpleIoc.Default.Register<MemberViewModel>();
+                    return ServiceLocator.Current.GetInstance<MemberViewModel>();
+
+                }
+                else//first run will let the service locator got the Object
+                {
+                    return ServiceLocator.Current.GetInstance<MemberViewModel>();
+                }
+                //return ServiceLocator.Current.GetInstance<MemberViewModel>();
             }
         }
 
@@ -70,21 +95,8 @@ namespace SRR_Devolopment.ViewModel
         public static void Cleanup()
         {
             
-            //if(SimpleIoc.Default.GetInstance<MemberViewModel>()!=null)
-            //{
-            //    SimpleIoc.Default.Unregister<MemberViewModel>();
-            //    SimpleIoc.Default.Register<MemberViewModel>();
-            //}
-
+           
         }
 
-        /// <summary>
-        /// Static Method Overload of Cleanup @Roland 2016
-        /// </summary>
-        /// <param name="ViewModelName">String PArameter ViewModelName</param>
-        public static void Cleanup(string ViewModelName)
-        {
-            
-        }
     }
 }

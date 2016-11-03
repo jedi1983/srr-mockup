@@ -9,8 +9,10 @@ using System.Collections.ObjectModel;
 
 namespace SRR_Devolopment.BaseLib.Class
 {
-
-  
+    /// <summary>
+    /// Class Name in Relation to View Model Locator
+    /// </summary>
+   
     public class Grid_Data_Add_Remove
     {
         public int TabItemNo { get; set; }

@@ -145,11 +145,6 @@ namespace SRR_Devolopment.BaseLib.Class
                 NotifyPropertyChanged();
             }
         }
-        
-        public void clickButtonClose(object sender, System.EventArgs e)
-        {
-            Button dataBut = (Button)sender;
-            MessageBox.Show("This Tab "+dataBut.Name.ToString()+" Will Closed","Test",MessageBoxButton.OK,MessageBoxImage.Warning);
-        }
+               
     }
 }

@@ -44,7 +44,6 @@ namespace SRR_Devolopment.ViewModel
         public void clickButtonClose(object sender, System.EventArgs e)
         {
             Button dataBut = (Button)sender;
-            MessageBox.Show("This Tab Will Closed", "Member Screen", MessageBoxButton.OK, MessageBoxImage.Information);
             if(TabCollection != null)
             {
                 var linQ = from tbl in TabCollection
@@ -53,7 +52,7 @@ namespace SRR_Devolopment.ViewModel
 
                 TabCollection.Remove((CloseableTab)linQ.FirstOrDefault());
                 //clenups the View Model Data this will using SimpleIoC unregister and re-register the Application
-                ViewModelLocator.Cleanup();
+                //ViewModelLocator.Cleanup(dataBut.Name);
             }
         }
 
@@ -79,7 +78,7 @@ namespace SRR_Devolopment.ViewModel
             var checkMenu = from x in TabCollection where x.Name.ToString().Contains(formURI.ToString()) select x;
             if(checkMenu.Count() > 0)
             {
-                MessageBox.Show("There Are Already A Tab Open For This Menu, Please Use Those Tab Instead", "Member Screen", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("There Are Already A Tab Open For This Menu, Please Use Those Tab Instead", "Koperasi Menu", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
             //
@@ -308,16 +307,7 @@ namespace SRR_Devolopment.ViewModel
             }
         }
         
-        /// <summary>
-        /// Tab Control as Properties/will be deleted?
-        /// </summary>
-        //public TabControl TabControlMenu
-        //{
-        //    get;
-        //    set;
-        //}
-
-      
+       
         private object _dataMenuHold;
         public object DataMenuHold
         {
