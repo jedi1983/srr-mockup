@@ -185,14 +185,26 @@
     <Compile Include="Services\IMemberDataService.cs" />
     <Compile Include="Services\MemberDataService.cs" />
     <Compile Include="Services\Services.cs" />
+    <Compile Include="ViewModel\ApprovalViewModel.cs" />
+    <Compile Include="ViewModel\ExpenditureViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MemberViewModel.cs" />
+    <Compile Include="ViewModel\RevenueViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="Views\ucApproval.xaml.cs">
+      <DependentUpon>ucApproval.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ucExpenditure.xaml.cs">
+      <DependentUpon>ucExpenditure.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ucMember.xaml.cs">
       <DependentUpon>ucMember.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ucPageOne.xaml.cs">
       <DependentUpon>ucPageOne.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ucRevenue.xaml.cs">
+      <DependentUpon>ucRevenue.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ucTransactionOne.xaml.cs">
       <DependentUpon>ucTransactionOne.xaml</DependentUpon>
@@ -213,11 +225,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\ucApproval.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ucExpenditure.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ucMember.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ucPageOne.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ucRevenue.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
