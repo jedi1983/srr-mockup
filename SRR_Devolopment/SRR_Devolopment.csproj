@@ -121,7 +121,16 @@
     <Compile Include="Model\CGL_KP_M_AccessRights_H.cs">
       <DependentUpon>SRRDev.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\CGL_KP_M_Account_Group_H.cs">
+      <DependentUpon>SRRDev.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CGL_KP_M_Account_H.cs">
+      <DependentUpon>SRRDev.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\CGL_KP_M_Assignment_H.cs">
+      <DependentUpon>SRRDev.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CGL_KP_M_Expenditure_Type_H.cs">
       <DependentUpon>SRRDev.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\CGL_KP_M_Form_Master_H.cs">
@@ -145,10 +154,49 @@
     <Compile Include="Model\CGL_KP_M_Period_Status_H.cs">
       <DependentUpon>SRRDev.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\CGL_KP_M_Revenue_Type_H.cs">
+      <DependentUpon>SRRDev.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\CGL_KP_M_Status_H.cs">
       <DependentUpon>SRRDev.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\CGL_KP_M_UserProfile_D.cs">
+      <DependentUpon>SRRDev.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\CGL_KP_M_UserProfile_H.cs">
+      <DependentUpon>SRRDev.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CGL_KP_R_Cooperative_Balance_H.cs">
+      <DependentUpon>SRRDev.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CGL_KP_R_Cooperative_Beginning_Balance_H.cs">
+      <DependentUpon>SRRDev.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CGL_KP_R_Expenditure_H.cs">
+      <DependentUpon>SRRDev.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CGL_KP_R_Journal_D.cs">
+      <DependentUpon>SRRDev.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CGL_KP_R_Journal_H.cs">
+      <DependentUpon>SRRDev.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CGL_KP_R_Member_Balance_H.cs">
+      <DependentUpon>SRRDev.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CGL_KP_R_Member_Beginning_Balance_H.cs">
+      <DependentUpon>SRRDev.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CGL_KP_R_Member_Loan_H.cs">
+      <DependentUpon>SRRDev.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CGL_KP_R_Revenue_H.cs">
+      <DependentUpon>SRRDev.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CGL_KP_S_Setting_H.cs">
+      <DependentUpon>SRRDev.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CGL_KP_S_Transaction_Type_H.cs">
       <DependentUpon>SRRDev.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\SRRDev.Context.cs">
@@ -169,6 +217,12 @@
     <Compile Include="Model\USP_CGL_KP_M_Member_H_Find_Result.cs">
       <DependentUpon>SRRDev.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\USP_CGL_KP_R_Revenue_H_Find_Result.cs">
+      <DependentUpon>SRRDev.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\USP_CGL_KP_T_Generate_Transaction_Number_Result.cs">
+      <DependentUpon>SRRDev.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\USP_CG_KP_M_AccessRights_H_Find_Result.cs">
       <DependentUpon>SRRDev.tt</DependentUpon>
     </Compile>
@@ -183,7 +237,9 @@
     </Compile>
     <Compile Include="Services\IDataServices.cs" />
     <Compile Include="Services\IMemberDataService.cs" />
+    <Compile Include="Services\IRevenueDataServices.cs" />
     <Compile Include="Services\MemberDataService.cs" />
+    <Compile Include="Services\RevenueDataServices.cs" />
     <Compile Include="Services\Services.cs" />
     <Compile Include="ViewModel\ApprovalViewModel.cs" />
     <Compile Include="ViewModel\ExpenditureViewModel.cs" />

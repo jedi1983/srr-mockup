@@ -12,18 +12,13 @@ namespace SRR_Devolopment.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class CGL_KP_M_UserProfile_H
+    public partial class CGL_KP_R_Member_Beginning_Balance_H
     {
-        public CGL_KP_M_UserProfile_H()
-        {
-            this.CGL_KP_M_UserProfile_D = new HashSet<CGL_KP_M_UserProfile_D>();
-        }
-    
-        public string User_Id { get; set; }
-        public string User_Name { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public int Legal_Entity_Id { get; set; }
+        public int Member_Id { get; set; }
+        public System.DateTime Beginning_Balance_Date { get; set; }
+        public decimal Savings { get; set; }
+        public decimal Debts { get; set; }
+        public decimal Interest { get; set; }
         public bool Is_Deleted { get; set; }
         public string Created_By { get; set; }
         public System.DateTime Created_Date { get; set; }
@@ -32,6 +27,6 @@ namespace SRR_Devolopment.Model
         public string Deleted_By { get; set; }
         public Nullable<System.DateTime> Deleted_Date { get; set; }
     
-        public virtual ICollection<CGL_KP_M_UserProfile_D> CGL_KP_M_UserProfile_D { get; set; }
+        public virtual CGL_KP_M_Member_H CGL_KP_M_Member_H { get; set; }
     }
 }

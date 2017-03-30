@@ -12,18 +12,13 @@ namespace SRR_Devolopment.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class CGL_KP_M_UserProfile_H
+    public partial class CGL_KP_S_Setting_H
     {
-        public CGL_KP_M_UserProfile_H()
-        {
-            this.CGL_KP_M_UserProfile_D = new HashSet<CGL_KP_M_UserProfile_D>();
-        }
-    
-        public string User_Id { get; set; }
-        public string User_Name { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public int Legal_Entity_Id { get; set; }
+        public string Setting_Name { get; set; }
+        public string Setting_Type { get; set; }
+        public string Value_1 { get; set; }
+        public string Value_2 { get; set; }
+        public string Setting_Description { get; set; }
         public bool Is_Deleted { get; set; }
         public string Created_By { get; set; }
         public System.DateTime Created_Date { get; set; }
@@ -31,7 +26,5 @@ namespace SRR_Devolopment.Model
         public Nullable<System.DateTime> Modified_Date { get; set; }
         public string Deleted_By { get; set; }
         public Nullable<System.DateTime> Deleted_Date { get; set; }
-    
-        public virtual ICollection<CGL_KP_M_UserProfile_D> CGL_KP_M_UserProfile_D { get; set; }
     }
 }

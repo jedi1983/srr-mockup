@@ -17,14 +17,22 @@ namespace SRR_Devolopment.Services
         public int GetFormTypeId(String FormType)
         {
             int ret = 0;
-            using (srr_devEntities x = new srr_devEntities())
+            try
             {
-                var linq = from tbl in x.CGL_KP_M_Form_Type_H
-                           where tbl.Is_Deleted == false && tbl.Form_Type_Name.Contains(FormType)
-                           select tbl;
-                ret = linq.FirstOrDefault().Form_Type_Id;
+                using (srr_devEntities x = new srr_devEntities())
+                {
+                    var linq = from tbl in x.CGL_KP_M_Form_Type_H
+                               where tbl.Is_Deleted == false && tbl.Form_Type_Name.Contains(FormType)
+                               select tbl;
+                    ret = linq.FirstOrDefault().Form_Type_Id;
+                }
+                return ret;
             }
-            return ret;
+            catch
+            {
+                throw new Exception("Database Error");
+            }
+            
         }
         
         public ObservableCollection<USP_CG_KP_M_UserProfile_H_Find_Result> GetLoginID(String UserName,String Password)

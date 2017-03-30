@@ -14,36 +14,58 @@ namespace SRR_Devolopment.Services
     {
         public ObservableCollection<CGL_KP_M_Legal_Entity_H> getLegalEntity()
         {
-            using(srr_devEntities xData = new srr_devEntities())
+            try
             {
-                var linqToSQL = from tbl in xData.CGL_KP_M_Legal_Entity_H
-                                where tbl.Is_Deleted == false
-                                select tbl;
+                using (srr_devEntities xData = new srr_devEntities())
+                {
+                    var linqToSQL = from tbl in xData.CGL_KP_M_Legal_Entity_H
+                                    where tbl.Is_Deleted == false
+                                    select tbl;
 
-                return new ObservableCollection<CGL_KP_M_Legal_Entity_H>(linqToSQL);
+                    return new ObservableCollection<CGL_KP_M_Legal_Entity_H>(linqToSQL);
+                }
             }
+            catch
+            {
+                throw new Exception("Database Error");
+            }
+           
         }
 
         public ObservableCollection<USP_CGL_KP_M_Member_H_Find_Result> getMember(int LegalEntityID,string Name)
         {
-            using(srr_devEntities xData = new srr_devEntities())
+            try
             {
-                IList<USP_CGL_KP_M_Member_H_Find_Result> linQData = xData.USP_CGL_KP_M_Member_H_Find(legalEntityID:LegalEntityID,name:Name).ToList();
-                return new ObservableCollection<USP_CGL_KP_M_Member_H_Find_Result>(linQData);
+                using (srr_devEntities xData = new srr_devEntities())
+                {
+                    IList<USP_CGL_KP_M_Member_H_Find_Result> linQData = xData.USP_CGL_KP_M_Member_H_Find(legalEntityID: LegalEntityID, name: Name).ToList();
+                    return new ObservableCollection<USP_CGL_KP_M_Member_H_Find_Result>(linQData);
 
+                }
             }
+            catch
+            {
+                throw new Exception("Database Error");
+            }
+          
         }
        public ObservableCollection<CGL_KP_M_Status_H> getStatus()
         {
-            using(srr_devEntities x = new srr_devEntities())
+            try
             {
-                var linqToSQL = from tbl in x.CGL_KP_M_Status_H
-                                where tbl.Is_Deleted == false
-                                select tbl;
+                using (srr_devEntities x = new srr_devEntities())
+                {
+                    var linqToSQL = from tbl in x.CGL_KP_M_Status_H
+                                    where tbl.Is_Deleted == false
+                                    select tbl;
 
-                return new ObservableCollection<CGL_KP_M_Status_H>(linqToSQL);
+                    return new ObservableCollection<CGL_KP_M_Status_H>(linqToSQL);
+                }
             }
-
+            catch
+            {
+                throw new Exception("Database Error");
+            }
         }
 
        /// <summary>

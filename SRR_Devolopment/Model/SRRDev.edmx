@@ -22,13 +22,71 @@
           <Property Name="Deleted_By" Type="varchar" MaxLength="50" />
           <Property Name="Deleted_Date" Type="datetime" />
         </EntityType>
+        <EntityType Name="CGL_KP_M_Account_Group_H">
+          <Key>
+            <PropertyRef Name="Account_Group_Id" />
+          </Key>
+          <Property Name="Account_Group_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Account_Group_Name" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Account_Group_Type" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="500" />
+          <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+          <Property Name="Created_By" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Created_Date" Type="datetime" Nullable="false" />
+          <Property Name="Modified_By" Type="varchar" MaxLength="50" />
+          <Property Name="Modified_Date" Type="datetime" />
+          <Property Name="Deleted_By" Type="varchar" MaxLength="50" />
+          <Property Name="Deleted_Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CGL_KP_M_Account_H">
+          <Key>
+            <PropertyRef Name="Account_Id" />
+          </Key>
+          <Property Name="Account_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Account_Group_Id" Type="int" Nullable="false" />
+          <Property Name="Account_Code" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Account_Name" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="500" />
+          <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+          <Property Name="Created_By" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Created_Date" Type="datetime" Nullable="false" />
+          <Property Name="Modified_By" Type="varchar" MaxLength="50" />
+          <Property Name="Modified_Date" Type="datetime" />
+          <Property Name="Deleted_By" Type="varchar" MaxLength="50" />
+          <Property Name="Deleted_Date" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'srr_dev.dbo.CGL_KP_M_Assignment_H' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CGL_KP_M_Assignment_H">
           <Key>
             <PropertyRef Name="Assignment_Id" />
+            
+            
+            
+            
+            
           </Key>
-          <Property Name="Assignment_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Assignment_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Group_Id" Type="int" Nullable="false" />
           <Property Name="Form_Id" Type="int" Nullable="false" />
+          <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+          <Property Name="Created_By" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Created_Date" Type="datetime" Nullable="false" />
+          <Property Name="Modified_By" Type="varchar" MaxLength="50" />
+          <Property Name="Modified_Date" Type="datetime" />
+          <Property Name="Deleted_By" Type="varchar" MaxLength="50" />
+          <Property Name="Deleted_Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CGL_KP_M_Expenditure_Type_H">
+          <Key>
+            <PropertyRef Name="Expenditure_Type_Id" />
+          </Key>
+          <Property Name="Expenditure_Type_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Expenditure_Type_Code" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Expenditure_Type_Description" Type="varchar" MaxLength="200" />
+          <Property Name="Account_Id" Type="int" Nullable="false" />
+          <Property Name="Need_Member" Type="bit" Nullable="false" />
+          <Property Name="Need_Approval" Type="bit" Nullable="false" />
           <Property Name="Is_Deleted" Type="bit" Nullable="false" />
           <Property Name="Created_By" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Created_Date" Type="datetime" Nullable="false" />
@@ -155,12 +213,50 @@
           <Property Name="Deleted_By" Type="varchar" MaxLength="50" />
           <Property Name="Deleted_Date" Type="datetime" />
         </EntityType>
+        <EntityType Name="CGL_KP_M_Revenue_Type_H">
+          <Key>
+            <PropertyRef Name="Revenue_Type_Id" />
+          </Key>
+          <Property Name="Revenue_Type_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Revenue_Type_Code" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Revenue_Type_Description" Type="varchar" MaxLength="200" />
+          <Property Name="Account_Id" Type="int" Nullable="false" />
+          <Property Name="Need_Member" Type="bit" Nullable="false" />
+          <Property Name="Need_Approval" Type="bit" Nullable="false" />
+          <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+          <Property Name="Created_By" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Created_Date" Type="datetime" Nullable="false" />
+          <Property Name="Modified_By" Type="varchar" MaxLength="50" />
+          <Property Name="Modified_Date" Type="datetime" />
+          <Property Name="Deleted_By" Type="varchar" MaxLength="50" />
+          <Property Name="Deleted_Date" Type="datetime" />
+        </EntityType>
         <EntityType Name="CGL_KP_M_Status_H">
           <Key>
             <PropertyRef Name="Status_Id" />
           </Key>
           <Property Name="Status_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Status_Desc" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+          <Property Name="Created_By" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Created_Date" Type="datetime" Nullable="false" />
+          <Property Name="Modified_By" Type="varchar" MaxLength="50" />
+          <Property Name="Modified_Date" Type="datetime" />
+          <Property Name="Deleted_By" Type="varchar" MaxLength="50" />
+          <Property Name="Deleted_Date" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'srr_dev.dbo.CGL_KP_M_UserProfile_D' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CGL_KP_M_UserProfile_D">
+          <Key>
+            <PropertyRef Name="Group_Id" />
+            <PropertyRef Name="Is_Deleted" />
+            <PropertyRef Name="Created_By" />
+            <PropertyRef Name="Created_Date" />
+          </Key>
+          <Property Name="User_Id" Type="varchar" MaxLength="100" />
+          <Property Name="Legal_Entity_Id" Type="int" />
+          <Property Name="Group_Id" Type="int" Nullable="false" />
           <Property Name="Is_Deleted" Type="bit" Nullable="false" />
           <Property Name="Created_By" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Created_Date" Type="datetime" Nullable="false" />
@@ -186,6 +282,234 @@
           <Property Name="Deleted_By" Type="varchar" MaxLength="50" />
           <Property Name="Deleted_Date" Type="datetime" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'srr_dev.dbo.CGL_KP_R_Cooperative_Balance_H' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CGL_KP_R_Cooperative_Balance_H">
+          <Key>
+            <PropertyRef Name="Legal_Entity_Id" />
+            <PropertyRef Name="Cooperative_Balance" />
+            <PropertyRef Name="Is_Deleted" />
+            <PropertyRef Name="Created_By" />
+            <PropertyRef Name="Created_Date" />
+          </Key>
+          <Property Name="Legal_Entity_Id" Type="int" Nullable="false" />
+          <Property Name="Cooperative_Balance" Type="numeric" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+          <Property Name="Created_By" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Created_Date" Type="datetime" Nullable="false" />
+          <Property Name="Modified_By" Type="varchar" MaxLength="50" />
+          <Property Name="Modified_Date" Type="datetime" />
+          <Property Name="Deleted_By" Type="varchar" MaxLength="50" />
+          <Property Name="Deleted_Date" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'srr_dev.dbo.CGL_KP_R_Cooperative_Beginning_Balance_H' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CGL_KP_R_Cooperative_Beginning_Balance_H">
+          <Key>
+            <PropertyRef Name="Legal_Entity_Id" />
+            <PropertyRef Name="Beginning_Balance_Date" />
+            <PropertyRef Name="Cooperative_Balance" />
+            <PropertyRef Name="Is_Deleted" />
+            <PropertyRef Name="Created_By" />
+            <PropertyRef Name="Created_Date" />
+          </Key>
+          <Property Name="Legal_Entity_Id" Type="int" Nullable="false" />
+          <Property Name="Beginning_Balance_Date" Type="datetime" Nullable="false" />
+          <Property Name="Cooperative_Balance" Type="numeric" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+          <Property Name="Created_By" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Created_Date" Type="datetime" Nullable="false" />
+          <Property Name="Modified_By" Type="varchar" MaxLength="50" />
+          <Property Name="Modified_Date" Type="datetime" />
+          <Property Name="Deleted_By" Type="varchar" MaxLength="50" />
+          <Property Name="Deleted_Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CGL_KP_R_Expenditure_H">
+          <Key>
+            <PropertyRef Name="Expenditure_Id" />
+          </Key>
+          <Property Name="Expenditure_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Expenditure_No" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="Expenditure_Date" Type="datetime" Nullable="false" />
+          <Property Name="Expenditure_Type_Id" Type="int" Nullable="false" />
+          <Property Name="Member_Id" Type="int" />
+          <Property Name="Expenditure_Amount" Type="numeric" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="500" />
+          <Property Name="Is_Approved" Type="bit" Nullable="false" />
+          <Property Name="Approved_By" Type="varchar" MaxLength="50" />
+          <Property Name="Approved_Date" Type="datetime" />
+          <Property Name="Member_Loan_Id" Type="int" />
+          <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+          <Property Name="Created_By" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Created_Date" Type="datetime" Nullable="false" />
+          <Property Name="Modified_By" Type="varchar" MaxLength="50" />
+          <Property Name="Modified_Date" Type="datetime" />
+          <Property Name="Deleted_By" Type="varchar" MaxLength="50" />
+          <Property Name="Deleted_Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CGL_KP_R_Journal_D">
+          <Key>
+            <PropertyRef Name="Journal_D_Id" />
+          </Key>
+          <Property Name="Journal_D_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Journal_Id" Type="int" Nullable="false" />
+          <Property Name="Journal_D_Line_No" Type="int" Nullable="false" />
+          <Property Name="Account_Id" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="numeric" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="500" />
+          <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+          <Property Name="Created_By" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Created_Date" Type="datetime" Nullable="false" />
+          <Property Name="Modified_By" Type="varchar" MaxLength="50" />
+          <Property Name="Modified_Date" Type="datetime" />
+          <Property Name="Deleted_By" Type="varchar" MaxLength="50" />
+          <Property Name="Deleted_Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CGL_KP_R_Journal_H">
+          <Key>
+            <PropertyRef Name="Journal_Id" />
+          </Key>
+          <Property Name="Journal_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Journal_No" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="Journal_Date" Type="datetime" Nullable="false" />
+          <Property Name="Legal_Entity_Id" Type="int" Nullable="false" />
+          <Property Name="Journal_Ref_Id" Type="int" />
+          <Property Name="Transaction_Type_Id" Type="int" />
+          <Property Name="Reference_Id" Type="int" />
+          <Property Name="Description" Type="varchar" MaxLength="500" />
+          <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+          <Property Name="Created_By" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Created_Date" Type="datetime" Nullable="false" />
+          <Property Name="Modified_By" Type="varchar" MaxLength="50" />
+          <Property Name="Modified_Date" Type="datetime" />
+          <Property Name="Deleted_By" Type="varchar" MaxLength="50" />
+          <Property Name="Deleted_Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CGL_KP_R_Member_Balance_H">
+          <Key>
+            <PropertyRef Name="Member_Id" />
+          </Key>
+          <Property Name="Member_Id" Type="int" Nullable="false" />
+          <Property Name="Savings" Type="numeric" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="Debts" Type="numeric" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="Interest" Type="numeric" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+          <Property Name="Created_By" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Created_Date" Type="datetime" Nullable="false" />
+          <Property Name="Modified_By" Type="varchar" MaxLength="50" />
+          <Property Name="Modified_Date" Type="datetime" />
+          <Property Name="Deleted_By" Type="varchar" MaxLength="50" />
+          <Property Name="Deleted_Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CGL_KP_R_Member_Beginning_Balance_H">
+          <Key>
+            <PropertyRef Name="Member_Id" />
+          </Key>
+          <Property Name="Member_Id" Type="int" Nullable="false" />
+          <Property Name="Beginning_Balance_Date" Type="datetime" Nullable="false" />
+          <Property Name="Savings" Type="numeric" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="Debts" Type="numeric" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="Interest" Type="numeric" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+          <Property Name="Created_By" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Created_Date" Type="datetime" Nullable="false" />
+          <Property Name="Modified_By" Type="varchar" MaxLength="50" />
+          <Property Name="Modified_Date" Type="datetime" />
+          <Property Name="Deleted_By" Type="varchar" MaxLength="50" />
+          <Property Name="Deleted_Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CGL_KP_R_Member_Loan_H">
+          <Key>
+            <PropertyRef Name="Member_Loan_Id" />
+          </Key>
+          <Property Name="Member_Loan_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Member_Id" Type="int" Nullable="false" />
+          <Property Name="Year" Type="int" Nullable="false" />
+          <Property Name="Month" Type="int" Nullable="false" />
+          <Property Name="Interest_Rate" Type="numeric" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="Loan_Amount" Type="numeric" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="Interest_Amount" Type="numeric" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="Term_of_Loan" Type="int" Nullable="false" />
+          <Property Name="Remaining_Loan_Amount" Type="numeric" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="Remaining_Interest_Amount" Type="numeric" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="Remaining_Term_of_Loan" Type="int" Nullable="false" />
+          <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+          <Property Name="Created_By" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Created_Date" Type="datetime" Nullable="false" />
+          <Property Name="Modified_By" Type="varchar" MaxLength="50" />
+          <Property Name="Modified_Date" Type="datetime" />
+          <Property Name="Deleted_By" Type="varchar" MaxLength="50" />
+          <Property Name="Deleted_Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CGL_KP_R_Revenue_H">
+          <Key>
+            <PropertyRef Name="Revenue_Id" />
+          </Key>
+          <Property Name="Revenue_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Revenue_No" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="Revenue_Date" Type="datetime" Nullable="false" />
+          <Property Name="Revenue_Type_Id" Type="int" Nullable="false" />
+          <Property Name="Member_Id" Type="int" />
+          <Property Name="Revenue_Amount" Type="numeric" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="500" />
+          <Property Name="Is_Approved" Type="bit" Nullable="false" />
+          <Property Name="Approved_By" Type="varchar" MaxLength="50" />
+          <Property Name="Approved_Date" Type="datetime" />
+          <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+          <Property Name="Created_By" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Created_Date" Type="datetime" Nullable="false" />
+          <Property Name="Modified_By" Type="varchar" MaxLength="50" />
+          <Property Name="Modified_Date" Type="datetime" />
+          <Property Name="Deleted_By" Type="varchar" MaxLength="50" />
+          <Property Name="Deleted_Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CGL_KP_S_Setting_H">
+          <Key>
+            <PropertyRef Name="Setting_Name" />
+          </Key>
+          <Property Name="Setting_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Setting_Type" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Value_1" Type="varchar" MaxLength="200" />
+          <Property Name="Value_2" Type="varchar" MaxLength="200" />
+          <Property Name="Setting_Description" Type="varchar" MaxLength="500" />
+          <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+          <Property Name="Created_By" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Created_Date" Type="datetime" Nullable="false" />
+          <Property Name="Modified_By" Type="varchar" MaxLength="50" />
+          <Property Name="Modified_Date" Type="datetime" />
+          <Property Name="Deleted_By" Type="varchar" MaxLength="50" />
+          <Property Name="Deleted_Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CGL_KP_S_Transaction_Type_H">
+          <Key>
+            <PropertyRef Name="Transaction_Type_Id" />
+          </Key>
+          <Property Name="Transaction_Type_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Transaction_Type_Code" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Transaction_Type_Name" Type="varchar" MaxLength="200" />
+          <Property Name="Transaction_Number_Prefix" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Length_Of_String" Type="int" Nullable="false" />
+          <Property Name="Increment" Type="int" Nullable="false" />
+          <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+          <Property Name="Created_By" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Created_Date" Type="datetime" Nullable="false" />
+          <Property Name="Modified_By" Type="varchar" MaxLength="50" />
+          <Property Name="Modified_Date" Type="datetime" />
+          <Property Name="Deleted_By" Type="varchar" MaxLength="50" />
+          <Property Name="Deleted_Date" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_CGL_KP_M_Account_H_CGL_KP_M_Account_Group_H">
+          <End Role="CGL_KP_M_Account_Group_H" Type="Self.CGL_KP_M_Account_Group_H" Multiplicity="1" />
+          <End Role="CGL_KP_M_Account_H" Type="Self.CGL_KP_M_Account_H" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CGL_KP_M_Account_Group_H">
+              <PropertyRef Name="Account_Group_Id" />
+            </Principal>
+            <Dependent Role="CGL_KP_M_Account_H">
+              <PropertyRef Name="Account_Group_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CGL_KP_M_Assignment_H_CGL_KP_M_Form_Master_H">
           <End Role="CGL_KP_M_Form_Master_H" Type="Self.CGL_KP_M_Form_Master_H" Multiplicity="1" />
           <End Role="CGL_KP_M_Assignment_H" Type="Self.CGL_KP_M_Assignment_H" Multiplicity="*" />
@@ -207,6 +531,18 @@
             </Principal>
             <Dependent Role="CGL_KP_M_Assignment_H">
               <PropertyRef Name="Group_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CGL_KP_M_Expenditure_Type_H_CGL_KP_M_Account_H">
+          <End Role="CGL_KP_M_Account_H" Type="Self.CGL_KP_M_Account_H" Multiplicity="1" />
+          <End Role="CGL_KP_M_Expenditure_Type_H" Type="Self.CGL_KP_M_Expenditure_Type_H" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CGL_KP_M_Account_H">
+              <PropertyRef Name="Account_Id" />
+            </Principal>
+            <Dependent Role="CGL_KP_M_Expenditure_Type_H">
+              <PropertyRef Name="Account_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -282,6 +618,174 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CGL_KP_M_Revenue_Type_H_CGL_KP_M_Account_H">
+          <End Role="CGL_KP_M_Account_H" Type="Self.CGL_KP_M_Account_H" Multiplicity="1" />
+          <End Role="CGL_KP_M_Revenue_Type_H" Type="Self.CGL_KP_M_Revenue_Type_H" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CGL_KP_M_Account_H">
+              <PropertyRef Name="Account_Id" />
+            </Principal>
+            <Dependent Role="CGL_KP_M_Revenue_Type_H">
+              <PropertyRef Name="Account_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CGL_KP_M_UserProfile_D_CGL_KP_M_UserProfile_H">
+          <End Role="CGL_KP_M_UserProfile_H" Type="Self.CGL_KP_M_UserProfile_H" Multiplicity="0..1" />
+          <End Role="CGL_KP_M_UserProfile_D" Type="Self.CGL_KP_M_UserProfile_D" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CGL_KP_M_UserProfile_H">
+              <PropertyRef Name="User_Id" />
+            </Principal>
+            <Dependent Role="CGL_KP_M_UserProfile_D">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CGL_KP_R_Cooperative_Balance_H_CGL_KP_M_Legal_Entity_H">
+          <End Role="CGL_KP_M_Legal_Entity_H" Type="Self.CGL_KP_M_Legal_Entity_H" Multiplicity="1" />
+          <End Role="CGL_KP_R_Cooperative_Balance_H" Type="Self.CGL_KP_R_Cooperative_Balance_H" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CGL_KP_M_Legal_Entity_H">
+              <PropertyRef Name="Legal_Entity_Id" />
+            </Principal>
+            <Dependent Role="CGL_KP_R_Cooperative_Balance_H">
+              <PropertyRef Name="Legal_Entity_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CGL_KP_R_Cooperative_Beginning_Balance_H_CGL_KP_M_Legal_Entity_H">
+          <End Role="CGL_KP_M_Legal_Entity_H" Type="Self.CGL_KP_M_Legal_Entity_H" Multiplicity="1" />
+          <End Role="CGL_KP_R_Cooperative_Beginning_Balance_H" Type="Self.CGL_KP_R_Cooperative_Beginning_Balance_H" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CGL_KP_M_Legal_Entity_H">
+              <PropertyRef Name="Legal_Entity_Id" />
+            </Principal>
+            <Dependent Role="CGL_KP_R_Cooperative_Beginning_Balance_H">
+              <PropertyRef Name="Legal_Entity_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CGL_KP_R_Expenditure_H_CGL_KP_M_Expenditure_Type_H">
+          <End Role="CGL_KP_M_Expenditure_Type_H" Type="Self.CGL_KP_M_Expenditure_Type_H" Multiplicity="1" />
+          <End Role="CGL_KP_R_Expenditure_H" Type="Self.CGL_KP_R_Expenditure_H" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CGL_KP_M_Expenditure_Type_H">
+              <PropertyRef Name="Expenditure_Type_Id" />
+            </Principal>
+            <Dependent Role="CGL_KP_R_Expenditure_H">
+              <PropertyRef Name="Expenditure_Type_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CGL_KP_R_Expenditure_H_CGL_KP_M_Member_H">
+          <End Role="CGL_KP_M_Member_H" Type="Self.CGL_KP_M_Member_H" Multiplicity="0..1" />
+          <End Role="CGL_KP_R_Expenditure_H" Type="Self.CGL_KP_R_Expenditure_H" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CGL_KP_M_Member_H">
+              <PropertyRef Name="Member_Id" />
+            </Principal>
+            <Dependent Role="CGL_KP_R_Expenditure_H">
+              <PropertyRef Name="Member_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CGL_KP_R_Journal_D_CGL_KP_M_Account_H">
+          <End Role="CGL_KP_M_Account_H" Type="Self.CGL_KP_M_Account_H" Multiplicity="1" />
+          <End Role="CGL_KP_R_Journal_D" Type="Self.CGL_KP_R_Journal_D" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CGL_KP_M_Account_H">
+              <PropertyRef Name="Account_Id" />
+            </Principal>
+            <Dependent Role="CGL_KP_R_Journal_D">
+              <PropertyRef Name="Account_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CGL_KP_R_Journal_D_CGL_KP_R_Journal_H">
+          <End Role="CGL_KP_R_Journal_H" Type="Self.CGL_KP_R_Journal_H" Multiplicity="1" />
+          <End Role="CGL_KP_R_Journal_D" Type="Self.CGL_KP_R_Journal_D" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CGL_KP_R_Journal_H">
+              <PropertyRef Name="Journal_Id" />
+            </Principal>
+            <Dependent Role="CGL_KP_R_Journal_D">
+              <PropertyRef Name="Journal_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CGL_KP_R_Journal_H_CGL_KP_M_Legal_Entity_H">
+          <End Role="CGL_KP_M_Legal_Entity_H" Type="Self.CGL_KP_M_Legal_Entity_H" Multiplicity="1" />
+          <End Role="CGL_KP_R_Journal_H" Type="Self.CGL_KP_R_Journal_H" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CGL_KP_M_Legal_Entity_H">
+              <PropertyRef Name="Legal_Entity_Id" />
+            </Principal>
+            <Dependent Role="CGL_KP_R_Journal_H">
+              <PropertyRef Name="Legal_Entity_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CGL_KP_R_Member_Balance_H_CGL_KP_M_Member_H">
+          <End Role="CGL_KP_M_Member_H" Type="Self.CGL_KP_M_Member_H" Multiplicity="1" />
+          <End Role="CGL_KP_R_Member_Balance_H" Type="Self.CGL_KP_R_Member_Balance_H" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="CGL_KP_M_Member_H">
+              <PropertyRef Name="Member_Id" />
+            </Principal>
+            <Dependent Role="CGL_KP_R_Member_Balance_H">
+              <PropertyRef Name="Member_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CGL_KP_R_Member_Beginning_Balance_H_CGL_KP_M_Member_H">
+          <End Role="CGL_KP_M_Member_H" Type="Self.CGL_KP_M_Member_H" Multiplicity="1" />
+          <End Role="CGL_KP_R_Member_Beginning_Balance_H" Type="Self.CGL_KP_R_Member_Beginning_Balance_H" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="CGL_KP_M_Member_H">
+              <PropertyRef Name="Member_Id" />
+            </Principal>
+            <Dependent Role="CGL_KP_R_Member_Beginning_Balance_H">
+              <PropertyRef Name="Member_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CGL_KP_R_Member_Loan_H_CGL_KP_M_Member_H">
+          <End Role="CGL_KP_M_Member_H" Type="Self.CGL_KP_M_Member_H" Multiplicity="1" />
+          <End Role="CGL_KP_R_Member_Loan_H" Type="Self.CGL_KP_R_Member_Loan_H" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CGL_KP_M_Member_H">
+              <PropertyRef Name="Member_Id" />
+            </Principal>
+            <Dependent Role="CGL_KP_R_Member_Loan_H">
+              <PropertyRef Name="Member_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CGL_KP_R_Revenue_H_CGL_KP_M_Member_H">
+          <End Role="CGL_KP_M_Member_H" Type="Self.CGL_KP_M_Member_H" Multiplicity="0..1" />
+          <End Role="CGL_KP_R_Revenue_H" Type="Self.CGL_KP_R_Revenue_H" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CGL_KP_M_Member_H">
+              <PropertyRef Name="Member_Id" />
+            </Principal>
+            <Dependent Role="CGL_KP_R_Revenue_H">
+              <PropertyRef Name="Member_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CGL_KP_R_Revenue_H_CGL_KP_M_Revenue_Type_H">
+          <End Role="CGL_KP_M_Revenue_Type_H" Type="Self.CGL_KP_M_Revenue_Type_H" Multiplicity="1" />
+          <End Role="CGL_KP_R_Revenue_H" Type="Self.CGL_KP_R_Revenue_H" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CGL_KP_M_Revenue_Type_H">
+              <PropertyRef Name="Revenue_Type_Id" />
+            </Principal>
+            <Dependent Role="CGL_KP_R_Revenue_H">
+              <PropertyRef Name="Revenue_Type_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="USP_CG_KP_M_AccessRights_H_Find" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="GroupID" Type="int" Mode="In" />
         </Function>
@@ -299,9 +803,19 @@
           <Parameter Name="Name" Type="varchar(max)" Mode="In" />
           <Parameter Name="LegalEntityID" Type="int" Mode="In" />
         </Function>
+        <Function Name="USP_CGL_KP_R_Revenue_H_Find" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LegalEntityID" Type="int" Mode="In" />
+          <Parameter Name="Period_Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="USP_CGL_KP_T_Generate_Transaction_Number" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Transaction_Type_Code" Type="varchar" Mode="In" />
+          <Parameter Name="Transaction_Date" Type="datetime" Mode="In" />
+        </Function>
         <EntityContainer Name="srr_devModelStoreContainer">
           <EntitySet Name="CGL_KP_M_AccessRights_H" EntityType="Self.CGL_KP_M_AccessRights_H" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CGL_KP_M_Assignment_H" EntityType="Self.CGL_KP_M_Assignment_H" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CGL_KP_M_Account_Group_H" EntityType="Self.CGL_KP_M_Account_Group_H" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CGL_KP_M_Account_H" EntityType="Self.CGL_KP_M_Account_H" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CGL_KP_M_Expenditure_Type_H" EntityType="Self.CGL_KP_M_Expenditure_Type_H" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CGL_KP_M_Form_Master_H" EntityType="Self.CGL_KP_M_Form_Master_H" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CGL_KP_M_Form_Type_H" EntityType="Self.CGL_KP_M_Form_Type_H" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CGL_KP_M_Group_H" EntityType="Self.CGL_KP_M_Group_H" Schema="dbo" store:Type="Tables" />
@@ -309,8 +823,77 @@
           <EntitySet Name="CGL_KP_M_Member_H" EntityType="Self.CGL_KP_M_Member_H" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CGL_KP_M_Period_H" EntityType="Self.CGL_KP_M_Period_H" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CGL_KP_M_Period_Status_H" EntityType="Self.CGL_KP_M_Period_Status_H" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CGL_KP_M_Revenue_Type_H" EntityType="Self.CGL_KP_M_Revenue_Type_H" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CGL_KP_M_Status_H" EntityType="Self.CGL_KP_M_Status_H" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CGL_KP_M_UserProfile_H" EntityType="Self.CGL_KP_M_UserProfile_H" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CGL_KP_R_Expenditure_H" EntityType="Self.CGL_KP_R_Expenditure_H" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CGL_KP_R_Journal_D" EntityType="Self.CGL_KP_R_Journal_D" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CGL_KP_R_Journal_H" EntityType="Self.CGL_KP_R_Journal_H" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CGL_KP_R_Member_Balance_H" EntityType="Self.CGL_KP_R_Member_Balance_H" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CGL_KP_R_Member_Beginning_Balance_H" EntityType="Self.CGL_KP_R_Member_Beginning_Balance_H" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CGL_KP_R_Member_Loan_H" EntityType="Self.CGL_KP_R_Member_Loan_H" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CGL_KP_R_Revenue_H" EntityType="Self.CGL_KP_R_Revenue_H" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CGL_KP_S_Setting_H" EntityType="Self.CGL_KP_S_Setting_H" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CGL_KP_S_Transaction_Type_H" EntityType="Self.CGL_KP_S_Transaction_Type_H" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CGL_KP_M_Assignment_H" EntityType="Self.CGL_KP_M_Assignment_H" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[CGL_KP_M_Assignment_H].[Assignment_Id] AS [Assignment_Id], 
+[CGL_KP_M_Assignment_H].[Group_Id] AS [Group_Id], 
+[CGL_KP_M_Assignment_H].[Form_Id] AS [Form_Id], 
+[CGL_KP_M_Assignment_H].[Is_Deleted] AS [Is_Deleted], 
+[CGL_KP_M_Assignment_H].[Created_By] AS [Created_By], 
+[CGL_KP_M_Assignment_H].[Created_Date] AS [Created_Date], 
+[CGL_KP_M_Assignment_H].[Modified_By] AS [Modified_By], 
+[CGL_KP_M_Assignment_H].[Modified_Date] AS [Modified_Date], 
+[CGL_KP_M_Assignment_H].[Deleted_By] AS [Deleted_By], 
+[CGL_KP_M_Assignment_H].[Deleted_Date] AS [Deleted_Date]
+FROM [dbo].[CGL_KP_M_Assignment_H] AS [CGL_KP_M_Assignment_H]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="CGL_KP_M_UserProfile_D" EntityType="Self.CGL_KP_M_UserProfile_D" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[CGL_KP_M_UserProfile_D].[User_Id] AS [User_Id], 
+[CGL_KP_M_UserProfile_D].[Legal_Entity_Id] AS [Legal_Entity_Id], 
+[CGL_KP_M_UserProfile_D].[Group_Id] AS [Group_Id], 
+[CGL_KP_M_UserProfile_D].[Is_Deleted] AS [Is_Deleted], 
+[CGL_KP_M_UserProfile_D].[Created_By] AS [Created_By], 
+[CGL_KP_M_UserProfile_D].[Created_Date] AS [Created_Date], 
+[CGL_KP_M_UserProfile_D].[Modified_By] AS [Modified_By], 
+[CGL_KP_M_UserProfile_D].[Modified_Date] AS [Modified_Date], 
+[CGL_KP_M_UserProfile_D].[Deleted_By] AS [Deleted_By], 
+[CGL_KP_M_UserProfile_D].[Deleted_Date] AS [Deleted_Date]
+FROM [dbo].[CGL_KP_M_UserProfile_D] AS [CGL_KP_M_UserProfile_D]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="CGL_KP_R_Cooperative_Balance_H" EntityType="Self.CGL_KP_R_Cooperative_Balance_H" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[CGL_KP_R_Cooperative_Balance_H].[Legal_Entity_Id] AS [Legal_Entity_Id], 
+[CGL_KP_R_Cooperative_Balance_H].[Cooperative_Balance] AS [Cooperative_Balance], 
+[CGL_KP_R_Cooperative_Balance_H].[Is_Deleted] AS [Is_Deleted], 
+[CGL_KP_R_Cooperative_Balance_H].[Created_By] AS [Created_By], 
+[CGL_KP_R_Cooperative_Balance_H].[Created_Date] AS [Created_Date], 
+[CGL_KP_R_Cooperative_Balance_H].[Modified_By] AS [Modified_By], 
+[CGL_KP_R_Cooperative_Balance_H].[Modified_Date] AS [Modified_Date], 
+[CGL_KP_R_Cooperative_Balance_H].[Deleted_By] AS [Deleted_By], 
+[CGL_KP_R_Cooperative_Balance_H].[Deleted_Date] AS [Deleted_Date]
+FROM [dbo].[CGL_KP_R_Cooperative_Balance_H] AS [CGL_KP_R_Cooperative_Balance_H]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="CGL_KP_R_Cooperative_Beginning_Balance_H" EntityType="Self.CGL_KP_R_Cooperative_Beginning_Balance_H" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[CGL_KP_R_Cooperative_Beginning_Balance_H].[Legal_Entity_Id] AS [Legal_Entity_Id], 
+[CGL_KP_R_Cooperative_Beginning_Balance_H].[Beginning_Balance_Date] AS [Beginning_Balance_Date], 
+[CGL_KP_R_Cooperative_Beginning_Balance_H].[Cooperative_Balance] AS [Cooperative_Balance], 
+[CGL_KP_R_Cooperative_Beginning_Balance_H].[Is_Deleted] AS [Is_Deleted], 
+[CGL_KP_R_Cooperative_Beginning_Balance_H].[Created_By] AS [Created_By], 
+[CGL_KP_R_Cooperative_Beginning_Balance_H].[Created_Date] AS [Created_Date], 
+[CGL_KP_R_Cooperative_Beginning_Balance_H].[Modified_By] AS [Modified_By], 
+[CGL_KP_R_Cooperative_Beginning_Balance_H].[Modified_Date] AS [Modified_Date], 
+[CGL_KP_R_Cooperative_Beginning_Balance_H].[Deleted_By] AS [Deleted_By], 
+[CGL_KP_R_Cooperative_Beginning_Balance_H].[Deleted_Date] AS [Deleted_Date]
+FROM [dbo].[CGL_KP_R_Cooperative_Beginning_Balance_H] AS [CGL_KP_R_Cooperative_Beginning_Balance_H]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_CGL_KP_M_Account_H_CGL_KP_M_Account_Group_H" Association="Self.FK_CGL_KP_M_Account_H_CGL_KP_M_Account_Group_H">
+            <End Role="CGL_KP_M_Account_Group_H" EntitySet="CGL_KP_M_Account_Group_H" />
+            <End Role="CGL_KP_M_Account_H" EntitySet="CGL_KP_M_Account_H" />
+          </AssociationSet>
           <AssociationSet Name="FK_CGL_KP_M_Assignment_H_CGL_KP_M_Form_Master_H" Association="Self.FK_CGL_KP_M_Assignment_H_CGL_KP_M_Form_Master_H">
             <End Role="CGL_KP_M_Form_Master_H" EntitySet="CGL_KP_M_Form_Master_H" />
             <End Role="CGL_KP_M_Assignment_H" EntitySet="CGL_KP_M_Assignment_H" />
@@ -318,6 +901,10 @@
           <AssociationSet Name="FK_CGL_KP_M_Assignment_H_CGL_KP_M_Group_H" Association="Self.FK_CGL_KP_M_Assignment_H_CGL_KP_M_Group_H">
             <End Role="CGL_KP_M_Group_H" EntitySet="CGL_KP_M_Group_H" />
             <End Role="CGL_KP_M_Assignment_H" EntitySet="CGL_KP_M_Assignment_H" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CGL_KP_M_Expenditure_Type_H_CGL_KP_M_Account_H" Association="Self.FK_CGL_KP_M_Expenditure_Type_H_CGL_KP_M_Account_H">
+            <End Role="CGL_KP_M_Account_H" EntitySet="CGL_KP_M_Account_H" />
+            <End Role="CGL_KP_M_Expenditure_Type_H" EntitySet="CGL_KP_M_Expenditure_Type_H" />
           </AssociationSet>
           <AssociationSet Name="FK_CGL_KP_M_Form_Master_H_CGL_KP_M_Form_Type_H" Association="Self.FK_CGL_KP_M_Form_Master_H_CGL_KP_M_Form_Type_H">
             <End Role="CGL_KP_M_Form_Type_H" EntitySet="CGL_KP_M_Form_Type_H" />
@@ -342,6 +929,62 @@
           <AssociationSet Name="FK_CGL_KP_M_Period_H_CGL_KP_M_Period_Status_H" Association="Self.FK_CGL_KP_M_Period_H_CGL_KP_M_Period_Status_H">
             <End Role="CGL_KP_M_Period_Status_H" EntitySet="CGL_KP_M_Period_Status_H" />
             <End Role="CGL_KP_M_Period_H" EntitySet="CGL_KP_M_Period_H" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CGL_KP_M_Revenue_Type_H_CGL_KP_M_Account_H" Association="Self.FK_CGL_KP_M_Revenue_Type_H_CGL_KP_M_Account_H">
+            <End Role="CGL_KP_M_Account_H" EntitySet="CGL_KP_M_Account_H" />
+            <End Role="CGL_KP_M_Revenue_Type_H" EntitySet="CGL_KP_M_Revenue_Type_H" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CGL_KP_M_UserProfile_D_CGL_KP_M_UserProfile_H" Association="Self.FK_CGL_KP_M_UserProfile_D_CGL_KP_M_UserProfile_H">
+            <End Role="CGL_KP_M_UserProfile_H" EntitySet="CGL_KP_M_UserProfile_H" />
+            <End Role="CGL_KP_M_UserProfile_D" EntitySet="CGL_KP_M_UserProfile_D" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CGL_KP_R_Cooperative_Balance_H_CGL_KP_M_Legal_Entity_H" Association="Self.FK_CGL_KP_R_Cooperative_Balance_H_CGL_KP_M_Legal_Entity_H">
+            <End Role="CGL_KP_M_Legal_Entity_H" EntitySet="CGL_KP_M_Legal_Entity_H" />
+            <End Role="CGL_KP_R_Cooperative_Balance_H" EntitySet="CGL_KP_R_Cooperative_Balance_H" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CGL_KP_R_Cooperative_Beginning_Balance_H_CGL_KP_M_Legal_Entity_H" Association="Self.FK_CGL_KP_R_Cooperative_Beginning_Balance_H_CGL_KP_M_Legal_Entity_H">
+            <End Role="CGL_KP_M_Legal_Entity_H" EntitySet="CGL_KP_M_Legal_Entity_H" />
+            <End Role="CGL_KP_R_Cooperative_Beginning_Balance_H" EntitySet="CGL_KP_R_Cooperative_Beginning_Balance_H" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CGL_KP_R_Expenditure_H_CGL_KP_M_Expenditure_Type_H" Association="Self.FK_CGL_KP_R_Expenditure_H_CGL_KP_M_Expenditure_Type_H">
+            <End Role="CGL_KP_M_Expenditure_Type_H" EntitySet="CGL_KP_M_Expenditure_Type_H" />
+            <End Role="CGL_KP_R_Expenditure_H" EntitySet="CGL_KP_R_Expenditure_H" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CGL_KP_R_Expenditure_H_CGL_KP_M_Member_H" Association="Self.FK_CGL_KP_R_Expenditure_H_CGL_KP_M_Member_H">
+            <End Role="CGL_KP_M_Member_H" EntitySet="CGL_KP_M_Member_H" />
+            <End Role="CGL_KP_R_Expenditure_H" EntitySet="CGL_KP_R_Expenditure_H" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CGL_KP_R_Journal_D_CGL_KP_M_Account_H" Association="Self.FK_CGL_KP_R_Journal_D_CGL_KP_M_Account_H">
+            <End Role="CGL_KP_M_Account_H" EntitySet="CGL_KP_M_Account_H" />
+            <End Role="CGL_KP_R_Journal_D" EntitySet="CGL_KP_R_Journal_D" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CGL_KP_R_Journal_D_CGL_KP_R_Journal_H" Association="Self.FK_CGL_KP_R_Journal_D_CGL_KP_R_Journal_H">
+            <End Role="CGL_KP_R_Journal_H" EntitySet="CGL_KP_R_Journal_H" />
+            <End Role="CGL_KP_R_Journal_D" EntitySet="CGL_KP_R_Journal_D" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CGL_KP_R_Journal_H_CGL_KP_M_Legal_Entity_H" Association="Self.FK_CGL_KP_R_Journal_H_CGL_KP_M_Legal_Entity_H">
+            <End Role="CGL_KP_M_Legal_Entity_H" EntitySet="CGL_KP_M_Legal_Entity_H" />
+            <End Role="CGL_KP_R_Journal_H" EntitySet="CGL_KP_R_Journal_H" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CGL_KP_R_Member_Balance_H_CGL_KP_M_Member_H" Association="Self.FK_CGL_KP_R_Member_Balance_H_CGL_KP_M_Member_H">
+            <End Role="CGL_KP_M_Member_H" EntitySet="CGL_KP_M_Member_H" />
+            <End Role="CGL_KP_R_Member_Balance_H" EntitySet="CGL_KP_R_Member_Balance_H" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CGL_KP_R_Member_Beginning_Balance_H_CGL_KP_M_Member_H" Association="Self.FK_CGL_KP_R_Member_Beginning_Balance_H_CGL_KP_M_Member_H">
+            <End Role="CGL_KP_M_Member_H" EntitySet="CGL_KP_M_Member_H" />
+            <End Role="CGL_KP_R_Member_Beginning_Balance_H" EntitySet="CGL_KP_R_Member_Beginning_Balance_H" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CGL_KP_R_Member_Loan_H_CGL_KP_M_Member_H" Association="Self.FK_CGL_KP_R_Member_Loan_H_CGL_KP_M_Member_H">
+            <End Role="CGL_KP_M_Member_H" EntitySet="CGL_KP_M_Member_H" />
+            <End Role="CGL_KP_R_Member_Loan_H" EntitySet="CGL_KP_R_Member_Loan_H" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CGL_KP_R_Revenue_H_CGL_KP_M_Member_H" Association="Self.FK_CGL_KP_R_Revenue_H_CGL_KP_M_Member_H">
+            <End Role="CGL_KP_M_Member_H" EntitySet="CGL_KP_M_Member_H" />
+            <End Role="CGL_KP_R_Revenue_H" EntitySet="CGL_KP_R_Revenue_H" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CGL_KP_R_Revenue_H_CGL_KP_M_Revenue_Type_H" Association="Self.FK_CGL_KP_R_Revenue_H_CGL_KP_M_Revenue_Type_H">
+            <End Role="CGL_KP_M_Revenue_Type_H" EntitySet="CGL_KP_M_Revenue_Type_H" />
+            <End Role="CGL_KP_R_Revenue_H" EntitySet="CGL_KP_R_Revenue_H" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -409,6 +1052,94 @@
             <Parameter Name="Name" Mode="In" Type="String" />
             <Parameter Name="LegalEntityID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="USP_CGL_KP_T_Generate_Transaction_Number" ReturnType="Collection(srr_devModel.USP_CGL_KP_T_Generate_Transaction_Number_Result)">
+            <Parameter Name="Transaction_Type_Code" Mode="In" Type="String" />
+            <Parameter Name="Transaction_Date" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <EntitySet Name="CGL_KP_M_Account_Group_H" EntityType="srr_devModel.CGL_KP_M_Account_Group_H" />
+          <EntitySet Name="CGL_KP_M_Account_H" EntityType="srr_devModel.CGL_KP_M_Account_H" />
+          <EntitySet Name="CGL_KP_M_Expenditure_Type_H" EntityType="srr_devModel.CGL_KP_M_Expenditure_Type_H" />
+          <EntitySet Name="CGL_KP_M_Revenue_Type_H" EntityType="srr_devModel.CGL_KP_M_Revenue_Type_H" />
+          <EntitySet Name="CGL_KP_R_Expenditure_H" EntityType="srr_devModel.CGL_KP_R_Expenditure_H" />
+          <EntitySet Name="CGL_KP_R_Journal_D" EntityType="srr_devModel.CGL_KP_R_Journal_D" />
+          <EntitySet Name="CGL_KP_R_Journal_H" EntityType="srr_devModel.CGL_KP_R_Journal_H" />
+          <EntitySet Name="CGL_KP_R_Member_Balance_H" EntityType="srr_devModel.CGL_KP_R_Member_Balance_H" />
+          <EntitySet Name="CGL_KP_R_Member_Beginning_Balance_H" EntityType="srr_devModel.CGL_KP_R_Member_Beginning_Balance_H" />
+          <EntitySet Name="CGL_KP_R_Member_Loan_H" EntityType="srr_devModel.CGL_KP_R_Member_Loan_H" />
+          <EntitySet Name="CGL_KP_R_Revenue_H" EntityType="srr_devModel.CGL_KP_R_Revenue_H" />
+          <EntitySet Name="CGL_KP_S_Setting_H" EntityType="srr_devModel.CGL_KP_S_Setting_H" />
+          <EntitySet Name="CGL_KP_S_Transaction_Type_H" EntityType="srr_devModel.CGL_KP_S_Transaction_Type_H" />
+          <EntitySet Name="CGL_KP_R_Cooperative_Balance_H" EntityType="srr_devModel.CGL_KP_R_Cooperative_Balance_H" />
+          <EntitySet Name="CGL_KP_R_Cooperative_Beginning_Balance_H" EntityType="srr_devModel.CGL_KP_R_Cooperative_Beginning_Balance_H" />
+          <AssociationSet Name="FK_CGL_KP_M_Account_H_CGL_KP_M_Account_Group_H" Association="srr_devModel.FK_CGL_KP_M_Account_H_CGL_KP_M_Account_Group_H">
+            <End Role="CGL_KP_M_Account_Group_H" EntitySet="CGL_KP_M_Account_Group_H" />
+            <End Role="CGL_KP_M_Account_H" EntitySet="CGL_KP_M_Account_H" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CGL_KP_M_Expenditure_Type_H_CGL_KP_M_Account_H" Association="srr_devModel.FK_CGL_KP_M_Expenditure_Type_H_CGL_KP_M_Account_H">
+            <End Role="CGL_KP_M_Account_H" EntitySet="CGL_KP_M_Account_H" />
+            <End Role="CGL_KP_M_Expenditure_Type_H" EntitySet="CGL_KP_M_Expenditure_Type_H" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CGL_KP_M_Revenue_Type_H_CGL_KP_M_Account_H" Association="srr_devModel.FK_CGL_KP_M_Revenue_Type_H_CGL_KP_M_Account_H">
+            <End Role="CGL_KP_M_Account_H" EntitySet="CGL_KP_M_Account_H" />
+            <End Role="CGL_KP_M_Revenue_Type_H" EntitySet="CGL_KP_M_Revenue_Type_H" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CGL_KP_R_Journal_D_CGL_KP_M_Account_H" Association="srr_devModel.FK_CGL_KP_R_Journal_D_CGL_KP_M_Account_H">
+            <End Role="CGL_KP_M_Account_H" EntitySet="CGL_KP_M_Account_H" />
+            <End Role="CGL_KP_R_Journal_D" EntitySet="CGL_KP_R_Journal_D" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CGL_KP_R_Expenditure_H_CGL_KP_M_Expenditure_Type_H" Association="srr_devModel.FK_CGL_KP_R_Expenditure_H_CGL_KP_M_Expenditure_Type_H">
+            <End Role="CGL_KP_M_Expenditure_Type_H" EntitySet="CGL_KP_M_Expenditure_Type_H" />
+            <End Role="CGL_KP_R_Expenditure_H" EntitySet="CGL_KP_R_Expenditure_H" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CGL_KP_R_Cooperative_Balance_H_CGL_KP_M_Legal_Entity_H" Association="srr_devModel.FK_CGL_KP_R_Cooperative_Balance_H_CGL_KP_M_Legal_Entity_H">
+            <End Role="CGL_KP_M_Legal_Entity_H" EntitySet="CGL_KP_M_Legal_Entity_H" />
+            <End Role="CGL_KP_R_Cooperative_Balance_H" EntitySet="CGL_KP_R_Cooperative_Balance_H" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CGL_KP_R_Cooperative_Beginning_Balance_H_CGL_KP_M_Legal_Entity_H" Association="srr_devModel.FK_CGL_KP_R_Cooperative_Beginning_Balance_H_CGL_KP_M_Legal_Entity_H">
+            <End Role="CGL_KP_M_Legal_Entity_H" EntitySet="CGL_KP_M_Legal_Entity_H" />
+            <End Role="CGL_KP_R_Cooperative_Beginning_Balance_H" EntitySet="CGL_KP_R_Cooperative_Beginning_Balance_H" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CGL_KP_R_Journal_H_CGL_KP_M_Legal_Entity_H" Association="srr_devModel.FK_CGL_KP_R_Journal_H_CGL_KP_M_Legal_Entity_H">
+            <End Role="CGL_KP_M_Legal_Entity_H" EntitySet="CGL_KP_M_Legal_Entity_H" />
+            <End Role="CGL_KP_R_Journal_H" EntitySet="CGL_KP_R_Journal_H" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CGL_KP_R_Expenditure_H_CGL_KP_M_Member_H" Association="srr_devModel.FK_CGL_KP_R_Expenditure_H_CGL_KP_M_Member_H">
+            <End Role="CGL_KP_M_Member_H" EntitySet="CGL_KP_M_Member_H" />
+            <End Role="CGL_KP_R_Expenditure_H" EntitySet="CGL_KP_R_Expenditure_H" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CGL_KP_R_Member_Balance_H_CGL_KP_M_Member_H" Association="srr_devModel.FK_CGL_KP_R_Member_Balance_H_CGL_KP_M_Member_H">
+            <End Role="CGL_KP_M_Member_H" EntitySet="CGL_KP_M_Member_H" />
+            <End Role="CGL_KP_R_Member_Balance_H" EntitySet="CGL_KP_R_Member_Balance_H" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CGL_KP_R_Member_Beginning_Balance_H_CGL_KP_M_Member_H" Association="srr_devModel.FK_CGL_KP_R_Member_Beginning_Balance_H_CGL_KP_M_Member_H">
+            <End Role="CGL_KP_M_Member_H" EntitySet="CGL_KP_M_Member_H" />
+            <End Role="CGL_KP_R_Member_Beginning_Balance_H" EntitySet="CGL_KP_R_Member_Beginning_Balance_H" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CGL_KP_R_Member_Loan_H_CGL_KP_M_Member_H" Association="srr_devModel.FK_CGL_KP_R_Member_Loan_H_CGL_KP_M_Member_H">
+            <End Role="CGL_KP_M_Member_H" EntitySet="CGL_KP_M_Member_H" />
+            <End Role="CGL_KP_R_Member_Loan_H" EntitySet="CGL_KP_R_Member_Loan_H" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CGL_KP_R_Revenue_H_CGL_KP_M_Member_H" Association="srr_devModel.FK_CGL_KP_R_Revenue_H_CGL_KP_M_Member_H">
+            <End Role="CGL_KP_M_Member_H" EntitySet="CGL_KP_M_Member_H" />
+            <End Role="CGL_KP_R_Revenue_H" EntitySet="CGL_KP_R_Revenue_H" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CGL_KP_R_Revenue_H_CGL_KP_M_Revenue_Type_H" Association="srr_devModel.FK_CGL_KP_R_Revenue_H_CGL_KP_M_Revenue_Type_H">
+            <End Role="CGL_KP_M_Revenue_Type_H" EntitySet="CGL_KP_M_Revenue_Type_H" />
+            <End Role="CGL_KP_R_Revenue_H" EntitySet="CGL_KP_R_Revenue_H" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CGL_KP_R_Journal_D_CGL_KP_R_Journal_H" Association="srr_devModel.FK_CGL_KP_R_Journal_D_CGL_KP_R_Journal_H">
+            <End Role="CGL_KP_R_Journal_H" EntitySet="CGL_KP_R_Journal_H" />
+            <End Role="CGL_KP_R_Journal_D" EntitySet="CGL_KP_R_Journal_D" />
+          </AssociationSet>
+          <EntitySet Name="CGL_KP_M_UserProfile_D" EntityType="srr_devModel.CGL_KP_M_UserProfile_D" />
+          <AssociationSet Name="FK_CGL_KP_M_UserProfile_D_CGL_KP_M_UserProfile_H" Association="srr_devModel.FK_CGL_KP_M_UserProfile_D_CGL_KP_M_UserProfile_H">
+            <End Role="CGL_KP_M_UserProfile_H" EntitySet="CGL_KP_M_UserProfile_H" />
+            <End Role="CGL_KP_M_UserProfile_D" EntitySet="CGL_KP_M_UserProfile_D" />
+          </AssociationSet>
+          <FunctionImport Name="USP_CGL_KP_R_Revenue_H_Find" ReturnType="Collection(srr_devModel.USP_CGL_KP_R_Revenue_H_Find_Result)">
+            <Parameter Name="LegalEntityID" Mode="In" Type="Int32" />
+            <Parameter Name="Period_Id" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="CGL_KP_M_Legal_Entity_H">
           <Key>
@@ -426,6 +1157,9 @@
           <Property Name="Deleted_Date" Type="DateTime" Precision="3" />
           <NavigationProperty Name="CGL_KP_M_Period_H" Relationship="srr_devModel.FK_CGL_KP_M_Period_H_CGL_KP_M_Legal_Entity_H" FromRole="CGL_KP_M_Legal_Entity_H" ToRole="CGL_KP_M_Period_H" />
           <NavigationProperty Name="CGL_KP_M_Member_H" Relationship="srr_devModel.FK_CGL_KP_M_Member_H_CGL_KP_M_Legal_Entity_H" FromRole="CGL_KP_M_Legal_Entity_H" ToRole="CGL_KP_M_Member_H" />
+          <NavigationProperty Name="CGL_KP_R_Cooperative_Balance_H" Relationship="srr_devModel.FK_CGL_KP_R_Cooperative_Balance_H_CGL_KP_M_Legal_Entity_H" FromRole="CGL_KP_M_Legal_Entity_H" ToRole="CGL_KP_R_Cooperative_Balance_H" />
+          <NavigationProperty Name="CGL_KP_R_Cooperative_Beginning_Balance_H" Relationship="srr_devModel.FK_CGL_KP_R_Cooperative_Beginning_Balance_H_CGL_KP_M_Legal_Entity_H" FromRole="CGL_KP_M_Legal_Entity_H" ToRole="CGL_KP_R_Cooperative_Beginning_Balance_H" />
+          <NavigationProperty Name="CGL_KP_R_Journal_H" Relationship="srr_devModel.FK_CGL_KP_R_Journal_H_CGL_KP_M_Legal_Entity_H" FromRole="CGL_KP_M_Legal_Entity_H" ToRole="CGL_KP_R_Journal_H" />
         </EntityType>
         <EntityType Name="CGL_KP_M_Period_H">
           <Key>
@@ -550,6 +1284,11 @@
           <Property Name="Deleted_Date" Type="DateTime" Precision="3" />
           <NavigationProperty Name="CGL_KP_M_Legal_Entity_H" Relationship="srr_devModel.FK_CGL_KP_M_Member_H_CGL_KP_M_Legal_Entity_H" FromRole="CGL_KP_M_Member_H" ToRole="CGL_KP_M_Legal_Entity_H" />
           <NavigationProperty Name="CGL_KP_M_Status_H" Relationship="srr_devModel.FK_CGL_KP_M_Member_H_CGL_KP_M_Status_H" FromRole="CGL_KP_M_Member_H" ToRole="CGL_KP_M_Status_H" />
+          <NavigationProperty Name="CGL_KP_R_Expenditure_H" Relationship="srr_devModel.FK_CGL_KP_R_Expenditure_H_CGL_KP_M_Member_H" FromRole="CGL_KP_M_Member_H" ToRole="CGL_KP_R_Expenditure_H" />
+          <NavigationProperty Name="CGL_KP_R_Member_Balance_H" Relationship="srr_devModel.FK_CGL_KP_R_Member_Balance_H_CGL_KP_M_Member_H" FromRole="CGL_KP_M_Member_H" ToRole="CGL_KP_R_Member_Balance_H" />
+          <NavigationProperty Name="CGL_KP_R_Member_Beginning_Balance_H" Relationship="srr_devModel.FK_CGL_KP_R_Member_Beginning_Balance_H_CGL_KP_M_Member_H" FromRole="CGL_KP_M_Member_H" ToRole="CGL_KP_R_Member_Beginning_Balance_H" />
+          <NavigationProperty Name="CGL_KP_R_Member_Loan_H" Relationship="srr_devModel.FK_CGL_KP_R_Member_Loan_H_CGL_KP_M_Member_H" FromRole="CGL_KP_M_Member_H" ToRole="CGL_KP_R_Member_Loan_H" />
+          <NavigationProperty Name="CGL_KP_R_Revenue_H" Relationship="srr_devModel.FK_CGL_KP_R_Revenue_H_CGL_KP_M_Member_H" FromRole="CGL_KP_M_Member_H" ToRole="CGL_KP_R_Revenue_H" />
         </EntityType>
         <Association Name="FK_CGL_KP_M_Member_H_CGL_KP_M_Legal_Entity_H">
           <End Type="srr_devModel.CGL_KP_M_Legal_Entity_H" Role="CGL_KP_M_Legal_Entity_H" Multiplicity="1" />
@@ -679,6 +1418,7 @@
           <Property Name="Modified_Date" Type="DateTime" Precision="3" />
           <Property Name="Deleted_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Deleted_Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CGL_KP_M_UserProfile_D" Relationship="srr_devModel.FK_CGL_KP_M_UserProfile_D_CGL_KP_M_UserProfile_H" FromRole="CGL_KP_M_UserProfile_H" ToRole="CGL_KP_M_UserProfile_D" />
         </EntityType>
         <Association Name="FK_CGL_KP_M_Group_H_CGL_KP_M_AccessRights_H">
           <End Type="srr_devModel.CGL_KP_M_AccessRights_H" Role="CGL_KP_M_AccessRights_H" Multiplicity="1" />
@@ -741,6 +1481,539 @@
           <Property Type="String" Name="Legal_Entity_Name" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="Status_Desc" Nullable="false" MaxLength="20" />
           <Property Type="String" Name="Address" Nullable="true" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="USP_CGL_KP_T_Generate_Transaction_Number_Result">
+          <Property Type="String" Name="Column1" Nullable="true" MaxLength="11" />
+        </ComplexType>
+        <EntityType Name="CGL_KP_M_Account_Group_H">
+          <Key>
+            <PropertyRef Name="Account_Group_Id" />
+          </Key>
+          <Property Name="Account_Group_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Account_Group_Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Account_Group_Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="Created_By" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Modified_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Modified_Date" Type="DateTime" Precision="3" />
+          <Property Name="Deleted_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Deleted_Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CGL_KP_M_Account_H" Relationship="srr_devModel.FK_CGL_KP_M_Account_H_CGL_KP_M_Account_Group_H" FromRole="CGL_KP_M_Account_Group_H" ToRole="CGL_KP_M_Account_H" />
+        </EntityType>
+        <EntityType Name="CGL_KP_M_Account_H">
+          <Key>
+            <PropertyRef Name="Account_Id" />
+          </Key>
+          <Property Name="Account_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Account_Group_Id" Type="Int32" Nullable="false" />
+          <Property Name="Account_Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Account_Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="Created_By" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Modified_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Modified_Date" Type="DateTime" Precision="3" />
+          <Property Name="Deleted_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Deleted_Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CGL_KP_M_Account_Group_H" Relationship="srr_devModel.FK_CGL_KP_M_Account_H_CGL_KP_M_Account_Group_H" FromRole="CGL_KP_M_Account_H" ToRole="CGL_KP_M_Account_Group_H" />
+          <NavigationProperty Name="CGL_KP_M_Expenditure_Type_H" Relationship="srr_devModel.FK_CGL_KP_M_Expenditure_Type_H_CGL_KP_M_Account_H" FromRole="CGL_KP_M_Account_H" ToRole="CGL_KP_M_Expenditure_Type_H" />
+          <NavigationProperty Name="CGL_KP_M_Revenue_Type_H" Relationship="srr_devModel.FK_CGL_KP_M_Revenue_Type_H_CGL_KP_M_Account_H" FromRole="CGL_KP_M_Account_H" ToRole="CGL_KP_M_Revenue_Type_H" />
+          <NavigationProperty Name="CGL_KP_R_Journal_D" Relationship="srr_devModel.FK_CGL_KP_R_Journal_D_CGL_KP_M_Account_H" FromRole="CGL_KP_M_Account_H" ToRole="CGL_KP_R_Journal_D" />
+        </EntityType>
+        <EntityType Name="CGL_KP_M_Expenditure_Type_H">
+          <Key>
+            <PropertyRef Name="Expenditure_Type_Id" />
+          </Key>
+          <Property Name="Expenditure_Type_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Expenditure_Type_Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Expenditure_Type_Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Account_Id" Type="Int32" Nullable="false" />
+          <Property Name="Need_Member" Type="Boolean" Nullable="false" />
+          <Property Name="Need_Approval" Type="Boolean" Nullable="false" />
+          <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="Created_By" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Modified_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Modified_Date" Type="DateTime" Precision="3" />
+          <Property Name="Deleted_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Deleted_Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CGL_KP_M_Account_H" Relationship="srr_devModel.FK_CGL_KP_M_Expenditure_Type_H_CGL_KP_M_Account_H" FromRole="CGL_KP_M_Expenditure_Type_H" ToRole="CGL_KP_M_Account_H" />
+          <NavigationProperty Name="CGL_KP_R_Expenditure_H" Relationship="srr_devModel.FK_CGL_KP_R_Expenditure_H_CGL_KP_M_Expenditure_Type_H" FromRole="CGL_KP_M_Expenditure_Type_H" ToRole="CGL_KP_R_Expenditure_H" />
+        </EntityType>
+        <EntityType Name="CGL_KP_M_Revenue_Type_H">
+          <Key>
+            <PropertyRef Name="Revenue_Type_Id" />
+          </Key>
+          <Property Name="Revenue_Type_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Revenue_Type_Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Revenue_Type_Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Account_Id" Type="Int32" Nullable="false" />
+          <Property Name="Need_Member" Type="Boolean" Nullable="false" />
+          <Property Name="Need_Approval" Type="Boolean" Nullable="false" />
+          <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="Created_By" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Modified_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Modified_Date" Type="DateTime" Precision="3" />
+          <Property Name="Deleted_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Deleted_Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CGL_KP_M_Account_H" Relationship="srr_devModel.FK_CGL_KP_M_Revenue_Type_H_CGL_KP_M_Account_H" FromRole="CGL_KP_M_Revenue_Type_H" ToRole="CGL_KP_M_Account_H" />
+          <NavigationProperty Name="CGL_KP_R_Revenue_H" Relationship="srr_devModel.FK_CGL_KP_R_Revenue_H_CGL_KP_M_Revenue_Type_H" FromRole="CGL_KP_M_Revenue_Type_H" ToRole="CGL_KP_R_Revenue_H" />
+        </EntityType>
+        <EntityType Name="CGL_KP_R_Expenditure_H">
+          <Key>
+            <PropertyRef Name="Expenditure_Id" />
+          </Key>
+          <Property Name="Expenditure_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Expenditure_No" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Expenditure_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Expenditure_Type_Id" Type="Int32" Nullable="false" />
+          <Property Name="Member_Id" Type="Int32" />
+          <Property Name="Expenditure_Amount" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Is_Approved" Type="Boolean" Nullable="false" />
+          <Property Name="Approved_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Approved_Date" Type="DateTime" Precision="3" />
+          <Property Name="Member_Loan_Id" Type="Int32" />
+          <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="Created_By" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Modified_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Modified_Date" Type="DateTime" Precision="3" />
+          <Property Name="Deleted_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Deleted_Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CGL_KP_M_Expenditure_Type_H" Relationship="srr_devModel.FK_CGL_KP_R_Expenditure_H_CGL_KP_M_Expenditure_Type_H" FromRole="CGL_KP_R_Expenditure_H" ToRole="CGL_KP_M_Expenditure_Type_H" />
+          <NavigationProperty Name="CGL_KP_M_Member_H" Relationship="srr_devModel.FK_CGL_KP_R_Expenditure_H_CGL_KP_M_Member_H" FromRole="CGL_KP_R_Expenditure_H" ToRole="CGL_KP_M_Member_H" />
+        </EntityType>
+        <EntityType Name="CGL_KP_R_Journal_D">
+          <Key>
+            <PropertyRef Name="Journal_D_Id" />
+          </Key>
+          <Property Name="Journal_D_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Journal_Id" Type="Int32" Nullable="false" />
+          <Property Name="Journal_D_Line_No" Type="Int32" Nullable="false" />
+          <Property Name="Account_Id" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="Created_By" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Modified_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Modified_Date" Type="DateTime" Precision="3" />
+          <Property Name="Deleted_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Deleted_Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CGL_KP_M_Account_H" Relationship="srr_devModel.FK_CGL_KP_R_Journal_D_CGL_KP_M_Account_H" FromRole="CGL_KP_R_Journal_D" ToRole="CGL_KP_M_Account_H" />
+          <NavigationProperty Name="CGL_KP_R_Journal_H" Relationship="srr_devModel.FK_CGL_KP_R_Journal_D_CGL_KP_R_Journal_H" FromRole="CGL_KP_R_Journal_D" ToRole="CGL_KP_R_Journal_H" />
+        </EntityType>
+        <EntityType Name="CGL_KP_R_Journal_H">
+          <Key>
+            <PropertyRef Name="Journal_Id" />
+          </Key>
+          <Property Name="Journal_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Journal_No" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Journal_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Legal_Entity_Id" Type="Int32" Nullable="false" />
+          <Property Name="Journal_Ref_Id" Type="Int32" />
+          <Property Name="Transaction_Type_Id" Type="Int32" />
+          <Property Name="Reference_Id" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="Created_By" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Modified_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Modified_Date" Type="DateTime" Precision="3" />
+          <Property Name="Deleted_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Deleted_Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CGL_KP_M_Legal_Entity_H" Relationship="srr_devModel.FK_CGL_KP_R_Journal_H_CGL_KP_M_Legal_Entity_H" FromRole="CGL_KP_R_Journal_H" ToRole="CGL_KP_M_Legal_Entity_H" />
+          <NavigationProperty Name="CGL_KP_R_Journal_D" Relationship="srr_devModel.FK_CGL_KP_R_Journal_D_CGL_KP_R_Journal_H" FromRole="CGL_KP_R_Journal_H" ToRole="CGL_KP_R_Journal_D" />
+        </EntityType>
+        <EntityType Name="CGL_KP_R_Member_Balance_H">
+          <Key>
+            <PropertyRef Name="Member_Id" />
+          </Key>
+          <Property Name="Member_Id" Type="Int32" Nullable="false" />
+          <Property Name="Savings" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="Debts" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="Interest" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="Created_By" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Modified_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Modified_Date" Type="DateTime" Precision="3" />
+          <Property Name="Deleted_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Deleted_Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CGL_KP_M_Member_H" Relationship="srr_devModel.FK_CGL_KP_R_Member_Balance_H_CGL_KP_M_Member_H" FromRole="CGL_KP_R_Member_Balance_H" ToRole="CGL_KP_M_Member_H" />
+        </EntityType>
+        <EntityType Name="CGL_KP_R_Member_Beginning_Balance_H">
+          <Key>
+            <PropertyRef Name="Member_Id" />
+          </Key>
+          <Property Name="Member_Id" Type="Int32" Nullable="false" />
+          <Property Name="Beginning_Balance_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Savings" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="Debts" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="Interest" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="Created_By" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Modified_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Modified_Date" Type="DateTime" Precision="3" />
+          <Property Name="Deleted_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Deleted_Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CGL_KP_M_Member_H" Relationship="srr_devModel.FK_CGL_KP_R_Member_Beginning_Balance_H_CGL_KP_M_Member_H" FromRole="CGL_KP_R_Member_Beginning_Balance_H" ToRole="CGL_KP_M_Member_H" />
+        </EntityType>
+        <EntityType Name="CGL_KP_R_Member_Loan_H">
+          <Key>
+            <PropertyRef Name="Member_Loan_Id" />
+          </Key>
+          <Property Name="Member_Loan_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Member_Id" Type="Int32" Nullable="false" />
+          <Property Name="Year" Type="Int32" Nullable="false" />
+          <Property Name="Month" Type="Int32" Nullable="false" />
+          <Property Name="Interest_Rate" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="Loan_Amount" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="Interest_Amount" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="Term_of_Loan" Type="Int32" Nullable="false" />
+          <Property Name="Remaining_Loan_Amount" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="Remaining_Interest_Amount" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="Remaining_Term_of_Loan" Type="Int32" Nullable="false" />
+          <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="Created_By" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Modified_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Modified_Date" Type="DateTime" Precision="3" />
+          <Property Name="Deleted_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Deleted_Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CGL_KP_M_Member_H" Relationship="srr_devModel.FK_CGL_KP_R_Member_Loan_H_CGL_KP_M_Member_H" FromRole="CGL_KP_R_Member_Loan_H" ToRole="CGL_KP_M_Member_H" />
+        </EntityType>
+        <EntityType Name="CGL_KP_R_Revenue_H">
+          <Key>
+            <PropertyRef Name="Revenue_Id" />
+          </Key>
+          <Property Name="Revenue_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Revenue_No" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Revenue_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Revenue_Type_Id" Type="Int32" Nullable="false" />
+          <Property Name="Member_Id" Type="Int32" />
+          <Property Name="Revenue_Amount" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Is_Approved" Type="Boolean" Nullable="false" />
+          <Property Name="Approved_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Approved_Date" Type="DateTime" Precision="3" />
+          <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="Created_By" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Modified_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Modified_Date" Type="DateTime" Precision="3" />
+          <Property Name="Deleted_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Deleted_Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CGL_KP_M_Member_H" Relationship="srr_devModel.FK_CGL_KP_R_Revenue_H_CGL_KP_M_Member_H" FromRole="CGL_KP_R_Revenue_H" ToRole="CGL_KP_M_Member_H" />
+          <NavigationProperty Name="CGL_KP_M_Revenue_Type_H" Relationship="srr_devModel.FK_CGL_KP_R_Revenue_H_CGL_KP_M_Revenue_Type_H" FromRole="CGL_KP_R_Revenue_H" ToRole="CGL_KP_M_Revenue_Type_H" />
+        </EntityType>
+        <EntityType Name="CGL_KP_S_Setting_H">
+          <Key>
+            <PropertyRef Name="Setting_Name" />
+          </Key>
+          <Property Name="Setting_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Setting_Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Value_1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Value_2" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Setting_Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="Created_By" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Modified_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Modified_Date" Type="DateTime" Precision="3" />
+          <Property Name="Deleted_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Deleted_Date" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="CGL_KP_S_Transaction_Type_H">
+          <Key>
+            <PropertyRef Name="Transaction_Type_Id" />
+          </Key>
+          <Property Name="Transaction_Type_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Transaction_Type_Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Transaction_Type_Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Transaction_Number_Prefix" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Length_Of_String" Type="Int32" Nullable="false" />
+          <Property Name="Increment" Type="Int32" Nullable="false" />
+          <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="Created_By" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Modified_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Modified_Date" Type="DateTime" Precision="3" />
+          <Property Name="Deleted_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Deleted_Date" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="CGL_KP_R_Cooperative_Balance_H">
+          <Key>
+            <PropertyRef Name="Legal_Entity_Id" />
+            <PropertyRef Name="Cooperative_Balance" />
+            <PropertyRef Name="Is_Deleted" />
+            <PropertyRef Name="Created_By" />
+            <PropertyRef Name="Created_Date" />
+          </Key>
+          <Property Name="Legal_Entity_Id" Type="Int32" Nullable="false" />
+          <Property Name="Cooperative_Balance" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="Created_By" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Modified_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Modified_Date" Type="DateTime" Precision="3" />
+          <Property Name="Deleted_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Deleted_Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CGL_KP_M_Legal_Entity_H" Relationship="srr_devModel.FK_CGL_KP_R_Cooperative_Balance_H_CGL_KP_M_Legal_Entity_H" FromRole="CGL_KP_R_Cooperative_Balance_H" ToRole="CGL_KP_M_Legal_Entity_H" />
+        </EntityType>
+        <EntityType Name="CGL_KP_R_Cooperative_Beginning_Balance_H">
+          <Key>
+            <PropertyRef Name="Legal_Entity_Id" />
+            <PropertyRef Name="Beginning_Balance_Date" />
+            <PropertyRef Name="Cooperative_Balance" />
+            <PropertyRef Name="Is_Deleted" />
+            <PropertyRef Name="Created_By" />
+            <PropertyRef Name="Created_Date" />
+          </Key>
+          <Property Name="Legal_Entity_Id" Type="Int32" Nullable="false" />
+          <Property Name="Beginning_Balance_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Cooperative_Balance" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="Created_By" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Modified_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Modified_Date" Type="DateTime" Precision="3" />
+          <Property Name="Deleted_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Deleted_Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CGL_KP_M_Legal_Entity_H" Relationship="srr_devModel.FK_CGL_KP_R_Cooperative_Beginning_Balance_H_CGL_KP_M_Legal_Entity_H" FromRole="CGL_KP_R_Cooperative_Beginning_Balance_H" ToRole="CGL_KP_M_Legal_Entity_H" />
+        </EntityType>
+        <Association Name="FK_CGL_KP_M_Account_H_CGL_KP_M_Account_Group_H">
+          <End Type="srr_devModel.CGL_KP_M_Account_Group_H" Role="CGL_KP_M_Account_Group_H" Multiplicity="1" />
+          <End Type="srr_devModel.CGL_KP_M_Account_H" Role="CGL_KP_M_Account_H" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CGL_KP_M_Account_Group_H">
+              <PropertyRef Name="Account_Group_Id" />
+            </Principal>
+            <Dependent Role="CGL_KP_M_Account_H">
+              <PropertyRef Name="Account_Group_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CGL_KP_M_Expenditure_Type_H_CGL_KP_M_Account_H">
+          <End Type="srr_devModel.CGL_KP_M_Account_H" Role="CGL_KP_M_Account_H" Multiplicity="1" />
+          <End Type="srr_devModel.CGL_KP_M_Expenditure_Type_H" Role="CGL_KP_M_Expenditure_Type_H" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CGL_KP_M_Account_H">
+              <PropertyRef Name="Account_Id" />
+            </Principal>
+            <Dependent Role="CGL_KP_M_Expenditure_Type_H">
+              <PropertyRef Name="Account_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CGL_KP_M_Revenue_Type_H_CGL_KP_M_Account_H">
+          <End Type="srr_devModel.CGL_KP_M_Account_H" Role="CGL_KP_M_Account_H" Multiplicity="1" />
+          <End Type="srr_devModel.CGL_KP_M_Revenue_Type_H" Role="CGL_KP_M_Revenue_Type_H" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CGL_KP_M_Account_H">
+              <PropertyRef Name="Account_Id" />
+            </Principal>
+            <Dependent Role="CGL_KP_M_Revenue_Type_H">
+              <PropertyRef Name="Account_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CGL_KP_R_Journal_D_CGL_KP_M_Account_H">
+          <End Type="srr_devModel.CGL_KP_M_Account_H" Role="CGL_KP_M_Account_H" Multiplicity="1" />
+          <End Type="srr_devModel.CGL_KP_R_Journal_D" Role="CGL_KP_R_Journal_D" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CGL_KP_M_Account_H">
+              <PropertyRef Name="Account_Id" />
+            </Principal>
+            <Dependent Role="CGL_KP_R_Journal_D">
+              <PropertyRef Name="Account_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CGL_KP_R_Expenditure_H_CGL_KP_M_Expenditure_Type_H">
+          <End Type="srr_devModel.CGL_KP_M_Expenditure_Type_H" Role="CGL_KP_M_Expenditure_Type_H" Multiplicity="1" />
+          <End Type="srr_devModel.CGL_KP_R_Expenditure_H" Role="CGL_KP_R_Expenditure_H" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CGL_KP_M_Expenditure_Type_H">
+              <PropertyRef Name="Expenditure_Type_Id" />
+            </Principal>
+            <Dependent Role="CGL_KP_R_Expenditure_H">
+              <PropertyRef Name="Expenditure_Type_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CGL_KP_R_Cooperative_Balance_H_CGL_KP_M_Legal_Entity_H">
+          <End Type="srr_devModel.CGL_KP_M_Legal_Entity_H" Role="CGL_KP_M_Legal_Entity_H" Multiplicity="1" />
+          <End Type="srr_devModel.CGL_KP_R_Cooperative_Balance_H" Role="CGL_KP_R_Cooperative_Balance_H" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CGL_KP_M_Legal_Entity_H">
+              <PropertyRef Name="Legal_Entity_Id" />
+            </Principal>
+            <Dependent Role="CGL_KP_R_Cooperative_Balance_H">
+              <PropertyRef Name="Legal_Entity_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CGL_KP_R_Cooperative_Beginning_Balance_H_CGL_KP_M_Legal_Entity_H">
+          <End Type="srr_devModel.CGL_KP_M_Legal_Entity_H" Role="CGL_KP_M_Legal_Entity_H" Multiplicity="1" />
+          <End Type="srr_devModel.CGL_KP_R_Cooperative_Beginning_Balance_H" Role="CGL_KP_R_Cooperative_Beginning_Balance_H" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CGL_KP_M_Legal_Entity_H">
+              <PropertyRef Name="Legal_Entity_Id" />
+            </Principal>
+            <Dependent Role="CGL_KP_R_Cooperative_Beginning_Balance_H">
+              <PropertyRef Name="Legal_Entity_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CGL_KP_R_Journal_H_CGL_KP_M_Legal_Entity_H">
+          <End Type="srr_devModel.CGL_KP_M_Legal_Entity_H" Role="CGL_KP_M_Legal_Entity_H" Multiplicity="1" />
+          <End Type="srr_devModel.CGL_KP_R_Journal_H" Role="CGL_KP_R_Journal_H" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CGL_KP_M_Legal_Entity_H">
+              <PropertyRef Name="Legal_Entity_Id" />
+            </Principal>
+            <Dependent Role="CGL_KP_R_Journal_H">
+              <PropertyRef Name="Legal_Entity_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CGL_KP_R_Expenditure_H_CGL_KP_M_Member_H">
+          <End Type="srr_devModel.CGL_KP_M_Member_H" Role="CGL_KP_M_Member_H" Multiplicity="0..1" />
+          <End Type="srr_devModel.CGL_KP_R_Expenditure_H" Role="CGL_KP_R_Expenditure_H" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CGL_KP_M_Member_H">
+              <PropertyRef Name="Member_Id" />
+            </Principal>
+            <Dependent Role="CGL_KP_R_Expenditure_H">
+              <PropertyRef Name="Member_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CGL_KP_R_Member_Balance_H_CGL_KP_M_Member_H">
+          <End Type="srr_devModel.CGL_KP_M_Member_H" Role="CGL_KP_M_Member_H" Multiplicity="1" />
+          <End Type="srr_devModel.CGL_KP_R_Member_Balance_H" Role="CGL_KP_R_Member_Balance_H" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="CGL_KP_M_Member_H">
+              <PropertyRef Name="Member_Id" />
+            </Principal>
+            <Dependent Role="CGL_KP_R_Member_Balance_H">
+              <PropertyRef Name="Member_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CGL_KP_R_Member_Beginning_Balance_H_CGL_KP_M_Member_H">
+          <End Type="srr_devModel.CGL_KP_M_Member_H" Role="CGL_KP_M_Member_H" Multiplicity="1" />
+          <End Type="srr_devModel.CGL_KP_R_Member_Beginning_Balance_H" Role="CGL_KP_R_Member_Beginning_Balance_H" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="CGL_KP_M_Member_H">
+              <PropertyRef Name="Member_Id" />
+            </Principal>
+            <Dependent Role="CGL_KP_R_Member_Beginning_Balance_H">
+              <PropertyRef Name="Member_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CGL_KP_R_Member_Loan_H_CGL_KP_M_Member_H">
+          <End Type="srr_devModel.CGL_KP_M_Member_H" Role="CGL_KP_M_Member_H" Multiplicity="1" />
+          <End Type="srr_devModel.CGL_KP_R_Member_Loan_H" Role="CGL_KP_R_Member_Loan_H" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CGL_KP_M_Member_H">
+              <PropertyRef Name="Member_Id" />
+            </Principal>
+            <Dependent Role="CGL_KP_R_Member_Loan_H">
+              <PropertyRef Name="Member_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CGL_KP_R_Revenue_H_CGL_KP_M_Member_H">
+          <End Type="srr_devModel.CGL_KP_M_Member_H" Role="CGL_KP_M_Member_H" Multiplicity="0..1" />
+          <End Type="srr_devModel.CGL_KP_R_Revenue_H" Role="CGL_KP_R_Revenue_H" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CGL_KP_M_Member_H">
+              <PropertyRef Name="Member_Id" />
+            </Principal>
+            <Dependent Role="CGL_KP_R_Revenue_H">
+              <PropertyRef Name="Member_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CGL_KP_R_Revenue_H_CGL_KP_M_Revenue_Type_H">
+          <End Type="srr_devModel.CGL_KP_M_Revenue_Type_H" Role="CGL_KP_M_Revenue_Type_H" Multiplicity="1" />
+          <End Type="srr_devModel.CGL_KP_R_Revenue_H" Role="CGL_KP_R_Revenue_H" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CGL_KP_M_Revenue_Type_H">
+              <PropertyRef Name="Revenue_Type_Id" />
+            </Principal>
+            <Dependent Role="CGL_KP_R_Revenue_H">
+              <PropertyRef Name="Revenue_Type_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CGL_KP_R_Journal_D_CGL_KP_R_Journal_H">
+          <End Type="srr_devModel.CGL_KP_R_Journal_H" Role="CGL_KP_R_Journal_H" Multiplicity="1" />
+          <End Type="srr_devModel.CGL_KP_R_Journal_D" Role="CGL_KP_R_Journal_D" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CGL_KP_R_Journal_H">
+              <PropertyRef Name="Journal_Id" />
+            </Principal>
+            <Dependent Role="CGL_KP_R_Journal_D">
+              <PropertyRef Name="Journal_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CGL_KP_M_UserProfile_D">
+          <Key>
+            <PropertyRef Name="Group_Id" />
+            <PropertyRef Name="Is_Deleted" />
+            <PropertyRef Name="Created_By" />
+            <PropertyRef Name="Created_Date" />
+          </Key>
+          <Property Name="User_Id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Legal_Entity_Id" Type="Int32" />
+          <Property Name="Group_Id" Type="Int32" Nullable="false" />
+          <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="Created_By" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Modified_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Modified_Date" Type="DateTime" Precision="3" />
+          <Property Name="Deleted_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Deleted_Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CGL_KP_M_UserProfile_H" Relationship="srr_devModel.FK_CGL_KP_M_UserProfile_D_CGL_KP_M_UserProfile_H" FromRole="CGL_KP_M_UserProfile_D" ToRole="CGL_KP_M_UserProfile_H" />
+        </EntityType>
+        <Association Name="FK_CGL_KP_M_UserProfile_D_CGL_KP_M_UserProfile_H">
+          <End Type="srr_devModel.CGL_KP_M_UserProfile_H" Role="CGL_KP_M_UserProfile_H" Multiplicity="0..1" />
+          <End Type="srr_devModel.CGL_KP_M_UserProfile_D" Role="CGL_KP_M_UserProfile_D" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CGL_KP_M_UserProfile_H">
+              <PropertyRef Name="User_Id" />
+            </Principal>
+            <Dependent Role="CGL_KP_M_UserProfile_D">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="USP_CGL_KP_R_Revenue_H_Find_Result">
+          <Property Type="Int32" Name="Revenue_Id" Nullable="false" />
+          <Property Type="String" Name="Revenue_No" Nullable="false" MaxLength="12" />
+          <Property Type="DateTime" Name="Revenue_Date" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Revenue_Type_Id" Nullable="false" />
+          <Property Type="Int32" Name="Member_Id" Nullable="true" />
+          <Property Type="Decimal" Name="Revenue_Amount" Nullable="false" Precision="18" Scale="4" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="500" />
+          <Property Type="Boolean" Name="Is_Approved" Nullable="false" />
+          <Property Type="String" Name="Approved_By" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="Approved_Date" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="Is_Deleted" Nullable="false" />
+          <Property Type="String" Name="Legal_Entity_Name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Employee_No" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -996,6 +2269,336 @@
                 <ScalarProperty Name="Legal_Entity_Name" ColumnName="Legal_Entity_Name" />
                 <ScalarProperty Name="Status_Desc" ColumnName="Status_Desc" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="USP_CGL_KP_T_Generate_Transaction_Number" FunctionName="srr_devModel.Store.USP_CGL_KP_T_Generate_Transaction_Number">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="srr_devModel.USP_CGL_KP_T_Generate_Transaction_Number_Result">
+                <ScalarProperty Name="Column1" ColumnName="Column1" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="CGL_KP_M_Account_Group_H">
+            <EntityTypeMapping TypeName="srr_devModel.CGL_KP_M_Account_Group_H">
+              <MappingFragment StoreEntitySet="CGL_KP_M_Account_Group_H">
+                <ScalarProperty Name="Deleted_Date" ColumnName="Deleted_Date" />
+                <ScalarProperty Name="Deleted_By" ColumnName="Deleted_By" />
+                <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+                <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Account_Group_Type" ColumnName="Account_Group_Type" />
+                <ScalarProperty Name="Account_Group_Name" ColumnName="Account_Group_Name" />
+                <ScalarProperty Name="Account_Group_Id" ColumnName="Account_Group_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CGL_KP_M_Account_H">
+            <EntityTypeMapping TypeName="srr_devModel.CGL_KP_M_Account_H">
+              <MappingFragment StoreEntitySet="CGL_KP_M_Account_H">
+                <ScalarProperty Name="Deleted_Date" ColumnName="Deleted_Date" />
+                <ScalarProperty Name="Deleted_By" ColumnName="Deleted_By" />
+                <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+                <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Account_Name" ColumnName="Account_Name" />
+                <ScalarProperty Name="Account_Code" ColumnName="Account_Code" />
+                <ScalarProperty Name="Account_Group_Id" ColumnName="Account_Group_Id" />
+                <ScalarProperty Name="Account_Id" ColumnName="Account_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CGL_KP_M_Expenditure_Type_H">
+            <EntityTypeMapping TypeName="srr_devModel.CGL_KP_M_Expenditure_Type_H">
+              <MappingFragment StoreEntitySet="CGL_KP_M_Expenditure_Type_H">
+                <ScalarProperty Name="Deleted_Date" ColumnName="Deleted_Date" />
+                <ScalarProperty Name="Deleted_By" ColumnName="Deleted_By" />
+                <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+                <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+                <ScalarProperty Name="Need_Approval" ColumnName="Need_Approval" />
+                <ScalarProperty Name="Need_Member" ColumnName="Need_Member" />
+                <ScalarProperty Name="Account_Id" ColumnName="Account_Id" />
+                <ScalarProperty Name="Expenditure_Type_Description" ColumnName="Expenditure_Type_Description" />
+                <ScalarProperty Name="Expenditure_Type_Code" ColumnName="Expenditure_Type_Code" />
+                <ScalarProperty Name="Expenditure_Type_Id" ColumnName="Expenditure_Type_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CGL_KP_M_Revenue_Type_H">
+            <EntityTypeMapping TypeName="srr_devModel.CGL_KP_M_Revenue_Type_H">
+              <MappingFragment StoreEntitySet="CGL_KP_M_Revenue_Type_H">
+                <ScalarProperty Name="Deleted_Date" ColumnName="Deleted_Date" />
+                <ScalarProperty Name="Deleted_By" ColumnName="Deleted_By" />
+                <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+                <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+                <ScalarProperty Name="Need_Approval" ColumnName="Need_Approval" />
+                <ScalarProperty Name="Need_Member" ColumnName="Need_Member" />
+                <ScalarProperty Name="Account_Id" ColumnName="Account_Id" />
+                <ScalarProperty Name="Revenue_Type_Description" ColumnName="Revenue_Type_Description" />
+                <ScalarProperty Name="Revenue_Type_Code" ColumnName="Revenue_Type_Code" />
+                <ScalarProperty Name="Revenue_Type_Id" ColumnName="Revenue_Type_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CGL_KP_R_Expenditure_H">
+            <EntityTypeMapping TypeName="srr_devModel.CGL_KP_R_Expenditure_H">
+              <MappingFragment StoreEntitySet="CGL_KP_R_Expenditure_H">
+                <ScalarProperty Name="Deleted_Date" ColumnName="Deleted_Date" />
+                <ScalarProperty Name="Deleted_By" ColumnName="Deleted_By" />
+                <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+                <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+                <ScalarProperty Name="Member_Loan_Id" ColumnName="Member_Loan_Id" />
+                <ScalarProperty Name="Approved_Date" ColumnName="Approved_Date" />
+                <ScalarProperty Name="Approved_By" ColumnName="Approved_By" />
+                <ScalarProperty Name="Is_Approved" ColumnName="Is_Approved" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Expenditure_Amount" ColumnName="Expenditure_Amount" />
+                <ScalarProperty Name="Member_Id" ColumnName="Member_Id" />
+                <ScalarProperty Name="Expenditure_Type_Id" ColumnName="Expenditure_Type_Id" />
+                <ScalarProperty Name="Expenditure_Date" ColumnName="Expenditure_Date" />
+                <ScalarProperty Name="Expenditure_No" ColumnName="Expenditure_No" />
+                <ScalarProperty Name="Expenditure_Id" ColumnName="Expenditure_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CGL_KP_R_Journal_D">
+            <EntityTypeMapping TypeName="srr_devModel.CGL_KP_R_Journal_D">
+              <MappingFragment StoreEntitySet="CGL_KP_R_Journal_D">
+                <ScalarProperty Name="Deleted_Date" ColumnName="Deleted_Date" />
+                <ScalarProperty Name="Deleted_By" ColumnName="Deleted_By" />
+                <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+                <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Account_Id" ColumnName="Account_Id" />
+                <ScalarProperty Name="Journal_D_Line_No" ColumnName="Journal_D_Line_No" />
+                <ScalarProperty Name="Journal_Id" ColumnName="Journal_Id" />
+                <ScalarProperty Name="Journal_D_Id" ColumnName="Journal_D_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CGL_KP_R_Journal_H">
+            <EntityTypeMapping TypeName="srr_devModel.CGL_KP_R_Journal_H">
+              <MappingFragment StoreEntitySet="CGL_KP_R_Journal_H">
+                <ScalarProperty Name="Deleted_Date" ColumnName="Deleted_Date" />
+                <ScalarProperty Name="Deleted_By" ColumnName="Deleted_By" />
+                <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+                <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Reference_Id" ColumnName="Reference_Id" />
+                <ScalarProperty Name="Transaction_Type_Id" ColumnName="Transaction_Type_Id" />
+                <ScalarProperty Name="Journal_Ref_Id" ColumnName="Journal_Ref_Id" />
+                <ScalarProperty Name="Legal_Entity_Id" ColumnName="Legal_Entity_Id" />
+                <ScalarProperty Name="Journal_Date" ColumnName="Journal_Date" />
+                <ScalarProperty Name="Journal_No" ColumnName="Journal_No" />
+                <ScalarProperty Name="Journal_Id" ColumnName="Journal_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CGL_KP_R_Member_Balance_H">
+            <EntityTypeMapping TypeName="srr_devModel.CGL_KP_R_Member_Balance_H">
+              <MappingFragment StoreEntitySet="CGL_KP_R_Member_Balance_H">
+                <ScalarProperty Name="Deleted_Date" ColumnName="Deleted_Date" />
+                <ScalarProperty Name="Deleted_By" ColumnName="Deleted_By" />
+                <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+                <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+                <ScalarProperty Name="Interest" ColumnName="Interest" />
+                <ScalarProperty Name="Debts" ColumnName="Debts" />
+                <ScalarProperty Name="Savings" ColumnName="Savings" />
+                <ScalarProperty Name="Member_Id" ColumnName="Member_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CGL_KP_R_Member_Beginning_Balance_H">
+            <EntityTypeMapping TypeName="srr_devModel.CGL_KP_R_Member_Beginning_Balance_H">
+              <MappingFragment StoreEntitySet="CGL_KP_R_Member_Beginning_Balance_H">
+                <ScalarProperty Name="Deleted_Date" ColumnName="Deleted_Date" />
+                <ScalarProperty Name="Deleted_By" ColumnName="Deleted_By" />
+                <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+                <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+                <ScalarProperty Name="Interest" ColumnName="Interest" />
+                <ScalarProperty Name="Debts" ColumnName="Debts" />
+                <ScalarProperty Name="Savings" ColumnName="Savings" />
+                <ScalarProperty Name="Beginning_Balance_Date" ColumnName="Beginning_Balance_Date" />
+                <ScalarProperty Name="Member_Id" ColumnName="Member_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CGL_KP_R_Member_Loan_H">
+            <EntityTypeMapping TypeName="srr_devModel.CGL_KP_R_Member_Loan_H">
+              <MappingFragment StoreEntitySet="CGL_KP_R_Member_Loan_H">
+                <ScalarProperty Name="Deleted_Date" ColumnName="Deleted_Date" />
+                <ScalarProperty Name="Deleted_By" ColumnName="Deleted_By" />
+                <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+                <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+                <ScalarProperty Name="Remaining_Term_of_Loan" ColumnName="Remaining_Term_of_Loan" />
+                <ScalarProperty Name="Remaining_Interest_Amount" ColumnName="Remaining_Interest_Amount" />
+                <ScalarProperty Name="Remaining_Loan_Amount" ColumnName="Remaining_Loan_Amount" />
+                <ScalarProperty Name="Term_of_Loan" ColumnName="Term_of_Loan" />
+                <ScalarProperty Name="Interest_Amount" ColumnName="Interest_Amount" />
+                <ScalarProperty Name="Loan_Amount" ColumnName="Loan_Amount" />
+                <ScalarProperty Name="Interest_Rate" ColumnName="Interest_Rate" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Member_Id" ColumnName="Member_Id" />
+                <ScalarProperty Name="Member_Loan_Id" ColumnName="Member_Loan_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CGL_KP_R_Revenue_H">
+            <EntityTypeMapping TypeName="srr_devModel.CGL_KP_R_Revenue_H">
+              <MappingFragment StoreEntitySet="CGL_KP_R_Revenue_H">
+                <ScalarProperty Name="Deleted_Date" ColumnName="Deleted_Date" />
+                <ScalarProperty Name="Deleted_By" ColumnName="Deleted_By" />
+                <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+                <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+                <ScalarProperty Name="Approved_Date" ColumnName="Approved_Date" />
+                <ScalarProperty Name="Approved_By" ColumnName="Approved_By" />
+                <ScalarProperty Name="Is_Approved" ColumnName="Is_Approved" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Revenue_Amount" ColumnName="Revenue_Amount" />
+                <ScalarProperty Name="Member_Id" ColumnName="Member_Id" />
+                <ScalarProperty Name="Revenue_Type_Id" ColumnName="Revenue_Type_Id" />
+                <ScalarProperty Name="Revenue_Date" ColumnName="Revenue_Date" />
+                <ScalarProperty Name="Revenue_No" ColumnName="Revenue_No" />
+                <ScalarProperty Name="Revenue_Id" ColumnName="Revenue_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CGL_KP_S_Setting_H">
+            <EntityTypeMapping TypeName="srr_devModel.CGL_KP_S_Setting_H">
+              <MappingFragment StoreEntitySet="CGL_KP_S_Setting_H">
+                <ScalarProperty Name="Deleted_Date" ColumnName="Deleted_Date" />
+                <ScalarProperty Name="Deleted_By" ColumnName="Deleted_By" />
+                <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+                <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+                <ScalarProperty Name="Setting_Description" ColumnName="Setting_Description" />
+                <ScalarProperty Name="Value_2" ColumnName="Value_2" />
+                <ScalarProperty Name="Value_1" ColumnName="Value_1" />
+                <ScalarProperty Name="Setting_Type" ColumnName="Setting_Type" />
+                <ScalarProperty Name="Setting_Name" ColumnName="Setting_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CGL_KP_S_Transaction_Type_H">
+            <EntityTypeMapping TypeName="srr_devModel.CGL_KP_S_Transaction_Type_H">
+              <MappingFragment StoreEntitySet="CGL_KP_S_Transaction_Type_H">
+                <ScalarProperty Name="Deleted_Date" ColumnName="Deleted_Date" />
+                <ScalarProperty Name="Deleted_By" ColumnName="Deleted_By" />
+                <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+                <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+                <ScalarProperty Name="Increment" ColumnName="Increment" />
+                <ScalarProperty Name="Length_Of_String" ColumnName="Length_Of_String" />
+                <ScalarProperty Name="Transaction_Number_Prefix" ColumnName="Transaction_Number_Prefix" />
+                <ScalarProperty Name="Transaction_Type_Name" ColumnName="Transaction_Type_Name" />
+                <ScalarProperty Name="Transaction_Type_Code" ColumnName="Transaction_Type_Code" />
+                <ScalarProperty Name="Transaction_Type_Id" ColumnName="Transaction_Type_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CGL_KP_R_Cooperative_Balance_H">
+            <EntityTypeMapping TypeName="srr_devModel.CGL_KP_R_Cooperative_Balance_H">
+              <MappingFragment StoreEntitySet="CGL_KP_R_Cooperative_Balance_H">
+                <ScalarProperty Name="Deleted_Date" ColumnName="Deleted_Date" />
+                <ScalarProperty Name="Deleted_By" ColumnName="Deleted_By" />
+                <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+                <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+                <ScalarProperty Name="Cooperative_Balance" ColumnName="Cooperative_Balance" />
+                <ScalarProperty Name="Legal_Entity_Id" ColumnName="Legal_Entity_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CGL_KP_R_Cooperative_Beginning_Balance_H">
+            <EntityTypeMapping TypeName="srr_devModel.CGL_KP_R_Cooperative_Beginning_Balance_H">
+              <MappingFragment StoreEntitySet="CGL_KP_R_Cooperative_Beginning_Balance_H">
+                <ScalarProperty Name="Deleted_Date" ColumnName="Deleted_Date" />
+                <ScalarProperty Name="Deleted_By" ColumnName="Deleted_By" />
+                <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+                <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+                <ScalarProperty Name="Cooperative_Balance" ColumnName="Cooperative_Balance" />
+                <ScalarProperty Name="Beginning_Balance_Date" ColumnName="Beginning_Balance_Date" />
+                <ScalarProperty Name="Legal_Entity_Id" ColumnName="Legal_Entity_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CGL_KP_M_UserProfile_D">
+            <EntityTypeMapping TypeName="srr_devModel.CGL_KP_M_UserProfile_D">
+              <MappingFragment StoreEntitySet="CGL_KP_M_UserProfile_D">
+                <ScalarProperty Name="Deleted_Date" ColumnName="Deleted_Date" />
+                <ScalarProperty Name="Deleted_By" ColumnName="Deleted_By" />
+                <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+                <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+                <ScalarProperty Name="Group_Id" ColumnName="Group_Id" />
+                <ScalarProperty Name="Legal_Entity_Id" ColumnName="Legal_Entity_Id" />
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="USP_CGL_KP_R_Revenue_H_Find" FunctionName="srr_devModel.Store.USP_CGL_KP_R_Revenue_H_Find">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="srr_devModel.USP_CGL_KP_R_Revenue_H_Find_Result">
+                <ScalarProperty Name="Revenue_Id" ColumnName="Revenue_Id" />
+                <ScalarProperty Name="Revenue_No" ColumnName="Revenue_No" />
+                <ScalarProperty Name="Revenue_Date" ColumnName="Revenue_Date" />
+                <ScalarProperty Name="Revenue_Type_Id" ColumnName="Revenue_Type_Id" />
+                <ScalarProperty Name="Member_Id" ColumnName="Member_Id" />
+                <ScalarProperty Name="Revenue_Amount" ColumnName="Revenue_Amount" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Is_Approved" ColumnName="Is_Approved" />
+                <ScalarProperty Name="Approved_By" ColumnName="Approved_By" />
+                <ScalarProperty Name="Approved_Date" ColumnName="Approved_Date" />
+                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+                <ScalarProperty Name="Legal_Entity_Name" ColumnName="Legal_Entity_Name" />
+                <ScalarProperty Name="Employee_No" ColumnName="Employee_No" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

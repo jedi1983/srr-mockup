@@ -39,6 +39,22 @@ namespace SRR_Devolopment.Model
         public DbSet<CGL_KP_M_Form_Type_H> CGL_KP_M_Form_Type_H { get; set; }
         public DbSet<CGL_KP_M_Group_H> CGL_KP_M_Group_H { get; set; }
         public DbSet<CGL_KP_M_UserProfile_H> CGL_KP_M_UserProfile_H { get; set; }
+        public DbSet<CGL_KP_M_Account_Group_H> CGL_KP_M_Account_Group_H { get; set; }
+        public DbSet<CGL_KP_M_Account_H> CGL_KP_M_Account_H { get; set; }
+        public DbSet<CGL_KP_M_Expenditure_Type_H> CGL_KP_M_Expenditure_Type_H { get; set; }
+        public DbSet<CGL_KP_M_Revenue_Type_H> CGL_KP_M_Revenue_Type_H { get; set; }
+        public DbSet<CGL_KP_R_Expenditure_H> CGL_KP_R_Expenditure_H { get; set; }
+        public DbSet<CGL_KP_R_Journal_D> CGL_KP_R_Journal_D { get; set; }
+        public DbSet<CGL_KP_R_Journal_H> CGL_KP_R_Journal_H { get; set; }
+        public DbSet<CGL_KP_R_Member_Balance_H> CGL_KP_R_Member_Balance_H { get; set; }
+        public DbSet<CGL_KP_R_Member_Beginning_Balance_H> CGL_KP_R_Member_Beginning_Balance_H { get; set; }
+        public DbSet<CGL_KP_R_Member_Loan_H> CGL_KP_R_Member_Loan_H { get; set; }
+        public DbSet<CGL_KP_R_Revenue_H> CGL_KP_R_Revenue_H { get; set; }
+        public DbSet<CGL_KP_S_Setting_H> CGL_KP_S_Setting_H { get; set; }
+        public DbSet<CGL_KP_S_Transaction_Type_H> CGL_KP_S_Transaction_Type_H { get; set; }
+        public DbSet<CGL_KP_R_Cooperative_Balance_H> CGL_KP_R_Cooperative_Balance_H { get; set; }
+        public DbSet<CGL_KP_R_Cooperative_Beginning_Balance_H> CGL_KP_R_Cooperative_Beginning_Balance_H { get; set; }
+        public DbSet<CGL_KP_M_UserProfile_D> CGL_KP_M_UserProfile_D { get; set; }
     
         public virtual ObjectResult<USP_CG_KP_M_AccessRights_H_Find_Result> USP_CG_KP_M_AccessRights_H_Find(Nullable<int> groupID)
         {
@@ -91,6 +107,32 @@ namespace SRR_Devolopment.Model
                 new ObjectParameter("LegalEntityID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<USP_CGL_KP_M_Member_H_Find_Result>("USP_CGL_KP_M_Member_H_Find", nameParameter, legalEntityIDParameter);
+        }
+    
+        public virtual ObjectResult<USP_CGL_KP_T_Generate_Transaction_Number_Result> USP_CGL_KP_T_Generate_Transaction_Number(string transaction_Type_Code, Nullable<System.DateTime> transaction_Date)
+        {
+            var transaction_Type_CodeParameter = transaction_Type_Code != null ?
+                new ObjectParameter("Transaction_Type_Code", transaction_Type_Code) :
+                new ObjectParameter("Transaction_Type_Code", typeof(string));
+    
+            var transaction_DateParameter = transaction_Date.HasValue ?
+                new ObjectParameter("Transaction_Date", transaction_Date) :
+                new ObjectParameter("Transaction_Date", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<USP_CGL_KP_T_Generate_Transaction_Number_Result>("USP_CGL_KP_T_Generate_Transaction_Number", transaction_Type_CodeParameter, transaction_DateParameter);
+        }
+    
+        public virtual ObjectResult<USP_CGL_KP_R_Revenue_H_Find_Result> USP_CGL_KP_R_Revenue_H_Find(Nullable<int> legalEntityID, Nullable<int> period_Id)
+        {
+            var legalEntityIDParameter = legalEntityID.HasValue ?
+                new ObjectParameter("LegalEntityID", legalEntityID) :
+                new ObjectParameter("LegalEntityID", typeof(int));
+    
+            var period_IdParameter = period_Id.HasValue ?
+                new ObjectParameter("Period_Id", period_Id) :
+                new ObjectParameter("Period_Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<USP_CGL_KP_R_Revenue_H_Find_Result>("USP_CGL_KP_R_Revenue_H_Find", legalEntityIDParameter, period_IdParameter);
         }
     }
 }

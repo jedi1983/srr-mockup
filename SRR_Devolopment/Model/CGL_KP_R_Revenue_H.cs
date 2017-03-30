@@ -12,18 +12,18 @@ namespace SRR_Devolopment.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class CGL_KP_M_UserProfile_H
+    public partial class CGL_KP_R_Revenue_H
     {
-        public CGL_KP_M_UserProfile_H()
-        {
-            this.CGL_KP_M_UserProfile_D = new HashSet<CGL_KP_M_UserProfile_D>();
-        }
-    
-        public string User_Id { get; set; }
-        public string User_Name { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public int Legal_Entity_Id { get; set; }
+        public int Revenue_Id { get; set; }
+        public string Revenue_No { get; set; }
+        public System.DateTime Revenue_Date { get; set; }
+        public int Revenue_Type_Id { get; set; }
+        public Nullable<int> Member_Id { get; set; }
+        public decimal Revenue_Amount { get; set; }
+        public string Description { get; set; }
+        public bool Is_Approved { get; set; }
+        public string Approved_By { get; set; }
+        public Nullable<System.DateTime> Approved_Date { get; set; }
         public bool Is_Deleted { get; set; }
         public string Created_By { get; set; }
         public System.DateTime Created_Date { get; set; }
@@ -32,6 +32,7 @@ namespace SRR_Devolopment.Model
         public string Deleted_By { get; set; }
         public Nullable<System.DateTime> Deleted_Date { get; set; }
     
-        public virtual ICollection<CGL_KP_M_UserProfile_D> CGL_KP_M_UserProfile_D { get; set; }
+        public virtual CGL_KP_M_Member_H CGL_KP_M_Member_H { get; set; }
+        public virtual CGL_KP_M_Revenue_Type_H CGL_KP_M_Revenue_Type_H { get; set; }
     }
 }

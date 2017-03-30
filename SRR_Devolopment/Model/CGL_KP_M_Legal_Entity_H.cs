@@ -18,6 +18,9 @@ namespace SRR_Devolopment.Model
         {
             this.CGL_KP_M_Period_H = new HashSet<CGL_KP_M_Period_H>();
             this.CGL_KP_M_Member_H = new HashSet<CGL_KP_M_Member_H>();
+            this.CGL_KP_R_Cooperative_Balance_H = new HashSet<CGL_KP_R_Cooperative_Balance_H>();
+            this.CGL_KP_R_Cooperative_Beginning_Balance_H = new HashSet<CGL_KP_R_Cooperative_Beginning_Balance_H>();
+            this.CGL_KP_R_Journal_H = new HashSet<CGL_KP_R_Journal_H>();
         }
     
         public int Legal_Entity_Id { get; set; }
@@ -33,5 +36,8 @@ namespace SRR_Devolopment.Model
     
         public virtual ICollection<CGL_KP_M_Period_H> CGL_KP_M_Period_H { get; set; }
         public virtual ICollection<CGL_KP_M_Member_H> CGL_KP_M_Member_H { get; set; }
+        public virtual ICollection<CGL_KP_R_Cooperative_Balance_H> CGL_KP_R_Cooperative_Balance_H { get; set; }
+        public virtual ICollection<CGL_KP_R_Cooperative_Beginning_Balance_H> CGL_KP_R_Cooperative_Beginning_Balance_H { get; set; }
+        public virtual ICollection<CGL_KP_R_Journal_H> CGL_KP_R_Journal_H { get; set; }
     }
 }

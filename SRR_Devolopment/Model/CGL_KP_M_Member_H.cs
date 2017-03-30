@@ -14,6 +14,13 @@ namespace SRR_Devolopment.Model
     
     public partial class CGL_KP_M_Member_H
     {
+        public CGL_KP_M_Member_H()
+        {
+            this.CGL_KP_R_Expenditure_H = new HashSet<CGL_KP_R_Expenditure_H>();
+            this.CGL_KP_R_Member_Loan_H = new HashSet<CGL_KP_R_Member_Loan_H>();
+            this.CGL_KP_R_Revenue_H = new HashSet<CGL_KP_R_Revenue_H>();
+        }
+    
         public int Member_Id { get; set; }
         public int Legal_Entity_Id { get; set; }
         public string Employee_No { get; set; }
@@ -33,5 +40,10 @@ namespace SRR_Devolopment.Model
     
         public virtual CGL_KP_M_Legal_Entity_H CGL_KP_M_Legal_Entity_H { get; set; }
         public virtual CGL_KP_M_Status_H CGL_KP_M_Status_H { get; set; }
+        public virtual ICollection<CGL_KP_R_Expenditure_H> CGL_KP_R_Expenditure_H { get; set; }
+        public virtual CGL_KP_R_Member_Balance_H CGL_KP_R_Member_Balance_H { get; set; }
+        public virtual CGL_KP_R_Member_Beginning_Balance_H CGL_KP_R_Member_Beginning_Balance_H { get; set; }
+        public virtual ICollection<CGL_KP_R_Member_Loan_H> CGL_KP_R_Member_Loan_H { get; set; }
+        public virtual ICollection<CGL_KP_R_Revenue_H> CGL_KP_R_Revenue_H { get; set; }
     }
 }

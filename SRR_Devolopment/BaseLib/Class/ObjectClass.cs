@@ -69,6 +69,21 @@ namespace SRR_Devolopment.BaseLib.Class
                 _tmpUserName = value;
             }
         }
+
+        private List<int> _legalEntity;
+        public List<int> LegalEntity
+        {
+            get
+            {
+                return _legalEntity;
+            }
+            set
+            {
+                _legalEntity = value;
+            }
+        }
+
+
         /// <summary>
         /// Statis Constructor
         /// </summary>
