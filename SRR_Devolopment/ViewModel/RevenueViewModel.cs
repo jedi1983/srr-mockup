@@ -96,9 +96,6 @@ namespace SRR_Devolopment.ViewModel
             set
             {
                 _isMemberEnabled = value;
-                if (DataNew == true)
-                    if (_isMemberEnabled == true)
-                        GetEditMode = true;
                 RaisePropertyChanged("IsMemberEnabled");
             }
         }
@@ -292,11 +289,20 @@ namespace SRR_Devolopment.ViewModel
                 _setRevenueType = value;
                 if (_setRevenueType != null)
                 {
-
+                    if(DataNew == true )
+                    {
                         if (_setRevenueType.Need_Member == true)
-                            IsMemberEnabled = true;
+                        { 
+                            IsMemberEnabled = true; 
+                            GetEditMode = true; 
+                        }
                         else
+                        {
                             IsMemberEnabled = false;
+                            GetEditMode = false;
+                        }
+                    }
+                        
                 }
                 RaisePropertyChanged("SetRevenueType");
             }
@@ -359,6 +365,14 @@ namespace SRR_Devolopment.ViewModel
         #region "Methods"
 
         /// <summary>
+        /// Dispose Methods
+        /// </summary>
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
         /// Generate Button
         /// </summary>
         public override void generateButton()
@@ -390,9 +404,12 @@ namespace SRR_Devolopment.ViewModel
             ObjEnabled = true;
             ObjFilterEnabled = false;
             DataMod = true;
-            //GetEditMode = true;
-            if (IsMemberEnabled == true)
+            
+            if (SetRevenueType.Need_Member == true)
+            {
+                IsMemberEnabled = true;
                 GetEditMode = true;
+            }
 
         }
 
@@ -579,11 +596,5 @@ namespace SRR_Devolopment.ViewModel
 
         #endregion
 
-
-
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
