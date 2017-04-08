@@ -18,6 +18,7 @@ namespace SRR_Devolopment.Services
             {
                 using (srr_devEntities xData = new srr_devEntities())
                 {
+                    
                     var linqToSQL = from tbl in xData.CGL_KP_M_Legal_Entity_H
                                     where tbl.Is_Deleted == false
                                     select tbl;

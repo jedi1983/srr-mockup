@@ -15,17 +15,73 @@ using SRR_Devolopment.BaseLib.Class;
 using GalaSoft.MvvmLight.Messaging;
 using SRR_Devolopment.MessageInfrastructure;
 using System.Drawing;
+using System.Windows.Controls.Primitives;//new added
+using System.Text.RegularExpressions;//new added
+using System.Windows.Media;//new added
+using System.Windows.Documents;//new added
+using System.Windows.Data;//new added
 
 namespace SRR_Devolopment.ViewModel
 {
-    public class RevenueViewModel : ViewModelBased
+    public class RevenueViewModel : ViewModelBased,IDisposable
     {
 
         #region "Properties"
 
-        //interface to solid object
+        //data services Dependency Injection
         IRevenueDataServices _dataServices;
         public RelayCommand<DataGrid> SelectionGrid { get; set; }
+
+        /// <summary>
+        /// Get Edit Mode of TextBoxWithSearch
+        /// </summary>
+        private bool _getEditMode;
+        public bool GetEditMode
+        {
+            get
+            {
+                return _getEditMode;
+            }
+            set
+            {
+                _getEditMode = value;
+                RaisePropertyChanged("GetEditMode");
+            }
+        }
+
+        /// <summary>
+        /// Object From Front End TextBoxWith Search
+        /// </summary>
+        private Object _objectFromText;
+        public Object ObjectFromText
+        {
+            get
+            {
+                return _objectFromText;
+            }
+            set
+            {
+                _objectFromText = value;
+                RaisePropertyChanged("ObjectFromText");
+            }
+        }
+
+        /// <summary>
+        /// Text Employee
+        /// </summary>
+        private string _employeeText;
+        public string EmployeeText
+        {
+            get
+            {
+                return _employeeText;
+            }
+            set
+            {
+                _employeeText = value;
+                RaisePropertyChanged("EmployeeText");
+            }
+        }
 
         /// <summary>
         /// Member Enabled Property
@@ -40,6 +96,9 @@ namespace SRR_Devolopment.ViewModel
             set
             {
                 _isMemberEnabled = value;
+                if (DataNew == true)
+                    if (_isMemberEnabled == true)
+                        GetEditMode = true;
                 RaisePropertyChanged("IsMemberEnabled");
             }
         }
@@ -165,6 +224,24 @@ namespace SRR_Devolopment.ViewModel
         }
 
         /// <summary>
+        /// Properties for marking New Data
+        /// </summary>
+        private bool _dataNew;
+        public bool DataNew
+        {
+            get
+            {
+                return _dataNew;
+            }
+            set
+            {
+                _dataNew = value;
+                RaisePropertyChanged("DataNew");
+
+            }
+        }
+
+        /// <summary>
         /// Revenue Amount
         /// </summary>
         private decimal _revenueAmount;
@@ -212,15 +289,15 @@ namespace SRR_Devolopment.ViewModel
             }
             set
             {
-                if(value!=_setRevenueType)
+                _setRevenueType = value;
+                if (_setRevenueType != null)
                 {
-                    _setRevenueType = value;
-                    if (_setRevenueType.Need_Member == true)
-                        IsMemberEnabled = true;
-                    else
-                        IsMemberEnabled = false;
+
+                        if (_setRevenueType.Need_Member == true)
+                            IsMemberEnabled = true;
+                        else
+                            IsMemberEnabled = false;
                 }
-                
                 RaisePropertyChanged("SetRevenueType");
             }
         }
@@ -313,6 +390,10 @@ namespace SRR_Devolopment.ViewModel
             ObjEnabled = true;
             ObjFilterEnabled = false;
             DataMod = true;
+            //GetEditMode = true;
+            if (IsMemberEnabled == true)
+                GetEditMode = true;
+
         }
 
         /// <summary>
@@ -365,6 +446,10 @@ namespace SRR_Devolopment.ViewModel
             SetMember = null;
             //MemberID = 0;
             IsMemberEnabled = false;
+            GetEditMode = false;
+            ObjectFromText = null;
+            EmployeeText = string.Empty;
+            DataNew = false;
         }
 
         /// <summary>
@@ -374,10 +459,12 @@ namespace SRR_Devolopment.ViewModel
         {
             CleanObject();
             base.newButton();
+            DataNew = true;
             ObjEnabled = true;
             ObjFilterEnabled = false;
             EnabledSave = true;
             EnabledCancel = true;
+           
         }
 
         /// <summary>
@@ -408,12 +495,16 @@ namespace SRR_Devolopment.ViewModel
             //end here
             _dataAccessLevel = BaseLib.Class.Singleton.Instance.AccessRight;
             getScreenAccess();
-            GetRevenueData = null;
-            SetPeriod = GetPeriod.FirstOrDefault();
+            _getRevenueData = null;
+            _setPeriod = GetPeriod.FirstOrDefault();
             ObjEnabled = false;
             ObjFilterEnabled = true;
-            SetMember = null;
-            IsMemberEnabled = false;
+            _setMember = null;
+            _isMemberEnabled = false;
+            _getEditMode = false;
+            _objectFromText = null;
+            _employeeText = null;
+            _dataNew = false;
 
         }
 
@@ -431,6 +522,21 @@ namespace SRR_Devolopment.ViewModel
 
         }
 
+
+        private CGL_KP_M_Member_H _setMemberData;
+        public CGL_KP_M_Member_H SetMemberData
+        {
+            get
+            {
+                return _setMember;
+            }
+            set
+            {
+                _setMember = value;
+                RaisePropertyChanged("SetMember");
+            }
+        }
+
         /// <summary>
         /// show data to the form
         /// </summary>
@@ -443,12 +549,15 @@ namespace SRR_Devolopment.ViewModel
                 RevenueNo = SelectedGridData.Revenue_No;
                 RevenueAmount = SelectedGridData.Revenue_Amount;
                 RevenueDate = SelectedGridData.Revenue_Date;
-                if (SelectedGridData.Member_Id.GetValueOrDefault() != 0)
+                
+                if(GetEditMode == false)
                 {
-                    SetMember = GetMember.FirstOrDefault(x => x.Member_Id == SelectedGridData.Member_Id);
+                        SetMember = GetMember.FirstOrDefault(x => x.Member_Id == SelectedGridData.Member_Id);
+                        //Set This TO Object TextBoxWithSearch
+                        ObjectFromText = SetMember;
+                        EmployeeText = SetMember.Name;
+   
                 }
-                else
-                    SetMember = null;
             }
         }
 
@@ -462,11 +571,19 @@ namespace SRR_Devolopment.ViewModel
             //initializer
             Initalize();
         }
+
+       
         #endregion
 
         #region "Grid Event"
 
         #endregion
 
+
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

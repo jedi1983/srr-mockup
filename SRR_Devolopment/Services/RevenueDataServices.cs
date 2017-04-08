@@ -92,6 +92,7 @@ namespace SRR_Devolopment.Services
             {
                 using (srr_devEntities xData = new srr_devEntities())
                 {
+                    xData.Configuration.LazyLoadingEnabled = false;
                     var linq = (from tbl in xData.CGL_KP_M_Member_H where tbl.Is_Deleted == false && tbl.Status_Id == 2 select tbl).ToList();
                     return new Collection<CGL_KP_M_Member_H>(linq);
                 }

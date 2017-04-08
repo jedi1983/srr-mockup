@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:my="clr-namespace:SRR_Devolopment.BaseLib.Class"
+             xmlns:local="clr-namespace:SRR_Devolopment.BaseLib.Class"
              xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
              mc:Ignorable="d" 
              DataContext="{Binding RevenueTransaction, Source={StaticResource Locator}}"
@@ -201,21 +202,19 @@
                     <TextBlock Grid.Column="1" Grid.Row="4" Text="Revenue Amount"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <TextBlock Grid.Column="2" Grid.Row="4" Text=":"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <TextBox BorderBrush="Black" Grid.Column="3" Grid.Row="4" Height="25" Width="200" HorizontalAlignment="Center" 
-                             VerticalAlignment="Center" Text="{Binding RevenueAmount }" IsEnabled="{Binding ObjEnabled}" />
+                             VerticalAlignment="Center" Text="{Binding RevenueAmount,StringFormat='#,###.00;$(#,###.00)',Mode=TwoWay}" IsEnabled="{Binding ObjEnabled}" />
 
                     <TextBlock Grid.Column="1" Grid.Row="5" Text="Member Name"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <TextBlock Grid.Column="2" Grid.Row="5" Text=":"  HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    <ComboBox BorderBrush="Black" Grid.Row="5" Grid.Column="3" Name="memberDrBx" Height="25" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" ItemsSource="{Binding GetMember}" 
-                              DisplayMemberPath="Name"  SelectedItem="{Binding SetMember,Mode=TwoWay}"  IsEditable="True" IsReadOnly="False" TextSearch.TextPath="Name"
-                              SelectedValue="{Binding SetMember.Member_Id,Mode=TwoWay}"  SelectedValuePath="Member_Id" IsEnabled="{Binding IsMemberEnabled}"/>
-                    
+
+                    <my:TextBoxWithSearch BorderBrush="Black" Grid.Column="3" Grid.Row="5" Height="25" Width="200" HorizontalAlignment="Center" 
+                             VerticalAlignment="Center" Text="{Binding EmployeeText }" x:Name="txWithSearchBoxComp" SetFirstColumnName="Name" GetSelectDropDown="{Binding ObjectFromText,Mode=TwoWay}" IsInEditMode="{Binding GetEditMode,Mode=TwoWay}"
+                                          SetSecondColumnName="Employee No" SetFirstColumnBind="Name" SetSecondColumnBind="Employee_No" ItemsSource="{Binding GetMember, Mode=TwoWay}" MaxPopUpHeight="300" MaxPopUpWidth="500" IsEnabled="{Binding IsMemberEnabled,Mode=TwoWay}" >
+                    </my:TextBoxWithSearch>
+ 
                 </Grid>
             </StackPanel>
         </Expander>
         
-       
-
-        
-
     </StackPanel>
 </UserControl>

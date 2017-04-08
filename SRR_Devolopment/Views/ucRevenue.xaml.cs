@@ -23,6 +23,14 @@ namespace SRR_Devolopment.Views
         public ucRevenue()
         {
             InitializeComponent();
+
         }
+
+        //testing out dispatcher
+        //private void Dispatcher_ShutdownStarted(object sender, EventArgs e)
+        //{
+        //    //throw new NotImplementedException();
+            
+        //}
     }
 }

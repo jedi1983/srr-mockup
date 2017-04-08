@@ -17,7 +17,7 @@ namespace SRR_Devolopment.BaseLib.Class
     /// <summary>
     /// Closeable Tab Inherited from TabItem Class and Interfaced of InotifyPropertyChanged(Will Be Implemented if there is another function) @Roland 2016
     /// </summary>
-    public class CloseableTab : TabItem ,INotifyPropertyChanged
+    public class CloseableTab : TabItem ,INotifyPropertyChanged,IDisposable
 
     {
 
@@ -145,6 +145,20 @@ namespace SRR_Devolopment.BaseLib.Class
                 NotifyPropertyChanged();
             }
         }
-               
+
+
+        /// <summary>
+        /// Disposable Methods
+        /// </summary>
+        public void Dispose()
+        {
+            UserControl _controlGet = (UserControl)this.Content;
+            TextBoxWithSearch _txtBoxSearch = (TextBoxWithSearch)_controlGet.FindName("txWithSearchBoxComp");
+
+            if (_txtBoxSearch != null)
+                _txtBoxSearch.Dispose();
+
+            //throw new NotImplementedException();
+        }
     }
 }

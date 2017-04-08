@@ -56,6 +56,20 @@ namespace SRR_Devolopment.ViewModel
             }
         }
 
+        
+        /// <summary>
+        /// Setting Up Disposable TextBox
+        /// </summary>
+        /// <param name="sender">Object</param>
+        /// <param name="e">Event Args</param>
+        public void unloadedItem(object sender, System.EventArgs e)
+        {
+            CloseableTab _disposeAbleItem = (CloseableTab)sender;
+            _disposeAbleItem.Dispose();
+        }
+
+        
+
         public void TextBoxMenuClicked(object sender,System.EventArgs e)
         {
             //setting Visibilty of the Tab Control to Visible, after hide it in Menu Plain UI
@@ -89,7 +103,8 @@ namespace SRR_Devolopment.ViewModel
             menuData.Name = formURI.ToString();
             menuData.SetHeader(HeaderData);
             menuData.DataButton.Name = formURI.ToString();
-            menuData.DataButton.Click += clickButtonClose;
+            menuData.DataButton.Click += clickButtonClose;//adding Event Click
+            menuData.Unloaded += unloadedItem;//unloaded Items To Check Dispose of Object
             menuData.Content = ModuleLoadObject.GetModule(MenuLoad);
             TabCollection.Add(menuData);
             SelectedItemTab = menuData;
@@ -161,7 +176,7 @@ namespace SRR_Devolopment.ViewModel
             //setting up Singleton Object with access Right and tmpUserName Data
             BaseLib.Class.Singleton.Instance.TmpUserName = dataInsert.FirstOrDefault().User_Id;
             BaseLib.Class.Singleton.Instance.AccessRight = AccessRight;
-            //end Singletong Setting
+            //end Singleton Setting
             ObservableCollection<USP_CG_KP_M_Form_Type_H_Find_Result> dataBack = _dataServices.GetFormType(dataInsert.FirstOrDefault().Group_Id);
             List<Expander> MenuCollection = new List<Expander>();
             StackPanel dataHandler = new StackPanel();
