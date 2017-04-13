@@ -27,5 +27,6 @@ namespace SRR_Devolopment.Model
         public string Legal_Entity_Name { get; set; }
         public string Employee_No { get; set; }
         public string Name { get; set; }
+        public Nullable<int> Member_Loan_Id { get; set; }
     }
 }

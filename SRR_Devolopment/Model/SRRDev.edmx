@@ -451,6 +451,7 @@ warning 6002: The table/view 'srr_dev.dbo.CGL_KP_R_Cooperative_Beginning_Balance
           <Property Name="Revenue_Type_Id" Type="int" Nullable="false" />
           <Property Name="Member_Id" Type="int" />
           <Property Name="Revenue_Amount" Type="numeric" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="Member_Loan_Id" Type="int" />
           <Property Name="Description" Type="varchar" MaxLength="500" />
           <Property Name="Is_Approved" Type="bit" Nullable="false" />
           <Property Name="Approved_By" Type="varchar" MaxLength="50" />
@@ -803,6 +804,20 @@ warning 6002: The table/view 'srr_dev.dbo.CGL_KP_R_Cooperative_Beginning_Balance
           <Parameter Name="Name" Type="varchar(max)" Mode="In" />
           <Parameter Name="LegalEntityID" Type="int" Mode="In" />
         </Function>
+        <Function Name="USP_CGL_KP_R_Generate_Simpanan_Pokok" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Member_Id" Type="int" Mode="In" />
+          <Parameter Name="Transaction_Date" Type="datetime" Mode="In" />
+          <Parameter Name="Success" Type="bit" Mode="InOut" />
+          <Parameter Name="Message" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="USP_CGL_KP_R_Generate_Simpanan_Wajib" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Transaction_Date" Type="datetime" Mode="In" />
+          <Parameter Name="Success" Type="bit" Mode="InOut" />
+          <Parameter Name="Message" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="USP_CGL_KP_R_Member_Loan_H_Find" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MemberID" Type="int" Mode="In" />
+        </Function>
         <Function Name="USP_CGL_KP_R_Revenue_H_Find" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="LegalEntityID" Type="int" Mode="In" />
           <Parameter Name="Period_Id" Type="int" Mode="In" />
@@ -810,6 +825,11 @@ warning 6002: The table/view 'srr_dev.dbo.CGL_KP_R_Cooperative_Beginning_Balance
         <Function Name="USP_CGL_KP_T_Generate_Transaction_Number" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Transaction_Type_Code" Type="varchar" Mode="In" />
           <Parameter Name="Transaction_Date" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="USP_CGL_KP_T_Generate_Transaction_Number_For_Auto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Transaction_Type_Code" Type="varchar" Mode="In" />
+          <Parameter Name="Transaction_Date" Type="datetime" Mode="In" />
+          <Parameter Name="Transaction_No" Type="varchar" Mode="InOut" />
         </Function>
         <EntityContainer Name="srr_devModelStoreContainer">
           <EntitySet Name="CGL_KP_M_AccessRights_H" EntityType="Self.CGL_KP_M_AccessRights_H" Schema="dbo" store:Type="Tables" />
@@ -1052,10 +1072,6 @@ FROM [dbo].[CGL_KP_R_Cooperative_Beginning_Balance_H] AS [CGL_KP_R_Cooperative_B
             <Parameter Name="Name" Mode="In" Type="String" />
             <Parameter Name="LegalEntityID" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="USP_CGL_KP_T_Generate_Transaction_Number" ReturnType="Collection(srr_devModel.USP_CGL_KP_T_Generate_Transaction_Number_Result)">
-            <Parameter Name="Transaction_Type_Code" Mode="In" Type="String" />
-            <Parameter Name="Transaction_Date" Mode="In" Type="DateTime" />
-          </FunctionImport>
           <EntitySet Name="CGL_KP_M_Account_Group_H" EntityType="srr_devModel.CGL_KP_M_Account_Group_H" />
           <EntitySet Name="CGL_KP_M_Account_H" EntityType="srr_devModel.CGL_KP_M_Account_H" />
           <EntitySet Name="CGL_KP_M_Expenditure_Type_H" EntityType="srr_devModel.CGL_KP_M_Expenditure_Type_H" />
@@ -1066,7 +1082,6 @@ FROM [dbo].[CGL_KP_R_Cooperative_Beginning_Balance_H] AS [CGL_KP_R_Cooperative_B
           <EntitySet Name="CGL_KP_R_Member_Balance_H" EntityType="srr_devModel.CGL_KP_R_Member_Balance_H" />
           <EntitySet Name="CGL_KP_R_Member_Beginning_Balance_H" EntityType="srr_devModel.CGL_KP_R_Member_Beginning_Balance_H" />
           <EntitySet Name="CGL_KP_R_Member_Loan_H" EntityType="srr_devModel.CGL_KP_R_Member_Loan_H" />
-          <EntitySet Name="CGL_KP_R_Revenue_H" EntityType="srr_devModel.CGL_KP_R_Revenue_H" />
           <EntitySet Name="CGL_KP_S_Setting_H" EntityType="srr_devModel.CGL_KP_S_Setting_H" />
           <EntitySet Name="CGL_KP_S_Transaction_Type_H" EntityType="srr_devModel.CGL_KP_S_Transaction_Type_H" />
           <EntitySet Name="CGL_KP_R_Cooperative_Balance_H" EntityType="srr_devModel.CGL_KP_R_Cooperative_Balance_H" />
@@ -1119,14 +1134,6 @@ FROM [dbo].[CGL_KP_R_Cooperative_Beginning_Balance_H] AS [CGL_KP_R_Cooperative_B
             <End Role="CGL_KP_M_Member_H" EntitySet="CGL_KP_M_Member_H" />
             <End Role="CGL_KP_R_Member_Loan_H" EntitySet="CGL_KP_R_Member_Loan_H" />
           </AssociationSet>
-          <AssociationSet Name="FK_CGL_KP_R_Revenue_H_CGL_KP_M_Member_H" Association="srr_devModel.FK_CGL_KP_R_Revenue_H_CGL_KP_M_Member_H">
-            <End Role="CGL_KP_M_Member_H" EntitySet="CGL_KP_M_Member_H" />
-            <End Role="CGL_KP_R_Revenue_H" EntitySet="CGL_KP_R_Revenue_H" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CGL_KP_R_Revenue_H_CGL_KP_M_Revenue_Type_H" Association="srr_devModel.FK_CGL_KP_R_Revenue_H_CGL_KP_M_Revenue_Type_H">
-            <End Role="CGL_KP_M_Revenue_Type_H" EntitySet="CGL_KP_M_Revenue_Type_H" />
-            <End Role="CGL_KP_R_Revenue_H" EntitySet="CGL_KP_R_Revenue_H" />
-          </AssociationSet>
           <AssociationSet Name="FK_CGL_KP_R_Journal_D_CGL_KP_R_Journal_H" Association="srr_devModel.FK_CGL_KP_R_Journal_D_CGL_KP_R_Journal_H">
             <End Role="CGL_KP_R_Journal_H" EntitySet="CGL_KP_R_Journal_H" />
             <End Role="CGL_KP_R_Journal_D" EntitySet="CGL_KP_R_Journal_D" />
@@ -1139,6 +1146,38 @@ FROM [dbo].[CGL_KP_R_Cooperative_Beginning_Balance_H] AS [CGL_KP_R_Cooperative_B
           <FunctionImport Name="USP_CGL_KP_R_Revenue_H_Find" ReturnType="Collection(srr_devModel.USP_CGL_KP_R_Revenue_H_Find_Result)">
             <Parameter Name="LegalEntityID" Mode="In" Type="Int32" />
             <Parameter Name="Period_Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="CGL_KP_R_Revenue_H" EntityType="srr_devModel.CGL_KP_R_Revenue_H" />
+          <AssociationSet Name="FK_CGL_KP_R_Revenue_H_CGL_KP_M_Member_H" Association="srr_devModel.FK_CGL_KP_R_Revenue_H_CGL_KP_M_Member_H">
+            <End Role="CGL_KP_M_Member_H" EntitySet="CGL_KP_M_Member_H" />
+            <End Role="CGL_KP_R_Revenue_H" EntitySet="CGL_KP_R_Revenue_H" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CGL_KP_R_Revenue_H_CGL_KP_M_Revenue_Type_H" Association="srr_devModel.FK_CGL_KP_R_Revenue_H_CGL_KP_M_Revenue_Type_H">
+            <End Role="CGL_KP_M_Revenue_Type_H" EntitySet="CGL_KP_M_Revenue_Type_H" />
+            <End Role="CGL_KP_R_Revenue_H" EntitySet="CGL_KP_R_Revenue_H" />
+          </AssociationSet>
+          <FunctionImport Name="USP_CGL_KP_R_Generate_Simpanan_Pokok">
+            <Parameter Name="Member_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Transaction_Date" Mode="In" Type="DateTime" />
+            <Parameter Name="Success" Mode="InOut" Type="Boolean" />
+            <Parameter Name="Message" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="USP_CGL_KP_R_Generate_Simpanan_Wajib">
+            <Parameter Name="Transaction_Date" Mode="In" Type="DateTime" />
+            <Parameter Name="Success" Mode="InOut" Type="Boolean" />
+            <Parameter Name="Message" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="USP_CGL_KP_T_Generate_Transaction_Number_For_Auto">
+            <Parameter Name="Transaction_Type_Code" Mode="In" Type="String" />
+            <Parameter Name="Transaction_Date" Mode="In" Type="DateTime" />
+            <Parameter Name="Transaction_No" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="USP_CGL_KP_T_Generate_Transaction_Number" ReturnType="Collection(srr_devModel.USP_CGL_KP_T_Generate_Transaction_Number_Result)">
+            <Parameter Name="Transaction_Type_Code" Mode="In" Type="String" />
+            <Parameter Name="Transaction_Date" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="USP_CGL_KP_R_Member_Loan_H_Find" ReturnType="Collection(srr_devModel.USP_CGL_KP_R_Member_Loan_H_Find_Result)">
+            <Parameter Name="MemberID" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="CGL_KP_M_Legal_Entity_H">
@@ -1482,9 +1521,6 @@ FROM [dbo].[CGL_KP_R_Cooperative_Beginning_Balance_H] AS [CGL_KP_R_Cooperative_B
           <Property Type="String" Name="Status_Desc" Nullable="false" MaxLength="20" />
           <Property Type="String" Name="Address" Nullable="true" MaxLength="200" />
         </ComplexType>
-        <ComplexType Name="USP_CGL_KP_T_Generate_Transaction_Number_Result">
-          <Property Type="String" Name="Column1" Nullable="true" MaxLength="11" />
-        </ComplexType>
         <EntityType Name="CGL_KP_M_Account_Group_H">
           <Key>
             <PropertyRef Name="Account_Group_Id" />
@@ -1688,30 +1724,6 @@ FROM [dbo].[CGL_KP_R_Cooperative_Beginning_Balance_H] AS [CGL_KP_R_Cooperative_B
           <Property Name="Deleted_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Deleted_Date" Type="DateTime" Precision="3" />
           <NavigationProperty Name="CGL_KP_M_Member_H" Relationship="srr_devModel.FK_CGL_KP_R_Member_Loan_H_CGL_KP_M_Member_H" FromRole="CGL_KP_R_Member_Loan_H" ToRole="CGL_KP_M_Member_H" />
-        </EntityType>
-        <EntityType Name="CGL_KP_R_Revenue_H">
-          <Key>
-            <PropertyRef Name="Revenue_Id" />
-          </Key>
-          <Property Name="Revenue_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Revenue_No" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="Revenue_Date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Revenue_Type_Id" Type="Int32" Nullable="false" />
-          <Property Name="Member_Id" Type="Int32" />
-          <Property Name="Revenue_Amount" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
-          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Is_Approved" Type="Boolean" Nullable="false" />
-          <Property Name="Approved_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Approved_Date" Type="DateTime" Precision="3" />
-          <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
-          <Property Name="Created_By" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Modified_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Modified_Date" Type="DateTime" Precision="3" />
-          <Property Name="Deleted_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Deleted_Date" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="CGL_KP_M_Member_H" Relationship="srr_devModel.FK_CGL_KP_R_Revenue_H_CGL_KP_M_Member_H" FromRole="CGL_KP_R_Revenue_H" ToRole="CGL_KP_M_Member_H" />
-          <NavigationProperty Name="CGL_KP_M_Revenue_Type_H" Relationship="srr_devModel.FK_CGL_KP_R_Revenue_H_CGL_KP_M_Revenue_Type_H" FromRole="CGL_KP_R_Revenue_H" ToRole="CGL_KP_M_Revenue_Type_H" />
         </EntityType>
         <EntityType Name="CGL_KP_S_Setting_H">
           <Key>
@@ -1932,30 +1944,6 @@ FROM [dbo].[CGL_KP_R_Cooperative_Beginning_Balance_H] AS [CGL_KP_R_Cooperative_B
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_CGL_KP_R_Revenue_H_CGL_KP_M_Member_H">
-          <End Type="srr_devModel.CGL_KP_M_Member_H" Role="CGL_KP_M_Member_H" Multiplicity="0..1" />
-          <End Type="srr_devModel.CGL_KP_R_Revenue_H" Role="CGL_KP_R_Revenue_H" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CGL_KP_M_Member_H">
-              <PropertyRef Name="Member_Id" />
-            </Principal>
-            <Dependent Role="CGL_KP_R_Revenue_H">
-              <PropertyRef Name="Member_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CGL_KP_R_Revenue_H_CGL_KP_M_Revenue_Type_H">
-          <End Type="srr_devModel.CGL_KP_M_Revenue_Type_H" Role="CGL_KP_M_Revenue_Type_H" Multiplicity="1" />
-          <End Type="srr_devModel.CGL_KP_R_Revenue_H" Role="CGL_KP_R_Revenue_H" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CGL_KP_M_Revenue_Type_H">
-              <PropertyRef Name="Revenue_Type_Id" />
-            </Principal>
-            <Dependent Role="CGL_KP_R_Revenue_H">
-              <PropertyRef Name="Revenue_Type_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_CGL_KP_R_Journal_D_CGL_KP_R_Journal_H">
           <End Type="srr_devModel.CGL_KP_R_Journal_H" Role="CGL_KP_R_Journal_H" Multiplicity="1" />
           <End Type="srr_devModel.CGL_KP_R_Journal_D" Role="CGL_KP_R_Journal_D" Multiplicity="*" />
@@ -2014,6 +2002,74 @@ FROM [dbo].[CGL_KP_R_Cooperative_Beginning_Balance_H] AS [CGL_KP_R_Cooperative_B
           <Property Type="String" Name="Legal_Entity_Name" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="Employee_No" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Member_Loan_Id" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="CGL_KP_R_Revenue_H">
+          <Key>
+            <PropertyRef Name="Revenue_Id" />
+          </Key>
+          <Property Name="Revenue_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Revenue_No" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Revenue_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Revenue_Type_Id" Type="Int32" Nullable="false" />
+          <Property Name="Member_Id" Type="Int32" />
+          <Property Name="Revenue_Amount" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="Member_Loan_Id" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Is_Approved" Type="Boolean" Nullable="false" />
+          <Property Name="Approved_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Approved_Date" Type="DateTime" Precision="3" />
+          <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="Created_By" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Modified_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Modified_Date" Type="DateTime" Precision="3" />
+          <Property Name="Deleted_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Deleted_Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CGL_KP_M_Member_H" Relationship="srr_devModel.FK_CGL_KP_R_Revenue_H_CGL_KP_M_Member_H" FromRole="CGL_KP_R_Revenue_H" ToRole="CGL_KP_M_Member_H" />
+          <NavigationProperty Name="CGL_KP_M_Revenue_Type_H" Relationship="srr_devModel.FK_CGL_KP_R_Revenue_H_CGL_KP_M_Revenue_Type_H" FromRole="CGL_KP_R_Revenue_H" ToRole="CGL_KP_M_Revenue_Type_H" />
+        </EntityType>
+        <Association Name="FK_CGL_KP_R_Revenue_H_CGL_KP_M_Member_H">
+          <End Type="srr_devModel.CGL_KP_M_Member_H" Role="CGL_KP_M_Member_H" Multiplicity="0..1" />
+          <End Type="srr_devModel.CGL_KP_R_Revenue_H" Role="CGL_KP_R_Revenue_H" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CGL_KP_M_Member_H">
+              <PropertyRef Name="Member_Id" />
+            </Principal>
+            <Dependent Role="CGL_KP_R_Revenue_H">
+              <PropertyRef Name="Member_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CGL_KP_R_Revenue_H_CGL_KP_M_Revenue_Type_H">
+          <End Type="srr_devModel.CGL_KP_M_Revenue_Type_H" Role="CGL_KP_M_Revenue_Type_H" Multiplicity="1" />
+          <End Type="srr_devModel.CGL_KP_R_Revenue_H" Role="CGL_KP_R_Revenue_H" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CGL_KP_M_Revenue_Type_H">
+              <PropertyRef Name="Revenue_Type_Id" />
+            </Principal>
+            <Dependent Role="CGL_KP_R_Revenue_H">
+              <PropertyRef Name="Revenue_Type_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="USP_CGL_KP_T_Generate_Transaction_Number_Result">
+          <Property Type="String" Name="ReturnBack" Nullable="true" MaxLength="11" />
+        </ComplexType>
+        <ComplexType Name="USP_CGL_KP_R_Member_Loan_H_Find_Result">
+          <Property Type="Int32" Name="Member_Loan_Id" Nullable="false" />
+          <Property Type="Int32" Name="Member_Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Employee_No" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Year" Nullable="false" />
+          <Property Type="Int32" Name="Month" Nullable="false" />
+          <Property Type="Decimal" Name="Interest_Rate" Nullable="false" Precision="18" Scale="4" />
+          <Property Type="Decimal" Name="Interest_Amount" Nullable="false" Precision="18" Scale="4" />
+          <Property Type="Int32" Name="Term_of_Loan" Nullable="false" />
+          <Property Type="Decimal" Name="Remaining_Loan_Amount" Nullable="false" Precision="18" Scale="4" />
+          <Property Type="Decimal" Name="Remaining_Interest_Amount" Nullable="false" Precision="18" Scale="4" />
+          <Property Type="Int32" Name="Remaining_Term_of_Loan" Nullable="false" />
+          <Property Type="String" Name="Showed" Nullable="true" MaxLength="52" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2272,13 +2328,6 @@ FROM [dbo].[CGL_KP_R_Cooperative_Beginning_Balance_H] AS [CGL_KP_R_Cooperative_B
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="USP_CGL_KP_T_Generate_Transaction_Number" FunctionName="srr_devModel.Store.USP_CGL_KP_T_Generate_Transaction_Number">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="srr_devModel.USP_CGL_KP_T_Generate_Transaction_Number_Result">
-                <ScalarProperty Name="Column1" ColumnName="Column1" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="CGL_KP_M_Account_Group_H">
             <EntityTypeMapping TypeName="srr_devModel.CGL_KP_M_Account_Group_H">
               <MappingFragment StoreEntitySet="CGL_KP_M_Account_Group_H">
@@ -2475,29 +2524,6 @@ FROM [dbo].[CGL_KP_R_Cooperative_Beginning_Balance_H] AS [CGL_KP_R_Cooperative_B
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CGL_KP_R_Revenue_H">
-            <EntityTypeMapping TypeName="srr_devModel.CGL_KP_R_Revenue_H">
-              <MappingFragment StoreEntitySet="CGL_KP_R_Revenue_H">
-                <ScalarProperty Name="Deleted_Date" ColumnName="Deleted_Date" />
-                <ScalarProperty Name="Deleted_By" ColumnName="Deleted_By" />
-                <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
-                <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
-                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
-                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
-                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
-                <ScalarProperty Name="Approved_Date" ColumnName="Approved_Date" />
-                <ScalarProperty Name="Approved_By" ColumnName="Approved_By" />
-                <ScalarProperty Name="Is_Approved" ColumnName="Is_Approved" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Revenue_Amount" ColumnName="Revenue_Amount" />
-                <ScalarProperty Name="Member_Id" ColumnName="Member_Id" />
-                <ScalarProperty Name="Revenue_Type_Id" ColumnName="Revenue_Type_Id" />
-                <ScalarProperty Name="Revenue_Date" ColumnName="Revenue_Date" />
-                <ScalarProperty Name="Revenue_No" ColumnName="Revenue_No" />
-                <ScalarProperty Name="Revenue_Id" ColumnName="Revenue_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="CGL_KP_S_Setting_H">
             <EntityTypeMapping TypeName="srr_devModel.CGL_KP_S_Setting_H">
               <MappingFragment StoreEntitySet="CGL_KP_S_Setting_H">
@@ -2599,6 +2625,60 @@ FROM [dbo].[CGL_KP_R_Cooperative_Beginning_Balance_H] AS [CGL_KP_R_Cooperative_B
                 <ScalarProperty Name="Legal_Entity_Name" ColumnName="Legal_Entity_Name" />
                 <ScalarProperty Name="Employee_No" ColumnName="Employee_No" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Member_Loan_Id" ColumnName="Member_Loan_Id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="CGL_KP_R_Revenue_H">
+            <EntityTypeMapping TypeName="srr_devModel.CGL_KP_R_Revenue_H">
+              <MappingFragment StoreEntitySet="CGL_KP_R_Revenue_H">
+                <ScalarProperty Name="Deleted_Date" ColumnName="Deleted_Date" />
+                <ScalarProperty Name="Deleted_By" ColumnName="Deleted_By" />
+                <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+                <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+                <ScalarProperty Name="Approved_Date" ColumnName="Approved_Date" />
+                <ScalarProperty Name="Approved_By" ColumnName="Approved_By" />
+                <ScalarProperty Name="Is_Approved" ColumnName="Is_Approved" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Member_Loan_Id" ColumnName="Member_Loan_Id" />
+                <ScalarProperty Name="Revenue_Amount" ColumnName="Revenue_Amount" />
+                <ScalarProperty Name="Member_Id" ColumnName="Member_Id" />
+                <ScalarProperty Name="Revenue_Type_Id" ColumnName="Revenue_Type_Id" />
+                <ScalarProperty Name="Revenue_Date" ColumnName="Revenue_Date" />
+                <ScalarProperty Name="Revenue_No" ColumnName="Revenue_No" />
+                <ScalarProperty Name="Revenue_Id" ColumnName="Revenue_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="USP_CGL_KP_R_Generate_Simpanan_Pokok" FunctionName="srr_devModel.Store.USP_CGL_KP_R_Generate_Simpanan_Pokok" />
+          <FunctionImportMapping FunctionImportName="USP_CGL_KP_R_Generate_Simpanan_Wajib" FunctionName="srr_devModel.Store.USP_CGL_KP_R_Generate_Simpanan_Wajib" />
+          <FunctionImportMapping FunctionImportName="USP_CGL_KP_T_Generate_Transaction_Number_For_Auto" FunctionName="srr_devModel.Store.USP_CGL_KP_T_Generate_Transaction_Number_For_Auto" />
+          <FunctionImportMapping FunctionImportName="USP_CGL_KP_T_Generate_Transaction_Number" FunctionName="srr_devModel.Store.USP_CGL_KP_T_Generate_Transaction_Number">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="srr_devModel.USP_CGL_KP_T_Generate_Transaction_Number_Result">
+                <ScalarProperty Name="ReturnBack" ColumnName="ReturnBack" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="USP_CGL_KP_R_Member_Loan_H_Find" FunctionName="srr_devModel.Store.USP_CGL_KP_R_Member_Loan_H_Find">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="srr_devModel.USP_CGL_KP_R_Member_Loan_H_Find_Result">
+                <ScalarProperty Name="Member_Loan_Id" ColumnName="Member_Loan_Id" />
+                <ScalarProperty Name="Member_Id" ColumnName="Member_Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Employee_No" ColumnName="Employee_No" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Interest_Rate" ColumnName="Interest_Rate" />
+                <ScalarProperty Name="Interest_Amount" ColumnName="Interest_Amount" />
+                <ScalarProperty Name="Term_of_Loan" ColumnName="Term_of_Loan" />
+                <ScalarProperty Name="Remaining_Loan_Amount" ColumnName="Remaining_Loan_Amount" />
+                <ScalarProperty Name="Remaining_Interest_Amount" ColumnName="Remaining_Interest_Amount" />
+                <ScalarProperty Name="Remaining_Term_of_Loan" ColumnName="Remaining_Term_of_Loan" />
+                <ScalarProperty Name="Showed" ColumnName="Showed" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

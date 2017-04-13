@@ -15,11 +15,11 @@ using SRR_Devolopment.BaseLib.Class;
 using GalaSoft.MvvmLight.Messaging;
 using SRR_Devolopment.MessageInfrastructure;
 using System.Drawing;
-using System.Windows.Controls.Primitives;//new added
-using System.Text.RegularExpressions;//new added
-using System.Windows.Media;//new added
-using System.Windows.Documents;//new added
-using System.Windows.Data;//new added
+using System.Windows.Controls.Primitives;
+using System.Text.RegularExpressions;
+using System.Windows.Media;
+using System.Windows.Documents;
+using System.Windows.Data;
 
 namespace SRR_Devolopment.ViewModel
 {
@@ -31,6 +31,98 @@ namespace SRR_Devolopment.ViewModel
         //data services Dependency Injection
         IRevenueDataServices _dataServices;
         public RelayCommand<DataGrid> SelectionGrid { get; set; }
+
+
+        //disposable
+        bool disposed = false;
+
+        /// <summary>
+        /// Get Member Loan Data
+        /// </summary>
+        private Collection<USP_CGL_KP_R_Member_Loan_H_Find_Result> _getMemberLoadData;
+        public Collection<USP_CGL_KP_R_Member_Loan_H_Find_Result> GetMemberLoadData
+        {
+            get
+            {
+                return _getMemberLoadData;
+            }
+            set
+            {
+                _getMemberLoadData = value;
+                RaisePropertyChanged("GetMemberLoadData");
+            }
+        }
+
+        /// <summary>
+        /// Set Loan Data
+        /// </summary>
+        private USP_CGL_KP_R_Member_Loan_H_Find_Result _setLoanData;
+        public USP_CGL_KP_R_Member_Loan_H_Find_Result SetLoanData
+        {
+            get
+            {
+                return _setLoanData;
+            }
+            set
+            {
+                _setLoanData = value;
+                if (_setLoanData != null)
+                    RevenueAmount = _setLoanData.Remaining_Loan_Amount;
+                RaisePropertyChanged("SetLoanData");
+            }
+        }
+
+        /// <summary>
+        /// Amount Enabled
+        /// </summary>
+        private bool _isAmountEnabled;
+        public bool IsAmountEnabled
+        {
+            get
+            {
+                return _isAmountEnabled;
+            }
+            set 
+            {
+                _isAmountEnabled = value;
+                RaisePropertyChanged("IsAmountEnabled");
+            }
+        }
+        
+        /// <summary>
+        /// Is Repayment
+        /// </summary>
+        private bool _isRepayment;
+        public bool IsRepayment
+        {
+            get
+            {
+                return _isRepayment; 
+            }
+            set
+            {
+                _isRepayment = value;
+                RaisePropertyChanged("IsRepayment");
+            }
+        }
+        
+
+        /// <summary>
+        /// Get ID Transaction
+        /// </summary>
+        int _getTransactionID;
+        public int GetTransactionID
+        {
+            get
+            {
+                return _getTransactionID;
+            }
+            set
+            {
+                _getTransactionID = value;
+                RaisePropertyChanged("GetTransactionID");
+            }
+        }
 
         /// <summary>
         /// Get Edit Mode of TextBoxWithSearch
@@ -62,6 +154,14 @@ namespace SRR_Devolopment.ViewModel
             set
             {
                 _objectFromText = value;
+                if(_objectFromText != null)
+                { 
+                    SetMember = (CGL_KP_M_Member_H)_objectFromText; 
+                    if(SetRevenueType.Revenue_Type_Description.Contains("Repayment"))
+                    {
+                        GetMemberLoadData = _dataServices.getMemberLoan(SetMember.Member_Id);
+                    }
+                }
                 RaisePropertyChanged("ObjectFromText");
             }
         }
@@ -289,20 +389,33 @@ namespace SRR_Devolopment.ViewModel
                 _setRevenueType = value;
                 if (_setRevenueType != null)
                 {
-                    if(DataNew == true )
+                    if(DataNew == true || DataMod == true)
                     {
+                        GetMemberLoadData = null;
+                        SetLoanData = null;
+                        SetMember = null;
+                        EmployeeText = null;
+                        ObjectFromText = null;
+                        RevenueAmount = 0;
+
                         if (_setRevenueType.Need_Member == true)
                         { 
-                            IsMemberEnabled = true; 
-                            GetEditMode = true; 
+                            IsMemberEnabled = true;
+                            if (GetEditMode != true)
+                                GetEditMode = true;
+                            //GetEditMode = true; 
                         }
                         else
                         {
                             IsMemberEnabled = false;
                             GetEditMode = false;
                         }
+                        if (_setRevenueType.Revenue_Type_Description.Contains("Repayment"))
+                        { IsAmountEnabled = false; IsRepayment = true; }
+                        else
+                        { IsAmountEnabled = true; IsRepayment = false; }
                     }
-                        
+                 
                 }
                 RaisePropertyChanged("SetRevenueType");
             }
@@ -365,11 +478,137 @@ namespace SRR_Devolopment.ViewModel
         #region "Methods"
 
         /// <summary>
-        /// Dispose Methods
+        /// Check Data
         /// </summary>
+        /// <returns>String Of Error (If any)</returns>
+        private string getReturnFilled()
+        {
+            string ret = string.Empty;
+
+            if (SetRevenueType == null)
+            {
+                ret = "Please Fill Up Revenue";
+            }
+            if (RevenueAmount == 0)
+            {
+                ret = "Revenue Amount Could Not Be Zero";
+            }
+            if (RevenueDate > GetPeriod.FirstOrDefault().Period_End_Date || RevenueDate < GetPeriod.FirstOrDefault().Period_Start_Date)
+            {
+                ret = "Revenue Date Is Not In The Perid " + GetPeriod.FirstOrDefault().Period_Name.ToString();
+            }
+            if(IsMemberEnabled == true && EmployeeText == string.Empty)
+            {
+                ret = "Please Fill Member Name";
+            }
+            if(SetRevenueType.Revenue_Type_Description.Contains("Repayment") && SetLoanData == null)
+            {
+                ret = "Please Select Loan Data";
+            }
+
+           
+            return ret;
+        }
+
+        /// <summary>
+        /// save button
+        /// </summary>
+        public override void saveButton()
+        {
+            base.saveButton();
+
+
+            if (MessageBox.Show("Are You Sure You Want To Save This Data?", "Revenue Screen", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                //SetMember =(CGL_KP_M_Member_H) ObjectFromText;
+                string _revenueNo = string.Empty;
+                string _retBack = getReturnFilled();
+                if (_retBack != string.Empty)
+                {
+                    MessageBox.Show(_retBack, "Revenue Screen", MessageBoxButton.OK, MessageBoxImage.Information);
+                    return;
+                }
+                int _memberID = 0;
+                if(SetMember != null)
+                {
+                    _memberID = SetMember.Member_Id;
+                }
+                int _memberLoanID = 0;
+                if(SetLoanData != null)
+                {
+                    _memberLoanID = SetLoanData.Member_Loan_Id;
+                }
+
+                //modify
+                if (DataMod == true)
+                {
+                    if (_dataServices.editDataToRevenue(GetTransactionID, RevenueDate, SetRevenueType.Revenue_Type_Id, RevenueAmount, _memberID, (string)BaseLib.Class.Singleton.Instance.TmpUserName, RevenueNo,_memberLoanID) == true)
+                    {
+                        MessageBox.Show("Revenue Transaction No " + RevenueNo.ToString() + " Successfully Saved!", "Revenue Screen", MessageBoxButton.OK, MessageBoxImage.Information);
+                        RevenueNo = _revenueNo;
+                        cancelButton();
+                        return;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Revenue Transaction Failed ", "Revenue Screen", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        return;
+                    }
+                }
+                ////new Data
+                else if(DataNew == true)
+                {
+
+                    if (_dataServices.saveDataToRevenue(RevenueDate, SetRevenueType.Revenue_Type_Id, RevenueAmount, _memberID, (string)BaseLib.Class.Singleton.Instance.TmpUserName, ref _revenueNo,_memberLoanID) == true)
+                   {
+                       MessageBox.Show("Revenue Transaction No " + _revenueNo.ToString() + " Successfully Saved!","Revenue Screen", MessageBoxButton.OK, MessageBoxImage.Information);
+                       RevenueNo = _revenueNo;
+                       cancelButton();
+                       return;
+                   }
+                   else
+                   {
+                       MessageBox.Show("Revenue Transaction Failed ", "Revenue Screen", MessageBoxButton.OK, MessageBoxImage.Warning);
+                       return;
+                   }
+
+
+                }
+                else
+                {
+                    MessageBox.Show("Oops Something Wrong", "Revenue Screen", MessageBoxButton.OK, MessageBoxImage.Stop);
+                    return;
+                }
+            }
+        }
+
+        // Public implementation of Dispose pattern callable by consumers.
         public void Dispose()
         {
-            throw new NotImplementedException();
+            Dispose(true);
+            //GC.SuppressFinalize(this); no need to call GC Suppress, since we still need the Garbage Collector to Do its job
+        }
+
+        // Protected implementation of Dispose pattern.
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                //handle.Dispose(); Hanlding Unmanager Resource Here, since there are no, so this is Left Marked
+                // Free any other managed objects here.
+                //
+                //cleans Up For Garbage Collection
+                CleanObject();
+                if (GetMember != null)
+                    _getMember = null;
+            }
+
+            // Free any unmanaged objects here.
+            //
+            disposed = true;
         }
 
         /// <summary>
@@ -411,6 +650,11 @@ namespace SRR_Devolopment.ViewModel
                 GetEditMode = true;
             }
 
+            if (SetRevenueType.Revenue_Type_Description.Contains("Repayment"))
+                IsAmountEnabled = false;
+            else
+                IsAmountEnabled = true;
+
         }
 
         /// <summary>
@@ -445,7 +689,7 @@ namespace SRR_Devolopment.ViewModel
         /// </summary>
         private void CleanObject()
         {
-            SetRevenueType = null;
+            //SetRevenueType = null;
             RevenueNo = string.Empty;
             RevenueAmount = 0;
             RevenueDate = DateTime.Now;
@@ -465,8 +709,15 @@ namespace SRR_Devolopment.ViewModel
             IsMemberEnabled = false;
             GetEditMode = false;
             ObjectFromText = null;
-            EmployeeText = string.Empty;
+            EmployeeText = " ";
+            EmployeeText = null;
             DataNew = false;
+            GetTransactionID = 0;
+            GetMemberLoadData = null;
+            SetLoanData = null;
+            SetRevenueType = null;
+            IsAmountEnabled = false;
+            IsRepayment = false;
         }
 
         /// <summary>
@@ -522,7 +773,11 @@ namespace SRR_Devolopment.ViewModel
             _objectFromText = null;
             _employeeText = null;
             _dataNew = false;
-
+            _getTransactionID = 0;
+            _isAmountEnabled = false;
+            _isRepayment = false;
+            _getMemberLoadData = null;
+            _setLoanData = null;
         }
 
         /// <summary>
@@ -540,20 +795,6 @@ namespace SRR_Devolopment.ViewModel
         }
 
 
-        private CGL_KP_M_Member_H _setMemberData;
-        public CGL_KP_M_Member_H SetMemberData
-        {
-            get
-            {
-                return _setMember;
-            }
-            set
-            {
-                _setMember = value;
-                RaisePropertyChanged("SetMember");
-            }
-        }
-
         /// <summary>
         /// show data to the form
         /// </summary>
@@ -566,14 +807,22 @@ namespace SRR_Devolopment.ViewModel
                 RevenueNo = SelectedGridData.Revenue_No;
                 RevenueAmount = SelectedGridData.Revenue_Amount;
                 RevenueDate = SelectedGridData.Revenue_Date;
-                
+                GetTransactionID = SelectedGridData.Revenue_Id;
                 if(GetEditMode == false)
                 {
+                    if(SetRevenueType.Need_Member == true)
+                    {
                         SetMember = GetMember.FirstOrDefault(x => x.Member_Id == SelectedGridData.Member_Id);
                         //Set This TO Object TextBoxWithSearch
                         ObjectFromText = SetMember;
                         EmployeeText = SetMember.Name;
-   
+                    }
+                        
+                }
+                if(SetRevenueType.Revenue_Type_Description.ToString().Contains("Repayment"))
+                {
+                    GetMemberLoadData = _dataServices.getMemberLoan(SetMember.Member_Id);
+                    SetLoanData = GetMemberLoadData.FirstOrDefault(x => x.Member_Loan_Id == SelectedGridData.Member_Loan_Id);
                 }
             }
         }

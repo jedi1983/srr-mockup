@@ -22,6 +22,9 @@ namespace SRR_Devolopment.BaseLib.Class
     {
 
         
+        //Disposable Implementation
+        //disposable
+        bool disposed = false;
 
         //event helper
         public event PropertyChangedEventHandler PropertyChanged;
@@ -150,15 +153,47 @@ namespace SRR_Devolopment.BaseLib.Class
         /// <summary>
         /// Disposable Methods
         /// </summary>
+        //public void Dispose()
+        //{
+        //    UserControl _controlGet = (UserControl)this.Content;
+        //    TextBoxWithSearch _txtBoxSearch = (TextBoxWithSearch)_controlGet.FindName("txWithSearchBoxComp");
+
+        //    if (_txtBoxSearch != null)
+        //        _txtBoxSearch.Dispose();
+
+        //    //throw new NotImplementedException();
+        //}
+
+        // Public implementation of Dispose pattern callable by consumers.
         public void Dispose()
         {
-            UserControl _controlGet = (UserControl)this.Content;
-            TextBoxWithSearch _txtBoxSearch = (TextBoxWithSearch)_controlGet.FindName("txWithSearchBoxComp");
-
-            if (_txtBoxSearch != null)
-                _txtBoxSearch.Dispose();
-
-            //throw new NotImplementedException();
+            Dispose(true);
+            //GC.SuppressFinalize(this); no need to call GC Suppress, since we still need the Garbage Collector to Do its job
         }
+
+        // Protected implementation of Dispose pattern.
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                //handle.Dispose(); Hanlding Unmanager Resource Here, since there are no, so this is Left Marked
+                // Free any other managed objects here.
+                //
+                //cleans Up For Garbage Collection
+                UserControl _controlGet = (UserControl)this.Content;
+                TextBoxWithSearch _txtBoxSearch = (TextBoxWithSearch)_controlGet.FindName("txWithSearchBoxComp");
+
+                if (_txtBoxSearch != null)
+                    _txtBoxSearch.Dispose();
+            }
+
+            // Free any unmanaged objects here.
+            //
+            disposed = true;
+        }
+
     }
 }

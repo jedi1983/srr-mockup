@@ -101,6 +101,8 @@ namespace SRR_Devolopment.ViewModel
                 if (SimpleIoc.Default.ContainsCreated<RevenueViewModel>() == true)
                 {
 
+                    //RevenueViewModel _objectRev = ServiceLocator.Current.GetInstance<RevenueViewModel>();//new line
+                    //_objectRev.Dispose();//disposing
                     SimpleIoc.Default.Unregister<RevenueViewModel>();
                     SimpleIoc.Default.Register<RevenueViewModel>();
                     return ServiceLocator.Current.GetInstance<RevenueViewModel>();

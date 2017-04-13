@@ -13,6 +13,6 @@ namespace SRR_Devolopment.Model
     
     public partial class USP_CGL_KP_T_Generate_Transaction_Number_Result
     {
-        public string Column1 { get; set; }
+        public string ReturnBack { get; set; }
     }
 }

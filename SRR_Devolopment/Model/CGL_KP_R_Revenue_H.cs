@@ -20,6 +20,7 @@ namespace SRR_Devolopment.Model
         public int Revenue_Type_Id { get; set; }
         public Nullable<int> Member_Id { get; set; }
         public decimal Revenue_Amount { get; set; }
+        public Nullable<int> Member_Loan_Id { get; set; }
         public string Description { get; set; }
         public bool Is_Approved { get; set; }
         public string Approved_By { get; set; }

@@ -103,5 +103,114 @@ namespace SRR_Devolopment.Services
             }
           
         }
+
+        public bool saveDataToRevenue(DateTime revenueDate, int revenueType, decimal revenueAmount, int memberId,string userID,ref string revenueNo,int memberLoanID)
+        {
+            bool ret = false;
+
+            try
+            {
+
+                using(srr_devEntities insertX = new srr_devEntities())
+                {
+                    CGL_KP_M_Revenue_Type_H typeRev = (from tbl in insertX.CGL_KP_M_Revenue_Type_H where tbl.Is_Deleted == false && tbl.Revenue_Type_Id == revenueType select tbl).FirstOrDefault(); 
+                    CGL_KP_R_Revenue_H dataInsert = new CGL_KP_R_Revenue_H();
+                    dataInsert.Revenue_Date = revenueDate;
+                    dataInsert.Revenue_Type_Id = revenueType;
+                    if (memberId != 0)
+                        dataInsert.Member_Id = memberId;
+                    else
+                        dataInsert.Member_Id = null;
+                    dataInsert.Revenue_Amount = revenueAmount;
+                    dataInsert.Member_Loan_Id = null;
+                    dataInsert.Description = string.Empty;
+                    if (typeRev.Need_Approval == false)
+                    { dataInsert.Is_Approved = true; dataInsert.Approved_By = "System Generated"; dataInsert.Approved_Date = DateTime.Now; }
+                    else
+                    {
+                        dataInsert.Is_Approved = false; dataInsert.Approved_By = string.Empty; dataInsert.Approved_Date = null;
+                    }
+                    if (memberLoanID != 0)
+                        dataInsert.Member_Loan_Id = memberLoanID;
+                    else
+                        dataInsert.Member_Loan_Id = null;
+                    dataInsert.Is_Deleted = false;
+                    dataInsert.Created_By = userID;
+                    dataInsert.Created_Date = DateTime.Now;
+                    //Generate RV Number
+                    dataInsert.Revenue_No = insertX.USP_CGL_KP_T_Generate_Transaction_Number("Revenue", DateTime.Now).FirstOrDefault().ReturnBack;
+                    insertX.CGL_KP_R_Revenue_H.Add(dataInsert);
+                    insertX.SaveChanges();
+                    revenueNo = dataInsert.Revenue_No;
+                    ret = true;
+                return ret;
+                }
+            }
+            catch
+            {
+                throw new Exception("Database Error");
+            }
+        }
+
+        public bool editDataToRevenue(int TransactionID, DateTime revenueDate, int revenueType, decimal revenueAmount, int memberId, string userID, string revenueNo,int memberLoanID)
+        {
+            bool ret = false;
+            try
+            {
+                using (srr_devEntities x = new srr_devEntities())
+                {
+                    CGL_KP_M_Revenue_Type_H typeRev = (from tbl in x.CGL_KP_M_Revenue_Type_H where tbl.Is_Deleted == false && tbl.Revenue_Type_Id == revenueType select tbl).FirstOrDefault(); 
+                    CGL_KP_R_Revenue_H insertData = x.CGL_KP_R_Revenue_H.FirstOrDefault(y => y.Revenue_Id == TransactionID);
+                    insertData.Revenue_Date = revenueDate;
+                    insertData.Revenue_Type_Id = revenueType;
+                    if (memberId != 0)
+                        insertData.Member_Id = memberId;
+                    else
+                        insertData.Member_Id = null;
+                    insertData.Revenue_Amount = revenueAmount;
+                    insertData.Member_Loan_Id = null;
+                    insertData.Description = string.Empty;
+                    if (typeRev.Need_Approval == false)
+                    { insertData.Is_Approved = true; insertData.Approved_By = "System Generated"; insertData.Approved_Date = DateTime.Now; }
+                    else
+                    {
+                        insertData.Is_Approved = false; insertData.Approved_By = string.Empty; insertData.Approved_Date = null;
+                    }
+                    if (memberLoanID != 0)
+                        insertData.Member_Loan_Id = memberLoanID;
+                    else
+                        insertData.Member_Loan_Id = null;
+                    insertData.Is_Deleted = false;
+                    insertData.Modified_By = userID;
+                    insertData.Modified_Date = DateTime.Now;
+                    x.SaveChanges();
+                    ret = true;
+                    return ret;
+                }
+                
+            }
+            catch
+            {
+                throw new Exception("Database Error");
+            }
+        }
+
+        public Collection<USP_CGL_KP_R_Member_Loan_H_Find_Result> getMemberLoan(int memberID)
+        {
+            
+            try
+            {
+                using (srr_devEntities x = new srr_devEntities())
+                {
+
+                    var linqToList = x.USP_CGL_KP_R_Member_Loan_H_Find(memberID).ToList();
+                    return new Collection<USP_CGL_KP_R_Member_Loan_H_Find_Result>(linqToList);
+                }
+            }
+            catch
+            {
+                throw new Exception("Database Error");
+            }
+        }
     }
 }

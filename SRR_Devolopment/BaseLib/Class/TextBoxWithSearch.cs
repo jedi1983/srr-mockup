@@ -24,7 +24,7 @@ using System.Data.Entity;
 
 namespace SRR_Devolopment.BaseLib.Class
 {
-    public class TextBoxWithSearch : TextBox,INotifyPropertyChanged,IDisposable
+    public class TextBoxWithSearch : TextBox,INotifyPropertyChanged
     {
 
 #region "Private CTOR"
@@ -212,6 +212,9 @@ namespace SRR_Devolopment.BaseLib.Class
         private DataGrid _dataGridAsSource = new DataGrid();
         private DataGridTextColumn _dataColumnOne = new DataGridTextColumn();
         private DataGridTextColumn _dataColumnTwo = new DataGridTextColumn();
+
+        //disposable
+        bool disposed = false;
 
         /// <summary>
         /// Get Entity Name Link
@@ -405,16 +408,19 @@ namespace SRR_Devolopment.BaseLib.Class
         {
 
             //check Whether it is in Edit Mode
+            if (IsInEditMode == false)
             {
-                if (IsInEditMode == false)
-                    return;
+                if(GetFilterPopUp.IsOpen == true)
+                    GetFilterPopUp.IsOpen = false;
+                return;
             }
-
+                    
             //checking state
             if (OldValueText == Text)
             {
                 return;
             }
+            
             else if(OldValueText != Text)
             {
                 if (GetSelectDropDown != null)
@@ -435,7 +441,7 @@ namespace SRR_Devolopment.BaseLib.Class
             }
 
             string dataTest = Text;
-            base.OnTextChanged(e);
+           
 
             Type cd = ItemsSource.GetType();
             var NameAssembly = cd.AssemblyQualifiedName;
@@ -446,25 +452,28 @@ namespace SRR_Devolopment.BaseLib.Class
             if (GetNameModel[0].Contains("CGL_KP_M_Member_H"))
             {
                 GetEntityNameLink = "CGL_KP_M_Member_H";
+                DataGridAsSource.SelectedItem = null;
                 ICollection<CGL_KP_M_Member_H> dataQuery = (ICollection<CGL_KP_M_Member_H>)ItemsSource;
                 var linqToSql = from tbl in dataQuery where tbl.Name.ToLower().StartsWith(Text) select tbl;
                 DataGridAsSource.ItemsSource = linqToSql;
                 
             }
 
-            
 
-            GetFilterPopUp.Child = DataGridAsSource;
-            GetFilterPopUp.Placement = PlacementMode.Right;
-            GetFilterPopUp.PlacementTarget = this;
-            GetFilterPopUp.IsOpen = true;
+            if (IsFocused)
+            {
+                GetFilterPopUp.Child = DataGridAsSource;
+                GetFilterPopUp.Placement = PlacementMode.Right;
+                GetFilterPopUp.PlacementTarget = this;
+                GetFilterPopUp.IsOpen = true;
+            }
 
             //check data
             
-            if (!IsFocused)
-            {
-                // Do stuff here
-            }
+            //if (!IsFocused)
+            //{
+            //    // Do stuff here
+            //}
 
         }
 
@@ -479,7 +488,7 @@ namespace SRR_Devolopment.BaseLib.Class
                 GetFilterPopUp.IsOpen = false;
                 
                 //specific for Member
-                if(GetEntityNameLink.Contains("CGL_KP_M_Member_H"))
+                if(GetEntityNameLink.Contains("CGL_KP_M_Member_H") && GetSelectDropDown != null)
                 {
                     CGL_KP_M_Member_H testData = (CGL_KP_M_Member_H)GetSelectDropDown;
                     OldValueText = testData.Name;
@@ -490,21 +499,41 @@ namespace SRR_Devolopment.BaseLib.Class
             
         }
 
-        /// <summary>
-        /// Dispose Anything Left on this User Control
-        /// </summary>
+        // Public implementation of Dispose pattern callable by consumers.
         public void Dispose()
         {
-            //cleans Up For Garbage Collection
-            if (GetFilterPopUp.IsOpen == true)
-                GetFilterPopUp.IsOpen = false;
-            
-            //cleans Up Selected Items
-            GetSelectDropDown = null;
-
-            //CleansUp
-            ItemsSource = null;
+            Dispose(true);
+            //GC.SuppressFinalize(this); no need to call GC Suppress, since we still need the Garbage Collector to Do its job
         }
+
+        // Protected implementation of Dispose pattern.
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                //handle.Dispose(); Hanlding Unmanager Resource Here, since there are no, so this is Left Marked
+                // Free any other managed objects here.
+                //
+                //cleans Up For Garbage Collection
+                if (GetFilterPopUp.IsOpen == true)
+                    GetFilterPopUp.IsOpen = false;
+
+                //cleans Up Selected Items
+                GetSelectDropDown = null;
+
+                //CleansUp
+                ItemsSource = null;
+            }
+
+            // Free any unmanaged objects here.
+            //
+            disposed = true;
+        }
+        
+     
        
 #endregion
 

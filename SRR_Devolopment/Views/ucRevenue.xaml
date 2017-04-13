@@ -29,11 +29,12 @@
                         </LinearGradientBrush>
                     </Grid.Background>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="5*" />
-                        <ColumnDefinition Width="25*" />
-                        <ColumnDefinition Width="5*" />
-                        <ColumnDefinition Width="25*" />
+                        <ColumnDefinition Width="5" />
+                        <ColumnDefinition Width="210" />
+                        <ColumnDefinition Width="15" />
+                        <ColumnDefinition Width="210" />
                         <ColumnDefinition Width="40*" />
+                        <ColumnDefinition Width="5" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="5" />
@@ -167,10 +168,14 @@
                     </Grid.Background>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="25*" />
+                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition Width="15" />
+                        <ColumnDefinition Width="210" />
+                        <ColumnDefinition Width="15" />
+                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition Width="15" />
+                        <ColumnDefinition Width="210" />
                         <ColumnDefinition Width="5*" />
-                        <ColumnDefinition Width="25*" />
-                        <ColumnDefinition Width="44*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="5" />
@@ -202,16 +207,23 @@
                     <TextBlock Grid.Column="1" Grid.Row="4" Text="Revenue Amount"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <TextBlock Grid.Column="2" Grid.Row="4" Text=":"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <TextBox BorderBrush="Black" Grid.Column="3" Grid.Row="4" Height="25" Width="200" HorizontalAlignment="Center" 
-                             VerticalAlignment="Center" Text="{Binding RevenueAmount,StringFormat='#,###.00;$(#,###.00)',Mode=TwoWay}" IsEnabled="{Binding ObjEnabled}" />
+                             VerticalAlignment="Center" Text="{Binding RevenueAmount,StringFormat='#,###.00;$(#,###.00)',Mode=TwoWay}" IsEnabled="{Binding IsAmountEnabled}" />
 
                     <TextBlock Grid.Column="1" Grid.Row="5" Text="Member Name"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <TextBlock Grid.Column="2" Grid.Row="5" Text=":"  HorizontalAlignment="Center" VerticalAlignment="Center" />
 
                     <my:TextBoxWithSearch BorderBrush="Black" Grid.Column="3" Grid.Row="5" Height="25" Width="200" HorizontalAlignment="Center" 
-                             VerticalAlignment="Center" Text="{Binding EmployeeText }" x:Name="txWithSearchBoxComp" SetFirstColumnName="Name" GetSelectDropDown="{Binding ObjectFromText,Mode=TwoWay}" IsInEditMode="{Binding GetEditMode,Mode=TwoWay}"
+                             VerticalAlignment="Center" Text="{Binding EmployeeText,Mode=TwoWay}" x:Name="txWithSearchBoxComp" SetFirstColumnName="Name" GetSelectDropDown="{Binding ObjectFromText,Mode=TwoWay}" IsInEditMode="{Binding GetEditMode,Mode=TwoWay}"
                                           SetSecondColumnName="Employee No" SetFirstColumnBind="Name" SetSecondColumnBind="Employee_No" ItemsSource="{Binding GetMember, Mode=TwoWay}" MaxPopUpHeight="300" MaxPopUpWidth="500" IsEnabled="{Binding IsMemberEnabled,Mode=TwoWay}" >
                     </my:TextBoxWithSearch>
- 
+
+                    <TextBlock Grid.Column="5" Grid.Row="5" Text="Repayment"  HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <TextBlock Grid.Column="6" Grid.Row="5" Text=":"  HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <ComboBox BorderBrush="Black" Grid.Row="5" Grid.Column="7" Name="repaymentDrBx" Height="25" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" ItemsSource="{Binding GetMemberLoadData}" 
+                              DisplayMemberPath="Showed"  SelectedItem="{Binding SetLoanData,Mode=TwoWay}"
+                              SelectedValue="{Binding SetLoanData.Member_Loan_Id,Mode=TwoWay}"  SelectedValuePath="Member_Loan_Id" IsEnabled="{Binding IsRepayment}"/>
+                    
+
                 </Grid>
             </StackPanel>
         </Expander>

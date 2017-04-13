@@ -20,5 +20,10 @@ namespace SRR_Devolopment.Services
 
        Collection<CGL_KP_M_Member_H> getMember();
 
+       bool saveDataToRevenue(DateTime revenueDate, int revenueType, decimal revenueAmount, int memberId, string userID, ref string revenueNo, int memberLoanID);
+
+       bool editDataToRevenue(int TransactionID, DateTime revenueDate, int revenueType, decimal revenueAmount, int memberId, string userID, string revenueNo, int memberLoanID);
+
+       Collection<USP_CGL_KP_R_Member_Loan_H_Find_Result> getMemberLoan(int memberID);
    }
 }

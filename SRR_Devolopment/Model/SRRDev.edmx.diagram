@@ -34,7 +34,6 @@
         <EntityTypeShape EntityType="srr_devModel.CGL_KP_R_Member_Balance_H" Width="1.5" PointX="8.625" PointY="11.625" />
         <EntityTypeShape EntityType="srr_devModel.CGL_KP_R_Member_Beginning_Balance_H" Width="1.5" PointX="8.625" PointY="15.625" />
         <EntityTypeShape EntityType="srr_devModel.CGL_KP_R_Member_Loan_H" Width="1.5" PointX="8.625" PointY="19.875" />
-        <EntityTypeShape EntityType="srr_devModel.CGL_KP_R_Revenue_H" Width="1.5" PointX="20.5" PointY="11.375" />
         <EntityTypeShape EntityType="srr_devModel.CGL_KP_S_Setting_H" Width="1.5" PointX="0.75" PointY="12.75" />
         <EntityTypeShape EntityType="srr_devModel.CGL_KP_S_Transaction_Type_H" Width="1.5" PointX="10.75" PointY="12.75" />
         <EntityTypeShape EntityType="srr_devModel.CGL_KP_R_Cooperative_Balance_H" Width="1.5" PointX="3.375" PointY="25.875" />
@@ -51,11 +50,12 @@
         <AssociationConnector Association="srr_devModel.FK_CGL_KP_R_Member_Balance_H_CGL_KP_M_Member_H" />
         <AssociationConnector Association="srr_devModel.FK_CGL_KP_R_Member_Beginning_Balance_H_CGL_KP_M_Member_H" />
         <AssociationConnector Association="srr_devModel.FK_CGL_KP_R_Member_Loan_H_CGL_KP_M_Member_H" />
-        <AssociationConnector Association="srr_devModel.FK_CGL_KP_R_Revenue_H_CGL_KP_M_Member_H" />
-        <AssociationConnector Association="srr_devModel.FK_CGL_KP_R_Revenue_H_CGL_KP_M_Revenue_Type_H" />
         <AssociationConnector Association="srr_devModel.FK_CGL_KP_R_Journal_D_CGL_KP_R_Journal_H" />
         <EntityTypeShape EntityType="srr_devModel.CGL_KP_M_UserProfile_D" Width="1.5" PointX="10.625" PointY="3.25" />
         <AssociationConnector Association="srr_devModel.FK_CGL_KP_M_UserProfile_D_CGL_KP_M_UserProfile_H" />
+        <EntityTypeShape EntityType="srr_devModel.CGL_KP_R_Revenue_H" Width="1.5" PointX="20.5" PointY="11.25" />
+        <AssociationConnector Association="srr_devModel.FK_CGL_KP_R_Revenue_H_CGL_KP_M_Member_H" />
+        <AssociationConnector Association="srr_devModel.FK_CGL_KP_R_Revenue_H_CGL_KP_M_Revenue_Type_H" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
