@@ -50,6 +50,10 @@ namespace SRR_Devolopment.ViewModel
 
             SimpleIoc.Default.Register<IRevenueDataServices, RevenueDataServices>();
 
+            SimpleIoc.Default.Register<IExpenditureDataServices, ExpenditureDataServices>();
+
+            SimpleIoc.Default.Register<ExpenditureViewModel>();
+
         }
 
         /// <summary>
@@ -111,6 +115,29 @@ namespace SRR_Devolopment.ViewModel
                 else//first run will let the service locator got the Object
                 {
                     return ServiceLocator.Current.GetInstance<RevenueViewModel>();
+                }
+            }
+        }
+
+        public ExpenditureViewModel ExpenditureTransaction
+        {
+            get
+            {
+                //checking whether already Contains/Object Created for this class?, if yes then unreg it first to clean cache up
+                //and register back to the SimpleIoc dan let the service locator find the Object GodSpeed
+                if (SimpleIoc.Default.ContainsCreated<ExpenditureViewModel>() == true)
+                {
+
+                    //RevenueViewModel _objectRev = ServiceLocator.Current.GetInstance<RevenueViewModel>();//new line
+                    //_objectRev.Dispose();//disposing
+                    SimpleIoc.Default.Unregister<ExpenditureViewModel>();
+                    SimpleIoc.Default.Register<ExpenditureViewModel>();
+                    return ServiceLocator.Current.GetInstance<ExpenditureViewModel>();
+
+                }
+                else//first run will let the service locator got the Object
+                {
+                    return ServiceLocator.Current.GetInstance<ExpenditureViewModel>();
                 }
             }
         }

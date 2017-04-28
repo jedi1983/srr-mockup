@@ -178,5 +178,36 @@ namespace SRR_Devolopment.Model
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<USP_CGL_KP_R_Member_Loan_H_Find_Result>("USP_CGL_KP_R_Member_Loan_H_Find", memberIDParameter);
         }
+    
+        public virtual ObjectResult<USP_CGL_KP_R_Expenditure_H_Find_Result> USP_CGL_KP_R_Expenditure_H_Find(Nullable<int> legalEntityID, Nullable<int> period_Id)
+        {
+            var legalEntityIDParameter = legalEntityID.HasValue ?
+                new ObjectParameter("LegalEntityID", legalEntityID) :
+                new ObjectParameter("LegalEntityID", typeof(int));
+    
+            var period_IdParameter = period_Id.HasValue ?
+                new ObjectParameter("Period_Id", period_Id) :
+                new ObjectParameter("Period_Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<USP_CGL_KP_R_Expenditure_H_Find_Result>("USP_CGL_KP_R_Expenditure_H_Find", legalEntityIDParameter, period_IdParameter);
+        }
+    
+        public virtual int USP_CGL_KP_R_Generate_Loan_Full_Payment(Nullable<int> member_Loan_Id, Nullable<System.DateTime> transaction_Date, ObjectParameter success, ObjectParameter message)
+        {
+            var member_Loan_IdParameter = member_Loan_Id.HasValue ?
+                new ObjectParameter("Member_Loan_Id", member_Loan_Id) :
+                new ObjectParameter("Member_Loan_Id", typeof(int));
+    
+            var transaction_DateParameter = transaction_Date.HasValue ?
+                new ObjectParameter("Transaction_Date", transaction_Date) :
+                new ObjectParameter("Transaction_Date", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("USP_CGL_KP_R_Generate_Loan_Full_Payment", member_Loan_IdParameter, transaction_DateParameter, success, message);
+        }
+    
+        public virtual ObjectResult<USP_CGL_KP_S_Setting_H_Get_Result> USP_CGL_KP_S_Setting_H_Get()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<USP_CGL_KP_S_Setting_H_Get_Result>("USP_CGL_KP_S_Setting_H_Get");
+        }
     }
 }

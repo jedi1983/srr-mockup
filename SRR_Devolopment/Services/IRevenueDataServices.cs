@@ -25,5 +25,7 @@ namespace SRR_Devolopment.Services
        bool editDataToRevenue(int TransactionID, DateTime revenueDate, int revenueType, decimal revenueAmount, int memberId, string userID, string revenueNo, int memberLoanID);
 
        Collection<USP_CGL_KP_R_Member_Loan_H_Find_Result> getMemberLoan(int memberID);
+
+       bool deleteDataToRevenue(int transactionID);
    }
 }

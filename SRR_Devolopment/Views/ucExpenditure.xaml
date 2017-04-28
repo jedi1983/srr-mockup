@@ -8,12 +8,12 @@
              xmlns:local="clr-namespace:SRR_Devolopment.BaseLib.Class"
              xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
              mc:Ignorable="d" 
-             DataContext="{Binding RevenueTransaction, Source={StaticResource Locator}}"
+             DataContext="{Binding ExpenditureTransaction, Source={StaticResource Locator}}"
              d:DesignHeight="640" d:DesignWidth="800" >
 
     <!-- dataGrid Minor So We Need to Add this-->
     <UserControl.Resources>
-        <CollectionViewSource x:Key="revenueStatic" Source="{Binding Get}" />
+        <CollectionViewSource x:Key="expenditureStatic" Source="{Binding GetExpenditureType}" />
         <CollectionViewSource x:Key="memberStatic" Source="{Binding GetMember}" />
     </UserControl.Resources>
 
@@ -53,9 +53,9 @@
                               DisplayMemberPath="Period_Name"  SelectedItem="{Binding SetPeriod,Mode=TwoWay}"
                               SelectedValue="{Binding SetPeriod.Period_Id,Mode=TwoWay}"  SelectedValuePath="Period_Id" IsEnabled="{Binding ObjFilterEnabled}"/>
 
-                    <Button Grid.Column="1" Grid.Row="2" Content="Find" Height="25" Width="200" Command="{Binding ButtonGenerate}" IsEnabled="{Binding EnabledGenerate}" />
+                    <Button Grid.Column="1" Grid.Row="2" Content="Find" Height="25" Width="200" Command="{Binding ButtonGenerate}" IsEnabled="{Binding ObjFilterEnabled}" />
                     <DataGrid Name="expenditureFindDataGrid" AutoGenerateColumns="False" Height="200" HorizontalAlignment="Stretch" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="4" VerticalAlignment="Top"
-                              ItemsSource="{Binding GetExpenditureData}" SelectionMode="Single"  SelectedItem="{Binding SelectedGridData}" CanUserAddRows="False"   >
+                              ItemsSource="{Binding GetExpenditureData}" SelectionMode="Single"  SelectedItem="{Binding SelectedGridData}" CanUserAddRows="False"  IsEnabled="{Binding ObjFilterEnabled}" >
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="SelectionChanged">
                                 <mvvm:EventToCommand 
@@ -78,9 +78,9 @@
                             </DataGridTemplateColumn>
 
                             <DataGridComboBoxColumn 
-                                SelectedValueBinding="{Binding Expenditure_Type_Id}"  SelectedValuePath="Revenue_Type_Id" IsReadOnly="True" 
-                                DisplayMemberPath="Revenue_Type_Description" 
-                                ItemsSource="{Binding Source={StaticResource revenueStatic}}"  Header="Expenditure" Width="150">
+                                SelectedValueBinding="{Binding Expenditure_Type_Id}"  SelectedValuePath="Expenditure_Type_Id" IsReadOnly="True" 
+                                DisplayMemberPath="Expenditure_Type_Description" 
+                                ItemsSource="{Binding Source={StaticResource expenditureStatic}}"  Header="Expenditure" Width="150">
 
                             </DataGridComboBoxColumn>
                             <DataGridTextColumn Header="Employee No" Binding="{Binding Employee_No}" Width="200" IsReadOnly="True" />
@@ -93,10 +93,10 @@
 
                             <DataGridTextColumn Header="Legal Entity" Binding="{Binding Legal_Entity_Name}" Width="200" IsReadOnly="True" />
 
-                            <DataGridTemplateColumn Header="Expenditure Amount">
+                            <DataGridTemplateColumn Header="Expenditure Amount" IsReadOnly="True">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox Text="{Binding Expenditure_Amount, StringFormat='Rp #,###.00;$(#,###.00)'}" />
+                                        <TextBox Text="{Binding Expenditure_Amount, StringFormat='Rp #,###.00;$(#,###.00)'}" IsReadOnly="True"  />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -137,6 +137,12 @@
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="/SRR_Devolopment;component/Images/ButtonIco/Menu16x16/Cancel.png" />
                                 <TextBlock Margin="3,0,0,0">Cancel</TextBlock>
+                            </StackPanel>
+                        </Button>
+                        <Button Command="{Binding ButtonDelete}" ToolTip="Delete Data." IsEnabled="{Binding EnabledDelete}">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="/SRR_Devolopment;component/Images/ButtonIco/Menu16x16/Delete.png" />
+                                <TextBlock Margin="3,0,0,0">Delete</TextBlock>
                             </StackPanel>
                         </Button>
                     </ToolBar>
@@ -188,14 +194,14 @@
 
                     <TextBlock Grid.Column="1" Grid.Row="3" Text="Expenditure Type"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <TextBlock Grid.Column="2" Grid.Row="3" Text=":"  HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    <ComboBox BorderBrush="Black" Grid.Row="3" Grid.Column="3" Name="revenueDrBx" Height="25" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" ItemsSource="{Binding GetRevenueType}" 
-                              DisplayMemberPath="Revenue_Type_Description"  SelectedItem="{Binding SetRevenueType,Mode=TwoWay}"
-                              SelectedValue="{Binding SetRevenueType.Revenue_Type_Id,Mode=TwoWay}"  SelectedValuePath="Revenue_Type_Id" IsEnabled="{Binding ObjEnabled}"/>
+                    <ComboBox BorderBrush="Black" Grid.Row="3" Grid.Column="3" Name="expenditureDrBx" Height="25" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" ItemsSource="{Binding GetExpenditureType}" 
+                              DisplayMemberPath="Expenditure_Type_Description"  SelectedItem="{Binding SetExpenditureType,Mode=TwoWay}"
+                              SelectedValue="{Binding SetExpenditureType.Expenditure_Type_Id,Mode=TwoWay}"  SelectedValuePath="Expenditure_Type_Id" IsEnabled="{Binding ObjEnabledTransactionType}"/>
 
                     <TextBlock Grid.Column="1" Grid.Row="4" Text="Expenditure Amount"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <TextBlock Grid.Column="2" Grid.Row="4" Text=":"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <TextBox BorderBrush="Black" Grid.Column="3" Grid.Row="4" Height="25" Width="200" HorizontalAlignment="Center" 
-                             VerticalAlignment="Center" Text="{Binding RevenueAmount,StringFormat='#,###.00;$(#,###.00)',Mode=TwoWay}" IsEnabled="{Binding ObjEnabled}" />
+                             VerticalAlignment="Center" Text="{Binding ExpenditureAmount,StringFormat='#,###.00;$(#,###.00)',Mode=TwoWay}" IsEnabled="{Binding ObjEnabled}" />
 
                     <TextBlock Grid.Column="1" Grid.Row="5" Text="Member Name"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <TextBlock Grid.Column="2" Grid.Row="5" Text=":"  HorizontalAlignment="Center" VerticalAlignment="Center" />
@@ -228,17 +234,17 @@
                             <TextBlock Grid.Column="2" Grid.Row="0" Text=":"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                             <TextBlock Grid.Column="3" Grid.Row="0" Text=":"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                             <TextBox BorderBrush="Black" Grid.Column="3" Grid.Row="0" Height="25" Width="200" HorizontalAlignment="Center" 
-                             VerticalAlignment="Center" Text="{Binding RevenueAmount,StringFormat='#,###.00;$(#,###.00)',Mode=TwoWay}" IsEnabled="{Binding ObjEnabled}" />
+                             VerticalAlignment="Center" Text="{Binding InterestRate ,Mode=TwoWay}" IsEnabled="False" />
 
                             <TextBlock Grid.Column="1" Grid.Row="1" Text="Term Of Loan"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                             <TextBlock Grid.Column="2" Grid.Row="1" Text=":"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                             <TextBox BorderBrush="Black" Grid.Column="3" Grid.Row="1" Height="25" Width="200" HorizontalAlignment="Center" 
-                             VerticalAlignment="Center" Text="{Binding RevenueAmount,StringFormat='#,###.00;$(#,###.00)',Mode=TwoWay}" IsEnabled="{Binding ObjEnabled}" />
+                             VerticalAlignment="Center" Text="{Binding TermOfLoan,StringFormat='#,###.00;$(#,###.00)',Mode=TwoWay}" IsEnabled="{Binding IsTermOfLoanEnabled}" />
                             
                             <TextBlock Grid.Column="1" Grid.Row="2" Text="Loan Amount"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                             <TextBlock Grid.Column="2" Grid.Row="2" Text=":"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                             <TextBox BorderBrush="Black" Grid.Column="3" Grid.Row="2" Height="25" Width="200" HorizontalAlignment="Center" 
-                             VerticalAlignment="Center" Text="{Binding RevenueAmount,StringFormat='#,###.00;$(#,###.00)',Mode=TwoWay}" IsEnabled="{Binding ObjEnabled}" />
+                             VerticalAlignment="Center" Text="{Binding LoanAmount,StringFormat='#,###.00;$(#,###.00)',Mode=TwoWay}" IsEnabled="False" />
 
                             <TextBlock Grid.Column="4" Grid.Row="0" Text="%"  HorizontalAlignment="Left" VerticalAlignment="Center" />
 
@@ -247,18 +253,18 @@
                             <TextBlock Grid.Column="5" Grid.Row="0" Text="Main Installment"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                             <TextBlock Grid.Column="6" Grid.Row="0" Text=":"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                             <TextBox BorderBrush="Black" Grid.Column="7" Grid.Row="0" Height="25" Width="200" HorizontalAlignment="Center" 
-                             VerticalAlignment="Center" Text="{Binding RevenueAmount,StringFormat='#,###.00;$(#,###.00)',Mode=TwoWay}" IsEnabled="{Binding ObjEnabled}" />
+                             VerticalAlignment="Center" Text="{Binding MainInstallment,StringFormat='#,###.00;$(#,###.00)',Mode=TwoWay}" IsEnabled="False" />
 
                             <TextBlock Grid.Column="5" Grid.Row="1" Text="Interest Installment"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                             <TextBlock Grid.Column="6" Grid.Row="1" Text=":"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                             <TextBox BorderBrush="Black" Grid.Column="7" Grid.Row="1" Height="25" Width="200" HorizontalAlignment="Center" 
-                             VerticalAlignment="Center" Text="{Binding RevenueAmount,StringFormat='#,###.00;$(#,###.00)',Mode=TwoWay}" IsEnabled="{Binding ObjEnabled}" />
+                             VerticalAlignment="Center" Text="{Binding InterestInstallment,StringFormat='#,###.00;$(#,###.00)',Mode=TwoWay}" IsEnabled="False" />
 
 
                             <TextBlock Grid.Column="5" Grid.Row="2" Text="Total Installment"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                             <TextBlock Grid.Column="6" Grid.Row="2" Text=":"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                             <TextBox BorderBrush="Black" Grid.Column="7" Grid.Row="2" Height="25" Width="200" HorizontalAlignment="Center" 
-                             VerticalAlignment="Center" Text="{Binding RevenueAmount,StringFormat='#,###.00;$(#,###.00)',Mode=TwoWay}" IsEnabled="{Binding ObjEnabled}" />
+                             VerticalAlignment="Center" Text="{Binding TotalInstallment,StringFormat='#,###.00;$(#,###.00)',Mode=TwoWay}" IsEnabled="False" />
 
 
                         </Grid>

@@ -53,9 +53,9 @@
                               DisplayMemberPath="Period_Name"  SelectedItem="{Binding SetPeriod,Mode=TwoWay}"
                               SelectedValue="{Binding SetPeriod.Period_Id,Mode=TwoWay}"  SelectedValuePath="Period_Id" IsEnabled="{Binding ObjFilterEnabled}"/>
 
-                    <Button Grid.Column="1" Grid.Row="2" Content="Find" Height="25" Width="200" Command="{Binding ButtonGenerate}" IsEnabled="{Binding EnabledGenerate}" />
+                    <Button Grid.Column="1" Grid.Row="2" Content="Find" Height="25" Width="200" Command="{Binding ButtonGenerate}" IsEnabled="{Binding ObjFilterEnabled}" />
                     <DataGrid Name="revenueFindDataGrid" AutoGenerateColumns="False" Height="200" HorizontalAlignment="Stretch" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="4" VerticalAlignment="Top"
-                              ItemsSource="{Binding GetRevenueData}" SelectionMode="Single"  SelectedItem="{Binding SelectedGridData}" CanUserAddRows="False"   >
+                              ItemsSource="{Binding GetRevenueData}" SelectionMode="Single"  SelectedItem="{Binding SelectedGridData}" CanUserAddRows="False"  IsEnabled="{Binding ObjFilterEnabled}"  >
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="SelectionChanged">
                                 <mvvm:EventToCommand 
@@ -111,10 +111,10 @@
                             </DataGridTemplateColumn>-->
 
                             <!--<DataGridTextColumn Header="Revenue Amount" Binding="{Binding Revenue_Amount}"  IsReadOnly="True" Width="200" />-->
-                            <DataGridTemplateColumn Header="Revenue Amount">
+                            <DataGridTemplateColumn Header="Revenue Amount" IsReadOnly="True">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox Text="{Binding Revenue_Amount, StringFormat='Rp #,###.00;$(#,###.00)'}" />
+                                        <TextBox Text="{Binding Revenue_Amount, StringFormat='Rp #,###.00;$(#,###.00)'}" IsReadOnly="True" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -155,6 +155,12 @@
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="/SRR_Devolopment;component/Images/ButtonIco/Menu16x16/Cancel.png" />
                                 <TextBlock Margin="3,0,0,0">Cancel</TextBlock>
+                            </StackPanel>
+                        </Button>
+                        <Button Command="{Binding ButtonDelete}" ToolTip="Delete Data." IsEnabled="{Binding EnabledDelete}">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="/SRR_Devolopment;component/Images/ButtonIco/Menu16x16/Delete.png" />
+                                <TextBlock Margin="3,0,0,0">Delete</TextBlock>
                             </StackPanel>
                         </Button>
                     </ToolBar>

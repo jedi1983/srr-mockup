@@ -804,6 +804,16 @@ warning 6002: The table/view 'srr_dev.dbo.CGL_KP_R_Cooperative_Beginning_Balance
           <Parameter Name="Name" Type="varchar(max)" Mode="In" />
           <Parameter Name="LegalEntityID" Type="int" Mode="In" />
         </Function>
+        <Function Name="USP_CGL_KP_R_Expenditure_H_Find" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LegalEntityID" Type="int" Mode="In" />
+          <Parameter Name="Period_Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="USP_CGL_KP_R_Generate_Loan_Full_Payment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Member_Loan_Id" Type="int" Mode="In" />
+          <Parameter Name="Transaction_Date" Type="datetime" Mode="In" />
+          <Parameter Name="Success" Type="bit" Mode="InOut" />
+          <Parameter Name="Message" Type="varchar" Mode="InOut" />
+        </Function>
         <Function Name="USP_CGL_KP_R_Generate_Simpanan_Pokok" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Member_Id" Type="int" Mode="In" />
           <Parameter Name="Transaction_Date" Type="datetime" Mode="In" />
@@ -822,6 +832,7 @@ warning 6002: The table/view 'srr_dev.dbo.CGL_KP_R_Cooperative_Beginning_Balance
           <Parameter Name="LegalEntityID" Type="int" Mode="In" />
           <Parameter Name="Period_Id" Type="int" Mode="In" />
         </Function>
+        <Function Name="USP_CGL_KP_S_Setting_H_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="USP_CGL_KP_T_Generate_Transaction_Number" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Transaction_Type_Code" Type="varchar" Mode="In" />
           <Parameter Name="Transaction_Date" Type="datetime" Mode="In" />
@@ -1177,8 +1188,19 @@ FROM [dbo].[CGL_KP_R_Cooperative_Beginning_Balance_H] AS [CGL_KP_R_Cooperative_B
             <Parameter Name="Transaction_Date" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="USP_CGL_KP_R_Member_Loan_H_Find" ReturnType="Collection(srr_devModel.USP_CGL_KP_R_Member_Loan_H_Find_Result)">
-            <Parameter Name="MemberID" Mode="In" Type="Int32" />
+          <Parameter Name="MemberID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="USP_CGL_KP_R_Expenditure_H_Find" ReturnType="Collection(srr_devModel.USP_CGL_KP_R_Expenditure_H_Find_Result)">
+            <Parameter Name="LegalEntityID" Mode="In" Type="Int32" />
+            <Parameter Name="Period_Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="USP_CGL_KP_R_Generate_Loan_Full_Payment">
+            <Parameter Name="Member_Loan_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Transaction_Date" Mode="In" Type="DateTime" />
+            <Parameter Name="Success" Mode="InOut" Type="Boolean" />
+            <Parameter Name="Message" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="USP_CGL_KP_S_Setting_H_Get" ReturnType="Collection(srr_devModel.USP_CGL_KP_S_Setting_H_Get_Result)" />
         </EntityContainer>
         <EntityType Name="CGL_KP_M_Legal_Entity_H">
           <Key>
@@ -2070,6 +2092,29 @@ FROM [dbo].[CGL_KP_R_Cooperative_Beginning_Balance_H] AS [CGL_KP_R_Cooperative_B
           <Property Type="Decimal" Name="Remaining_Interest_Amount" Nullable="false" Precision="18" Scale="4" />
           <Property Type="Int32" Name="Remaining_Term_of_Loan" Nullable="false" />
           <Property Type="String" Name="Showed" Nullable="true" MaxLength="52" />
+          <Property Type="Decimal" Name="Loan_Amount" Nullable="false" Precision="18" Scale="4" />
+        </ComplexType>
+        <ComplexType Name="USP_CGL_KP_R_Expenditure_H_Find_Result">
+          <Property Type="Int32" Name="Expenditure_Id" Nullable="false" />
+          <Property Type="String" Name="Expenditure_No" Nullable="false" MaxLength="12" />
+          <Property Type="DateTime" Name="Expenditure_Date" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Expenditure_Type_Id" Nullable="false" />
+          <Property Type="Int32" Name="Member_Id" Nullable="true" />
+          <Property Type="Decimal" Name="Expenditure_Amount" Nullable="false" Precision="18" Scale="4" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="500" />
+          <Property Type="Boolean" Name="Is_Approved" Nullable="false" />
+          <Property Type="String" Name="Approved_By" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="Approved_Date" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="Is_Deleted" Nullable="false" />
+          <Property Type="String" Name="Legal_Entity_Name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Employee_No" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Member_Loan_Id" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="USP_CGL_KP_S_Setting_H_Get_Result">
+          <Property Type="Decimal" Name="INTEREST" Nullable="true" Precision="18" Scale="5" />
+          <Property Type="Decimal" Name="MAXLOAN" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="MAXTENOR" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2679,6 +2724,38 @@ FROM [dbo].[CGL_KP_R_Cooperative_Beginning_Balance_H] AS [CGL_KP_R_Cooperative_B
                 <ScalarProperty Name="Remaining_Interest_Amount" ColumnName="Remaining_Interest_Amount" />
                 <ScalarProperty Name="Remaining_Term_of_Loan" ColumnName="Remaining_Term_of_Loan" />
                 <ScalarProperty Name="Showed" ColumnName="Showed" />
+                <ScalarProperty Name="Loan_Amount" ColumnName="Loan_Amount" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="USP_CGL_KP_R_Expenditure_H_Find" FunctionName="srr_devModel.Store.USP_CGL_KP_R_Expenditure_H_Find">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="srr_devModel.USP_CGL_KP_R_Expenditure_H_Find_Result">
+                <ScalarProperty Name="Expenditure_Id" ColumnName="Expenditure_Id" />
+                <ScalarProperty Name="Expenditure_No" ColumnName="Expenditure_No" />
+                <ScalarProperty Name="Expenditure_Date" ColumnName="Expenditure_Date" />
+                <ScalarProperty Name="Expenditure_Type_Id" ColumnName="Expenditure_Type_Id" />
+                <ScalarProperty Name="Member_Id" ColumnName="Member_Id" />
+                <ScalarProperty Name="Expenditure_Amount" ColumnName="Expenditure_Amount" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Is_Approved" ColumnName="Is_Approved" />
+                <ScalarProperty Name="Approved_By" ColumnName="Approved_By" />
+                <ScalarProperty Name="Approved_Date" ColumnName="Approved_Date" />
+                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+                <ScalarProperty Name="Legal_Entity_Name" ColumnName="Legal_Entity_Name" />
+                <ScalarProperty Name="Employee_No" ColumnName="Employee_No" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Member_Loan_Id" ColumnName="Member_Loan_Id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="USP_CGL_KP_R_Generate_Loan_Full_Payment" FunctionName="srr_devModel.Store.USP_CGL_KP_R_Generate_Loan_Full_Payment" />
+          <FunctionImportMapping FunctionImportName="USP_CGL_KP_S_Setting_H_Get" FunctionName="srr_devModel.Store.USP_CGL_KP_S_Setting_H_Get">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="srr_devModel.USP_CGL_KP_S_Setting_H_Get_Result">
+                <ScalarProperty Name="INTEREST" ColumnName="INTEREST" />
+                <ScalarProperty Name="MAXLOAN" ColumnName="MAXLOAN" />
+                <ScalarProperty Name="MAXTENOR" ColumnName="MAXTENOR" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -95,6 +95,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.2.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -224,10 +225,16 @@
     <Compile Include="Model\USP_CGL_KP_M_Member_H_Find_Result.cs">
       <DependentUpon>SRRDev.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\USP_CGL_KP_R_Expenditure_H_Find_Result.cs">
+      <DependentUpon>SRRDev.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\USP_CGL_KP_R_Member_Loan_H_Find_Result.cs">
       <DependentUpon>SRRDev.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\USP_CGL_KP_R_Revenue_H_Find_Result.cs">
+      <DependentUpon>SRRDev.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\USP_CGL_KP_S_Setting_H_Get_Result.cs">
       <DependentUpon>SRRDev.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\USP_CGL_KP_T_Generate_Transaction_Number_Result.cs">
@@ -245,7 +252,9 @@
     <Compile Include="Model\USP_CG_KP_M_UserProfile_H_Find_Result.cs">
       <DependentUpon>SRRDev.tt</DependentUpon>
     </Compile>
+    <Compile Include="Services\ExpenditureDataServices.cs" />
     <Compile Include="Services\IDataServices.cs" />
+    <Compile Include="Services\IExpenditureDataServices.cs" />
     <Compile Include="Services\IMemberDataService.cs" />
     <Compile Include="Services\IRevenueDataServices.cs" />
     <Compile Include="Services\MemberDataService.cs" />

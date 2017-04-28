@@ -478,6 +478,14 @@ namespace SRR_Devolopment.ViewModel
         #region "Methods"
 
         /// <summary>
+        /// Delete Button
+        /// </summary>
+        public override void deleteButton()
+        {
+            base.deleteButton();
+        }
+
+        /// <summary>
         /// Check Data
         /// </summary>
         /// <returns>String Of Error (If any)</returns>
@@ -701,6 +709,7 @@ namespace SRR_Devolopment.ViewModel
             EnabledSave = false;
             EnabledModify = false;
             EnabledCancel = false;
+            EnabledDelete = false;
             DataMod = false;
             ObjEnabled = false;
             ObjFilterEnabled = true;

@@ -152,6 +152,23 @@ namespace SRR_Devolopment.BaseLib.Class
        }
 
        /// <summary>
+       /// Delete Enabled Property
+       /// </summary>
+       private Boolean _enabledDelete;
+       public Boolean EnabledDelete
+       {
+           get
+           {
+               return _enabledDelete;
+           }
+           set
+           {
+               _enabledDelete = value;
+               RaisePropertyChanged("EnabledDelete");
+           }
+       }
+
+       /// <summary>
        /// Save Property
        /// </summary>
        private Boolean _enabledSave;
@@ -413,6 +430,20 @@ namespace SRR_Devolopment.BaseLib.Class
             }
         }
 
+        private RelayCommand _buttonDelete;
+        public RelayCommand ButtonDelete
+        {
+            get
+            {
+                if (_buttonDelete == null)
+                {
+                    _buttonDelete = new RelayCommand(deleteButton);
+
+                }
+                return _buttonDelete;
+            }
+        }
+
         #endregion
 
         #region "Methods"
@@ -469,6 +500,11 @@ namespace SRR_Devolopment.BaseLib.Class
 
          }
 
+       public virtual void deleteButton()
+       {
+
+       }
+
        public void getFirstAccess(bool isRead,bool isWrite,bool isModify)
          {
            if(isWrite == true && isModify == true)
@@ -478,6 +514,7 @@ namespace SRR_Devolopment.BaseLib.Class
                IsMod = true;
                EnabledNew = true;
                EnabledModify = false;
+               EnabledDelete = false;
                EnabledCancel = false;
                EnabledSave = false;
                EnabledProcess = true;
@@ -494,6 +531,7 @@ namespace SRR_Devolopment.BaseLib.Class
                IsMod = true;
                EnabledNew = true;
                EnabledModify = false;
+               EnabledDelete = false;
                EnabledCancel = false;
                EnabledSave = false;
                EnabledProcess = true;
@@ -509,6 +547,7 @@ namespace SRR_Devolopment.BaseLib.Class
                IsMod = true;
                EnabledNew = false;
                EnabledModify = false;
+               EnabledDelete = false;
                EnabledCancel = false;
                EnabledSave = false;
                EnabledProcess = true;
@@ -524,6 +563,7 @@ namespace SRR_Devolopment.BaseLib.Class
                IsMod = true;
                EnabledNew = false;
                EnabledModify = false;
+               EnabledDelete = false;
                EnabledCancel = false;
                EnabledSave = false;
                EnabledProcess = true;
@@ -539,6 +579,7 @@ namespace SRR_Devolopment.BaseLib.Class
                IsMod = true;
                EnabledNew = false;
                EnabledModify = false;
+               EnabledDelete = false;
                EnabledCancel = false;
                EnabledSave = false;
                EnabledProcess = false;

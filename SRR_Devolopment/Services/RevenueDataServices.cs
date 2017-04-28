@@ -115,6 +115,10 @@ namespace SRR_Devolopment.Services
                 {
                     CGL_KP_M_Revenue_Type_H typeRev = (from tbl in insertX.CGL_KP_M_Revenue_Type_H where tbl.Is_Deleted == false && tbl.Revenue_Type_Id == revenueType select tbl).FirstOrDefault(); 
                     CGL_KP_R_Revenue_H dataInsert = new CGL_KP_R_Revenue_H();
+                    bool refStatus = false;
+                    string refMessage = string.Empty;
+                    System.Data.Objects.ObjectParameter pMessage = new System.Data.Objects.ObjectParameter("Message", refMessage);
+                    System.Data.Objects.ObjectParameter pStatus = new System.Data.Objects.ObjectParameter("Success", refStatus);
                     dataInsert.Revenue_Date = revenueDate;
                     dataInsert.Revenue_Type_Id = revenueType;
                     if (memberId != 0)
@@ -134,6 +138,7 @@ namespace SRR_Devolopment.Services
                         dataInsert.Member_Loan_Id = memberLoanID;
                     else
                         dataInsert.Member_Loan_Id = null;
+
                     dataInsert.Is_Deleted = false;
                     dataInsert.Created_By = userID;
                     dataInsert.Created_Date = DateTime.Now;
@@ -142,6 +147,8 @@ namespace SRR_Devolopment.Services
                     insertX.CGL_KP_R_Revenue_H.Add(dataInsert);
                     insertX.SaveChanges();
                     revenueNo = dataInsert.Revenue_No;
+                    if (typeRev.Revenue_Type_Description.ToString().Contains("Repayment"))
+                        insertX.USP_CGL_KP_R_Generate_Loan_Full_Payment(dataInsert.Member_Loan_Id, dataInsert.Revenue_Date,pStatus, pMessage);
                     ret = true;
                 return ret;
                 }
@@ -206,6 +213,19 @@ namespace SRR_Devolopment.Services
                     var linqToList = x.USP_CGL_KP_R_Member_Loan_H_Find(memberID).ToList();
                     return new Collection<USP_CGL_KP_R_Member_Loan_H_Find_Result>(linqToList);
                 }
+            }
+            catch
+            {
+                throw new Exception("Database Error");
+            }
+        }
+
+        public bool deleteDataToRevenue(int transactionID)
+        {
+            bool ret = false;
+            try
+            {
+                return ret;
             }
             catch
             {

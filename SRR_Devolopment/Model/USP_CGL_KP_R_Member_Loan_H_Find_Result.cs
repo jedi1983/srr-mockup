@@ -26,5 +26,6 @@ namespace SRR_Devolopment.Model
         public decimal Remaining_Interest_Amount { get; set; }
         public int Remaining_Term_of_Loan { get; set; }
         public string Showed { get; set; }
+        public decimal Loan_Amount { get; set; }
     }
 }
