@@ -305,6 +305,8 @@ namespace SRR_Devolopment.Services
                         data.Deleted_By = userID;
                         data.Deleted_Date = DateTime.Now;
                         deleteX.SaveChanges();
+                        //deleting Journal If Exist
+                        deleteX.USP_CGL_KP_R_Journal_H_To_Find_Delete("Expenditure",(int)data.Expenditure_Id,(string)userID);
                     }
                     ret = true;
                     scope.Complete();

@@ -208,7 +208,7 @@
                     <TextBlock Grid.Column="2" Grid.Row="3" Text=":"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <ComboBox BorderBrush="Black" Grid.Row="3" Grid.Column="3" Name="revenueDrBx" Height="25" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" ItemsSource="{Binding GetRevenueType}" 
                               DisplayMemberPath="Revenue_Type_Description"  SelectedItem="{Binding SetRevenueType,Mode=TwoWay}"
-                              SelectedValue="{Binding SetRevenueType.Revenue_Type_Id,Mode=TwoWay}"  SelectedValuePath="Revenue_Type_Id" IsEnabled="{Binding ObjEnabled}"/>
+                              SelectedValue="{Binding SetRevenueType.Revenue_Type_Id,Mode=TwoWay}"  SelectedValuePath="Revenue_Type_Id" IsEnabled="{Binding ObjEnabledTransactionType}"/>
                     
                     <TextBlock Grid.Column="1" Grid.Row="4" Text="Revenue Amount"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <TextBlock Grid.Column="2" Grid.Row="4" Text=":"  HorizontalAlignment="Center" VerticalAlignment="Center" />

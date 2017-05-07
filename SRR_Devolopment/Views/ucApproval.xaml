@@ -1,11 +1,123 @@
 ﻿<UserControl x:Class="SRR_Devolopment.Views.ucApproval"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:my="clr-namespace:SRR_Devolopment.BaseLib.Class"
+             xmlns:local="clr-namespace:SRR_Devolopment.BaseLib.Class"
+             xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-            
-    </Grid>
+             DataContext="{Binding ApprovalScreen, Source={StaticResource Locator}}"
+             d:DesignHeight="640" d:DesignWidth="800" >
+
+    <StackPanel Name="mainStackPanel" >
+
+        <Expander Header="Approval :" Name="xPanderMainData" IsExpanded="True" BorderBrush="#FF7C7C7C" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <StackPanel Orientation="Vertical" Name="stackPanelMaster">
+                <Grid Height="500">
+                    <Grid.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FFECE8E8" Offset="0.542"/>
+                            <GradientStop Color="#FFFFF4F4" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Grid.Background>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5" />
+                        <ColumnDefinition Width="210" />
+                        <ColumnDefinition Width="15" />
+                        <ColumnDefinition Width="210" />
+                        <ColumnDefinition Width="40*" />
+                        <ColumnDefinition Width="5" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="5" />
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="5" />
+                        <RowDefinition Height="425" />
+                        <RowDefinition Height="5*" />
+                    </Grid.RowDefinitions>
+
+                    <Button Grid.Column="1" Grid.Row="1" Content="Approve" Height="25" Width="200" Command="{Binding ButtonProcess}" IsEnabled="{Binding EnabledNew}" />
+                    <Button Grid.Column="3" Grid.Row="1" Content="Reject" Height="25" Width="200" Command="{Binding ButtonDelete}" IsEnabled="{Binding EnabledNew}" />
+                    
+                    <DataGrid Name="approvalFindDataGrid" AutoGenerateColumns="False" Height="425" HorizontalAlignment="Stretch" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="4" VerticalAlignment="Top"
+                              ItemsSource="{Binding GetApprovalData,Mode=TwoWay}" SelectionMode="Single"  SelectedItem="{Binding SelectedGridData,Mode=TwoWay}" CanUserAddRows="False"  IsEnabled="true" >
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <mvvm:EventToCommand 
+                                            Command="{Binding  SelectionGrid, Mode=OneWay}" CommandParameter="{Binding ElementName= approvalFindDataGrid}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <DataGrid.Columns>
+
+                            <DataGridCheckBoxColumn Header="Approved" Binding="{Binding Flag}" Width="65"/>
+                            <DataGridTextColumn Header="Member Name" Binding="{Binding Name}" Width="200" IsReadOnly="True" />
+                           
+                            <DataGridTemplateColumn Header="Loan Date" IsReadOnly="True" Width="150">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <DatePicker SelectedDate="{Binding Expenditure_Date}" BorderThickness="0" IsEnabled="False" my:DateTimePicker.DateFormat="dd/MMM/yyyy"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                            <DataGridTextColumn Header="Interest Rate" Binding="{Binding Interest_Rate}" Width="200" IsReadOnly="True" />  
+   
+                            <DataGridTemplateColumn Header="Loan Amount" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding Loan_Amount, StringFormat='Rp #,###.00;$(#,###.00)'}" IsReadOnly="True"  />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                            <DataGridTemplateColumn Header="Interest Amount" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding Interest_Amount, StringFormat='Rp #,###.00;$(#,###.00)'}" IsReadOnly="True"  />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                            <DataGridTemplateColumn Header="Term Of Loan" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding Term_of_Loan, StringFormat='#,###.00;$(#,###.00)'}" IsReadOnly="True"  />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                            <DataGridTemplateColumn Header="Monthly Loan Amount" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding Monthly_Loan_Amount, StringFormat='Rp #,###.00;$(#,###.00)'}" IsReadOnly="True"  />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                            <DataGridTemplateColumn Header="Monthly Interest Amount" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding Monthly_Interest_Amount, StringFormat='Rp #,###.00;$(#,###.00)'}" IsReadOnly="True"  />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                            <DataGridTemplateColumn Header="Monthly Installment Amount" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding Monthly_Installment_Amount, StringFormat='Rp #,###.00;$(#,###.00)'}" IsReadOnly="True"  />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </StackPanel>
+        </Expander>
+    </StackPanel>
 </UserControl>

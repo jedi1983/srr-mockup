@@ -46,13 +46,17 @@ namespace SRR_Devolopment.ViewModel
 
             SimpleIoc.Default.Register<MemberViewModel>();
 
-            SimpleIoc.Default.Register<RevenueViewModel>();
-
             SimpleIoc.Default.Register<IRevenueDataServices, RevenueDataServices>();
+
+            SimpleIoc.Default.Register<RevenueViewModel>();
 
             SimpleIoc.Default.Register<IExpenditureDataServices, ExpenditureDataServices>();
 
             SimpleIoc.Default.Register<ExpenditureViewModel>();
+
+            SimpleIoc.Default.Register<IApprovalDataService, ApprovalDataService>();
+
+            SimpleIoc.Default.Register<ApprovalViewModel>();
 
         }
 
@@ -138,6 +142,30 @@ namespace SRR_Devolopment.ViewModel
                 else//first run will let the service locator got the Object
                 {
                     return ServiceLocator.Current.GetInstance<ExpenditureViewModel>();
+                }
+            }
+        }
+
+        public ApprovalViewModel ApprovalScreen
+        {
+            get
+            {
+                //checking whether already Contains/Object Created for this class?, if yes then unreg it first to clean cache up
+                //and register back to the SimpleIoc dan let the service locator find the Object GodSpeed
+                if (SimpleIoc.Default.ContainsCreated<ApprovalViewModel>() == true)
+                {
+
+                    //RevenueViewModel _objectRev = ServiceLocator.Current.GetInstance<RevenueViewModel>();//new line
+                    //_objectRev.Dispose();//disposing
+                    SimpleIoc.Default.Unregister<ApprovalViewModel>();
+                    SimpleIoc.Default.Register<ApprovalViewModel>();
+                    return ServiceLocator.Current.GetInstance<ApprovalViewModel>();
+                    
+
+                }
+                else//first run will let the service locator got the Object
+                {
+                    return ServiceLocator.Current.GetInstance<ApprovalViewModel>();
                 }
             }
         }

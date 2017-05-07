@@ -37,6 +37,23 @@ namespace SRR_Devolopment.ViewModel
         bool disposed = false;
 
         /// <summary>
+        /// Object Enabled Transaction Type
+        /// </summary>
+        private bool _objEnabledTransactionType;
+        public bool ObjEnabledTransactionType
+        {
+            get
+            {
+                return _objEnabledTransactionType;
+            }
+            set
+            {
+                _objEnabledTransactionType = value;
+                RaisePropertyChanged("ObjEnabledTransactionType");
+            }
+        }
+
+        /// <summary>
         /// Get Member Loan Data
         /// </summary>
         private Collection<USP_CGL_KP_R_Member_Loan_H_Find_Result> _getMemberLoadData;
@@ -478,14 +495,6 @@ namespace SRR_Devolopment.ViewModel
         #region "Methods"
 
         /// <summary>
-        /// Delete Button
-        /// </summary>
-        public override void deleteButton()
-        {
-            base.deleteButton();
-        }
-
-        /// <summary>
         /// Check Data
         /// </summary>
         /// <returns>String Of Error (If any)</returns>
@@ -663,6 +672,8 @@ namespace SRR_Devolopment.ViewModel
             else
                 IsAmountEnabled = true;
 
+            ObjEnabledTransactionType = false;
+
         }
 
         /// <summary>
@@ -691,6 +702,30 @@ namespace SRR_Devolopment.ViewModel
             }
             base.cancelButton();
         }
+
+        /// <summary>
+        /// Delete Button
+        /// </summary>
+        public override void deleteButton()
+        {
+            base.deleteButton();
+            if (MessageBox.Show("Are You Sure You Want To Delete This Transaction ?", "Revenue Screen", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                if (_dataServices.deleteDataToRevenue(GetTransactionID, (string)BaseLib.Class.Singleton.Instance.TmpUserName) == true)
+                {
+                    MessageBox.Show("Revenue Transaction No " + RevenueNo.ToString() + " Successfully Deleted!", "Expenditure Screen", MessageBoxButton.OK, MessageBoxImage.Information);
+                    RevenueNo = _revenueNo;
+                    cancelButton();
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show("Expenditure Transaction Failed ", "Expenditure Screen", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+            }
+        }
+
 
         /// <summary>
         /// Clean Object
@@ -727,6 +762,7 @@ namespace SRR_Devolopment.ViewModel
             SetRevenueType = null;
             IsAmountEnabled = false;
             IsRepayment = false;
+            ObjEnabledTransactionType = false;
         }
 
         /// <summary>
@@ -739,6 +775,7 @@ namespace SRR_Devolopment.ViewModel
             DataNew = true;
             ObjEnabled = true;
             ObjFilterEnabled = false;
+            ObjEnabledTransactionType = true;
             EnabledSave = true;
             EnabledCancel = true;
            
@@ -787,6 +824,7 @@ namespace SRR_Devolopment.ViewModel
             _isRepayment = false;
             _getMemberLoadData = null;
             _setLoanData = null;
+            _objEnabledTransactionType = false;
         }
 
         /// <summary>
@@ -833,6 +871,7 @@ namespace SRR_Devolopment.ViewModel
                     GetMemberLoadData = _dataServices.getMemberLoan(SetMember.Member_Id);
                     SetLoanData = GetMemberLoadData.FirstOrDefault(x => x.Member_Loan_Id == SelectedGridData.Member_Loan_Id);
                 }
+                EnabledDelete = true;//Delete are always possible
             }
         }
 

@@ -26,6 +26,6 @@ namespace SRR_Devolopment.Services
 
        Collection<USP_CGL_KP_R_Member_Loan_H_Find_Result> getMemberLoan(int memberID);
 
-       bool deleteDataToRevenue(int transactionID);
+       bool deleteDataToRevenue(int transactionID,string userID);
    }
 }

@@ -209,5 +209,27 @@ namespace SRR_Devolopment.Model
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<USP_CGL_KP_S_Setting_H_Get_Result>("USP_CGL_KP_S_Setting_H_Get");
         }
+    
+        public virtual int USP_CGL_KP_R_Journal_H_To_Find_Delete(string transactionTypeInput, Nullable<int> referenceID, string userID)
+        {
+            var transactionTypeInputParameter = transactionTypeInput != null ?
+                new ObjectParameter("TransactionTypeInput", transactionTypeInput) :
+                new ObjectParameter("TransactionTypeInput", typeof(string));
+    
+            var referenceIDParameter = referenceID.HasValue ?
+                new ObjectParameter("ReferenceID", referenceID) :
+                new ObjectParameter("ReferenceID", typeof(int));
+    
+            var userIDParameter = userID != null ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("USP_CGL_KP_R_Journal_H_To_Find_Delete", transactionTypeInputParameter, referenceIDParameter, userIDParameter);
+        }
+    
+        public virtual ObjectResult<USP_CGL_KP_R_Expenditure_H_UnApproved_Yet_Result> USP_CGL_KP_R_Expenditure_H_UnApproved_Yet()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<USP_CGL_KP_R_Expenditure_H_UnApproved_Yet_Result>("USP_CGL_KP_R_Expenditure_H_UnApproved_Yet");
+        }
     }
 }

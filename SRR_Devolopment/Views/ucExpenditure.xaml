@@ -19,7 +19,7 @@
 
     <StackPanel Name="mainStackPanel"  >
 
-        <Expander Header="Find Data :" Name="xPanderMainData" IsExpanded="True" BorderBrush="#FF7C7C7C" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <Expander Header="Find Data :" Name="xPanderMainData" IsExpanded="True" BorderBrush="#FF7C7C7C" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
             <StackPanel Orientation="Vertical" Name="stackPanelMaster">
                 <Grid Height="275">
                     <Grid.Background>

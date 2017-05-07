@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SRR_Devolopment.Model;
 using System.Collections.ObjectModel;
+using System.Transactions;
 
 namespace SRR_Devolopment.Services
 {
@@ -220,12 +221,27 @@ namespace SRR_Devolopment.Services
             }
         }
 
-        public bool deleteDataToRevenue(int transactionID)
+        public bool deleteDataToRevenue(int transactionID,string userID)
         {
             bool ret = false;
             try
             {
-                return ret;
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    using (srr_devEntities deleteX = new srr_devEntities())
+                    {
+                        CGL_KP_R_Revenue_H data = deleteX.CGL_KP_R_Revenue_H.FirstOrDefault(x => x.Revenue_Id == transactionID);
+                        data.Is_Deleted = true;
+                        data.Deleted_By = userID;
+                        data.Deleted_Date = DateTime.Now;
+                        deleteX.SaveChanges();
+                        //deleting Journal If Exist
+                        deleteX.USP_CGL_KP_R_Journal_H_To_Find_Delete("Revenue", (int)data.Revenue_Id, (string)userID);
+                    }
+                    ret = true;
+                    scope.Complete();
+                    return ret;
+                }
             }
             catch
             {
