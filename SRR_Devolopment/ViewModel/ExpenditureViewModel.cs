@@ -15,6 +15,8 @@ using SRR_Devolopment.BaseLib.Class;
 using GalaSoft.MvvmLight.Messaging;
 using SRR_Devolopment.MessageInfrastructure;
 using System.Drawing;
+using System.Windows.Data;
+using System.Windows.Input;
 
 
 namespace SRR_Devolopment.ViewModel
@@ -27,6 +29,26 @@ namespace SRR_Devolopment.ViewModel
         IExpenditureDataServices _dataServices;
         public RelayCommand<DataGrid> SelectionGrid { get; set; }
 
+        //On Focus Object Inherited by COntrol
+        public RelayCommand<Control> LostFocus { get; set; }
+
+        /// <summary>
+        /// Collection of Control
+        /// </summary>
+        private Collection<Control> _fillControl = new Collection<Control>();
+        public Collection<Control> FillControl
+        {
+            get
+            {
+                return _fillControl;
+            }
+            set
+            {
+                _fillControl = value;
+                RaisePropertyChanged("FillControl");
+            }
+        }
+ 
         /// <summary>
         /// Object Enabled Transaction Type
         /// </summary>
@@ -687,6 +709,8 @@ namespace SRR_Devolopment.ViewModel
 
         #region "Methods"
 
+     
+
         /// <summary>
         /// Modify Button
         /// </summary>
@@ -843,6 +867,7 @@ namespace SRR_Devolopment.ViewModel
             EnabledSave = false;
             EnabledModify = false;
             EnabledCancel = false;
+            EnabledDelete = false;
             DataMod = false;
             ObjEnabled = false;
             ObjFilterEnabled = true;
@@ -869,6 +894,7 @@ namespace SRR_Devolopment.ViewModel
             InterestInstallment = 0;
             TotalInstallment = 0;
             ObjEnabledTransactionType = false;
+            FillControl.Clear();//clear Fill Control
         }
 
         /// <summary>
@@ -891,7 +917,7 @@ namespace SRR_Devolopment.ViewModel
             {
                 ret = "Expenditure Date Is Not In The Period " + GetPeriod.FirstOrDefault().Period_Name.ToString();
             }
-            if (IsMemberEnabled == true && EmployeeText == string.Empty)
+            if (IsMemberEnabled == true &&  String.IsNullOrEmpty(EmployeeText))//change string to null or empty
             {
                 ret = "Please Fill Member Name";
             }
@@ -928,13 +954,44 @@ namespace SRR_Devolopment.ViewModel
         }
 
         /// <summary>
+        /// Get Control Focused
+        /// </summary>
+        /// <param name="x"></param>
+        public void getControl(Control x)
+        {
+            var _checkControl = from dataControl in FillControl where dataControl.Name == x.Name select dataControl;
+            if (_checkControl.Count() > 0)
+                return;
+            FillControl.Add(x);
+
+        }
+
+        /// <summary>
+        /// Get Focus
+        /// </summary>
+        /// <param name="dataObject"></param>
+        private void getNextFocus(Collection<Control> dataObject)
+        {
+            foreach (Control dd in dataObject.ToList())
+            {
+                //Focus Navigation Direction
+                FocusNavigationDirection focusDirection = new FocusNavigationDirection();
+                focusDirection = FocusNavigationDirection.Next;//
+                // MoveFocus takes a TraveralReqest as its argument.
+                TraversalRequest request = new TraversalRequest(focusDirection);
+                dd.MoveFocus(request);
+            }
+        }
+
+        /// <summary>
         /// save button
         /// </summary>
         public override void saveButton()
         {
             base.saveButton();
-
             
+            getNextFocus(FillControl);//Get Filled Control
+            TermOfLoan = TermOfLoan;//check for loan
 
             if (MessageBox.Show("Are You Sure You Want To Save This Data?", "Expenditure Screen", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
@@ -1112,6 +1169,7 @@ namespace SRR_Devolopment.ViewModel
         {
             _dataServices = dataServices;
             SelectionGrid = new RelayCommand<DataGrid>(getGridSelection);
+            LostFocus = new RelayCommand<Control>(getControl);//get Control Focused
             //initializer
             Initalize();
         }

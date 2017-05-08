@@ -201,7 +201,17 @@
                     <TextBlock Grid.Column="1" Grid.Row="4" Text="Expenditure Amount"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <TextBlock Grid.Column="2" Grid.Row="4" Text=":"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <TextBox BorderBrush="Black" Grid.Column="3" Grid.Row="4" Height="25" Width="200" HorizontalAlignment="Center" 
-                             VerticalAlignment="Center" Text="{Binding ExpenditureAmount,StringFormat='#,###.00;$(#,###.00)',Mode=TwoWay}" IsEnabled="{Binding ObjEnabled}" />
+                             VerticalAlignment="Center" Text="{Binding ExpenditureAmount,StringFormat='#,###.00;$(#,###.00)',Mode=TwoWay}" IsEnabled="{Binding ObjEnabled}" Name="expenditureAmountBox" >
+                        <i:Interaction.Behaviors>
+                            <local:TextBoxInputRegExBehaviour RegularExpression="^[0-9.\-]+$" MaxLength="12" EmptyValue="" />
+                        </i:Interaction.Behaviors>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="GotFocus">
+                                <mvvm:EventToCommand 
+                                            Command="{Binding  LostFocus, Mode=TwoWay}" CommandParameter="{Binding ElementName= expenditureAmountBox}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
 
                     <TextBlock Grid.Column="1" Grid.Row="5" Text="Member Name"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <TextBlock Grid.Column="2" Grid.Row="5" Text=":"  HorizontalAlignment="Center" VerticalAlignment="Center" />
@@ -209,6 +219,12 @@
                     <my:TextBoxWithSearch BorderBrush="Black" Grid.Column="3" Grid.Row="5" Height="25" Width="200" HorizontalAlignment="Center" 
                              VerticalAlignment="Center" Text="{Binding EmployeeText }" x:Name="txWithSearchBoxComp" SetFirstColumnName="Name" GetSelectDropDown="{Binding ObjectFromText,Mode=TwoWay}" IsInEditMode="{Binding GetEditMode,Mode=TwoWay}"
                                           SetSecondColumnName="Employee No" SetFirstColumnBind="Name" SetSecondColumnBind="Employee_No" ItemsSource="{Binding GetMember, Mode=TwoWay}" MaxPopUpHeight="300" MaxPopUpWidth="500" IsEnabled="{Binding IsMemberEnabled,Mode=TwoWay}" >
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="GotFocus">
+                                <mvvm:EventToCommand 
+                                            Command="{Binding  LostFocus, Mode=TwoWay}" CommandParameter="{Binding ElementName= txWithSearchBoxComp}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
                     </my:TextBoxWithSearch>
                     <GroupBox Grid.Row="7" Grid.RowSpan="4" Grid.Column="1" Grid.ColumnSpan="7" Header="Loan Simulation" >
                         <Grid>
@@ -239,7 +255,14 @@
                             <TextBlock Grid.Column="1" Grid.Row="1" Text="Term Of Loan"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                             <TextBlock Grid.Column="2" Grid.Row="1" Text=":"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                             <TextBox BorderBrush="Black" Grid.Column="3" Grid.Row="1" Height="25" Width="200" HorizontalAlignment="Center" 
-                             VerticalAlignment="Center" Text="{Binding TermOfLoan,StringFormat='#,###.00;$(#,###.00)',Mode=TwoWay}" IsEnabled="{Binding IsTermOfLoanEnabled}" />
+                             VerticalAlignment="Center" Text="{Binding TermOfLoan,StringFormat='#,###.00;$(#,###.00)',Mode=TwoWay}" IsEnabled="{Binding IsTermOfLoanEnabled}" Name="termOfLoan" >
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="GotFocus">
+                                        <mvvm:EventToCommand 
+                                            Command="{Binding  LostFocus, Mode=TwoWay}" CommandParameter="{Binding ElementName= termOfLoan}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </TextBox>
                             
                             <TextBlock Grid.Column="1" Grid.Row="2" Text="Loan Amount"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                             <TextBlock Grid.Column="2" Grid.Row="2" Text=":"  HorizontalAlignment="Center" VerticalAlignment="Center" />

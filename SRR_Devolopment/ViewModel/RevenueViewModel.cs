@@ -20,6 +20,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Media;
 using System.Windows.Documents;
 using System.Windows.Data;
+using System.Windows.Input;
 
 namespace SRR_Devolopment.ViewModel
 {
@@ -31,7 +32,26 @@ namespace SRR_Devolopment.ViewModel
         //data services Dependency Injection
         IRevenueDataServices _dataServices;
         public RelayCommand<DataGrid> SelectionGrid { get; set; }
+        
+        //On Focus Object Inherited by COntrol
+        public RelayCommand<Control> LostFocus { get; set; }
 
+        /// <summary>
+        /// Collection of Control
+        /// </summary>
+        private Collection<Control> _fillControl = new Collection<Control>();
+        public Collection<Control> FillControl
+        {
+            get
+            {
+                return _fillControl;
+            }
+            set
+            {
+                _fillControl = value;
+                RaisePropertyChanged("FillControl");
+            }
+        }
 
         //disposable
         bool disposed = false;
@@ -514,7 +534,7 @@ namespace SRR_Devolopment.ViewModel
             {
                 ret = "Revenue Date Is Not In The Perid " + GetPeriod.FirstOrDefault().Period_Name.ToString();
             }
-            if(IsMemberEnabled == true && EmployeeText == string.Empty)
+            if(IsMemberEnabled == true && string.IsNullOrEmpty(EmployeeText))
             {
                 ret = "Please Fill Member Name";
             }
@@ -533,7 +553,7 @@ namespace SRR_Devolopment.ViewModel
         public override void saveButton()
         {
             base.saveButton();
-
+            getNextFocus(FillControl);//get All Last Direction
 
             if (MessageBox.Show("Are You Sure You Want To Save This Data?", "Revenue Screen", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
@@ -763,6 +783,7 @@ namespace SRR_Devolopment.ViewModel
             IsAmountEnabled = false;
             IsRepayment = false;
             ObjEnabledTransactionType = false;
+            FillControl.Clear();//clear all Fill Control
         }
 
         /// <summary>
@@ -841,6 +862,36 @@ namespace SRR_Devolopment.ViewModel
 
         }
 
+        /// <summary>
+        /// Get Focus
+        /// </summary>
+        /// <param name="dataObject"></param>
+        private void getNextFocus(Collection<Control> dataObject)
+        {
+            foreach (Control dd in dataObject.ToList())
+            {
+                //Focus Navigation Direction
+                FocusNavigationDirection focusDirection = new FocusNavigationDirection();
+                focusDirection = FocusNavigationDirection.Next;//
+                // MoveFocus takes a TraveralReqest as its argument.
+                TraversalRequest request = new TraversalRequest(focusDirection);
+                dd.MoveFocus(request);
+            }
+        }
+
+        /// <summary>
+        /// Get Control Focused
+        /// </summary>
+        /// <param name="x"></param>
+        public void getControl(Control x)
+        {
+            var _checkControl = from dataControl in FillControl where dataControl.Name == x.Name select dataControl;
+            if (_checkControl.Count() > 0)
+                return;
+            FillControl.Add(x);
+
+        }
+
 
         /// <summary>
         /// show data to the form
@@ -882,6 +933,7 @@ namespace SRR_Devolopment.ViewModel
         {
             _dataServices = dataServices;
             SelectionGrid = new RelayCommand<DataGrid>(getGridSelection);
+            LostFocus = new RelayCommand<Control>(getControl);//get Control Focused
             //initializer
             Initalize();
         }
