@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace SRR_Devolopment.Views
 {
     /// <summary>
-    /// Interaction logic for ucTransactionOne.xaml
+    /// Interaction logic for ucPeriodSettings.xaml
     /// </summary>
-    public partial class ucTransactionOne : UserControl
+    public partial class ucPeriodSettings : UserControl
     {
-        public ucTransactionOne()
+        public ucPeriodSettings()
         {
             InitializeComponent();
         }

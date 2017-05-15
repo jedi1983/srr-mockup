@@ -22,6 +22,7 @@ using System.Data.Objects;
 using System.Data.Entity;
 
 
+
 namespace SRR_Devolopment.BaseLib.Class
 {
     public class TextBoxWithSearch : TextBox,INotifyPropertyChanged
@@ -406,7 +407,7 @@ namespace SRR_Devolopment.BaseLib.Class
 #region "Methods"
         protected override void OnTextChanged(TextChangedEventArgs e)
         {
-
+            
             //check Whether it is in Edit Mode
             if (IsInEditMode == false)
             {
@@ -467,6 +468,7 @@ namespace SRR_Devolopment.BaseLib.Class
                 GetFilterPopUp.PlacementTarget = this;
                 GetFilterPopUp.IsOpen = true;
             }
+            
 
             //check data
             
@@ -477,6 +479,19 @@ namespace SRR_Devolopment.BaseLib.Class
 
         }
 
+        //protected override void OnLostFocus(RoutedEventArgs e)
+        //{
+        //    //if (GetFilterPopUp.IsOpen == true)
+        //    //    GetFilterPopUp.IsOpen = false;
+
+        //}
+
+        //protected override void OnGotFocus(RoutedEventArgs e)
+        //{
+
+        //}
+
+       
 
         private void getData_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -486,18 +501,20 @@ namespace SRR_Devolopment.BaseLib.Class
             if (GetFilterPopUp.IsOpen == true)
             {
                 GetFilterPopUp.IsOpen = false;
-                
+
                 //specific for Member
-                if(GetEntityNameLink.Contains("CGL_KP_M_Member_H") && GetSelectDropDown != null)
+                if (GetEntityNameLink.Contains("CGL_KP_M_Member_H") && GetSelectDropDown != null)
                 {
                     CGL_KP_M_Member_H testData = (CGL_KP_M_Member_H)GetSelectDropDown;
                     OldValueText = testData.Name;
                     Text = testData.Name;
                 }
 
-            } 
-            
+            }
+
         }
+
+      
 
         // Public implementation of Dispose pattern callable by consumers.
         public void Dispose()

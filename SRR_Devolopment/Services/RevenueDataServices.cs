@@ -148,8 +148,14 @@ namespace SRR_Devolopment.Services
                     insertX.CGL_KP_R_Revenue_H.Add(dataInsert);
                     insertX.SaveChanges();
                     revenueNo = dataInsert.Revenue_No;
+
+
                     if (typeRev.Revenue_Type_Description.ToString().Contains("Repayment"))
                         insertX.USP_CGL_KP_R_Generate_Loan_Full_Payment(dataInsert.Member_Loan_Id, dataInsert.Revenue_Date,pStatus, pMessage);
+                    else
+                        insertX.USP_CGL_KP_R_Generate_Journal("REVENUE", dataInsert.Revenue_Id, pStatus, pMessage);
+
+
                     ret = true;
                 return ret;
                 }
@@ -167,6 +173,10 @@ namespace SRR_Devolopment.Services
             {
                 using (srr_devEntities x = new srr_devEntities())
                 {
+                    bool refStatus = false;
+                    string refMessage = string.Empty;
+                    System.Data.Objects.ObjectParameter pMessage = new System.Data.Objects.ObjectParameter("Message", refMessage);
+                    System.Data.Objects.ObjectParameter pStatus = new System.Data.Objects.ObjectParameter("Success", refStatus);
                     CGL_KP_M_Revenue_Type_H typeRev = (from tbl in x.CGL_KP_M_Revenue_Type_H where tbl.Is_Deleted == false && tbl.Revenue_Type_Id == revenueType select tbl).FirstOrDefault(); 
                     CGL_KP_R_Revenue_H insertData = x.CGL_KP_R_Revenue_H.FirstOrDefault(y => y.Revenue_Id == TransactionID);
                     insertData.Revenue_Date = revenueDate;
@@ -192,6 +202,9 @@ namespace SRR_Devolopment.Services
                     insertData.Modified_By = userID;
                     insertData.Modified_Date = DateTime.Now;
                     x.SaveChanges();
+
+                    x.USP_CGL_KP_R_Generate_Journal("REVENUE", insertData.Revenue_Id, pStatus, pMessage);//Generate Journal
+
                     ret = true;
                     return ret;
                 }

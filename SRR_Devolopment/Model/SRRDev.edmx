@@ -800,17 +800,51 @@ warning 6002: The table/view 'srr_dev.dbo.CGL_KP_R_Cooperative_Beginning_Balance
           <Parameter Name="UserID" Type="varchar(max)" Mode="In" />
           <Parameter Name="Password" Type="varchar(max)" Mode="In" />
         </Function>
+        <Function Name="USP_CGL_KP_M_Close_Period" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Period" Type="datetime" Mode="In" />
+          <Parameter Name="User_Id" Type="varchar" Mode="In" />
+          <Parameter Name="Success" Type="int" Mode="InOut" />
+          <Parameter Name="Message" Type="varchar" Mode="InOut" />
+        </Function>
         <Function Name="USP_CGL_KP_M_Member_H_Find" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Name" Type="varchar(max)" Mode="In" />
           <Parameter Name="LegalEntityID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="USP_CGL_KP_M_New_Period" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Period" Type="datetime" Mode="In" />
+          <Parameter Name="User_Id" Type="varchar" Mode="In" />
+          <Parameter Name="Success" Type="int" Mode="InOut" />
+          <Parameter Name="Message" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="USP_CGL_KP_M_Period_Status" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="USP_CGL_KP_M_Reopen_Period" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Period" Type="datetime" Mode="In" />
+          <Parameter Name="User_Id" Type="varchar" Mode="In" />
+          <Parameter Name="Success" Type="int" Mode="InOut" />
+          <Parameter Name="Message" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="USP_CGL_KP_R_Balance_Calculation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Success" Type="bit" Mode="InOut" />
+          <Parameter Name="Message" Type="varchar" Mode="InOut" />
         </Function>
         <Function Name="USP_CGL_KP_R_Expenditure_H_Find" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="LegalEntityID" Type="int" Mode="In" />
           <Parameter Name="Period_Id" Type="int" Mode="In" />
         </Function>
         <Function Name="USP_CGL_KP_R_Expenditure_H_UnApproved_Yet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="USP_CGL_KP_R_Generate_Journal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Transaction_Type_Code" Type="varchar" Mode="In" />
+          <Parameter Name="Transaction_Id" Type="int" Mode="In" />
+          <Parameter Name="Success" Type="bit" Mode="InOut" />
+          <Parameter Name="Message" Type="varchar" Mode="InOut" />
+        </Function>
         <Function Name="USP_CGL_KP_R_Generate_Loan_Full_Payment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Member_Loan_Id" Type="int" Mode="In" />
+          <Parameter Name="Transaction_Date" Type="datetime" Mode="In" />
+          <Parameter Name="Success" Type="bit" Mode="InOut" />
+          <Parameter Name="Message" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="USP_CGL_KP_R_Generate_Loan_Payment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Transaction_Date" Type="datetime" Mode="In" />
           <Parameter Name="Success" Type="bit" Mode="InOut" />
           <Parameter Name="Message" Type="varchar" Mode="InOut" />
@@ -1213,6 +1247,40 @@ FROM [dbo].[CGL_KP_R_Cooperative_Beginning_Balance_H] AS [CGL_KP_R_Cooperative_B
             <Parameter Name="UserID" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="USP_CGL_KP_R_Expenditure_H_UnApproved_Yet" ReturnType="Collection(srr_devModel.USP_CGL_KP_R_Expenditure_H_UnApproved_Yet_Result)" />
+          <FunctionImport Name="USP_CGL_KP_R_Balance_Calculation">
+            <Parameter Name="Success" Mode="InOut" Type="Boolean" />
+            <Parameter Name="Message" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="USP_CGL_KP_R_Generate_Journal">
+            <Parameter Name="Transaction_Type_Code" Mode="In" Type="String" />
+            <Parameter Name="Transaction_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Success" Mode="InOut" Type="Boolean" />
+            <Parameter Name="Message" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="USP_CGL_KP_R_Generate_Loan_Payment">
+            <Parameter Name="Transaction_Date" Mode="In" Type="DateTime" />
+            <Parameter Name="Success" Mode="InOut" Type="Boolean" />
+            <Parameter Name="Message" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="USP_CGL_KP_M_Close_Period">
+            <Parameter Name="Period" Mode="In" Type="DateTime" />
+            <Parameter Name="User_Id" Mode="In" Type="String" />
+            <Parameter Name="Success" Mode="InOut" Type="Int32" />
+            <Parameter Name="Message" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="USP_CGL_KP_M_New_Period">
+            <Parameter Name="Period" Mode="In" Type="DateTime" />
+            <Parameter Name="User_Id" Mode="In" Type="String" />
+            <Parameter Name="Success" Mode="InOut" Type="Int32" />
+            <Parameter Name="Message" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="USP_CGL_KP_M_Period_Status" ReturnType="Collection(srr_devModel.USP_CGL_KP_M_Period_Status_Result)" />
+          <FunctionImport Name="USP_CGL_KP_M_Reopen_Period">
+            <Parameter Name="Period" Mode="In" Type="DateTime" />
+            <Parameter Name="User_Id" Mode="In" Type="String" />
+            <Parameter Name="Success" Mode="InOut" Type="Int32" />
+            <Parameter Name="Message" Mode="InOut" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="CGL_KP_M_Legal_Entity_H">
           <Key>
@@ -2143,6 +2211,12 @@ FROM [dbo].[CGL_KP_R_Cooperative_Beginning_Balance_H] AS [CGL_KP_R_Cooperative_B
           <Property Type="Int32" Name="Expenditure_Id" Nullable="false" />
           <Property Type="Int32" Name="Member_Loan_Id" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="USP_CGL_KP_M_Period_Status_Result">
+          <Property Type="String" Name="Legal_Entity_Code" Nullable="false" MaxLength="5" />
+          <Property Type="DateTime" Name="Last_Closed_Period" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="Last_Active_Period" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="Last_Reopen_Period" Nullable="true" Precision="23" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2806,6 +2880,22 @@ FROM [dbo].[CGL_KP_R_Cooperative_Beginning_Balance_H] AS [CGL_KP_R_Cooperative_B
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="USP_CGL_KP_R_Balance_Calculation" FunctionName="srr_devModel.Store.USP_CGL_KP_R_Balance_Calculation" />
+          <FunctionImportMapping FunctionImportName="USP_CGL_KP_R_Generate_Journal" FunctionName="srr_devModel.Store.USP_CGL_KP_R_Generate_Journal" />
+          <FunctionImportMapping FunctionImportName="USP_CGL_KP_R_Generate_Loan_Payment" FunctionName="srr_devModel.Store.USP_CGL_KP_R_Generate_Loan_Payment" />
+          <FunctionImportMapping FunctionImportName="USP_CGL_KP_M_Close_Period" FunctionName="srr_devModel.Store.USP_CGL_KP_M_Close_Period" />
+          <FunctionImportMapping FunctionImportName="USP_CGL_KP_M_New_Period" FunctionName="srr_devModel.Store.USP_CGL_KP_M_New_Period" />
+          <FunctionImportMapping FunctionImportName="USP_CGL_KP_M_Period_Status" FunctionName="srr_devModel.Store.USP_CGL_KP_M_Period_Status">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="srr_devModel.USP_CGL_KP_M_Period_Status_Result">
+                <ScalarProperty Name="Legal_Entity_Code" ColumnName="Legal_Entity_Code" />
+                <ScalarProperty Name="Last_Closed_Period" ColumnName="Last_Closed_Period" />
+                <ScalarProperty Name="Last_Active_Period" ColumnName="Last_Active_Period" />
+                <ScalarProperty Name="Last_Reopen_Period" ColumnName="Last_Reopen_Period" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="USP_CGL_KP_M_Reopen_Period" FunctionName="srr_devModel.Store.USP_CGL_KP_M_Reopen_Period" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

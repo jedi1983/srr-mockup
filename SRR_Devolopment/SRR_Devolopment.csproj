@@ -225,6 +225,9 @@
     <Compile Include="Model\USP_CGL_KP_M_Member_H_Find_Result.cs">
       <DependentUpon>SRRDev.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\USP_CGL_KP_M_Period_Status_Result.cs">
+      <DependentUpon>SRRDev.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\USP_CGL_KP_R_Expenditure_H_Find_Result.cs">
       <DependentUpon>SRRDev.tt</DependentUpon>
     </Compile>
@@ -261,8 +264,12 @@
     <Compile Include="Services\IDataServices.cs" />
     <Compile Include="Services\IExpenditureDataServices.cs" />
     <Compile Include="Services\IMemberDataService.cs" />
+    <Compile Include="Services\IPeriodDataService.cs" />
+    <Compile Include="Services\IProcessDataService.cs" />
     <Compile Include="Services\IRevenueDataServices.cs" />
     <Compile Include="Services\MemberDataService.cs" />
+    <Compile Include="Services\PeriodDataService.cs" />
+    <Compile Include="Services\ProcessDataService.cs" />
     <Compile Include="Services\RevenueDataServices.cs" />
     <Compile Include="Services\Services.cs" />
     <Compile Include="UnitTest\TestingOne.cs" />
@@ -270,6 +277,8 @@
     <Compile Include="ViewModel\ExpenditureViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MemberViewModel.cs" />
+    <Compile Include="ViewModel\PeriodSettingsViewModel.cs" />
+    <Compile Include="ViewModel\ProcessViewModel.cs" />
     <Compile Include="ViewModel\RevenueViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="Views\ucApproval.xaml.cs">
@@ -281,14 +290,14 @@
     <Compile Include="Views\ucMember.xaml.cs">
       <DependentUpon>ucMember.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ucPageOne.xaml.cs">
-      <DependentUpon>ucPageOne.xaml</DependentUpon>
+    <Compile Include="Views\ucPeriodSettings.xaml.cs">
+      <DependentUpon>ucPeriodSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ucProcess.xaml.cs">
+      <DependentUpon>ucProcess.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ucRevenue.xaml.cs">
       <DependentUpon>ucRevenue.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ucTransactionOne.xaml.cs">
-      <DependentUpon>ucTransactionOne.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -318,15 +327,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ucPageOne.xaml">
+    <Page Include="Views\ucPeriodSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ucProcess.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ucRevenue.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\ucTransactionOne.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -231,5 +231,76 @@ namespace SRR_Devolopment.Model
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<USP_CGL_KP_R_Expenditure_H_UnApproved_Yet_Result>("USP_CGL_KP_R_Expenditure_H_UnApproved_Yet");
         }
+    
+        public virtual int USP_CGL_KP_R_Balance_Calculation(ObjectParameter success, ObjectParameter message)
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("USP_CGL_KP_R_Balance_Calculation", success, message);
+        }
+    
+        public virtual int USP_CGL_KP_R_Generate_Journal(string transaction_Type_Code, Nullable<int> transaction_Id, ObjectParameter success, ObjectParameter message)
+        {
+            var transaction_Type_CodeParameter = transaction_Type_Code != null ?
+                new ObjectParameter("Transaction_Type_Code", transaction_Type_Code) :
+                new ObjectParameter("Transaction_Type_Code", typeof(string));
+    
+            var transaction_IdParameter = transaction_Id.HasValue ?
+                new ObjectParameter("Transaction_Id", transaction_Id) :
+                new ObjectParameter("Transaction_Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("USP_CGL_KP_R_Generate_Journal", transaction_Type_CodeParameter, transaction_IdParameter, success, message);
+        }
+    
+        public virtual int USP_CGL_KP_R_Generate_Loan_Payment(Nullable<System.DateTime> transaction_Date, ObjectParameter success, ObjectParameter message)
+        {
+            var transaction_DateParameter = transaction_Date.HasValue ?
+                new ObjectParameter("Transaction_Date", transaction_Date) :
+                new ObjectParameter("Transaction_Date", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("USP_CGL_KP_R_Generate_Loan_Payment", transaction_DateParameter, success, message);
+        }
+    
+        public virtual int USP_CGL_KP_M_Close_Period(Nullable<System.DateTime> period, string user_Id, ObjectParameter success, ObjectParameter message)
+        {
+            var periodParameter = period.HasValue ?
+                new ObjectParameter("Period", period) :
+                new ObjectParameter("Period", typeof(System.DateTime));
+    
+            var user_IdParameter = user_Id != null ?
+                new ObjectParameter("User_Id", user_Id) :
+                new ObjectParameter("User_Id", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("USP_CGL_KP_M_Close_Period", periodParameter, user_IdParameter, success, message);
+        }
+    
+        public virtual int USP_CGL_KP_M_New_Period(Nullable<System.DateTime> period, string user_Id, ObjectParameter success, ObjectParameter message)
+        {
+            var periodParameter = period.HasValue ?
+                new ObjectParameter("Period", period) :
+                new ObjectParameter("Period", typeof(System.DateTime));
+    
+            var user_IdParameter = user_Id != null ?
+                new ObjectParameter("User_Id", user_Id) :
+                new ObjectParameter("User_Id", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("USP_CGL_KP_M_New_Period", periodParameter, user_IdParameter, success, message);
+        }
+    
+        public virtual ObjectResult<USP_CGL_KP_M_Period_Status_Result> USP_CGL_KP_M_Period_Status()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<USP_CGL_KP_M_Period_Status_Result>("USP_CGL_KP_M_Period_Status");
+        }
+    
+        public virtual int USP_CGL_KP_M_Reopen_Period(Nullable<System.DateTime> period, string user_Id, ObjectParameter success, ObjectParameter message)
+        {
+            var periodParameter = period.HasValue ?
+                new ObjectParameter("Period", period) :
+                new ObjectParameter("Period", typeof(System.DateTime));
+    
+            var user_IdParameter = user_Id != null ?
+                new ObjectParameter("User_Id", user_Id) :
+                new ObjectParameter("User_Id", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("USP_CGL_KP_M_Reopen_Period", periodParameter, user_IdParameter, success, message);
+        }
     }
 }

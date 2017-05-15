@@ -42,6 +42,10 @@ namespace SRR_Devolopment.Services
 
                         foreach (USP_CGL_KP_R_Expenditure_H_UnApproved_Yet_Result xData in queryLinq)
                         {
+                            bool refStatus = false;
+                            string refMessage = string.Empty;
+                            System.Data.Objects.ObjectParameter pMessage = new System.Data.Objects.ObjectParameter("Message", refMessage);
+                            System.Data.Objects.ObjectParameter pStatus = new System.Data.Objects.ObjectParameter("Success", refStatus);
                             int _id = xData.Expenditure_Id;
                             CGL_KP_R_Expenditure_H dataMod = dataX.CGL_KP_R_Expenditure_H.FirstOrDefault(x=> x.Expenditure_Id == _id);
                             dataMod.Is_Approved = true;
@@ -53,7 +57,7 @@ namespace SRR_Devolopment.Services
                             dataX.SaveChanges();
 
                             //SP To Create Journal
-
+                            dataX.USP_CGL_KP_R_Generate_Journal("EXPENDITURE", dataMod.Expenditure_Id, pStatus, pMessage);//Generate Journal
 
                         }
 

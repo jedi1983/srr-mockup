@@ -960,9 +960,34 @@ namespace SRR_Devolopment.ViewModel
         public void getControl(Control x)
         {
             var _checkControl = from dataControl in FillControl where dataControl.Name == x.Name select dataControl;
+
+            if (x.Name != "txWithSearchBoxComp")
+            {
+                //check
+                var _checkTextBox = from dataControl in FillControl where dataControl.Name == "txWithSearchBoxComp" select dataControl;
+                if (_checkTextBox.Count() > 0)
+                {
+                    TextBoxWithSearch dataX = (TextBoxWithSearch)FillControl.FirstOrDefault(xx => xx.Name == "txWithSearchBoxComp");
+                    //TextBoxWithSearch dataX = (TextBoxWithSearch)_checkTextBox;
+                    if (dataX.GetFilterPopUp.IsOpen == true)
+                        dataX.GetFilterPopUp.IsOpen = false;
+                }
+
+            }
+
             if (_checkControl.Count() > 0)
-                return;
-            FillControl.Add(x);
+            {
+                //Do Nothing
+            }
+            else
+            {
+                FillControl.Add(x);
+            }
+           
+            //var _checkControl = from dataControl in FillControl where dataControl.Name == x.Name select dataControl;
+            //if (_checkControl.Count() > 0)
+            //    return;
+            //FillControl.Add(x);
 
         }
 

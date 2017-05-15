@@ -151,7 +151,7 @@ namespace SRR_Devolopment.ViewModel
 
 
 
-            if (_selectData == null)
+            if (_selectData.Count() < 1)
             {
                 MessageBox.Show("Please Select At Least One Data To Reject ", "Approval Screen", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 return;
@@ -188,9 +188,10 @@ namespace SRR_Devolopment.ViewModel
 
 
 
-            if(_selectData == null)
+            if(_selectData.Count() < 1)
             {
                 MessageBox.Show("Please Select At Least One Data To Approve " , "Approval Screen", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                return;
             }
 
             if(MessageBox.Show("Are You Sure You Want To Approve This Transaction ?","Approval Screen",MessageBoxButton.YesNo,MessageBoxImage.Question)==MessageBoxResult.Yes)

@@ -126,6 +126,10 @@ namespace SRR_Devolopment.Services
                {
                     using(srr_devEntities x = new srr_devEntities())
                     {
+                        bool refStatus = false;
+                        string refMessage = string.Empty;
+                        System.Data.Objects.ObjectParameter pMessage = new System.Data.Objects.ObjectParameter("Message", refMessage);
+                        System.Data.Objects.ObjectParameter pStatus = new System.Data.Objects.ObjectParameter("Success", refStatus);
                         CGL_KP_M_Member_H insertInto = new CGL_KP_M_Member_H();
                         insertInto.Employee_No = dataInsert.Employee_No;
                         insertInto.Name = dataInsert.Name;
@@ -140,6 +144,8 @@ namespace SRR_Devolopment.Services
                         insertInto.Created_Date = DateTime.Now;
                         x.CGL_KP_M_Member_H.Add(insertInto);
                         x.SaveChanges();
+                        //run SP
+                        x.USP_CGL_KP_R_Generate_Simpanan_Wajib(DateTime.Now,pStatus,pMessage);
                         ret = true;
                         return ret;
                     }

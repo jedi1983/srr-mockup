@@ -58,6 +58,11 @@ namespace SRR_Devolopment.ViewModel
 
             SimpleIoc.Default.Register<ApprovalViewModel>();
 
+
+            SimpleIoc.Default.Register<IProcessDataService, ProcessDataService>();
+
+            SimpleIoc.Default.Register<ProcessViewModel>();
+
         }
 
         /// <summary>
@@ -167,6 +172,28 @@ namespace SRR_Devolopment.ViewModel
                 {
                     return ServiceLocator.Current.GetInstance<ApprovalViewModel>();
                 }
+            }
+        }
+
+        public ProcessViewModel ProcessScreen
+        {
+            get
+            {
+                //checking whether already Contains/Object Created for this class?, if yes then unreg it first to clean cache up
+                //and register back to the SimpleIoc dan let the service locator find the Object GodSpeed
+                if (SimpleIoc.Default.ContainsCreated<ProcessViewModel>() == true)
+                {
+
+                    SimpleIoc.Default.Unregister<ProcessViewModel>();
+                    SimpleIoc.Default.Register<ProcessViewModel>();
+                    return ServiceLocator.Current.GetInstance<ProcessViewModel>();
+
+                }
+                else//first run will let the service locator got the Object
+                {
+                    return ServiceLocator.Current.GetInstance<ProcessViewModel>();
+                }
+                //return ServiceLocator.Current.GetInstance<MemberViewModel>();
             }
         }
       

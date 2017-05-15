@@ -19,7 +19,7 @@ namespace SRR_Devolopment.Services
                 {
                     var dataBack = (from tbl in xData.CGL_KP_M_Period_H
                                     join xx in xData.CGL_KP_M_Period_Status_H on tbl.Period_Status_Id equals xx.Period_Status_Id
-                                    where tbl.Is_Deleted == false && (xx.Period_Status_Desc.Contains("Active") || xx.Period_Status_Desc.Contains("Reopen"))
+                                    where tbl.Is_Deleted == false && (xx.Period_Status_Desc.Contains("Active") || xx.Period_Status_Desc.Contains("ReOpen"))
                                     select tbl).ToList();
                     return new Collection<CGL_KP_M_Period_H>(dataBack);
                 }
@@ -148,6 +148,10 @@ namespace SRR_Devolopment.Services
                 {
                     using (srr_devEntities insertX = new srr_devEntities())
                     {
+                        bool refStatus = false;
+                        string refMessage = string.Empty;
+                        System.Data.Objects.ObjectParameter pMessage = new System.Data.Objects.ObjectParameter("Message", refMessage);
+                        System.Data.Objects.ObjectParameter pStatus = new System.Data.Objects.ObjectParameter("Success", refStatus);
                         CGL_KP_M_Expenditure_Type_H typExp = (from tbl in insertX.CGL_KP_M_Expenditure_Type_H where tbl.Is_Deleted == false && tbl.Expenditure_Type_Id == expenditureType select tbl).FirstOrDefault();
                         CGL_KP_R_Expenditure_H dataInsert = new CGL_KP_R_Expenditure_H();
                         dataInsert.Expenditure_Date = expenditureDate;
@@ -199,7 +203,12 @@ namespace SRR_Devolopment.Services
                         insertX.CGL_KP_R_Expenditure_H.Add(dataInsert);
                         insertX.SaveChanges();
                         expenditureNo = dataInsert.Expenditure_No;
+                       
                         //sp will run here
+
+                        if(typExp.Expenditure_Type_Description.ToString().Contains("Loan")!= true)
+                           insertX.USP_CGL_KP_R_Generate_Journal("EXPENDITURE", dataInsert.Expenditure_Id, pStatus, pMessage);
+
                         ret = true;
                         insertX.SaveChanges();
                         
@@ -224,6 +233,10 @@ namespace SRR_Devolopment.Services
                 {
                     using (srr_devEntities x = new srr_devEntities())
                     {
+                        bool refStatus = false;
+                        string refMessage = string.Empty;
+                        System.Data.Objects.ObjectParameter pMessage = new System.Data.Objects.ObjectParameter("Message", refMessage);
+                        System.Data.Objects.ObjectParameter pStatus = new System.Data.Objects.ObjectParameter("Success", refStatus);
                         CGL_KP_M_Expenditure_Type_H typExp = (from tbl in x.CGL_KP_M_Expenditure_Type_H where tbl.Is_Deleted == false && tbl.Expenditure_Type_Id == expenditureType select tbl).FirstOrDefault();
                         CGL_KP_R_Expenditure_H dataInsert = x.CGL_KP_R_Expenditure_H.FirstOrDefault(xx => xx.Expenditure_Id == transactionID);
                         dataInsert.Expenditure_Date = expenditureDate;
@@ -270,7 +283,10 @@ namespace SRR_Devolopment.Services
                             loanInsert.Modified_Date = DateTime.Now;
                            
                         }
+
                         x.SaveChanges();
+                        if (typExp.Expenditure_Type_Description.ToString().Contains("Loan") != true)
+                            x.USP_CGL_KP_R_Generate_Journal("EXPENDITURE", dataInsert.Expenditure_Id, pStatus, pMessage);
                     }
                    
                     ret = true;
