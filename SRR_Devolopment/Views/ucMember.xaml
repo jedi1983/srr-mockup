@@ -77,7 +77,7 @@
                             <DataGridTemplateColumn Header="Join Date" Width="150" IsReadOnly="True">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <DatePicker SelectedDate="{Binding Join_Date}" BorderThickness="0" IsEnabled="False" my:DateTimePicker.DateFormat="dd/MMM/yyyy"/>
+                                        <DatePicker SelectedDate="{Binding Join_Date}" BorderThickness="0" IsEnabled="False" my:DateTimePicker.DateFormat="dd-MMM-yyyy"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -187,7 +187,7 @@
                     <TextBlock Grid.Column="1" Grid.Row="4" Text="Join Date"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <TextBlock Grid.Column="2" Grid.Row="4" Text=":"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <DatePicker Grid.Column="3" Grid.Row="4" Width="200" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                                SelectedDate="{Binding SetJoinDate}" my:DateTimePicker.DateFormat="dd/MMM/yyyy" IsEnabled="{Binding ObjEnabled}"/>
+                                SelectedDate="{Binding SetJoinDate}" my:DateTimePicker.DateFormat="dd-MMM-yyyy" IsEnabled="{Binding ObjEnabled}"/>
 
                     <TextBlock Grid.Column="1" Grid.Row="5" Text="Status"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <TextBlock Grid.Column="2" Grid.Row="5" Text=":"  HorizontalAlignment="Center" VerticalAlignment="Center" />

@@ -63,6 +63,11 @@ namespace SRR_Devolopment.ViewModel
 
             SimpleIoc.Default.Register<ProcessViewModel>();
 
+
+            SimpleIoc.Default.Register<IPeriodDataService, PeriodDataService>();
+
+            SimpleIoc.Default.Register<PeriodSettingsViewModel>();
+
         }
 
         /// <summary>
@@ -194,6 +199,29 @@ namespace SRR_Devolopment.ViewModel
                     return ServiceLocator.Current.GetInstance<ProcessViewModel>();
                 }
                 //return ServiceLocator.Current.GetInstance<MemberViewModel>();
+            }
+        }
+
+        public PeriodSettingsViewModel PeriodScreen
+        {
+            get
+            {
+                //checking whether already Contains/Object Created for this class?, if yes then unreg it first to clean cache up
+                //and register back to the SimpleIoc dan let the service locator find the Object GodSpeed
+                if (SimpleIoc.Default.ContainsCreated<PeriodSettingsViewModel>() == true)
+                {
+
+                    //RevenueViewModel _objectRev = ServiceLocator.Current.GetInstance<RevenueViewModel>();//new line
+                    //_objectRev.Dispose();//disposing
+                    SimpleIoc.Default.Unregister<PeriodSettingsViewModel>();
+                    SimpleIoc.Default.Register<PeriodSettingsViewModel>();
+                    return ServiceLocator.Current.GetInstance<PeriodSettingsViewModel>();
+
+                }
+                else//first run will let the service locator got the Object
+                {
+                    return ServiceLocator.Current.GetInstance<PeriodSettingsViewModel>();
+                }
             }
         }
       
