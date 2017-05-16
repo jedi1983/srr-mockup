@@ -117,7 +117,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BaseLib\Class\CloseableTab.cs" />
-    <Compile Include="BaseLib\Class\DatePickerCalendar.cs" />
+    <Compile Include="BaseLib\Class\DatePickerCalendar.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="BaseLib\Class\DateTimePicker.cs" />
     <Compile Include="BaseLib\Class\ExtendTextBox.cs" />
     <Compile Include="BaseLib\Class\HashingClass.cs" />
