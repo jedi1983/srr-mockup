@@ -92,7 +92,7 @@ namespace SRR_Devolopment.ViewModel
                 return;
             }
             base.generateButton();
-            if(MessageBox.Show("Are You Sure You Want To Generate Iuran Pokok & Loan Payment?","Process Screen",MessageBoxButton.YesNo,MessageBoxImage.Question)== MessageBoxResult.Yes)
+            if(MessageBox.Show("Are You Sure You Want To Generate Iuran Wajib?","Process Screen",MessageBoxButton.YesNo,MessageBoxImage.Question)== MessageBoxResult.Yes)
             {
                 string _messageBack = string.Empty;
                 DateTime _dataNew = new DateTime(SetPeriod.Year, SetPeriod.Month, 1);
@@ -124,6 +124,35 @@ namespace SRR_Devolopment.ViewModel
                 string _messageBack = string.Empty;
                 DateTime _dataNew = new DateTime(SetPeriod.Year, SetPeriod.Month, 1);
                 if (_dataServices.balanceCalculation(_dataNew, ref _messageBack) == true)
+                {
+                    MessageBox.Show(_messageBack, "Process Screen", MessageBoxButton.OK, MessageBoxImage.Information);
+                    CleanObject();
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show(_messageBack, "Process Screen", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Generate Loan Payment
+        /// </summary>
+        public override void exportButton()
+        {
+            base.exportButton();
+            if (SetPeriod == null)
+            {
+                MessageBox.Show("There Are No Period Selected Yet, Please Select At Least One Period", "Process Screen", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+            if (MessageBox.Show("Are You Sure You Want To Generate Loan Payment?", "Process Screen", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                string _messageBack = string.Empty;
+                DateTime _dataNew = new DateTime(SetPeriod.Year, SetPeriod.Month, 1);
+                if (_dataServices.loanPaymentCalculation(_dataNew, ref _messageBack) == true)
                 {
                     MessageBox.Show(_messageBack, "Process Screen", MessageBoxButton.OK, MessageBoxImage.Information);
                     CleanObject();

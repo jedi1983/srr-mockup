@@ -150,19 +150,7 @@ namespace SRR_Devolopment.BaseLib.Class
         }
 
 
-        /// <summary>
-        /// Disposable Methods
-        /// </summary>
-        //public void Dispose()
-        //{
-        //    UserControl _controlGet = (UserControl)this.Content;
-        //    TextBoxWithSearch _txtBoxSearch = (TextBoxWithSearch)_controlGet.FindName("txWithSearchBoxComp");
-
-        //    if (_txtBoxSearch != null)
-        //        _txtBoxSearch.Dispose();
-
-        //    //throw new NotImplementedException();
-        //}
+       
 
         // Public implementation of Dispose pattern callable by consumers.
         public void Dispose()

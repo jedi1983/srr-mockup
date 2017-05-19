@@ -10,7 +10,8 @@ namespace SRR_Devolopment.Services
 {
     class ProcessDataService : IProcessDataService
     {
-        public bool generateIuran(DateTime nowData,ref string message)
+
+        public bool loanPaymentCalculation(DateTime nowData, ref string message)
         {
             bool ret = false;
             try
@@ -23,18 +24,34 @@ namespace SRR_Devolopment.Services
                     System.Data.Objects.ObjectParameter pMessage = new System.Data.Objects.ObjectParameter("Message", refMessage);
                     System.Data.Objects.ObjectParameter pStatus = new System.Data.Objects.ObjectParameter("Success", refStatus);
                     asData.USP_CGL_KP_R_Generate_Loan_Payment(nowData, pStatus, pMessage);
-                    if ((bool)pStatus.Value != true)
-                    {
-                        ret = false;
-                        message = pMessage.Value.ToString();
-                        return ret;
-                    }
-                    else
-                    {
-                        asData.USP_CGL_KP_R_Generate_Simpanan_Wajib(nowData, pStatus, pMessage);
-                        ret = (bool)pStatus.Value;
-                        message = pMessage.Value.ToString();
-                    }
+                    ret = (bool)pStatus.Value;
+                    message = pMessage.Value.ToString();
+                    return ret;
+
+                }
+            }
+            catch
+            {
+                throw new Exception("Database Error");
+            }
+        }
+
+        public bool generateIuran(DateTime nowData,ref string message)
+        {
+            bool ret = false;
+            try
+            {
+                using (srr_devEntities asData = new srr_devEntities())
+                {
+
+                    bool refStatus = false;
+                    string refMessage = string.Empty;
+                    System.Data.Objects.ObjectParameter pMessage = new System.Data.Objects.ObjectParameter("Message", refMessage);
+                    System.Data.Objects.ObjectParameter pStatus = new System.Data.Objects.ObjectParameter("Success", refStatus);
+                    asData.USP_CGL_KP_R_Generate_Simpanan_Wajib(nowData, pStatus, pMessage);
+                    ret = (bool)pStatus.Value;
+                    message = pMessage.Value.ToString();
+                    
                     return ret;
                 }
             }

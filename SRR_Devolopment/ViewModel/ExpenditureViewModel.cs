@@ -728,8 +728,10 @@ namespace SRR_Devolopment.ViewModel
 
             if (SetExpenditureType.Need_Member == true)
             {
-                IsMemberEnabled = true;
-                GetEditMode = true;
+                //IsMemberEnabled = true;
+                //GetEditMode = true;
+                IsMemberEnabled = false;
+                GetEditMode = false;
             }
 
             if(SetExpenditureType.Expenditure_Type_Description.ToString().Contains("Loan"))

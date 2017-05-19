@@ -9,15 +9,17 @@
              xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
              mc:Ignorable="d" 
              DataContext="{Binding RevenueTransaction, Source={StaticResource Locator}}"
-             d:DesignHeight="600" d:DesignWidth="800" >
+              >
     
     <!-- dataGrid Minor So We Need to Add this-->
     <UserControl.Resources>
         <CollectionViewSource x:Key="revenueStatic" Source="{Binding GetRevenueType}" />
         <CollectionViewSource x:Key="memberStatic" Source="{Binding GetMember}" />
+        <local:NumericConverter x:Key="myconverter"/>
+        <local:NumericToValueTypeConverter x:Key="mytypeconverter"/>
     </UserControl.Resources>
     
-    <StackPanel Name="mainStackPanel" >
+    <StackPanel Name="mainStackPanel" Height="auto">
 
         <Expander Header="Find Data :" Name="xPanderMainData" IsExpanded="True" BorderBrush="#FF7C7C7C" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <StackPanel Orientation="Vertical" Name="stackPanelMaster">
@@ -212,8 +214,12 @@
                     
                     <TextBlock Grid.Column="1" Grid.Row="4" Text="Revenue Amount"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <TextBlock Grid.Column="2" Grid.Row="4" Text=":"  HorizontalAlignment="Center" VerticalAlignment="Center" />
+                   
                     <TextBox BorderBrush="Black" Grid.Column="3" Grid.Row="4" Height="25" Width="200" HorizontalAlignment="Center" 
-                             VerticalAlignment="Center" Text="{Binding RevenueAmount,StringFormat='#,###.00;$(#,###.00)',Mode=TwoWay}" IsEnabled="{Binding IsAmountEnabled}" Name="revenueAmountBox" >
+                             VerticalAlignment="Center" Text="{Binding RevenueAmount, Converter={StaticResource myconverter}, Mode=TwoWay}"
+                             local:TextBoxMaskBehavior.Mask="0:#,0.00##"
+                             local:TextBoxMaskBehavior.ValueType="{Binding RevenueAmount, Converter={StaticResource mytypeconverter}, Mode=OneWay}"
+                             IsEnabled="{Binding IsAmountEnabled}" Name="revenueAmountBox" >
                         <i:Interaction.Behaviors>
                             <local:TextBoxInputRegExBehaviour RegularExpression="^[0-9.\-]+$" MaxLength="14" EmptyValue="" />
                         </i:Interaction.Behaviors>

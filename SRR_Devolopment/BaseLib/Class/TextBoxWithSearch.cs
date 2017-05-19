@@ -455,7 +455,7 @@ namespace SRR_Devolopment.BaseLib.Class
                 GetEntityNameLink = "CGL_KP_M_Member_H";
                 DataGridAsSource.SelectedItem = null;
                 ICollection<CGL_KP_M_Member_H> dataQuery = (ICollection<CGL_KP_M_Member_H>)ItemsSource;
-                var linqToSql = from tbl in dataQuery where tbl.Name.ToLower().StartsWith(Text) select tbl;
+                var linqToSql = from tbl in dataQuery where tbl.Name.ToLower().StartsWith(Text.ToString().ToLower()) select tbl;
                 DataGridAsSource.ItemsSource = linqToSql;
                 
             }

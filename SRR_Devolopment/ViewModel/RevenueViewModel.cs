@@ -683,8 +683,10 @@ namespace SRR_Devolopment.ViewModel
             
             if (SetRevenueType.Need_Member == true)
             {
-                IsMemberEnabled = true;
-                GetEditMode = true;
+                //IsMemberEnabled = true;
+                //GetEditMode = true;
+                IsMemberEnabled = false;
+                GetEditMode = false;
             }
 
             if (SetRevenueType.Revenue_Type_Description.Contains("Repayment"))

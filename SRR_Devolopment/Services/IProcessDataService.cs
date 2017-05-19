@@ -14,6 +14,8 @@ namespace SRR_Devolopment.Services
 
         bool balanceCalculation(DateTime nowData,ref string message);
 
+        bool loanPaymentCalculation(DateTime nowData, ref string message);
+
         Collection<CGL_KP_M_Period_H> getPeriod();
 
     }

@@ -9,7 +9,7 @@
              xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
              mc:Ignorable="d" 
              DataContext="{Binding ApprovalScreen, Source={StaticResource Locator}}"
-             d:DesignHeight="640" d:DesignWidth="800" >
+             >
 
     <StackPanel Name="mainStackPanel" >
 
