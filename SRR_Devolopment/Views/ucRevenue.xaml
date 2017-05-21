@@ -8,8 +8,7 @@
              xmlns:local="clr-namespace:SRR_Devolopment.BaseLib.Class"
              xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
              mc:Ignorable="d" 
-             DataContext="{Binding RevenueTransaction, Source={StaticResource Locator}}"
-              >
+             DataContext="{Binding RevenueTransaction, Source={StaticResource Locator}}">
     
     <!-- dataGrid Minor So We Need to Add this-->
     <UserControl.Resources>
@@ -19,11 +18,14 @@
         <local:NumericToValueTypeConverter x:Key="mytypeconverter"/>
     </UserControl.Resources>
     
-    <StackPanel Name="mainStackPanel" Height="auto">
-
-        <Expander Header="Find Data :" Name="xPanderMainData" IsExpanded="True" BorderBrush="#FF7C7C7C" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+    <Grid Name="gridMainStack" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="400*"/>
+            <RowDefinition Height="400*"/>
+        </Grid.RowDefinitions>
+        <Expander Header="Find Data :" Name="xPanderMainData" IsExpanded="True" BorderBrush="#FF7C7C7C" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="0">
             <StackPanel Orientation="Vertical" Name="stackPanelMaster">
-                <Grid Height="275">
+                <Grid Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <Grid.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="#FFECE8E8" Offset="0.542"/>
@@ -43,11 +45,11 @@
                         <RowDefinition Height="30" />
                         <RowDefinition Height="30" />
                         <RowDefinition Height="5" />
-                        <RowDefinition Height="200" />
-                        <RowDefinition Height="5*" />
+                        <RowDefinition Height="240*" />
+                        <RowDefinition Height="5" />
                     </Grid.RowDefinitions>
 
-                    
+
 
                     <TextBlock Grid.Column="1" Grid.Row="1" Text="Active Period"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <TextBlock Grid.Column="2" Grid.Row="1" Text=":"  HorizontalAlignment="Center" VerticalAlignment="Center" />
@@ -56,7 +58,7 @@
                               SelectedValue="{Binding SetPeriod.Period_Id,Mode=TwoWay}"  SelectedValuePath="Period_Id" IsEnabled="{Binding ObjFilterEnabled}"/>
 
                     <Button Grid.Column="1" Grid.Row="2" Content="Find" Height="25" Width="200" Command="{Binding ButtonGenerate}" IsEnabled="{Binding ObjFilterEnabled}" />
-                    <DataGrid Name="revenueFindDataGrid" AutoGenerateColumns="False" Height="200" HorizontalAlignment="Stretch" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="4" VerticalAlignment="Top"
+                    <DataGrid Name="revenueFindDataGrid" AutoGenerateColumns="False" Height="240"  HorizontalAlignment="Stretch" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="4" VerticalAlignment="Stretch" 
                               ItemsSource="{Binding GetRevenueData}" SelectionMode="Single"  SelectedItem="{Binding SelectedGridData}" CanUserAddRows="False"  IsEnabled="{Binding ObjFilterEnabled}"  >
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="SelectionChanged">
@@ -68,9 +70,9 @@
 
                             <DataGridTextColumn Header="ID" Binding="{Binding Revenue_Id}" Visibility="Hidden" />
                             <DataGridTextColumn Header="Revenue No" Binding="{Binding Revenue_No}" Width="200" IsReadOnly="True" />
-                        
-                            
-                           
+
+
+
                             <DataGridTemplateColumn Header="Revenue Date" IsReadOnly="True" Width="150">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -83,7 +85,7 @@
                                 SelectedValueBinding="{Binding Revenue_Type_Id}"  SelectedValuePath="Revenue_Type_Id" IsReadOnly="True" 
                                 DisplayMemberPath="Revenue_Type_Code" 
                                 ItemsSource="{Binding Source={StaticResource revenueStatic}}"  Header="Revenue" Width="150">
-                                
+
                             </DataGridComboBoxColumn>
                             <DataGridTextColumn Header="Employee No" Binding="{Binding Employee_No}" Width="200" IsReadOnly="True" />
                             <DataGridComboBoxColumn 
@@ -94,13 +96,13 @@
                             </DataGridComboBoxColumn>
 
                             <DataGridTextColumn Header="Legal Entity" Binding="{Binding Legal_Entity_Name}" Width="200" IsReadOnly="True" />
-                            
-                            <!--<DataGridComboBoxColumn 
+
+                            <DataGridComboBoxColumn 
                                 SelectedValueBinding="{Binding Revenue_Type_Id}"  SelectedValuePath="Revenue_Type_Id" 
                                 DisplayMemberPath="Revenue_Type_Description" 
-                                ItemsSource="{Binding S}"  Header="Revenue" Width="150">
+                                ItemsSource="{Binding Source={StaticResource revenueStatic}}"  Header="Revenue" Width="150">
 
-                            </DataGridComboBoxColumn>-->
+                            </DataGridComboBoxColumn>
 
                             <!-- binding to other element -->
                             <!--<DataGridTemplateColumn Header="Document Type" IsReadOnly="True" >
@@ -112,7 +114,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>-->
 
-                            <!--<DataGridTextColumn Header="Revenue Amount" Binding="{Binding Revenue_Amount}"  IsReadOnly="True" Width="200" />-->
+                            <DataGridTextColumn Header="Revenue Amount" Binding="{Binding Revenue_Amount}"  IsReadOnly="True" Width="200" />
                             <DataGridTemplateColumn Header="Revenue Amount" IsReadOnly="True">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -120,17 +122,22 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            
-                            
+
+
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
             </StackPanel>
         </Expander>
 
-        <Expander Header="Revenue Transaction :" IsExpanded="True" BorderBrush="#FF7C7C7C" Name="xPanderMember" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
-            <StackPanel Orientation="Vertical" >
-                <ToolBarTray>
+        <Expander Header="Revenue Transaction :" IsExpanded="True" BorderBrush="#FF7C7C7C" Name="xPanderMember" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="1">
+         
+            <Grid Name="innerGrid" Height="auto" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="55*"/>
+                    <RowDefinition Height="400*"/>
+                </Grid.RowDefinitions>
+                <ToolBarTray Grid.Row="0">
                     <ToolBar>
                         <Button Command="{Binding ButtonNew}" ToolTip="Insert New Data." IsEnabled="{Binding EnabledNew}">
                             <StackPanel Orientation="Horizontal">
@@ -167,7 +174,8 @@
                         </Button>
                     </ToolBar>
                 </ToolBarTray>
-                <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="250">
+                
+                <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="Auto" Grid.Row="1">
                     <Grid.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="#FFECE8E8" Offset="0.542"/>
@@ -193,7 +201,7 @@
                         <RowDefinition Height="30" />
                         <RowDefinition Height="30" />
                         <RowDefinition Height="5*" />
-                        
+
 
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Column="1" Grid.Row="1" Text="Revenue No"  HorizontalAlignment="Center" VerticalAlignment="Center" />
@@ -211,10 +219,10 @@
                     <ComboBox BorderBrush="Black" Grid.Row="3" Grid.Column="3" Name="revenueDrBx" Height="25" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" ItemsSource="{Binding GetRevenueType}" 
                               DisplayMemberPath="Revenue_Type_Code"  SelectedItem="{Binding SetRevenueType,Mode=TwoWay}"
                               SelectedValue="{Binding SetRevenueType.Revenue_Type_Id,Mode=TwoWay}"  SelectedValuePath="Revenue_Type_Id" IsEnabled="{Binding ObjEnabledTransactionType}"/>
-                    
+
                     <TextBlock Grid.Column="1" Grid.Row="4" Text="Revenue Amount"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <TextBlock Grid.Column="2" Grid.Row="4" Text=":"  HorizontalAlignment="Center" VerticalAlignment="Center" />
-                   
+
                     <TextBox BorderBrush="Black" Grid.Column="3" Grid.Row="4" Height="25" Width="200" HorizontalAlignment="Center" 
                              VerticalAlignment="Center" Text="{Binding RevenueAmount, Converter={StaticResource myconverter}, Mode=TwoWay}"
                              local:TextBoxMaskBehavior.Mask="0:#,0.00##"
@@ -250,11 +258,9 @@
                     <ComboBox BorderBrush="Black" Grid.Row="5" Grid.Column="7" Name="repaymentDrBx" Height="25" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" ItemsSource="{Binding GetMemberLoadData}" 
                               DisplayMemberPath="Showed"  SelectedItem="{Binding SetLoanData,Mode=TwoWay}"
                               SelectedValue="{Binding SetLoanData.Member_Loan_Id,Mode=TwoWay}"  SelectedValuePath="Member_Loan_Id" IsEnabled="{Binding IsRepayment}"/>
-                    
-
                 </Grid>
-            </StackPanel>
+            </Grid>
         </Expander>
-        
-    </StackPanel>
+    </Grid>
+   
 </UserControl>

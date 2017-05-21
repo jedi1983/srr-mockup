@@ -8,8 +8,7 @@
              xmlns:local="clr-namespace:SRR_Devolopment.BaseLib.Class"
              xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
              mc:Ignorable="d" 
-             DataContext="{Binding ExpenditureTransaction, Source={StaticResource Locator}}"
-              >
+             DataContext="{Binding ExpenditureTransaction, Source={StaticResource Locator}}">
 
     <!-- dataGrid Minor So We Need to Add this-->
     <UserControl.Resources>
@@ -19,11 +18,15 @@
         <local:NumericToValueTypeConverter x:Key="mytypeconverter"/>
     </UserControl.Resources>
 
-    <StackPanel Name="mainStackPanel"  >
+    <Grid Name="mainGridPanel" Height="auto" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="400*" />
+            <RowDefinition Height="450*" />
+        </Grid.RowDefinitions>
 
-        <Expander Header="Find Data :" Name="xPanderMainData" IsExpanded="True" BorderBrush="#FF7C7C7C" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
+        <Expander Header="Find Data :" Name="xPanderMainData" IsExpanded="True" BorderBrush="#FF7C7C7C" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="0">
             <StackPanel Orientation="Vertical" Name="stackPanelMaster">
-                <Grid Height="275">
+                <Grid Height="Auto">
                     <Grid.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="#FFECE8E8" Offset="0.542"/>
@@ -43,8 +46,8 @@
                         <RowDefinition Height="30" />
                         <RowDefinition Height="30" />
                         <RowDefinition Height="5" />
-                        <RowDefinition Height="200" />
-                        <RowDefinition Height="5*" />
+                        <RowDefinition Height="220*" />
+                        <RowDefinition Height="5" />
                     </Grid.RowDefinitions>
 
 
@@ -56,7 +59,7 @@
                               SelectedValue="{Binding SetPeriod.Period_Id,Mode=TwoWay}"  SelectedValuePath="Period_Id" IsEnabled="{Binding ObjFilterEnabled}"/>
 
                     <Button Grid.Column="1" Grid.Row="2" Content="Find" Height="25" Width="200" Command="{Binding ButtonGenerate}" IsEnabled="{Binding ObjFilterEnabled}" />
-                    <DataGrid Name="expenditureFindDataGrid" AutoGenerateColumns="False" Height="200" HorizontalAlignment="Stretch" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="4" VerticalAlignment="Top"
+                    <DataGrid Name="expenditureFindDataGrid" AutoGenerateColumns="False" Height="220" HorizontalAlignment="Stretch" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="4" VerticalAlignment="Stretch"
                               ItemsSource="{Binding GetExpenditureData}" SelectionMode="Single"  SelectedItem="{Binding SelectedGridData}" CanUserAddRows="False"  IsEnabled="{Binding ObjFilterEnabled}" >
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="SelectionChanged">
@@ -109,10 +112,13 @@
                 </Grid>
             </StackPanel>
         </Expander>
-
-        <Expander Header="Expenditure Transaction :" IsExpanded="True" BorderBrush="#FF7C7C7C" Name="xPanderMember" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
-            <StackPanel Orientation="Vertical" >
-                <ToolBarTray>
+        <Expander Header="Expenditure Transaction :" IsExpanded="True" BorderBrush="#FF7C7C7C" Name="xPanderMember" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  Grid.Row="1">
+            <Grid Name="innerGridFromExpenditure" Height="Auto" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="55*"/>
+                    <RowDefinition Height="450*"/>
+                </Grid.RowDefinitions>
+                <ToolBarTray Grid.Row="0" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <ToolBar>
                         <Button Command="{Binding ButtonNew}" ToolTip="Insert New Data." IsEnabled="{Binding EnabledNew}">
                             <StackPanel Orientation="Horizontal">
@@ -149,9 +155,7 @@
                         </Button>
                     </ToolBar>
                 </ToolBarTray>
-                
-                <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="285">
-                    
+                <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="Auto" Grid.Row="1">
                     <Grid.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="#FFECE8E8" Offset="0.542"/>
@@ -180,9 +184,7 @@
                         <RowDefinition Height="30" />
                         <RowDefinition Height="30" />
                         <RowDefinition Height="35" />
-                        <RowDefinition Height="5" />
-
-
+                        <RowDefinition Height="5*" />
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Column="1" Grid.Row="1" Text="Expenditure No"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <TextBlock Grid.Column="2" Grid.Row="1" Text=":"  HorizontalAlignment="Center" VerticalAlignment="Center" />
@@ -202,12 +204,12 @@
 
                     <TextBlock Grid.Column="1" Grid.Row="4" Text="Expenditure Amount"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <TextBlock Grid.Column="2" Grid.Row="4" Text=":"  HorizontalAlignment="Center" VerticalAlignment="Center" />
-                  
+
                     <TextBox BorderBrush="Black" Grid.Column="3" Grid.Row="4" Height="25" Width="200" HorizontalAlignment="Center" 
                              VerticalAlignment="Center" Text="{Binding ExpenditureAmount, Converter={StaticResource myconverter}, Mode=TwoWay}"
                              local:TextBoxMaskBehavior.Mask="0:#,0.00##"
                              local:TextBoxMaskBehavior.ValueType="{Binding ExpenditureAmount, Converter={StaticResource mytypeconverter}, Mode=OneWay}"
-                             IsEnabled="{Binding IsAmountEnabled}" Name="expenditureAmountBox" >
+                             IsEnabled="{Binding ObjEnabled}" Name="expenditureAmountBox" >
                         <i:Interaction.Behaviors>
                             <local:TextBoxInputRegExBehaviour RegularExpression="^[0-9.\-]+$" MaxLength="14" EmptyValue="" />
                         </i:Interaction.Behaviors>
@@ -249,7 +251,7 @@
                                 <RowDefinition Height="30" />
                                 <RowDefinition Height="30" />
                                 <RowDefinition Height="30" />
-                                <RowDefinition Height="5" />                               
+                                <RowDefinition Height="5" />
                             </Grid.RowDefinitions>
 
                             <TextBlock Grid.Column="1" Grid.Row="0" Text="Interest Rate"  HorizontalAlignment="Center" VerticalAlignment="Center" />
@@ -269,7 +271,7 @@
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
                             </TextBox>
-                            
+
                             <TextBlock Grid.Column="1" Grid.Row="2" Text="Loan Amount"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                             <TextBlock Grid.Column="2" Grid.Row="2" Text=":"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                             <TextBox BorderBrush="Black" Grid.Column="3" Grid.Row="2" Height="25" Width="200" HorizontalAlignment="Center" 
@@ -294,17 +296,12 @@
                             <TextBlock Grid.Column="6" Grid.Row="2" Text=":"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                             <TextBox BorderBrush="Black" Grid.Column="7" Grid.Row="2" Height="25" Width="200" HorizontalAlignment="Center" 
                              VerticalAlignment="Center" Text="{Binding TotalInstallment,StringFormat='#,###.00;$(#,###.00)',Mode=TwoWay}" IsEnabled="False" />
-
-
                         </Grid>
-                        
-                        
                     </GroupBox>
-                
                 </Grid>
-               
-            </StackPanel>
+            </Grid>
         </Expander>
-
-    </StackPanel>
+    </Grid>
+    
+    
 </UserControl>
