@@ -7,14 +7,17 @@
              xmlns:my="clr-namespace:SRR_Devolopment.BaseLib.Class"
              xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
              mc:Ignorable="d" 
-             DataContext="{Binding Member, Source={StaticResource Locator}}"
-             d:DesignHeight="600" d:DesignWidth="800">
+             DataContext="{Binding Member, Source={StaticResource Locator}}">
     
-    <StackPanel Name="mainStackPanel">
-      
-        <Expander Header="Find Data :" Name="xPanderFind" IsExpanded="True" BorderBrush="#FF7C7C7C" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+    <Grid Name="mainGridPanel" Height="auto" >
+        <Grid.RowDefinitions >
+            <RowDefinition Height="400*" />
+            <RowDefinition Height="400*" />
+        </Grid.RowDefinitions>
+
+        <Expander Header="Find Data :" Name="xPanderFind" IsExpanded="True" BorderBrush="#FF7C7C7C" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="0">
             <StackPanel Orientation="Vertical" Name="stackPanelFind">
-                <Grid>
+                <Grid Height="Auto">
                     <Grid.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="#FFECE8E8" Offset="0.542"/>
@@ -35,21 +38,22 @@
                         <RowDefinition Height="30" />
                         <RowDefinition Height="30" />
                         <RowDefinition Height="5" />
-                        <RowDefinition Height="150" />
+                        <RowDefinition Height="200*" />
+                        <RowDefinition Height="5*" />
                     </Grid.RowDefinitions>
-                    
+
                     <TextBlock Grid.Column="1" Grid.Row="1" Text="Legal Entity"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <TextBlock Grid.Column="2" Grid.Row="1" Text=":"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <ComboBox BorderBrush="Black" Grid.Row="1" Grid.Column="3" Name="LegalEntityFindDropDown" Height="25" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" 
                               DisplayMemberPath="Legal_Entity_Name"  ItemsSource="{Binding GetLegalEntity,Mode=TwoWay}" SelectedItem="{Binding SetLegalEntityFind,Mode=TwoWay}"
                               SelectedValue="{Binding SetLegalEntityFind.Legal_Entity_Id,Mode=TwoWay}" SelectedValuePath="Legal_Entity_Id" IsEnabled="{Binding ObjFilterEnabled}"/>
- 
+
                     <TextBlock Grid.Column="1" Grid.Row="2" Text="Name"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <TextBlock Grid.Column="2" Grid.Row="2" Text=":"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <TextBox BorderBrush="Black" Grid.Column="3" Grid.Row="2" Height="25" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding FindName}" IsEnabled="{Binding ObjFilterEnabled}"/>
 
                     <Button Grid.Column="1" Grid.Row="3" Content="Find" Height="25" Width="200" Command="{Binding ButtonGenerate}" IsEnabled="{Binding EnabledGenerate}" />
-                    <DataGrid Name="filterFindDataGridMaster" AutoGenerateColumns="False" Height="135" HorizontalAlignment="Stretch" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="4" VerticalAlignment="Top"
+                    <DataGrid Name="filterFindDataGridMaster" AutoGenerateColumns="False" Height="200" HorizontalAlignment="Stretch" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="4" VerticalAlignment="Top"
                               ItemsSource="{Binding GetMemberData}" SelectionMode="Single"  SelectedItem="{Binding SelectedGridData}" CanUserAddRows="False"  >
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="SelectionChanged">
@@ -58,7 +62,7 @@
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                         <DataGrid.Columns>
-                          
+
                             <DataGridTextColumn Header="Member_Id" Binding="{Binding Member_Id}" Visibility="Hidden" IsReadOnly="True"/>
                             <DataGridTextColumn Header="Legal Entity" Binding="{Binding Legal_Entity_Name}" Width="150" IsReadOnly="True"/>
                             <DataGridTextColumn Header="Employee No" Binding="{Binding Employee_No}" Width="150" IsReadOnly="True"/>
@@ -84,15 +88,20 @@
 
                             <DataGridTextColumn Header="Status" Binding="{Binding Status_Desc}" Width="100" IsReadOnly="True" />
 
-                           
+        
                         </DataGrid.Columns>
                     </DataGrid>
+                    <TextBlock Grid.Column="1" Grid.Row="7" Text=""  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"/>
                 </Grid>
             </StackPanel>
         </Expander>
-        <Expander Header="Member Master Input :" IsExpanded="True" BorderBrush="#FF7C7C7C" Name="xPanderMember" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-            <StackPanel Orientation="Vertical">
-                <ToolBarTray>
+        <Expander Header="Member Master Input :" IsExpanded="True" BorderBrush="#FF7C7C7C" Name="xPanderMember" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="1">
+            <Grid Name="innerGrid" Height="Auto" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="55*"/>
+                    <RowDefinition Height="400*"/>
+                </Grid.RowDefinitions>
+                <ToolBarTray Grid.Row="0">
                     <ToolBar>
                         <Button Command="{Binding ButtonNew}" ToolTip="Insert New Data." IsEnabled="{Binding EnabledNew}">
                             <StackPanel Orientation="Horizontal">
@@ -106,7 +115,7 @@
                                 <TextBlock Margin="3,0,0,0">Save</TextBlock>
                             </StackPanel>
                         </Button>
-                        
+
                         <Button ToolTip="Edit Data." Command="{Binding ButtonModify}" IsEnabled="{Binding EnabledModify}">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="/SRR_Devolopment;component/Images/ButtonIco/Menu16x16/Modify.png" />
@@ -123,7 +132,7 @@
                         </Button>
                     </ToolBar>
                 </ToolBarTray>
-                <Grid VerticalAlignment="Stretch">
+                <Grid VerticalAlignment="Stretch" Grid.Row="1" HorizontalAlignment="Stretch">
                     <Grid.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="#FFECE8E8" Offset="0.542"/>
@@ -150,7 +159,7 @@
                         <RowDefinition Height="30" />
                         <RowDefinition Height="5" />
                         <RowDefinition Height="5*" />
-                        
+
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Column="1" Grid.Row="1" Text="Legal Entity"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <TextBlock Grid.Column="2" Grid.Row="1" Text=":"  HorizontalAlignment="Center" VerticalAlignment="Center" />
@@ -194,11 +203,9 @@
                     <ComboBox BorderBrush="Black" Grid.Row="5" Grid.Column="3" Name="insertStatus" Height="25" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" ItemsSource="{Binding GetStatus}" 
                               DisplayMemberPath="Status_Desc"  SelectedItem="{Binding SetStatus,Mode=TwoWay}"
                               SelectedValue="{Binding SetStatus.Status_Id,Mode=TwoWay}"  SelectedValuePath="Status_Id" IsEnabled="{Binding ObjEnabled}"/>
-
-
-
                 </Grid>
-            </StackPanel>
+            </Grid>
         </Expander>
-    </StackPanel>
+    </Grid>
+
 </UserControl>

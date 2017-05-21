@@ -7,18 +7,21 @@
              xmlns:local="clr-namespace:SRR_Devolopment.BaseLib.Class"
              xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
              mc:Ignorable="d" 
-             DataContext="{Binding PeriodScreen, Source={StaticResource Locator}}"
-             d:DesignHeight="1000" d:DesignWidth="800" >
+             DataContext="{Binding PeriodScreen, Source={StaticResource Locator}}">
 
     <Grid Name="mainGridPanel">
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
-            <RowDefinition Height="395*"/>
-            <RowDefinition Height="5"/>
+            <RowDefinition Height="800*"/>
         </Grid.RowDefinitions>
         <Expander Header="Find Data :" Name="xPanderMainData" IsExpanded="True" BorderBrush="#FF7C7C7C" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="0" Grid.RowSpan="2">
-            <StackPanel Orientation="Vertical" Name="stackPanelMaster">
-                <Grid>
+            <!--<StackPanel Orientation="Vertical" Name="stackPanelMaster">
+               
+            </StackPanel>-->
+            <Grid Name="innerGridData" Height="auto">
+                <Grid.RowDefinitions >
+                    <RowDefinition Height="800*" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
                     <Grid.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="#FFECE8E8" Offset="0.542"/>
@@ -46,7 +49,7 @@
                     </Grid.RowDefinitions>
 
 
-
+                    
                     <TextBlock Grid.Column="1" Grid.Row="1" Text="Active Period"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <TextBlock Grid.Column="2" Grid.Row="1" Text=":"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <DatePicker   SelectedDate="{Binding YearMonthDate}" IsEnabled="True" local:DatePickerCalendar.IsMonthYear="True" x:Name="MonthCalendar" HorizontalAlignment="Center" Grid.Column="3" Grid.Row="1" Height="27" Width="180" >
@@ -70,7 +73,7 @@
                     <Button Grid.Column="1" Grid.Row="2" Content="Create" Height="25" Width="200" Command="{Binding ButtonGenerate}" IsEnabled="{Binding EnabledNew}" />
                     <Button Grid.Column="3" Grid.Row="2" Content="Closed" Height="25" Width="200" Command="{Binding ButtonDelete}" IsEnabled="{Binding EnabledNew}" />
                     <Button Grid.Column="5" Grid.Row="2" Content="Re-Opened" Height="25" Width="200" Command="{Binding ButtonProcess}" IsEnabled="{Binding EnabledNew}" />
-                    <DataGrid Name="periodFindDataGrid" AutoGenerateColumns="False" Height="350" HorizontalAlignment="Stretch" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="6" VerticalAlignment="Top" 
+                    <DataGrid Name="periodFindDataGrid" AutoGenerateColumns="False" Height="400" HorizontalAlignment="Stretch" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="6" VerticalAlignment="Top" 
                               ItemsSource="{Binding GetPeriodSetting}" SelectionMode="Single"  SelectedItem="{Binding SelectedGridData}" CanUserAddRows="False"  IsEnabled="true"  >
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="SelectionChanged">
@@ -105,8 +108,10 @@
                             </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
+                    <TextBlock Grid.Column="1" Grid.Row="5" Text="Active Period"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden" />
                 </Grid>
-            </StackPanel>
+            </Grid>
+           
         </Expander>
     </Grid>
 </UserControl>

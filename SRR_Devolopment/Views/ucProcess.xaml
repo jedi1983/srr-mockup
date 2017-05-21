@@ -10,82 +10,88 @@
              mc:Ignorable="d" 
              DataContext="{Binding ProcessScreen, Source={StaticResource Locator}}"
              d:DesignHeight="1000" d:DesignWidth="800" >
-
-    <Grid Name="mainGridProcess" >
-        <Grid.RowDefinitions >
-            <RowDefinition Height="5" />
-            <RowDefinition Height="70" />
-            <RowDefinition Height="5" />
-            <RowDefinition Height="255" />
-            <RowDefinition Height="5" />
-            <RowDefinition Height="255*" />
+    
+    <Grid Name="mainGridPanel" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="800*" />
         </Grid.RowDefinitions>
-        <Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="#FFECE8E8" Offset="0.542"/>
-                <GradientStop Color="#FFFFF4F4" Offset="1"/>
-            </LinearGradientBrush>
-        </Grid.Background>
-
-       
-            <Grid Name="insertAtas" Grid.Row="1" >
-                
-                <Grid.ColumnDefinitions >
-                    <ColumnDefinition Width="5" />
-                    <ColumnDefinition Width="210" />
-                    <ColumnDefinition Width="15" />
-                    <ColumnDefinition Width="210" />
-                    <ColumnDefinition Width="40*" />
-                    <ColumnDefinition Width="5" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
+        <Expander Header="Process Screen :" Name="xPanderMainData" IsExpanded="True" BorderBrush="#FF7C7C7C" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="0" Grid.RowSpan="2">
+            <Grid Name="innerGrid" >
+                <Grid.RowDefinitions >
                     <RowDefinition Height="5" />
-                    <RowDefinition Height="30" />
-                    <RowDefinition Height="30" />
+                    <RowDefinition Height="70" />
                     <RowDefinition Height="5" />
+                    <RowDefinition Height="255" />
+                    <RowDefinition Height="5" />
+                    <RowDefinition Height="255*" />
                 </Grid.RowDefinitions>
+                <Grid.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFECE8E8" Offset="0.542"/>
+                        <GradientStop Color="#FFFFF4F4" Offset="1"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Grid Name="insertAtas" Grid.Row="1" >
 
-                <TextBlock Grid.Column="1" Grid.Row="1" Text="Active Period"  HorizontalAlignment="Center" VerticalAlignment="Center" />
-                <TextBlock Grid.Column="2" Grid.Row="1" Text=":"  HorizontalAlignment="Center" VerticalAlignment="Center" />
-                <ComboBox BorderBrush="Black" Grid.Row="1" Grid.Column="3" Name="activeDrBx" Height="25" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" ItemsSource="{Binding GetPeriod}" 
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width="5" />
+                        <ColumnDefinition Width="210" />
+                        <ColumnDefinition Width="15" />
+                        <ColumnDefinition Width="210" />
+                        <ColumnDefinition Width="40*" />
+                        <ColumnDefinition Width="5" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="5" />
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="5" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Column="1" Grid.Row="1" Text="Active Period"  HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <TextBlock Grid.Column="2" Grid.Row="1" Text=":"  HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <ComboBox BorderBrush="Black" Grid.Row="1" Grid.Column="3" Name="activeDrBx" Height="25" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" ItemsSource="{Binding GetPeriod}" 
                               DisplayMemberPath="Period_Name"  SelectedItem="{Binding SetPeriod,Mode=TwoWay}"
                               SelectedValue="{Binding SetPeriod.Period_Id,Mode=TwoWay}"  SelectedValuePath="Period_Id" IsEnabled="True"/>
+                </Grid>
+
+
+
+                <Grid Name="moduleRow" Grid.Row="3" >
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20*" />
+                        <RowDefinition Height="40*" />
+                        <RowDefinition Height="40*" />
+                        <RowDefinition Height="20*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width="5*" />
+                        <ColumnDefinition Width="30*" />
+                        <ColumnDefinition Width="30*" />
+                        <ColumnDefinition Width="30*" />
+                        <ColumnDefinition Width="5*" />
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="1" Grid.Row="1" Command="{Binding ButtonGenerate}" IsEnabled="{Binding EnabledNew}" Height="45" Width="200" >
+                        <TextBlock TextWrapping="Wrap">Generate Iuran Wajib</TextBlock>
+                    </Button>
+
+
+
+                    <Button Grid.Column="2" Grid.Row="1" Command="{Binding ButtonExport}" IsEnabled="{Binding EnabledNew}" Height="45" Width="200" >
+                        <TextBlock TextWrapping="Wrap">Generate Loan Payment</TextBlock>
+                    </Button>
+
+                    <Button Grid.Column="3" Grid.Row="1" Command="{Binding ButtonProcess}" IsEnabled="{Binding EnabledNew}" Height="45" Width="200" >
+                        <TextBlock TextWrapping="Wrap">Balance Calculation</TextBlock>
+                    </Button>
+
+                </Grid>
             </Grid>
-      
-
-        
-        <Grid Name="moduleRow" Grid.Row="3" >
-           
-            <Grid.RowDefinitions>
-                <RowDefinition Height="20*" />
-                <RowDefinition Height="40*" />
-                <RowDefinition Height="40*" />
-                <RowDefinition Height="20*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions >
-                <ColumnDefinition Width="5*" />
-                <ColumnDefinition Width="30*" />
-                <ColumnDefinition Width="30*" />
-                <ColumnDefinition Width="30*" />
-                <ColumnDefinition Width="5*" />
-            </Grid.ColumnDefinitions>
-            <Button Grid.Column="1" Grid.Row="1" Command="{Binding ButtonGenerate}" IsEnabled="{Binding EnabledNew}" Height="45" Width="200" >
-                <TextBlock TextWrapping="Wrap">Generate Iuran Wajib</TextBlock>
-            </Button>
-
             
-
-            <Button Grid.Column="2" Grid.Row="1" Command="{Binding ButtonExport}" IsEnabled="{Binding EnabledNew}" Height="45" Width="200" >
-                <TextBlock TextWrapping="Wrap">Generate Loan Payment</TextBlock>
-            </Button>
-
-            <Button Grid.Column="3" Grid.Row="1" Command="{Binding ButtonProcess}" IsEnabled="{Binding EnabledNew}" Height="45" Width="200" >
-                <TextBlock TextWrapping="Wrap">Balance Calculation</TextBlock>
-            </Button>
-
-        </Grid>
-     
+        </Expander>
     </Grid>
+   
    
     
 </UserControl>
