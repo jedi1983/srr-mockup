@@ -17,6 +17,6 @@ namespace SRR_Devolopment.Services
         bool memberSaveData(CGL_KP_M_Member_H dataInsert, string userID);   
 
         bool memberEditedData(CGL_KP_M_Member_H dataInsert, string userID);
-
+        Collection<CGL_KP_M_Period_H> getPeriod();
     }
 }

@@ -137,6 +137,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BaseLib\Class\BaseLibClass.cs" />
     <Compile Include="BaseLib\Class\CloseableTab.cs" />
     <Compile Include="BaseLib\Class\Converter.cs" />
     <Compile Include="BaseLib\Class\DatePickerCalendar.cs">

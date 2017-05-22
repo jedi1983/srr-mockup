@@ -96,25 +96,7 @@
                             </DataGridComboBoxColumn>
 
                             <DataGridTextColumn Header="Legal Entity" Binding="{Binding Legal_Entity_Name}" Width="200" IsReadOnly="True" />
-
-                            <DataGridComboBoxColumn 
-                                SelectedValueBinding="{Binding Revenue_Type_Id}"  SelectedValuePath="Revenue_Type_Id" 
-                                DisplayMemberPath="Revenue_Type_Description" 
-                                ItemsSource="{Binding Source={StaticResource revenueStatic}}"  Header="Revenue" Width="150">
-
-                            </DataGridComboBoxColumn>
-
-                            <!-- binding to other element -->
-                            <!--<DataGridTemplateColumn Header="Document Type" IsReadOnly="True" >
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <ComboBox ItemsSource="{Binding ElementName=revenueDrBx,Path=ItemsSource}"  
-                                                  DisplayMemberPath="Revenue_Type_Description"  SelectedValue="{Binding Revenue_Type_Id,Mode=TwoWay}"  SelectedValuePath="Revenue_Type_Id" IsEditable="False" IsReadOnly="True" />
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>-->
-
-                            <DataGridTextColumn Header="Revenue Amount" Binding="{Binding Revenue_Amount}"  IsReadOnly="True" Width="200" />
+                            
                             <DataGridTemplateColumn Header="Revenue Amount" IsReadOnly="True">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>

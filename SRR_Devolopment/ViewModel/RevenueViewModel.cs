@@ -140,6 +140,7 @@ namespace SRR_Devolopment.ViewModel
             {
                 _isRepayment = value;
                 RaisePropertyChanged("IsRepayment");
+                
             }
         }
         
@@ -287,6 +288,7 @@ namespace SRR_Devolopment.ViewModel
             {
                 _getPeriod = value;
                 RaisePropertyChanged("GetPeriod");
+                
             }
         }
 
@@ -530,10 +532,6 @@ namespace SRR_Devolopment.ViewModel
             {
                 ret = "Revenue Amount Could Not Be Zero";
             }
-            if (RevenueDate > GetPeriod.FirstOrDefault().Period_End_Date || RevenueDate < GetPeriod.FirstOrDefault().Period_Start_Date)
-            {
-                ret = "Revenue Date Is Not In The Perid " + GetPeriod.FirstOrDefault().Period_Name.ToString();
-            }
             if(IsMemberEnabled == true && string.IsNullOrEmpty(EmployeeText))
             {
                 ret = "Please Fill Member Name";
@@ -541,6 +539,10 @@ namespace SRR_Devolopment.ViewModel
             if(SetRevenueType.Revenue_Type_Description.Contains("Repayment") && SetLoanData == null)
             {
                 ret = "Please Select Loan Data";
+            }
+            if (BaseLibClass.getDateIsInPeriod(RevenueDate, GetPeriod) == false)
+            {
+                ret = "Revenue Date Is Not In Period";
             }
 
            

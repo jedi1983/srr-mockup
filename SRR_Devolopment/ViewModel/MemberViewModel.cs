@@ -46,6 +46,25 @@ namespace SRR_Devolopment.ViewModel
         }
 
         /// <summary>
+        /// Get Periods
+        /// </summary>
+        private Collection<CGL_KP_M_Period_H> _getPeriod;
+        public Collection<CGL_KP_M_Period_H> GetPeriod
+        {
+            get
+            {
+                _getPeriod = _dataServices.getPeriod();
+                return _getPeriod;
+            }
+            set
+            {
+                _getPeriod = value;
+                RaisePropertyChanged("GetPeriod");
+
+            }
+        }
+
+        /// <summary>
         /// Properties for marking Modify
         /// </summary>
         private bool _dataMod;
@@ -428,6 +447,12 @@ namespace SRR_Devolopment.ViewModel
             //{
             //    ret = "Please Fill Up Gender";
             //}
+            //check Period
+            if (BaseLibClass.getDateIsInPeriod(SetJoinDate,GetPeriod)==false)
+            {
+                ret = "Join Date Is Not In Period";
+            }
+            //end
             if(SetStatus == null)
             {
                 ret = "Please Fill Up Status";
@@ -582,6 +607,7 @@ namespace SRR_Devolopment.ViewModel
             _setJoinDate = DateTime.Now;
             _memberID = 0;
             //end here
+            _getPeriod = _dataServices.getPeriod();
             _dataAccessLevel = BaseLib.Class.Singleton.Instance.AccessRight;
             getScreenAccess();
 

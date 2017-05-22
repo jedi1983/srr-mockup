@@ -915,9 +915,9 @@ namespace SRR_Devolopment.ViewModel
             {
                 ret = "Expenditure Amount Could Not Be Zero";
             }
-            if (ExpenditureDate > GetPeriod.FirstOrDefault().Period_End_Date || ExpenditureDate < GetPeriod.FirstOrDefault().Period_Start_Date)
+            if (BaseLibClass.getDateIsInPeriod(ExpenditureDate, GetPeriod) == false)
             {
-                ret = "Expenditure Date Is Not In The Period " + GetPeriod.FirstOrDefault().Period_Name.ToString();
+                ret = "Expenditure Date Is Not In Period";
             }
             if (IsMemberEnabled == true &&  String.IsNullOrEmpty(EmployeeText))//change string to null or empty
             {
