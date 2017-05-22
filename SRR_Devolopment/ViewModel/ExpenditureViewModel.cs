@@ -976,6 +976,10 @@ namespace SRR_Devolopment.ViewModel
                 }
 
             }
+            else if (x.Name != "termOfLoan")
+            {
+                TermOfLoan = TermOfLoan;
+            }
 
             if (_checkControl.Count() > 0)
             {
