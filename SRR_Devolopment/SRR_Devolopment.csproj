@@ -30,7 +30,7 @@
     <ProductName>Koperasi</ProductName>
     <PublisherName>SRR Development</PublisherName>
     <SuiteName>Koperasi %28Beta Testing%29</SuiteName>
-    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationRevision>2</ApplicationRevision>
     <ApplicationVersion>1.5.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
