@@ -146,6 +146,7 @@ namespace SRR_Devolopment.Services
                         x.SaveChanges();
                         //run SP
                         x.USP_CGL_KP_R_Generate_Simpanan_Wajib(DateTime.Now,pStatus,pMessage);
+                        x.USP_CGL_KP_R_Generate_Simpanan_Pokok(insertInto.Member_Id, DateTime.Now, pStatus, pMessage);
                         ret = true;
                         return ret;
                     }
