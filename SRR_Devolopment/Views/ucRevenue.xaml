@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:my="clr-namespace:SRR_Devolopment.BaseLib.Class"
+             xmlns:filter="clr-namespace:DataGridFilterLibrary;assembly=DataGridFilterLibrary"
              xmlns:local="clr-namespace:SRR_Devolopment.BaseLib.Class"
              xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
              mc:Ignorable="d" 
@@ -59,7 +60,14 @@
 
                     <Button Grid.Column="1" Grid.Row="2" Content="Find" Height="25" Width="200" Command="{Binding ButtonGenerate}" IsEnabled="{Binding ObjFilterEnabled}" />
                     <DataGrid Name="revenueFindDataGrid" AutoGenerateColumns="False" Height="240"  HorizontalAlignment="Stretch" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="4" VerticalAlignment="Stretch" 
-                              ItemsSource="{Binding GetRevenueData}" SelectionMode="Single"  SelectedItem="{Binding SelectedGridData}" CanUserAddRows="False"  IsEnabled="{Binding ObjFilterEnabled}"  >
+                              ItemsSource="{Binding GetRevenueData}" SelectionMode="Single"  SelectedItem="{Binding SelectedGridData}" CanUserAddRows="False"  IsEnabled="{Binding ObjFilterEnabled}"  
+                              filter:DataGridExtensions.UseBackgroundWorkerForFiltering="True"
+                              filter:DataGridExtensions.IsClearButtonVisible="False"
+                              filter:DataGridExtensions.IsFilterVisible="True" 
+                              ColumnHeaderStyle="{StaticResource {ComponentResourceKey 
+		                       TypeInTargetAssembly={x:Type filter:DataGridHeaderFilterControl}, 
+		                       ResourceId=DataGridHeaderFilterControlStyle}}" >
+                        
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="SelectionChanged">
                                 <mvvm:EventToCommand 
@@ -81,7 +89,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <DataGridComboBoxColumn 
+                            <DataGridComboBoxColumn filter:DataGridComboBoxExtensions.UserCanEnterText="True"
                                 SelectedValueBinding="{Binding Revenue_Type_Id}"  SelectedValuePath="Revenue_Type_Id" IsReadOnly="True" 
                                 DisplayMemberPath="Revenue_Type_Code" 
                                 ItemsSource="{Binding Source={StaticResource revenueStatic}}"  Header="Revenue" Width="150">

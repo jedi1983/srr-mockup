@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
+        xmlns:filter="clr-namespace:DataGridFilterLibrary;assembly=DataGridFilterLibrary"
         xmlns:ignore="http://www.galasoft.ch/ignore"
         mc:Ignorable="d ignore"
         Height="600"
@@ -12,15 +13,9 @@
         Title="Koperasi" Icon="Images\Icons\1470068314_office-03.ico"
         DataContext="{Binding Main, Source={StaticResource Locator}}" WindowState="Maximized">
 
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Skins/MainSkin.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Window.Resources>
+    
 
-    <Grid x:Name="LayoutRoot">
+    <Grid x:Name="LayoutRoot">     
         <Grid.RowDefinitions >
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
@@ -28,6 +23,24 @@
             <ColumnDefinition Width="20*"/>
             <ColumnDefinition Width="70*"/>
         </Grid.ColumnDefinitions>
+        <!--<DataGrid   filter:DataGridExtensions.UseBackgroundWorkerForFiltering="True"
+                        
+                       filter:DataGridExtensions.IsClearButtonVisible="False"
+                        
+                       filter:DataGridExtensions.IsFilterVisible="{Binding 
+                                                                  Path=IsChecked,
+                                                                  ElementName=ShowHideFilterCheckBox, Mode=TwoWay}"
+                        
+                       ColumnHeaderStyle="{DynamicResource {ComponentResourceKey 
+		                       TypeInTargetAssembly={x:Type filter:DataGridHeaderFilterControl}, 
+		                       ResourceId=DataGridHeaderFilterControlStyle}}"
+                        
+                        AutoGenerateColumns="False"
+                        ItemsSource="{Binding Path=EmployeeList}" 
+                        Name="myGrid1" 
+                        Grid.Row="0" >
+            
+        </DataGrid>-->
         <TabControl Grid.Column="0"   
                     HorizontalAlignment="Stretch"   VerticalAlignment="Stretch"  TabStripPlacement="Bottom" >
             <TabItem Header="Login" IsEnabled="{Binding EnableLogin,Mode=TwoWay}" IsSelected="{Binding IsLoginSelected,Mode=TwoWay}" >

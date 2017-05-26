@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("DataGridFilterLibrary")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Cargill, Inc.")]
+[assembly: AssemblyCompany("SRR Development")]
 [assembly: AssemblyProduct("DataGridFilterLibrary")]
-[assembly: AssemblyCopyright("Copyright © Cargill, Inc. 2017")]
+[assembly: AssemblyCopyright("Copyright © SRR Development")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
