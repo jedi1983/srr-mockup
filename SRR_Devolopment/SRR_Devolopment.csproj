@@ -479,12 +479,6 @@
   <ItemGroup>
     <Folder Include="BaseLib\UserControl\" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DataGridFilterLibrary\DataGridFilterLibrary.csproj">
-      <Project>{5a466c77-82ec-4f2c-a6f8-184b45b03464}</Project>
-      <Name>DataGridFilterLibrary</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
