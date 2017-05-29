@@ -63,10 +63,7 @@
                               ItemsSource="{Binding GetRevenueData}" SelectionMode="Single"  SelectedItem="{Binding SelectedGridData}" CanUserAddRows="False"  IsEnabled="{Binding ObjFilterEnabled}"  
                               filter:DataGridExtensions.UseBackgroundWorkerForFiltering="True"
                               filter:DataGridExtensions.IsClearButtonVisible="False"
-                              filter:DataGridExtensions.IsFilterVisible="True" 
-                              ColumnHeaderStyle="{StaticResource {ComponentResourceKey 
-		                       TypeInTargetAssembly={x:Type filter:DataGridHeaderFilterControl}, 
-		                       ResourceId=DataGridHeaderFilterControlStyle}}" >
+                              filter:DataGridExtensions.IsFilterVisible="True">
                         
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="SelectionChanged">
