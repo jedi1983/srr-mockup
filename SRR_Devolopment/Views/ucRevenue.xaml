@@ -62,7 +62,7 @@
                     <DataGrid Name="revenueFindDataGrid" AutoGenerateColumns="False" Height="240"  HorizontalAlignment="Stretch" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="4" VerticalAlignment="Stretch" 
                               ItemsSource="{Binding GetRevenueData}" SelectionMode="Single"  SelectedItem="{Binding SelectedGridData}" CanUserAddRows="False"  IsEnabled="{Binding ObjFilterEnabled}"  
                               filter:DataGridExtensions.UseBackgroundWorkerForFiltering="True"
-                              filter:DataGridExtensions.IsClearButtonVisible="False"
+                              filter:DataGridExtensions.IsClearButtonVisible="True"
                               filter:DataGridExtensions.IsFilterVisible="True"
                               ColumnHeaderStyle="{StaticResource {ComponentResourceKey TypeInTargetAssembly={x:Type filter:DataGridHeaderFilterControl}, ResourceId=DataGridHeaderFilterControlStyle}}">
                               
@@ -80,31 +80,35 @@
 
 
 
-                            <DataGridTemplateColumn Header="Revenue Date" IsReadOnly="True" Width="150">
+                            <!--<DataGridTemplateColumn Header="Revenue Date" IsReadOnly="True" Width="150">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <DatePicker SelectedDate="{Binding Revenue_Date}" BorderThickness="0" IsEnabled="False" my:DateTimePicker.DateFormat="dd-MMM-yyyy"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
+                            </DataGridTemplateColumn>-->
 
-                            <DataGridComboBoxColumn filter:DataGridComboBoxExtensions.UserCanEnterText="True"
+                            <DataGridTextColumn Header="Revenue Date" Binding="{Binding Revenue_Date,StringFormat='dd-MMM-yyyy'}"/>
+
+                            <DataGridComboBoxColumn 
+                                filter:DataGridComboBoxExtensions.UserCanEnterText="True"
                                 SelectedValueBinding="{Binding Revenue_Type_Id}"  SelectedValuePath="Revenue_Type_Id" IsReadOnly="True" 
                                 DisplayMemberPath="Revenue_Type_Code" 
                                 ItemsSource="{Binding Source={StaticResource revenueStatic}}"  Header="Revenue" Width="150">
 
                             </DataGridComboBoxColumn>
                             <DataGridTextColumn Header="Employee No" Binding="{Binding Employee_No}" Width="200" IsReadOnly="True" />
+                            
                             <DataGridComboBoxColumn 
                                 SelectedValueBinding="{Binding Member_Id}"  SelectedValuePath="Member_Id" IsReadOnly="True"
-                                DisplayMemberPath="Name" 
+                                DisplayMemberPath="Name" filter:DataGridComboBoxExtensions.UserCanEnterText="True" 
                                 ItemsSource="{Binding Source={StaticResource memberStatic}}"  Header="Member Name" Width="150">
 
                             </DataGridComboBoxColumn>
-
-                            <DataGridTextColumn Header="Legal Entity" Binding="{Binding Legal_Entity_Name}" Width="200" IsReadOnly="True" />
                             
-                            <DataGridTemplateColumn Header="Revenue Amount" IsReadOnly="True">
+                            <DataGridTextColumn Header="Legal Entity" Binding="{Binding Legal_Entity_Name}" Width="200" IsReadOnly="True" />
+
+                            <DataGridTemplateColumn Header="Revenue Amount" IsReadOnly="True" filter:DataGridColumnExtensions.DoNotGenerateFilterControl="True">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBox Text="{Binding Revenue_Amount, StringFormat='Rp #,###.00;$(#,###.00)'}" IsReadOnly="True" />

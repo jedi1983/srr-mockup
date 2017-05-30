@@ -11,8 +11,15 @@
         Width="800"
         Title="Koperasi" Icon="Images\Icons\1470068314_office-03.ico"
         DataContext="{Binding Main, Source={StaticResource Locator}}" WindowState="Maximized">
-
     
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Skins/MainSkin.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
 
     <Grid x:Name="LayoutRoot">     
         <Grid.RowDefinitions >
