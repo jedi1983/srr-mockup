@@ -864,7 +864,8 @@ namespace SRR_Devolopment.ViewModel
             SetPeriod = null;
             SetPeriod = GetPeriod.FirstOrDefault();
             SelectedGridData = null;
-            GetExpenditureData = null;
+            //GetExpenditureData = null;
+            GetExpenditureData = _dataServices.getExpenditureTransaction(0, -1);
             EnabledNew = false;
             EnabledSave = false;
             EnabledModify = false;
@@ -1167,7 +1168,8 @@ namespace SRR_Devolopment.ViewModel
             ////end here
             _dataAccessLevel = BaseLib.Class.Singleton.Instance.AccessRight;
             getScreenAccess();
-            _getExpenditureData = null;
+            //_getExpenditureData = null;
+            _getExpenditureData = _dataServices.getExpenditureTransaction(0, -1);
             _setPeriod = GetPeriod.FirstOrDefault();
             _setMember = null;
             _isMemberEnabled = false;

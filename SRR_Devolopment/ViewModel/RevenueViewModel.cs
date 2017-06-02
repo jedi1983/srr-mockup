@@ -21,6 +21,7 @@ using System.Windows.Media;
 using System.Windows.Documents;
 using System.Windows.Data;
 using System.Windows.Input;
+using DataGridFilterLibrary;
 
 namespace SRR_Devolopment.ViewModel
 {
@@ -757,13 +758,15 @@ namespace SRR_Devolopment.ViewModel
         private void CleanObject()
         {
             //SetRevenueType = null;
+            
             RevenueNo = string.Empty;
             RevenueAmount = 0;
             RevenueDate = DateTime.Now;
             SetPeriod = null;
             SetPeriod = GetPeriod.FirstOrDefault();
             SelectedGridData = null;
-            GetRevenueData = null;
+            //GetRevenueData = null;
+            GetRevenueData = _dataServices.getRevenueTransaction(0, -1);
             EnabledNew = false;
             EnabledSave = false;
             EnabledModify = false;
@@ -834,7 +837,7 @@ namespace SRR_Devolopment.ViewModel
             //end here
             _dataAccessLevel = BaseLib.Class.Singleton.Instance.AccessRight;
             getScreenAccess();
-            _getRevenueData = null;
+            _getRevenueData = _dataServices.getRevenueTransaction(0, -1); ;
             _setPeriod = GetPeriod.FirstOrDefault();
             ObjEnabled = false;
             ObjFilterEnabled = true;
@@ -860,6 +863,7 @@ namespace SRR_Devolopment.ViewModel
         {
             if (SelectedGridData != null && (IsMod == true))
             {
+                //DataGridExtensions.SetClearFilterCommand(x,Action);
                 showDataOnForm(SelectedGridData);
                 EnabledModify = true;
             }

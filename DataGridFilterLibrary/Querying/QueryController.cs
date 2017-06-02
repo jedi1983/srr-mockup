@@ -159,9 +159,23 @@ namespace DataGridFilterLibrary.Querying
 
                 if (query.FilterString != String.Empty)
                 {
-                    var result = collection.AsQueryable().Where(query.FilterString, query.QueryParameters.ToArray<object>());
+                    //var result = collection.AsQueryable().Where(query.FilterString, query.QueryParameters.ToArray<object>());  //original Line Remarks By Roland
 
-                    filteredCollection = result.Cast<object>().ToList();
+                    //filteredCollection = result.Cast<object>().ToList(); //original Line Remarks By Roland
+
+                    //new Added Roland
+                    ICollection dataX = (ICollection) collection;
+                    if (dataX.Count == 0)
+                    {
+                        ClearFilter();
+                    }
+                    else
+                    {
+                        var result = collection.AsQueryable().Where(query.FilterString, query.QueryParameters.ToArray<object>());
+
+                        filteredCollection = result.Cast<object>().ToList(); //original Line Remarks By Roland
+                    }
+                    //end   
                 }
             }
             else
