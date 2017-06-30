@@ -389,6 +389,8 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>SRRDev.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="DB_Backup\Koperasi_20170509.bak" />
+    <None Include="DB_Backup\Koperasi_20170522.bak" />
     <None Include="Model\SRRDev.edmx.diagram">
       <DependentUpon>SRRDev.edmx</DependentUpon>
     </None>
