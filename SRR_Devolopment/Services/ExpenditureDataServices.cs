@@ -189,7 +189,8 @@ namespace SRR_Devolopment.Services
                             loanInsert.Member_Id = memberId;
                             loanInsert.Year = expenditureDate.Year;
                             loanInsert.Month = expenditureDate.Month;
-                            loanInsert.Interest_Amount = expenditureAmount * interestRate;
+                            //loanInsert.Interest_Amount = expenditureAmount * interestRate;
+                            loanInsert.Interest_Amount = expenditureAmount * interestRate * termOfLoan;//new Rules
                             loanInsert.Remaining_Loan_Amount = expenditureAmount;
                             loanInsert.Remaining_Interest_Amount = loanInsert.Interest_Amount;
                             loanInsert.Remaining_Term_of_Loan = termOfLoan;
@@ -274,7 +275,8 @@ namespace SRR_Devolopment.Services
                             loanInsert.Member_Id = memberId;
                             loanInsert.Year = expenditureDate.Year;
                             loanInsert.Month = expenditureDate.Month;
-                            loanInsert.Interest_Amount = expenditureAmount * loanInsert.Interest_Rate;
+                            //loanInsert.Interest_Amount = expenditureAmount * loanInsert.Interest_Rate;
+                            loanInsert.Interest_Amount = expenditureAmount * loanInsert.Interest_Rate * termOfLoan; // new Rules 02/11/2017
                             loanInsert.Remaining_Loan_Amount = expenditureAmount;
                             loanInsert.Remaining_Interest_Amount = loanInsert.Interest_Amount;
                             loanInsert.Remaining_Term_of_Loan = termOfLoan;

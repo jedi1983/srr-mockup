@@ -200,7 +200,8 @@ namespace SRR_Devolopment.ViewModel
                     else 
                     {
                         MainInstallment = LoanAmount / _termOfLoan;
-                        InterestInstallment = LoanAmount * (InterestRate/100) / _termOfLoan;
+                        //InterestInstallment = LoanAmount * (InterestRate/100) / _termOfLoan; closed
+                        InterestInstallment = LoanAmount * (InterestRate / 100); // new Rules
                         TotalInstallment = MainInstallment + InterestInstallment;
                     }    
 
@@ -823,7 +824,8 @@ namespace SRR_Devolopment.ViewModel
                         TermOfLoan = SetLoanData.Term_of_Loan;
                         LoanAmount = ExpenditureAmount;
                         MainInstallment = SetLoanData.Loan_Amount / SetLoanData.Term_of_Loan;
-                        InterestInstallment = SetLoanData.Loan_Amount * SetLoanData.Interest_Rate / SetLoanData.Term_of_Loan;
+                        //InterestInstallment = SetLoanData.Loan_Amount * SetLoanData.Interest_Rate / SetLoanData.Term_of_Loan;
+                        InterestInstallment = SetLoanData.Loan_Amount * SetLoanData.Interest_Rate;// new rule for Installment
                         TotalInstallment = InterestInstallment + MainInstallment;
                         LoanAmount = SetLoanData.Loan_Amount;
                     }
