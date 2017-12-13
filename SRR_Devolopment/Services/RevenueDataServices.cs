@@ -144,7 +144,8 @@ namespace SRR_Devolopment.Services
                     dataInsert.Created_By = userID;
                     dataInsert.Created_Date = DateTime.Now;
                     //Generate RV Number
-                    dataInsert.Revenue_No = insertX.USP_CGL_KP_T_Generate_Transaction_Number("Revenue", DateTime.Now).FirstOrDefault().ReturnBack;
+                    //dataInsert.Revenue_No = insertX.USP_CGL_KP_T_Generate_Transaction_Number("Revenue", DateTime.Now).FirstOrDefault().ReturnBack;// Closed
+                    dataInsert.Revenue_No = insertX.USP_CGL_KP_T_Generate_Transaction_Number("Revenue", revenueDate).FirstOrDefault().ReturnBack;
                     insertX.CGL_KP_R_Revenue_H.Add(dataInsert);
                     insertX.SaveChanges();
                     revenueNo = dataInsert.Revenue_No;

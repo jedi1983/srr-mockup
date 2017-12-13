@@ -177,7 +177,8 @@ namespace SRR_Devolopment.Services
                         dataInsert.Is_Deleted = false;
                         dataInsert.Created_By = userID;
                         dataInsert.Created_Date = DateTime.Now;
-                        dataInsert.Expenditure_No = insertX.USP_CGL_KP_T_Generate_Transaction_Number("Expenditure", DateTime.Now).FirstOrDefault().ReturnBack;
+                        //dataInsert.Expenditure_No = insertX.USP_CGL_KP_T_Generate_Transaction_Number("Expenditure", DateTime.Now).FirstOrDefault().ReturnBack;// closed
+                        dataInsert.Expenditure_No = insertX.USP_CGL_KP_T_Generate_Transaction_Number("Expenditure", expenditureDate).FirstOrDefault().ReturnBack;
                         //insertX.CGL_KP_R_Expenditure_H.Add(dataInsert);
 
                         if (typExp.Expenditure_Type_Description.ToString().Contains("Loan"))
